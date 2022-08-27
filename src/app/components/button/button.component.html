@@ -1,0 +1,11 @@
+<button
+  [type]="type"
+  class="btn {{ variant ? 'btn--' + variant : '' }} {{
+    size !== 'md' ? 'btn--' + size : ''
+  }}"
+  [ngClass]="classes"
+  [disabled]="loading || disabled"
+  (click)="onClick($event)"
+>
+  <ng-content></ng-content>
+</button>

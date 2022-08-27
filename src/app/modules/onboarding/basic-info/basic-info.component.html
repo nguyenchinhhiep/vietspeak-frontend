@@ -1,0 +1,63 @@
+<div class="min-h-full flex flex-col items-center px-5 py-10 bg-gray-100">
+  <div class="max-w-full w-[450px] min-h-[500px] sm:px-10 sm:py-12">
+    <div class="mb-4 flex">
+      <button type="button" class="text-gray-700" (click)="back()">
+        <mat-icon [svgIcon]="'mat_outline:arrow_back'"></mat-icon>
+      </button>
+    </div>
+    <div class="font-medium text-gray-900 text-2xl text-center">
+      Thông tin cơ bản
+    </div>
+
+    <form class="mt-6" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form__field">
+        <label class="form__label" for="firstName">Tên</label>
+        <input
+          id="firstName"
+          type="text"
+          class="form__input"
+          placeholder="Nhập tên"
+          formControlName="firstName"
+        />
+      </div>
+      <div class="form__field">
+        <label class="form__label" for="lastName">Họ</label>
+        <input
+          id="lastName"
+          type="text"
+          class="form__input"
+          placeholder="Nhập họ"
+          formControlName="lastName"
+        />
+      </div>
+      <div class="form__field">
+        <label class="form__label" for="occupation">Bạn đang là</label>
+        <input
+          id="occupation"
+          type="text"
+          class="form__input"
+          formControlName="occupation"
+        />
+      </div>
+      <div class="form__field">
+        <label class="form__label" for="timezone">Timezone</label>
+        <input
+          id="timezone"
+          type="text"
+          class="form__input"
+          formControlName="timezone"
+        />
+      </div>
+
+      <vs-button
+        [type]="'submit'"
+        [variant]="'primary'"
+        [classes]="'w-full'"
+        [disabled]="loading"
+        (clicked)="submit()"
+      >
+        Tiếp tục
+      </vs-button>
+    </form>
+  </div>
+</div>

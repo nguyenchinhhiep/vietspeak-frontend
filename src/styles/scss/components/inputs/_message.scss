@@ -1,0 +1,12 @@
+.form__feedback {
+   @apply mt-2 block text-sm;
+ 
+   &.error {
+     @apply text-danger;
+   }
+ 
+   &.hint {
+     @apply text-gray-400;
+   }
+ }
+ 

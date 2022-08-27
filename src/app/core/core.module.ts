@@ -11,6 +11,7 @@ import { SeoService } from './seo/seo.service';
 import { UtilsService } from './utils/utils.service';
 import { MediaWatcherService } from './media-watcher/media-watcher.service';
 import { UserService } from './user/user.service';
+import { IconsModule } from './icons/icons.module';
 
 @NgModule({
   declarations: [],
@@ -20,6 +21,7 @@ import { UserService } from './user/user.service';
     AuthModule,
     TranslationModule,
     ConfigModule,
+    IconsModule,
   ],
   providers: [
     { provide: 'Window', useValue: window },

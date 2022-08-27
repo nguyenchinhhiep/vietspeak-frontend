@@ -2,8 +2,14 @@
 // `ng build` replaces `environment.ts` with `environment.prod.ts`.
 // The list of file replacements can be found in `angular.json`.
 
+import { LanguageCode } from "src/app/core/translation/language.model";
+
 export const environment = {
-  production: false
+  production: false,
+  projectName: 'vietspeak',
+  serverUrl: "localhost:1995",
+  supportedLanguages: [LanguageCode.English, LanguageCode.Vietnamese],
+  defaultLanguage: LanguageCode.Vietnamese
 };
 
 /*

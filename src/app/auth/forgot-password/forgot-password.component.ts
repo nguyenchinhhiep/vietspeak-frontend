@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { UntypedFormBuilder, UntypedFormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-forgot-password',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ForgotPasswordComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _router: Router, private _fb: UntypedFormBuilder) {}
 
-  ngOnInit(): void {
+  loading: boolean = false;
+
+  form!: UntypedFormGroup;
+
+  isSent: boolean = false;
+
+  ngOnInit(): void {}
+
+  sendReset() {
+    this.isSent = !this.isSent;
   }
 
+  back() {
+    this._router.navigate(['/login']);
+  }
 }

@@ -1,1 +1,181 @@
-<p>register works!</p>
+<div
+  class="w-full h-full overflow-auto flex flex-col items-center py-20 px-4 bg-gray-50"
+>
+  <div
+    class="w-full max-w-md min-h-[500px] rounded-md sm:shadow sm:bg-white sm:px-9 sm:py-12"
+  >
+    <div class="mb-4 flex">
+      <button type="button" class="text-gray-400" (click)="back()">
+        <mat-icon>arrow_back</mat-icon>
+      </button>
+    </div>
+    <div class="font-medium text-gray-900 text-2xl text-center">
+      Tài khoản mới
+    </div>
+    <form class="mt-6" [formGroup]="form" (ngSubmit)="submit()">
+      <div class="form__field">
+        <label class="form__label" for="email">Email</label>
+        <input
+          id="email"
+          type="text"
+          class="form__input"
+          placeholder="Nhập email"
+          formControlName="email"
+        />
+      </div>
+      <div class="form__field">
+        <label class="form__label" for="password">Mật khẩu</label>
+        <div
+          class="input-group"
+          [ngClass]="
+            this.form.get('password')?.invalid &&
+            (this.form.get('password')?.touched ||
+              this.form.get('password')?.dirty)
+              ? 'invalid'
+              : ''
+          "
+        >
+          <input
+            id="password"
+            type="password"
+            class="form__input"
+            placeholder="Nhập mật khẩu"
+            formControlName="password"
+            #passwordField
+          />
+          <button
+            type="button"
+            class="input__suffix text-gray-400"
+            (click)="
+              passwordField.type === 'password'
+                ? (passwordField.type = 'text')
+                : (passwordField.type = 'password')
+            "
+          >
+            <mat-icon>
+              {{
+                passwordField.type === "password"
+                  ? "visibility"
+                  : "visibility_off"
+              }}
+            </mat-icon>
+          </button>
+        </div>
+
+        <ng-container
+          *ngIf="
+            this.form.get('password')?.invalid &&
+            (this.form.get('password')?.touched ||
+              this.form.get('password')?.dirty)
+          "
+        >
+          <div
+            *ngIf="this.form.get('password')?.hasError('required')"
+            class="form__feedback error"
+          >
+            Mật khẩu không được bỏ trống
+          </div>
+
+          <div
+            *ngIf="this.form.get('password')?.hasError('minlength')"
+            class="form__feedback error"
+          >
+            Mật khẩu phải có độ dài tối thiểu 6 kí tự
+          </div>
+        </ng-container>
+      </div>
+      <div class="form__field">
+        <label class="form__label" for="confirmPassword"
+          >Mật khẩu xác nhận</label
+        >
+        <div
+          class="input-group"
+          [ngClass]="
+            this.form.get('confirmPassword')?.invalid &&
+            (this.form.get('confirmPassword')?.touched ||
+              this.form.get('confirmPassword')?.dirty)
+              ? 'invalid'
+              : ''
+          "
+        >
+          <input
+            id="confirmPassword"
+            type="password"
+            class="form__input"
+            placeholder="Nhập mật khẩu xác nhận"
+            formControlName="confirmPassword"
+            #confirmPasswordField
+          />
+          <button
+            type="button"
+            class="input__suffix text-gray-400"
+            (click)="
+              confirmPasswordField.type === 'password'
+                ? (confirmPasswordField.type = 'text')
+                : (confirmPasswordField.type = 'password')
+            "
+          >
+            <mat-icon>
+              {{
+                confirmPasswordField.type === "password"
+                  ? "visibility"
+                  : "visibility_off"
+              }}
+            </mat-icon>
+          </button>
+        </div>
+
+        <ng-container
+          *ngIf="
+            this.form.get('confirmPassword')?.invalid &&
+            (this.form.get('confirmPassword')?.touched ||
+              this.form.get('confirmPassword')?.dirty)
+          "
+        >
+          <div
+            *ngIf="this.form.get('confirmPassword')?.hasError('required')"
+            class="form__feedback error"
+          >
+            Mật khẩu không được bỏ trống
+          </div>
+
+          <div
+            *ngIf="this.form.get('confirmPassword')?.hasError('mustMatch')"
+            class="form__feedback error"
+          >
+            Mật khẩu xác nhận phải trùng với mật khẩu
+          </div>
+        </ng-container>
+      </div>
+      <div class="form__field">
+        <app-checkbox formControlName="agreements">
+          Khi đăng kí bạn phải đồng ý với <a>điều khoản dịch vụ</a> và
+          <a>chính sách bảo mật</a> của chúng tôi
+        </app-checkbox>
+        <ng-container
+          *ngIf="
+            this.form.get('agreements')?.invalid &&
+            (this.form.get('agreements')?.touched ||
+              this.form.get('agreements')?.dirty)
+          "
+        >
+          <div
+            *ngIf="this.form.get('agreements')?.hasError('required')"
+            class="form__feedback error"
+          >
+            Bạn phải đồng ý với điều khoản của chúng tôi
+          </div>
+        </ng-container>
+      </div>
+      <app-button
+        [type]="'button'"
+        [variant]="'primary'"
+        [classes]="'w-full'"
+        [disabled]="loading"
+        (clicked)="submit()"
+      >
+        Tiếp tục
+      </app-button>
+    </form>
+  </div>
+</div>

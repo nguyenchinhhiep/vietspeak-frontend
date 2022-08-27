@@ -1,0 +1,71 @@
+button {
+   @apply inline-flex justify-center items-center;
+ 
+   &:focus-visible {
+     @apply outline-primary;
+   }
+ 
+   &:disabled {
+     cursor: not-allowed;
+     opacity: 0.7;
+   }
+ }
+ 
+ .btn {
+   @apply outline-none inline-flex items-center justify-center gap-2 border border-solid border-transparent px-3 py-2 rounded-md font-medium;
+   min-height: 48px;
+   transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out,
+     border-color 0.15s ease-in-out;
+ 
+   &:not(:disabled):hover,
+   &:not(:disabled):active,
+   &:not(:disabled):focus {
+     @apply bg-gray-200;
+   }
+ 
+   > svg {
+     @apply icon-size-7;
+   }
+ }
+ 
+ /* Variants */
+ .btn--primary {
+   @apply bg-primary text-on-primary border-primary;
+ 
+   &:not(:disabled):hover,
+   &:not(:disabled):active,
+   &:not(:disabled):focus {
+     @apply bg-primary-600 text-on-primary-600 border-primary-600 ring-primary;
+   }
+ }
+ 
+ .btn--outline-primary {
+   @apply border-primary-300 text-primary;
+ 
+   &:not(:disabled):hover,
+   &:not(:disabled):active,
+   &:not(:disabled):focus {
+     @apply border-primary ring-primary;
+   }
+ }
+ 
+ .btn--secondary {
+   @apply bg-secondary text-on-secondary border-secondary;
+ 
+   &:not(:disabled):hover,
+   &:not(:disabled):active,
+   &:not(:disabled):focus {
+     @apply bg-secondary-600 text-on-secondary-600 border-secondary-600 ring-secondary;
+   }
+ }
+ 
+ .btn--outline-secondary {
+   @apply border-secondary-300 text-secondary;
+ 
+   &:not(:disabled):hover,
+   &:not(:disabled):active,
+   &:not(:disabled):focus {
+     @apply border-secondary ring-secondary bg-transparent;
+   }
+ }
+ 
