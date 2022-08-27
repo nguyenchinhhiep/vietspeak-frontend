@@ -1,0 +1,19 @@
+{
+   "Auth": {
+      "Common": {
+         "Password": "mật khẩu"
+      },
+      "Errors": {
+
+      },
+      "Login": {
+         "Title": "đăng nhập"
+      },
+      "Register": {
+         "Title": "đăng kí"
+      },
+      "ForgotPassword": {
+         "Title": "quên mật khẩu"
+      }
+   }
+}

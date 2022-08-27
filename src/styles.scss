@@ -1,1 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
+// Tailwind
+@import "./tailwind/tailwind.scss";
+
+// Styles
+@import "./styles/styles.scss";
+
+// Angular Material
+// @import "./material/_material";
