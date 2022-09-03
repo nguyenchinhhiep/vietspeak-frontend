@@ -1,8 +1,8 @@
 <div
-  class="w-full h-full overflow-auto flex flex-col items-center py-20 px-4 bg-gray-50"
+  class="w-full min-h-full flex flex-col items-center py-20 px-4 bg-gray-100"
 >
   <div
-    class="w-full max-w-md min-h-[500px] rounded-md sm:shadow sm:bg-white sm:px-9 sm:py-12"
+    class="w-full max-w-md min-h-[500px] rounded-md sm:shadow-base sm:bg-white sm:px-9 sm:py-12"
   >
     <ng-container *ngIf="!this.form.get('emailFound')?.value">
       <div class="font-medium text-gray-900 text-2xl text-center mb-2">
@@ -16,7 +16,7 @@
     <ng-container *ngIf="this.form.get('emailFound')?.value">
       <div class="mb-4 flex">
         <button type="button" class="text-gray-400" (click)="reset()">
-          <mat-icon>arrow_back</mat-icon>
+          <mat-icon class="icon-size-7">arrow_back</mat-icon>
         </button>
       </div>
       <div class="font-medium text-gray-900 text-2xl text-center mb-2">

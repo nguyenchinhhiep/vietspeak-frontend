@@ -54,7 +54,11 @@ module.exports = {
       sans: ["Inter", ...defaultTheme.fontFamily.sans],
       mono: defaultTheme.fontFamily.mono,
     },
-    extend: {},
+    extend: {
+      boxShadow: {
+        base: "rgba(0, 0, 0, 0.1) 0px 0px 2px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px",
+      },
+    },
   },
   plugins: [
     require(path.resolve(__dirname, "src/tailwind/plugins/icon-size")),

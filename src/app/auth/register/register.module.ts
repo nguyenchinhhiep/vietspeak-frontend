@@ -21,7 +21,6 @@ const routes: Routes = [
     FormsModule,
     ReactiveFormsModule,
     AppButtonModule,
-    AppCheckboxModule,
     RouterModule.forChild(routes),
   ],
 })

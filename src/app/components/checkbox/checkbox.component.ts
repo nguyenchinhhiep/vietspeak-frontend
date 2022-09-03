@@ -28,6 +28,7 @@ export const CHECKBOX_VALUE_ACCESSOR: any = {
 @Component({
   selector: 'app-checkbox',
   templateUrl: './checkbox.component.html',
+  styleUrls: ['./checkbox.component.scss'],
   providers: [CHECKBOX_VALUE_ACCESSOR],
   changeDetection: ChangeDetectionStrategy.OnPush,
   encapsulation: ViewEncapsulation.None,
