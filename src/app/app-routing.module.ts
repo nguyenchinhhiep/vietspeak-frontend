@@ -34,6 +34,13 @@ const routes: Routes = [
             (m) => m.ForgotPasswordModule
           ),
       },
+      {
+        path: 'onboarding',
+        loadChildren: () =>
+          import('./modules/onboarding/onboarding.module').then(
+            (m) => m.OnboardingModule
+          ),
+      },
     ],
   },
   {

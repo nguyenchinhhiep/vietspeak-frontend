@@ -1,8 +1,13 @@
-<div class="min-h-full flex flex-col items-center px-5 py-10 bg-gray-100">
-  <div class="max-w-full w-[450px] min-h-[500px] sm:px-10 sm:py-12">
+<div class="min-h-full flex flex-col items-center px-4 py-20 bg-gray-100">
+  <div
+    class="w-full max-w-md min-h-[500px] sm:shadow-base rounded-md sm:px-9 sm:py-12 bg-white"
+  >
     <div class="mb-4 flex">
-      <button type="button" class="text-gray-700" (click)="back()">
-        <mat-icon [svgIcon]="'mat_outline:arrow_back'"></mat-icon>
+      <button type="button" class="text-gray-400" (click)="back()">
+        <mat-icon
+          class="icon-size-7"
+          [svgIcon]="'mat_outline:arrow_back'"
+        ></mat-icon>
       </button>
     </div>
     <div class="font-medium text-gray-900 text-2xl text-center mb-14">
@@ -11,7 +16,7 @@
 
     <div class="flex items-center justify-center gap-20">
       <a
-        class="flex flex-col gap-5 items-center"
+        class="flex flex-col gap-5 items-center hover:no-underline cursor-pointer"
         *ngFor="let type of accountTypeList"
         (click)="onSelectType(type)"
       >
@@ -38,14 +43,14 @@
     </div>
 
     <div class="flex mt-14">
-      <vs-button
+      <app-button
         [type]="'button'"
         [variant]="'primary'"
         class="w-full"
         [classes]="'!w-full'"
         [disabled]="isDisabled()"
         (clicked)="continue()"
-        >Tiếp theo</vs-button
+        >Tiếp theo</app-button
       >
     </div>
   </div>

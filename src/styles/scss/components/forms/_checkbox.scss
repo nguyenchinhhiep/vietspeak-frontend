@@ -1,28 +1,5 @@
 [type="checkbox"] {
-  print-color-adjust: exact;
-  appearance: none;
-  background-origin: border-box;
-  background-color: transparent;
-  display: inline-block;
-  padding: 0;
-  user-select: none;
-  vertical-align: middle;
-  transition: all 0.2s;
-  outline: none;
   @apply w-5 h-5 flex-shrink-0 rounded border-2 border-solid border-gray-400;
-
-  &:not(:disabled):focus {
-    @apply border-primary ring-primary-300 ring-1;
-  }
-
-  // Invalid
-  &.ng-dirty.ng-invalid:not(:disabled):focus {
-    @apply ring-danger-300;
-  }
-
-  &.ng-dirty.ng-invalid {
-    @apply border-danger;
-  }
 }
 
 [type="checkbox"]:checked {

@@ -1,0 +1,26 @@
+[type="checkbox"],
+[type="radio"] {
+  print-color-adjust: exact;
+  appearance: none;
+  background-origin: border-box;
+  background-color: transparent;
+  display: inline-block;
+  padding: 0;
+  user-select: none;
+  vertical-align: middle;
+  transition: all 0.2s;
+  outline: none;
+
+  &:not(:disabled):focus {
+    @apply border-primary ring-primary-300 ring-1 ring-offset-2;
+  }
+
+  // Invalid
+  &.ng-dirty.ng-invalid:not(:disabled):focus {
+    @apply ring-danger-300;
+  }
+
+  &.ng-dirty.ng-invalid {
+    @apply border-danger;
+  }
+}

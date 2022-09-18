@@ -1,22 +1,18 @@
-<div
-  class="w-full min-h-full flex flex-col items-center py-20 px-4 bg-gray-100"
->
+<div class="w-full min-h-full flex flex-col items-center py-20 px-4">
   <div
-    class="w-full max-w-md min-h-[500px] rounded-md sm:shadow-base sm:bg-white sm:px-9 sm:py-12"
+    class="w-full max-w-md min-h-[500px] rounded-md sm:shadow-base sm:px-9 sm:py-12"
   >
-    <ng-container *ngIf="!this.form.get('emailFound')?.value">
-      <div class="font-medium text-gray-900 text-2xl text-center mb-2">
-        Vietspeak
-      </div>
-      <div class="text-gray-400 text-center">
-        Tạo tài khoản mới hoặc đăng nhập vào Vietspeak
-      </div>
-    </ng-container>
+    <div class="font-medium text-gray-900 text-2xl text-center mb-2">
+      Login to your account
+    </div>
 
-    <ng-container *ngIf="this.form.get('emailFound')?.value">
+    <!-- <ng-container *ngIf="this.form.get('emailFound')?.value">
       <div class="mb-4 flex">
         <button type="button" class="text-gray-400" (click)="reset()">
-          <mat-icon class="icon-size-7">arrow_back</mat-icon>
+          <mat-icon
+            class="icon-size-7"
+            [svgIcon]="'mat_outline:arrow_back'"
+          ></mat-icon>
         </button>
       </div>
       <div class="font-medium text-gray-900 text-2xl text-center mb-2">
@@ -32,16 +28,16 @@
           }}</span>
         </div>
       </div>
-    </ng-container>
+    </ng-container> -->
 
     <form class="mt-8" [formGroup]="form" (ngSubmit)="submit()">
-      <div *ngIf="!this.form.get('emailFound')?.value" class="form__field">
-        <label for="email" class="form__label sr-only">Email</label>
+      <div class="form__field">
+        <label for="email" class="form__label">Email</label>
         <input
           id="email"
           type="text"
           class="form__input"
-          placeholder="Nhập địa chỉ email"
+          placeholder="Enter your email"
           formControlName="email"
         />
         <ng-container
@@ -54,76 +50,75 @@
             *ngIf="this.form.get('email')?.hasError('required')"
             class="form__feedback error"
           >
-            Email không được bỏ trống
+            This field is required.
           </div>
           <div
             *ngIf="this.form.get('email')?.hasError('email')"
             class="form__feedback error"
           >
-            Địa chỉ email không hợp lệ
+            Invalid email
           </div>
         </ng-container>
       </div>
 
-      <ng-container *ngIf="this.form.get('emailFound')?.value">
-        <div class="form__field !mb-2">
-          <label class="form__label" for="password">Mật khẩu</label>
-          <div
-            class="input-group"
-            [ngClass]="
-              this.form.get('password')?.invalid &&
-              (this.form.get('password')?.touched ||
-                this.form.get('password')?.dirty)
-                ? 'invalid'
-                : ''
+      <div class="form__field !mb-2">
+        <label class="form__label" for="password">Password</label>
+        <div
+          class="input-group"
+          [ngClass]="
+            this.form.get('password')?.invalid &&
+            (this.form.get('password')?.touched ||
+              this.form.get('password')?.dirty)
+              ? 'invalid'
+              : ''
+          "
+        >
+          <input
+            id="password"
+            type="password"
+            class="form__input"
+            placeholder="Enter your password"
+            formControlName="password"
+            #password
+          />
+          <button
+            type="button"
+            class="input__suffix text-gray-400"
+            (click)="
+              password.type === 'password'
+                ? (password.type = 'text')
+                : (password.type = 'password')
             "
           >
-            <input
-              id="password"
-              type="password"
-              class="form__input"
-              placeholder="Nhập mật khẩu"
-              formControlName="password"
-              #password
-            />
-            <button
-              type="button"
-              class="input__suffix text-gray-400"
-              (click)="
+            <mat-icon
+              [svgIcon]="
                 password.type === 'password'
-                  ? (password.type = 'text')
-                  : (password.type = 'password')
+                  ? 'mat_outline:visibility'
+                  : 'mat_outline:visibility_off'
               "
             >
-              <mat-icon>
-                {{
-                  password.type === "password"
-                    ? "visibility"
-                    : "visibility_off"
-                }}
-              </mat-icon>
-            </button>
-          </div>
+            </mat-icon>
+          </button>
+        </div>
 
-          <ng-container
-            *ngIf="
-              this.form.get('password')?.invalid &&
-              (this.form.get('password')?.touched ||
-                this.form.get('password')?.dirty)
-            "
+        <ng-container
+          *ngIf="
+            this.form.get('password')?.invalid &&
+            (this.form.get('password')?.touched ||
+              this.form.get('password')?.dirty)
+          "
+        >
+          <div
+            *ngIf="this.form.get('password')?.hasError('required')"
+            class="form__feedback error"
           >
-            <div
-              *ngIf="this.form.get('password')?.hasError('required')"
-              class="form__feedback error"
-            >
-              Mật khẩu không được bỏ trống
-            </div>
-          </ng-container>
-        </div>
-        <div class="text-right mb-6">
-          <a routerLink="/forgot-password">Quên mật khẩu?</a>
-        </div>
-      </ng-container>
+            This field is required.
+          </div>
+        </ng-container>
+      </div>
+      <div class="text-right mb-6">
+        <a routerLink="/forgot-password">Forgot password?</a>
+      </div>
 
       <app-button
         [type]="'submit'"
@@ -131,13 +126,13 @@
         [classes]="'w-full'"
         [disabled]="loading"
       >
-        Tiếp tục
+        Login
       </app-button>
 
       <ng-container *ngIf="!this.form.get('emailFound')?.value">
         <div class="flex items-center my-6">
           <div class="flex-grow h-[1px] bg-gray-200"></div>
-          <div class="px-4 text-xs uppercase text-gray-400">Hoặc</div>
+          <div class="px-4 text-xs uppercase text-gray-400">Or</div>
           <div class="flex-grow h-[1px] bg-gray-200"></div>
         </div>
         <div class="flex flex-col gap-4">
@@ -164,7 +159,7 @@
                 fill="#EB4334"
               ></path>
             </svg>
-            Tiếp tục với Google
+            Login with Google
           </app-button>
           <app-button [variant]="'outline-secondary'" [classes]="'w-full'">
             <svg
@@ -177,7 +172,7 @@
                 fill="#007AF8"
               ></path>
             </svg>
-            Tiếp tục với Facebook
+            Login with Facebook
           </app-button>
         </div>
       </ng-container>

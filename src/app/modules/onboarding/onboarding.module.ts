@@ -3,11 +3,16 @@ import { CommonModule } from '@angular/common';
 import { AccountTypeComponent } from './account-type/account-type.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
-import { ButtonModule } from 'src/app/components/button/button.module';
+import { AppButtonModule } from 'src/app/components/button/button.module';
 import { BasicInfoComponent } from './basic-info/basic-info.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'account-type',
+    pathMatch: 'full',
+  },
   {
     path: 'account-type',
     component: AccountTypeComponent,
@@ -29,7 +34,7 @@ const routes: Routes = [
   imports: [
     CommonModule,
     MatIconModule,
-    ButtonModule,
+    AppButtonModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),
