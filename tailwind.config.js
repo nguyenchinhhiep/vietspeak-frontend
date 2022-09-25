@@ -26,7 +26,7 @@ const themes = {
       ...colors.blue,
     },
     accent: {
-      ...colors.pink,
+      ...colors.rose,
     },
     secondary: {
       ...colors.gray,

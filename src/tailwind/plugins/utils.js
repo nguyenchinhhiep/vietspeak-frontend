@@ -1,19 +1,9 @@
 const plugin = require("tailwindcss/plugin");
 
 const utils = plugin(({ addComponents }) => {
-  addComponents(
-    {},
-    {
-      variants: ["dark", "responsive", "group-hover", "hover"],
-    }
-  );
+  addComponents({});
 
-  addComponents(
-    {},
-    {
-      variants: ["dark", "group-hover", "hover"],
-    }
-  );
+  addComponents({});
 });
 
 module.exports = utils;

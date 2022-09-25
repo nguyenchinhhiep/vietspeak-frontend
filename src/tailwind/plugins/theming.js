@@ -1,3 +1,4 @@
+// @ts-nocheck
 const plugin = require("tailwindcss/plugin");
 const path = require("path");
 const chroma = require("chroma-js");
@@ -160,6 +161,31 @@ const theming = plugin.withOptions(
 
         return {
           [isDark ? darkSchemeSelectors : lightSchemeSelectors]: {
+            /**
+             * If a custom property is not available, browsers will use
+             * the fallback value. In this case, we want to use '--is-dark'
+             * as the indicator of a dark theme so we can use it like this:
+             * background-color: var(--is-dark, red);
+             *
+             * If we set '--is-dark' as "true" on dark themes, the above rule
+             * won't work because of the said "fallback value" logic. Therefore,
+             * we set the '--is-dark' to "false" on light themes and not set it
+             * all on dark themes so that the fallback value can be used on
+             * dark themes.
+             *
+             * On light themes, since '--is-dark' exists, the above rule will be
+             * interpolated as:
+             * "background-color: false"
+             *
+             * On dark themes, since '--is-dark' doesn't exist, the fallback value
+             * will be used ('red' in this case) and the rule will be interpolated as:
+             * "background-color: red"
+             *
+             * It's easier to understand and remember like this.
+             */
+            ...(!isDark ? { "--is-dark": "false" } : {}),
+
+            // Generate custom properties from customProps
             ...Object.entries(background).reduce((acc, [key, value]) => {
               acc[`--${e(key)}`] = value;
               acc[`--${e(key)}-rgb`] = chroma(value).rgb().join(",");
@@ -174,7 +200,7 @@ const theming = plugin.withOptions(
         };
       });
 
-      // Scheme ultility classes
+      // Generate general styles & utilities
       const schemeUtils = (() => {
         return {};
       })();
