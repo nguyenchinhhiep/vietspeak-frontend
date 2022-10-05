@@ -1,10 +1,13 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
+  NgForm,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertType } from 'src/app/components/alert/alert.model';
+import { CustomValidators } from 'src/app/core/validators/validators';
 
 @Component({
   selector: 'app-login',
@@ -13,40 +16,55 @@ import { Router } from '@angular/router';
 })
 export class LoginComponent implements OnInit {
   constructor(private _router: Router, private _fb: UntypedFormBuilder) {}
+  @ViewChild('loginNgForm') loginNgForm!: NgForm;
+
+  alert: { type: AlertType; message: string } | any = {
+    type: 'success',
+    message: '',
+  };
+
   loading: boolean = false;
-  form!: UntypedFormGroup;
+  loginForm!: UntypedFormGroup;
 
   ngOnInit(): void {
     this.createForm();
   }
 
   createForm() {
-    this.form = this._fb.group({
-      emailFound: [false],
-      email: ['', [Validators.required, Validators.email]],
+    this.loginForm = this._fb.group({
+      email: ['', [Validators.required, CustomValidators.isEmail()]],
       password: ['', [Validators.required]],
     });
   }
 
   submit() {
-    for (let control in this.form.controls) {
-      this.form.controls[control].markAsDirty();
-      this.form.controls[control].markAsTouched();
+    for (let control in this.loginForm.controls) {
+      this.loginForm.controls[control].markAsDirty();
+      this.loginForm.controls[control].markAsTouched();
     }
-    if (this.form.invalid) return;
 
-    const emailFound: boolean = this.form.get('emailFound')?.value;
+    // Return if the form is invalid
+    if (this.loginForm.invalid) return;
 
-    if (emailFound) {
-      console.log(this.form.value);
-    } else {
-      // Check if email found
-      this.form.get('emailFound')?.setValue(true);
-      // Set validator and reset states for password
-      this.form.get('password')?.setValidators([Validators.required]);
-      this.form.get('password')?.markAsUntouched();
-      this.form.get('password')?.markAsPristine();
-    }
+    // Disable the form
+    this.loginForm.disable();
+
+    // Reset the alert
+    this.alert = {};
+
+    setTimeout(() => {
+      // Re-enable the form
+      this.loginForm.enable();
+
+      // Reset the form
+      this.loginNgForm.resetForm();
+
+      // Set the alert
+      this.alert = {
+        type: 'error',
+        message: 'Invalid email or password',
+      };
+    }, 5000);
   }
 
   // Reset form value and validators

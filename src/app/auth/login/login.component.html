@@ -1,6 +1,6 @@
-<div class="w-full min-h-full flex flex-col items-center bg-gray-100">
+<div class="w-full min-h-full flex flex-col gap-4 items-center bg-gray-100">
   <div
-    class="w-full max-w-7xl px-4 flex flex-col gap-14 items-center justify-start pb-12 pt-4"
+    class="w-full max-w-7xl p-4 flex flex-col gap-14 items-center justify-start"
   >
     <div class="flex justify-between items-center w-full">
       <div class="font-bold text-gray-900 text-xl">Vietspeak</div>
@@ -16,16 +16,29 @@
         </button>
       </div>
     </div>
-    <div
-      class="w-full max-w-md rounded-md sm:shadow sm:px-12 sm:py-12 sm:bg-white"
-    >
-      <div class="font-semibold text-gray-900 text-2xl mb-2">Login</div>
-      <alert [type]="'error'" class="mt-6">Invalid email or password</alert>
-      <form class="mt-8" [formGroup]="form" (ngSubmit)="submit()">
+    <div class="w-full max-w-md rounded-md sm:px-12 sm:py-12 sm:bg-white">
+      <div class="font-semibold text-gray-900 text-2xl">Login</div>
+
+      <form
+        class="mt-8"
+        [formGroup]="loginForm"
+        (ngSubmit)="submit()"
+        #loginNgForm="ngForm"
+      >
+        <!-- Alert message -->
+        <alert *ngIf="alert.message" [type]="'error'" class="mb-4">{{
+          alert.message
+        }}</alert>
+
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>Email</mat-label>
           <input matInput formControlName="email" />
-          <mat-error>This field is required</mat-error>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')"
+            >This field is required</mat-error
+          >
+          <mat-error *ngIf="loginForm.get('email')?.hasError('email')"
+            >Please enter a valid email</mat-error
+          >
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="w-full">
@@ -58,19 +71,23 @@
               [svgIcon]="'mat_outline:visibility_off'"
             ></mat-icon>
           </button>
-          <mat-error> This field is required </mat-error>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+            This field is required
+          </mat-error>
         </mat-form-field>
         <div class="text-right">
           <a routerLink="/forgot-password">Forgot password?</a>
         </div>
         <button
-          class="w-full !mt-4 btn--lg"
+          type="submit"
+          class="w-full !mt-6 btn--lg"
           mat-flat-button
           [color]="'primary'"
+          [disabled]="loginForm.disabled"
         >
-          <span *ngIf="!form.disabled"> Login </span>
+          <span *ngIf="!loginForm.disabled"> Login </span>
           <mat-progress-spinner
-            *ngIf="form.disabled"
+            *ngIf="loginForm.disabled"
             [diameter]="24"
             mode="indeterminate"
           >
@@ -78,5 +95,8 @@
         </button>
       </form>
     </div>
+  </div>
+  <div class="mt-auto text-gray-400 text-sm text-center p-4">
+    &copy; 2022 Vietspeak. All rights reserved.
   </div>
 </div>

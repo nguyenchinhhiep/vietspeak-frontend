@@ -1,8 +1,8 @@
-<div class="w-full min-h-full flex flex-col items-center bg-gray-100">
+<div class="w-full min-h-full flex flex-col gap-4 items-center bg-gray-100 relative">
   <div
-    class="w-full max-w-7xl px-4 flex flex-col gap-14 items-center justify-start pb-12 pt-4"
+    class="w-full max-w-7xl p-4 flex flex-col gap-14 items-center justify-start"
   >
-    <div class="flex justify-between items-center w-full">
+    <div class="flex justify-between items-center w-full sticky top-4 left-0">
       <div class="font-bold text-gray-900 text-xl">Vietspeak</div>
       <div class="flex items-center gap-2">
         <div class="text-gray-400">Already have an account?</div>
@@ -17,7 +17,7 @@
       </div>
     </div>
     <div
-      class="w-full max-w-md rounded-md sm:shadow sm:px-12 sm:py-12 sm:bg-white"
+      class="w-full max-w-md rounded-md sm:px-12 sm:py-12 sm:bg-white"
     >
       <div class="font-semibold text-gray-900 text-2xl mb-2">Register</div>
 
@@ -90,9 +90,9 @@
           </button>
           <mat-error> This field is required </mat-error>
         </mat-form-field>
-        <mat-checkbox class="mt-2">
-          I agree to the <a>Terms of Service</a> and <a>Privacy Policy</a>
-        </mat-checkbox>
+        <div class="mt-2 text-secondary">
+          By creating an account, you agree to the <a>Terms of Service</a> and <a>Privacy Policy</a>.
+        </div>
         <button
           class="w-full !mt-6 btn--lg"
           mat-flat-button
@@ -103,5 +103,8 @@
         </button>
       </form>
     </div>
+  </div>
+  <div class="mt-auto text-gray-400 text-sm text-center p-4">
+    &copy; 2022 Vietspeak. All rights reserved.
   </div>
 </div>

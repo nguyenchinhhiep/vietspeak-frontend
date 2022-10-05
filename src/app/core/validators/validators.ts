@@ -88,4 +88,42 @@ export class CustomValidators {
       return errors;
     };
   }
+
+  /**
+   * Is Object validator
+   */
+  static isObject(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      // If empty value
+      if (this.isEmptyInputValue(control.value)) {
+        return null;
+      }
+
+      if (typeof control.value === 'object') {
+        return null;
+      }
+
+      return { isObject: true };
+    };
+  }
+
+  /**
+   * Is valid email
+   */
+  static isEmail(): ValidatorFn {
+    return (control: AbstractControl): ValidationErrors | null => {
+      // If empty value
+      if (this.isEmptyInputValue(control.value)) {
+        return null;
+      }
+
+      const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+
+      if (control.value.match(emailRegex)) {
+        return null;
+      }
+
+      return { email: true };
+    };
+  }
 }

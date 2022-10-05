@@ -411,6 +411,20 @@
   max-height: 40px;
   line-height: 1 !important;
 
+  .mat-button-wrapper {
+    position: relative;
+    display: inline-flex !important;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    z-index: 2; /* Move mat-button-wrapper above the ripple and focus overlay */
+  }
+
+  .mat-button-focus-overlay,
+  .mat-button-ripple {
+    z-index: 1;
+  }
+
   &.btn--sm {
     height: 30px;
     min-height: 32px;
@@ -432,5 +446,149 @@
         stroke: currentColor !important;
       }
     }
+  }
+}
+
+/* Colored background buttons */
+.mat-flat-button,
+.mat-raised-button,
+.mat-fab,
+.mat-mini-fab {
+  .mat-icon {
+    color: currentColor !important;
+  }
+
+  /* Add hover and focus style on all buttons */
+  .mat-button-focus-overlay {
+    @apply bg-gray-400 bg-opacity-20 dark:bg-black dark:bg-opacity-5 #{'!important'};
+  }
+
+  /* On palette colored buttons, use a darker color */
+  &.mat-primary,
+  &.mat-accent,
+  &.mat-warn {
+    .mat-button-focus-overlay {
+      background-color: rgba(0, 0, 0, 0.1) !important;
+    }
+  }
+
+  &:hover,
+  &.cdk-keyboard-focused,
+  &.cdk-program-focused {
+    .mat-button-focus-overlay {
+      opacity: 1 !important;
+    }
+  }
+
+  @media (hover: none) {
+    &:hover {
+      .mat-button-focus-overlay {
+        opacity: 0 !important;
+      }
+    }
+  }
+
+  &.mat-button-disabled {
+    .mat-button-focus-overlay {
+      opacity: 0 !important;
+    }
+  }
+}
+
+/* Transparent background buttons */
+.mat-button,
+.mat-icon-button,
+.mat-stroked-button {
+  /* Apply primary color */
+  &.mat-primary:not(.mat-button-disabled) {
+    .mat-icon {
+      @apply text-primary #{'!important'};
+    }
+  }
+
+  /* Apply accent color */
+  &.mat-accent:not(.mat-button-disabled) {
+    .mat-icon {
+      @apply text-accent #{'!important'};
+    }
+  }
+
+  /* Apply warn color */
+  &.mat-warn:not(.mat-button-disabled) {
+    .mat-icon {
+      @apply text-warn #{'!important'};
+    }
+  }
+
+  /* Add hover and focus styles */
+  .mat-button-focus-overlay {
+    @apply bg-gray-400 bg-opacity-20 dark:bg-black dark:bg-opacity-5 #{'!important'};
+  }
+
+  /* On primary colored buttons, use the primary color as focus overlay */
+  &.mat-primary:not(.mat-button-disabled) {
+    .mat-button-focus-overlay {
+      @apply bg-primary #{'!important'};
+    }
+  }
+
+  /* On accent colored buttons, use the accent color as focus overlay */
+  &.mat-accent:not(.mat-button-disabled) {
+    .mat-button-focus-overlay {
+      @apply bg-accent #{'!important'};
+    }
+  }
+
+  /* On warn colored buttons, use the warn color as focus overlay */
+  &.mat-warn:not(.mat-button-disabled) {
+    .mat-button-focus-overlay {
+      @apply bg-warn #{'!important'};
+    }
+  }
+
+  &.mat-primary:not(.mat-button-disabled),
+  &.mat-accent:not(.mat-button-disabled),
+  &.mat-warn:not(.mat-button-disabled) {
+    &:hover,
+    &.cdk-keyboard-focused,
+    &.cdk-program-focused {
+      .mat-button-focus-overlay {
+        opacity: 0.1 !important;
+      }
+    }
+  }
+
+  &:hover,
+  &.cdk-keyboard-focused,
+  &.cdk-program-focused {
+    .mat-button-focus-overlay {
+      opacity: 1 !important;
+    }
+  }
+
+  @media (hover: none) {
+    &:hover {
+      .mat-button-focus-overlay {
+        opacity: 0 !important;
+      }
+    }
+  }
+
+  &.mat-button-disabled {
+    .mat-button-focus-overlay {
+      opacity: 0 !important;
+    }
+  }
+}
+
+/* Stroked buttons */
+.mat-stroked-button {
+  /* Border color */
+  &:not(.mat-button-disabled) {
+    @apply border-gray-300 dark:border-gray-500 #{'!important'};
+  }
+
+  &.mat-button-disabled {
+    @apply border-gray-200 dark:border-gray-600 #{'!important'};
   }
 }

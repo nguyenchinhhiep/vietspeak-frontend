@@ -9,6 +9,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { AlertModule } from 'src/app/components/alert/alert.module';
 
 const routes: Routes = [
   {
@@ -18,9 +19,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [
-    ForgotPasswordComponent
-  ],
+  declarations: [ForgotPasswordComponent],
   imports: [
     CommonModule,
     SharedModule,
@@ -31,7 +30,8 @@ const routes: Routes = [
     MatInputModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    AlertModule,
     RouterModule.forChild(routes),
-  ]
+  ],
 })
-export class ForgotPasswordModule { }
+export class ForgotPasswordModule {}
