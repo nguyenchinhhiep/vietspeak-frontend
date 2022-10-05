@@ -1,6 +1,7 @@
 // @ts-nocheck
 const plugin = require("tailwindcss/plugin");
 const path = require("path");
+const colors = require("tailwindcss/colors");
 const chroma = require("chroma-js");
 const flattenColorPalette =
   require("tailwindcss/lib/util/flattenColorPalette").default;
@@ -216,12 +217,36 @@ const theming = plugin.withOptions(
         },
         customProps: {
           background: {
-            light: {},
-            dark: {},
+            light: {
+              "bg-surface": colors.white,
+              "bg-hover": chroma(colors.gray[400]).alpha(0.12).css(),
+            },
+            dark: {
+              "bg-surface": colors.gray[600],
+              "bg-hover": "rgba(255,255,255,0.2)",
+            },
           },
           foreground: {
-            light: {},
-            dark: {},
+            light: {
+              "text-default": colors.gray[800],
+              "text-secondary": colors.gray[500],
+              "text-hint": colors.gray[400],
+              "text-disabled": colors.gray[400],
+              border: colors.gray[200],
+              divider: colors.gray[200],
+              icon: colors.gray[500],
+              "mat-icon": colors.gray[500],
+            },
+            dark: {
+              "text-default": "#FFFFFF",
+              "text-secondary": colors.gray[400],
+              "text-hint": colors.gray[500],
+              "text-disabled": colors.gray[600],
+              border: chroma(colors.gray[100]).alpha(0.12).css(),
+              divider: chroma(colors.gray[100]).alpha(0.12).css(),
+              icon: colors.gray[400],
+              "mat-icon": colors.gray[400],
+            },
           },
         },
         themes: generateThemesObject(options.themes),

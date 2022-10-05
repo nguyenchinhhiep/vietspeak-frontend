@@ -1,0 +1,83 @@
+<div
+  class="alert__container"
+  *ngIf="!dismissible || (dismissible && !dismissed)"
+  [@fadeIn]="!dismissed"
+  [@fadeOut]="!dismissed"
+>
+
+<!-- Border -->
+<div
+class="alert__border"
+*ngIf="appearance === 'border'"></div>
+
+  <!-- Icon -->
+  <div class="alert__icon" *ngIf="showIcon">
+    <!-- Custom icon -->
+    <div class="alert__custom-icon">
+      <ng-content select="[alertIcon]"></ng-content>
+    </div>
+
+    <!-- Default icon  -->
+    <div class="alert__default-icon">
+      <!-- Primary -->
+      <mat-icon
+        *ngIf="type === 'primary'"
+        [svgIcon]="'mat_outline:check_circle'"
+      ></mat-icon>
+
+      <!-- Accent -->
+      <mat-icon
+        *ngIf="type === 'accent'"
+        [svgIcon]="'mat_outline:check_circle'"
+      ></mat-icon>
+
+      <!-- Basic -->
+      <mat-icon
+        *ngIf="type === 'basic'"
+        [svgIcon]="'mat_outline:check_circle'"
+      ></mat-icon>
+
+      <!-- Success -->
+      <mat-icon
+        *ngIf="type === 'success'"
+        [svgIcon]="'mat_outline:check_circle'"
+      ></mat-icon>
+
+      <!-- Info -->
+      <mat-icon
+        *ngIf="type === 'info'"
+        [svgIcon]="'mat_outline:info'"
+      ></mat-icon>
+
+      <!-- Warning -->
+      <mat-icon
+        *ngIf="type === 'warning'"
+        [svgIcon]="'mat_outline:report_problem'"
+      ></mat-icon>
+
+      <!-- Error -->
+      <mat-icon
+        *ngIf="type === 'error'"
+        [svgIcon]="'mat_outline:error_outline'"
+      ></mat-icon>
+    </div>
+  </div>
+
+  <!-- Content -->
+  <div class="alert__content">
+    <!-- Title -->
+    <div class="alert__title">
+      <ng-content select="[alertTitle]"></ng-content>
+    </div>
+
+    <!-- Message -->
+    <div class="alert__message">
+      <ng-content></ng-content>
+    </div>
+  </div>
+
+  <!-- Dimiss button -->
+  <button *ngIf="dismissible" class="alert__dismiss-button btn btn--icon" (click)="dismiss()">
+    <mat-icon [svgIcon]="'design:close'"></mat-icon>
+  </button>
+</div>

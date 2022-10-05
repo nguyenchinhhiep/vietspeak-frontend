@@ -49,38 +49,6 @@
     }
   }
 
-  /* Remove the default arrow for native select */
-  &.mat-form-field-type-mat-native-select {
-    .mat-form-field-infix {
-      select {
-        top: auto;
-        margin-top: 0;
-        margin-bottom: 0;
-        padding-top: 0;
-        padding-right: 18px;
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2364748B' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
-        background-repeat: no-repeat;
-        background-position: right -7px center;
-        background-size: 24px;
-
-        .dark & {
-          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2397a6ba' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
-        }
-      }
-
-      &:after {
-        display: none;
-      }
-    }
-  }
-
-  /* Adjustments for mat-label */
-  &.mat-form-field-has-label {
-    .mat-form-field-wrapper {
-      margin-top: 24px;
-    }
-  }
-
   /* Default style tweaks and enhancements */
   .mat-form-field-wrapper {
     margin-bottom: 16px;
@@ -141,7 +109,7 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        @apply text-gray-400 #{'!important'};
+        @apply text-hint #{'!important'};
 
         .mat-icon-button {
           width: 40px;
@@ -153,7 +121,7 @@
         .mat-icon,
         .mat-icon-button:not(.mat-button-disabled),
         .mat-select-value {
-          @apply text-gray-400;
+          @apply text-hint;
         }
 
         /* Remove the margins from the mat-icon if it's inside a button */
@@ -308,7 +276,7 @@
             backface-visibility: hidden;
             transition: none;
             font-weight: 500;
-            @apply text-gray-500 #{'!important'};
+            @apply text-secondary #{'!important'};
           }
         }
       }
@@ -329,9 +297,9 @@
       font-weight: 500;
       line-height: 1;
 
-      > div {
-        display: contents; /* Remove the div from flow to stop the subscript animation */
-      }
+      // > div {
+      //   display: contents; /* Remove the div from flow to stop the subscript animation */
+      // }
 
       .mat-error,
       .mat-hint {
@@ -340,7 +308,39 @@
       }
 
       .mat-hint {
-        @apply text-gray-400 #{'!important'};
+        @apply text-hint #{'!important'};
+      }
+    }
+  }
+
+  /* Adjustments for mat-label */
+  &.mat-form-field-has-label {
+    .mat-form-field-wrapper {
+      margin-top: 24px;
+    }
+  }
+
+  /* Remove the default arrow for native select */
+  &.mat-form-field-type-mat-native-select {
+    .mat-form-field-infix {
+      select {
+        top: auto;
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-right: 18px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2364748B' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right -7px center;
+        background-size: 24px;
+
+        .dark & {
+          background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='%2397a6ba' viewBox='0 0 24 24'%3E%3Cpath d='M7 10l5 5 5-5H7z'/%3E%3C/svg%3E");
+        }
+      }
+
+      &:after {
+        display: none;
       }
     }
   }
@@ -390,5 +390,47 @@
   .mat-form-field-label {
     text-transform: uppercase;
     font-weight: 500;
+  }
+}
+
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Buttons
+/* ----------------------------------------------------------------------------------------------------- */
+.mat-button,
+.mat-fab,
+.mat-flat-button,
+.mat-icon-button,
+.mat-mini-fab,
+.mat-raised-button,
+.mat-stroked-button {
+  display: inline-flex !important;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  min-height: 40px;
+  max-height: 40px;
+  line-height: 1 !important;
+
+  &.btn--sm {
+    height: 30px;
+    min-height: 32px;
+    max-height: 32px;
+    padding: -0 14px;
+  }
+
+  &.btn--lg {
+    font-size: 15px;
+    height: 48px;
+    min-height: 48px;
+    max-height: 48px;
+  }
+
+  /* mat-progress-spinner inside buttons */
+  .mat-progress-spinner {
+    &.mat-progress-spinner-indeterminate-animation[mode="indeterminate"] {
+      circle {
+        stroke: currentColor !important;
+      }
+    }
   }
 }

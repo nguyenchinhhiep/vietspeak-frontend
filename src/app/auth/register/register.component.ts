@@ -1,15 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { UntypedFormBuilder, UntypedFormGroup, Validators } from '@angular/forms';
+import {
+  UntypedFormBuilder,
+  UntypedFormGroup,
+  Validators,
+} from '@angular/forms';
 import { Router } from '@angular/router';
 import { CustomValidators } from 'src/app/core/validators/validators';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.scss']
+  styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-
   constructor(private _router: Router, private _fb: UntypedFormBuilder) {}
 
   loading: boolean = false;
@@ -25,7 +28,7 @@ export class RegisterComponent implements OnInit {
   createForm() {
     this.form = this._fb.group(
       {
-        email: [{ value: 'nguyenchinhhiep95@gmail.com', disabled: true }],
+        email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required]],
         agreements: [false, [Validators.requiredTrue]],

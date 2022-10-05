@@ -4,8 +4,11 @@ import { ForgotPasswordComponent } from './forgot-password.component';
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatIconModule } from '@angular/material/icon';
-import { AppButtonModule } from 'src/app/components/button/button.module';
-import { AppCheckboxModule } from 'src/app/components/checkbox/checkbox.module';
+import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 const routes: Routes = [
   {
@@ -20,10 +23,14 @@ const routes: Routes = [
   ],
   imports: [
     CommonModule,
-    MatIconModule,
+    SharedModule,
     FormsModule,
     ReactiveFormsModule,
-    AppButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatButtonModule,
+    MatProgressSpinnerModule,
     RouterModule.forChild(routes),
   ]
 })

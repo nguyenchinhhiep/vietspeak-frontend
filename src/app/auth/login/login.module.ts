@@ -7,7 +7,9 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-import { AppButtonModule } from 'src/app/components/button/button.module';
+import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { AlertModule } from 'src/app/components/alert/alert.module';
 
 const routes: Routes = [
   {
@@ -19,13 +21,15 @@ const routes: Routes = [
   declarations: [LoginComponent],
   imports: [
     CommonModule,
+    SharedModule,
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
     MatFormFieldModule,
     MatInputModule,
     MatButtonModule,
-    AppButtonModule,
+    MatProgressSpinnerModule,
+    AlertModule,
     RouterModule.forChild(routes),
   ],
 })
