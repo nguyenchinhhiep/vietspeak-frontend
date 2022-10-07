@@ -66,9 +66,4 @@ export class LoginComponent implements OnInit {
       };
     }, 5000);
   }
-
-  // Reset form value and validators
-  reset() {
-    this.createForm();
-  }
 }

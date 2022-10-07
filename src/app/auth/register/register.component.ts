@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import {
+  NgForm,
   UntypedFormBuilder,
   UntypedFormGroup,
   Validators,
@@ -15,9 +16,9 @@ import { CustomValidators } from 'src/app/core/validators/validators';
 export class RegisterComponent implements OnInit {
   constructor(private _router: Router, private _fb: UntypedFormBuilder) {}
 
-  loading: boolean = false;
+  @ViewChild('registerNgForm') registerNgForm!: NgForm;
 
-  form!: UntypedFormGroup;
+  registerForm!: UntypedFormGroup;
 
   checked: boolean = true;
 
@@ -26,12 +27,11 @@ export class RegisterComponent implements OnInit {
   }
 
   createForm() {
-    this.form = this._fb.group(
+    this.registerForm = this._fb.group(
       {
-        email: ['', [Validators.required, Validators.email]],
+        email: ['', [Validators.required, CustomValidators.isEmail()]],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required]],
-        agreements: [false, [Validators.requiredTrue]],
       },
       {
         validator: CustomValidators.mustMatch('password', 'confirmPassword'),
@@ -40,14 +40,20 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
-    for (let control in this.form.controls) {
-      this.form.controls[control].markAsDirty();
-      this.form.controls[control].markAsTouched();
+    for (let control in this.registerForm.controls) {
+      this.registerForm.controls[control].markAsDirty();
+      this.registerForm.controls[control].markAsTouched();
     }
-    if (this.form.invalid) return;
-  }
+    if (this.registerForm.invalid) return;
 
-  back() {
-    this._router.navigate(['/login']);
+    this.registerForm.disable();
+
+    setTimeout(() => {
+      // Re-enable the form
+      this.registerForm.enable();
+
+      // Reset the form
+      this.registerNgForm.resetForm();
+    }, 5000);
   }
 }

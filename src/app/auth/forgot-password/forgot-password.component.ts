@@ -63,12 +63,8 @@ export class ForgotPasswordComponent implements OnInit {
       this.alert = {
         type: 'success',
         message:
-          'An email has been sent to your email with instructions to reset your password',
+          "We've sent a link to your email with instructions to reset your password",
       };
     }, 5000);
-  }
-
-  back() {
-    this._router.navigate(['/login']);
   }
 }
