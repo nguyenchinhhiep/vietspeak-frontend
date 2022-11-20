@@ -1,23 +1,29 @@
-<div class="w-full min-h-full flex flex-col gap-4 items-center bg-gray-100">
+<div
+  class="w-full min-h-full flex flex-col gap-4 items-center bg-gray-100 relative"
+>
   <div
     class="w-full max-w-7xl p-4 flex flex-col gap-14 items-center justify-start"
   >
     <div class="flex justify-between items-center w-full">
       <div class="font-bold text-gray-900 text-xl">Vietspeak</div>
       <div class="flex items-center gap-2">
-        <div class="text-gray-400">Don't have an account yet?</div>
+        <div class="text-gray-400">
+          {{ "Login.DontHaveAccount" | translate }}?
+        </div>
         <button
           class="btn--sm"
           mat-flat-button
           [color]="'primary'"
           routerLink="/register"
         >
-          Register
+          {{ "Register.Title" | translate }}
         </button>
       </div>
     </div>
     <div class="w-full max-w-md rounded-md sm:px-12 sm:py-12 sm:bg-white">
-      <div class="font-semibold text-gray-900 text-2xl">Login</div>
+      <div class="font-semibold text-gray-900 text-2xl">
+        {{ "Login.Title" | translate }}
+      </div>
 
       <form
         class="mt-8"
@@ -33,16 +39,16 @@
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>Email</mat-label>
           <input matInput formControlName="email" />
-          <mat-error *ngIf="loginForm.get('email')?.hasError('required')"
-            >This field is required</mat-error
-          >
-          <mat-error *ngIf="loginForm.get('email')?.hasError('email')"
-            >Please enter a valid email</mat-error
-          >
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">{{
+            "Errors.Required" | translate
+          }}</mat-error>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('email')">{{
+            "Errors.Email" | translate
+          }}</mat-error>
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="w-full">
-          <mat-label>Password</mat-label>
+          <mat-label>{{ "Login.Password" | translate }}</mat-label>
           <input
             id="password"
             matInput
@@ -72,11 +78,13 @@
             ></mat-icon>
           </button>
           <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
-            This field is required
+            {{ "Errors.Required" | translate }}
           </mat-error>
         </mat-form-field>
         <div class="text-right">
-          <a routerLink="/forgot-password">Forgot password?</a>
+          <a routerLink="/forgot-password"
+            >{{ "Login.ForgotPassword" | translate }}?</a
+          >
         </div>
         <button
           type="submit"
@@ -85,7 +93,9 @@
           [color]="'primary'"
           [disabled]="loginForm.disabled"
         >
-          <span *ngIf="!loginForm.disabled"> Login </span>
+          <span *ngIf="!loginForm.disabled">
+            {{ "Login.Title" | translate }}
+          </span>
           <mat-progress-spinner
             *ngIf="loginForm.disabled"
             [diameter]="24"

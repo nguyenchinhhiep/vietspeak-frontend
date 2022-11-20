@@ -1,11 +1,16 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
+  AbstractControl,
   NgForm,
   UntypedFormBuilder,
   UntypedFormGroup,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, of, timer } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { CustomValidators } from 'src/app/core/validators/validators';
 
 @Component({
@@ -14,7 +19,11 @@ import { CustomValidators } from 'src/app/core/validators/validators';
   styleUrls: ['./register.component.scss'],
 })
 export class RegisterComponent implements OnInit {
-  constructor(private _router: Router, private _fb: UntypedFormBuilder) {}
+  constructor(
+    private _router: Router,
+    private _fb: UntypedFormBuilder,
+    private _authService: AuthService
+  ) {}
 
   @ViewChild('registerNgForm') registerNgForm!: NgForm;
 
@@ -29,7 +38,11 @@ export class RegisterComponent implements OnInit {
   createForm() {
     this.registerForm = this._fb.group(
       {
-        email: ['', [Validators.required, CustomValidators.isEmail()]],
+        email: [
+          '',
+          [Validators.required, CustomValidators.isEmail()],
+          this._validateExistingEmail(this._authService),
+        ],
         password: ['', [Validators.required, Validators.minLength(6)]],
         confirmPassword: ['', [Validators.required]],
       },
@@ -44,7 +57,8 @@ export class RegisterComponent implements OnInit {
       this.registerForm.controls[control].markAsDirty();
       this.registerForm.controls[control].markAsTouched();
     }
-    if (this.registerForm.invalid) return;
+    if (this.registerForm.invalid || this.registerForm.status === 'PENDING')
+      return;
 
     this.registerForm.disable();
 
@@ -55,5 +69,27 @@ export class RegisterComponent implements OnInit {
       // Reset the form
       this.registerNgForm.resetForm();
     }, 5000);
+  }
+
+  private _validateExistingEmail(authService: AuthService) {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (control.hasError('required') || control.hasError('isEmail')) {
+        return of(null);
+      }
+      return timer(5000).pipe(
+        switchMap((_) => {
+          return authService.checkExistingEmail(control.value).pipe(
+            map((isExisting: boolean) => {
+              if (!isExisting) {
+                return null;
+              }
+              return {
+                existingEmail: true,
+              };
+            })
+          );
+        })
+      );
+    };
   }
 }

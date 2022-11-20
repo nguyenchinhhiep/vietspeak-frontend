@@ -1,12 +1,17 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import {
+  AbstractControl,
   NgForm,
   UntypedFormBuilder,
   UntypedFormGroup,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { Observable, of, timer } from 'rxjs';
+import { map, switchMap } from 'rxjs/operators';
 import { AlertType } from 'src/app/components/alert/alert.model';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { CustomValidators } from 'src/app/core/validators/validators';
 
 @Component({
@@ -15,7 +20,11 @@ import { CustomValidators } from 'src/app/core/validators/validators';
   styleUrls: ['./forgot-password.component.scss'],
 })
 export class ForgotPasswordComponent implements OnInit {
-  constructor(private _router: Router, private _fb: UntypedFormBuilder) {}
+  constructor(
+    private _router: Router,
+    private _fb: UntypedFormBuilder,
+    private _authService: AuthService
+  ) {}
   @ViewChild('forgotPasswordNgForm') forgotPasswordNgForm!: NgForm;
 
   alert: { type: AlertType; message: string } | null = {
@@ -33,7 +42,11 @@ export class ForgotPasswordComponent implements OnInit {
 
   createForm() {
     this.forgotPasswordForm = this._fb.group({
-      email: ['', [Validators.required, CustomValidators.isEmail()]],
+      email: [
+        '',
+        [Validators.required, CustomValidators.isEmail()],
+        this._validateExistingEmail(this._authService),
+      ],
     });
   }
 
@@ -44,7 +57,11 @@ export class ForgotPasswordComponent implements OnInit {
     }
 
     // Return if the form is invalid
-    if (this.forgotPasswordForm.invalid) return;
+    if (
+      this.forgotPasswordForm.invalid ||
+      this.forgotPasswordForm.status === 'PENDING'
+    )
+      return;
 
     // Disable the form
     this.forgotPasswordForm.disable();
@@ -66,5 +83,27 @@ export class ForgotPasswordComponent implements OnInit {
           "We've sent a link to your email with instructions to reset your password",
       };
     }, 5000);
+  }
+
+  private _validateExistingEmail(authService: AuthService) {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (control.hasError('required') || control.hasError('isEmail')) {
+        return of(null);
+      }
+      return timer(5000).pipe(
+        switchMap((_) => {
+          return authService.checkExistingEmail(control.value).pipe(
+            map((isExisting: boolean) => {
+              if (isExisting) {
+                return null;
+              }
+              return {
+                notFoundEmail: true,
+              };
+            })
+          );
+        })
+      );
+    };
   }
 }

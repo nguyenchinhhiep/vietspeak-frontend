@@ -4,22 +4,26 @@
   <div
     class="w-full max-w-7xl p-4 flex flex-col gap-14 items-center justify-start"
   >
-    <div class="flex justify-between items-center w-full sticky top-4 left-0">
+    <div class="flex justify-between items-center w-full">
       <div class="font-bold text-gray-900 text-xl">Vietspeak</div>
       <div class="flex items-center gap-2">
-        <div class="text-gray-400">Already have an account?</div>
+        <div class="text-gray-400">
+          {{ "Register.AlreadyHaveAccount" | translate }}?
+        </div>
         <button
           class="btn--sm"
           mat-flat-button
           [color]="'primary'"
           routerLink="/login"
         >
-          Login
+          {{ "Login.Title" | translate }}
         </button>
       </div>
     </div>
     <div class="w-full max-w-md rounded-md sm:px-12 sm:py-12 sm:bg-white">
-      <div class="font-semibold text-gray-900 text-2xl mb-2">Register</div>
+      <div class="font-semibold text-gray-900 text-2xl mb-2">
+        {{ "Register.Title" | translate }}
+      </div>
 
       <form
         class="mt-8"
@@ -30,15 +34,48 @@
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>Email</mat-label>
           <input matInput formControlName="email" />
-          <mat-error *ngIf="registerForm.get('email')?.hasError('required')"
-            >This field is required</mat-error
+          <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
+            {{ "Errors.Required" | translate }}
+          </mat-error>
+          <mat-error *ngIf="registerForm.get('email')?.hasError('email')">{{
+            "Errors.Email" | translate
+          }}</mat-error>
+          <mat-error
+            *ngIf="registerForm.get('email')?.hasError('existingEmail')"
+            >{{ "Errors.ExistingEmail" | translate }}</mat-error
           >
-          <mat-error *ngIf="registerForm.get('email')?.hasError('email')"
-            >Please enter a valid email</mat-error
+
+          <button
+            mat-icon-button
+            type="button"
+            matSuffix
+            *ngIf="
+              registerForm.get('email')?.status !== 'PENDING' &&
+              registerForm.get('email')?.value != ''
+            "
+            (click)="registerForm.get('email')?.setValue('')"
           >
+            <mat-icon
+              class="icon-size-5"
+              [svgIcon]="'mat_outline:close'"
+            ></mat-icon>
+          </button>
+          <div class="ml-2" matSuffix *ngIf="registerForm.get('email')?.valid">
+            <mat-icon
+              class="!text-success"
+              [svgIcon]="'mat_outline:check_circle'"
+            ></mat-icon>
+          </div>
+          <mat-progress-spinner
+            [diameter]="24"
+            *ngIf="registerForm.get('email')?.status === 'PENDING'"
+            mode="indeterminate"
+            matSuffix
+          >
+          </mat-progress-spinner>
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
-          <mat-label>Password</mat-label>
+          <mat-label>{{ "Register.Password" | translate }}</mat-label>
           <input
             matInput
             type="password"
@@ -67,16 +104,20 @@
             ></mat-icon>
           </button>
           <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
-            This field is required
+            {{ "Errors.Required" | translate }}
           </mat-error>
           <mat-error
             *ngIf="registerForm.get('password')?.hasError('minlength')"
           >
-            Password must be at least 6 characters long
+            {{
+              "Errors.MinLength"
+                | translate
+                  : { control: ("Register.Password" | translate), length: "6" }
+            }}
           </mat-error>
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
-          <mat-label>Confirm password</mat-label>
+          <mat-label>{{ "Register.ConfirmPassword" | translate }}</mat-label>
           <input
             matInput
             type="password"
@@ -107,25 +148,34 @@
           <mat-error
             *ngIf="registerForm.get('confirmPassword')?.hasError('required')"
           >
-            This field is required
+            {{ "Errors.Required" | translate }}
           </mat-error>
           <mat-error
             *ngIf="registerForm.get('confirmPassword')?.hasError('mustMatch')"
           >
-            Password and Confirm password must match
+            {{
+              "Errors.MustMatch"
+                | translate
+                  : {
+                      control: ("Register.Password" | translate),
+                      matchingControl: ("Register.ConfirmPassword" | translate)
+                    }
+            }}
           </mat-error>
         </mat-form-field>
-        <div class="mt-2 text-secondary">
-          By creating an account, you agree to the <a>Terms of Service</a> and
-          <a>Privacy Policy</a>.
-        </div>
+        <div
+          class="mt-2 text-secondary"
+          [innerHTML]="'Register.Agreement' | translate"
+        ></div>
         <button
           class="w-full !mt-6 btn--lg"
           mat-flat-button
           [color]="'primary'"
           [disabled]="registerForm.disabled"
         >
-          <span *ngIf="!registerForm.disabled"> Register </span>
+          <span *ngIf="!registerForm.disabled">
+            {{ "Register.Title" | translate }}
+          </span>
           <mat-progress-spinner
             *ngIf="registerForm.disabled"
             [diameter]="24"

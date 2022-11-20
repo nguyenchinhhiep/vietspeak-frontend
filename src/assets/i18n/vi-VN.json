@@ -1,19 +1,30 @@
 {
-   "Auth": {
-      "Common": {
-         "Password": "mật khẩu"
-      },
-      "Errors": {
-
-      },
-      "Login": {
-         "Title": "đăng nhập"
-      },
-      "Register": {
-         "Title": "đăng kí"
-      },
-      "ForgotPassword": {
-         "Title": "quên mật khẩu"
-      }
+   "Errors": {
+      "Required": "This field is required",
+      "Email": "Please enter a valid email",
+      "ExistingEmail": "Email already exists",
+      "NotFoundEmail": "Email not found",
+      "MustMatch": "{{control}} and {{matchingControl}} must match",
+      "MinLength": "{{control}} must be at least {{length}} characters"
+   },
+   "Login": {
+      "Title": "Login",
+      "Password": "Password",
+      "ForgotPassword": "Forgot password",
+      "DontHaveAccount": "Don't have an account yet"
+   },
+   "Register": {
+      "Title": "Register",
+      "Password": "Password",
+      "ConfirmPassword": "Confirm password",
+      "Agreement": "By creating an account, you agree to the <a>Terms of Service</a> and <a>Privacy Policy</a>",
+      "AlreadyHaveAccount": "Already have an account"
+   },
+   "ForgotPassword": {
+      "Title": "Forgot password",
+      "SubTitle": "Fill the form to reset your password",
+      "ResetPassword": "Reset password",
+      "BackTo": "Back to",
+      "AlreadyHaveAccount": "Already have an account"
    }
 }

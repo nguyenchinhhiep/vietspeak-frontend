@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { catchError, Observable, of, switchMap, throwError } from 'rxjs';
+import { catchError, delay, Observable, of, switchMap, throwError } from 'rxjs';
 import { ApiEndpoint, ApiMethod } from '../http/api.model';
 import { HttpService } from '../http/services/http.service';
 import { StorageKey, StorageType } from '../storage/storage.model';
@@ -191,6 +191,24 @@ export class AuthService {
 
     // Get new access token
     return this.getNewAccessToken();
+  }
+
+  checkExistingEmail(email: string): Observable<boolean> {
+    // return this._httpService
+    //   .request({
+    //     apiUrl: ApiEndpoint.checkExistingEmail,
+    //     method: ApiMethod.Post,
+    //     body: {
+    //       email: email,
+    //     },
+    //   })
+    //   .pipe(
+    //     switchMap((res: boolean) => {
+    //       return of(res);
+    //     })
+    //   );
+
+    return of(true);
   }
 
   /**

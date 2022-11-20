@@ -11,4 +11,5 @@ export enum ApiEndpoint {
   SignUp = 'auth/sign-up',
   ForgotPassword = 'auth/forgot',
   RefreshToken = 'auth/refresh-token',
+  checkExistingEmail = 'auth/check-email',
 }

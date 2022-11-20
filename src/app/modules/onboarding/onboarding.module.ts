@@ -4,7 +4,6 @@ import { AccountTypeComponent } from './account-type/account-type.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { AppButtonModule } from 'src/app/components/button/button.module';
-import { BasicInfoComponent } from './basic-info/basic-info.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 const routes: Routes = [
@@ -19,18 +18,11 @@ const routes: Routes = [
     data: {
       authLayout: 'blank',
     },
-  },
-  {
-    path: 'basic-info',
-    component: BasicInfoComponent,
-    data: {
-      authLayout: 'blank',
-    },
-  },
+  }
 ];
 
 @NgModule({
-  declarations: [AccountTypeComponent, BasicInfoComponent],
+  declarations: [AccountTypeComponent],
   imports: [
     CommonModule,
     MatIconModule,
