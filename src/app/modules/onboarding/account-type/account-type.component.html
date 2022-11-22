@@ -1,57 +1,58 @@
-<div class="min-h-full flex flex-col items-center px-4 py-20 bg-gray-100">
+<div
+  class="w-full min-h-full flex flex-col gap-4 items-center bg-gray-50 relative"
+>
   <div
-    class="w-full max-w-md min-h-[500px] sm:shadow-base rounded-md sm:px-9 sm:py-12 bg-white"
+    class="w-full max-w-7xl p-4 flex flex-col gap-14 items-center justify-start"
   >
-    <div class="mb-4 flex">
-      <button type="button" class="text-gray-400" (click)="back()">
-        <mat-icon
-          class="icon-size-7"
-          [svgIcon]="'mat_outline:arrow_back'"
-        ></mat-icon>
-      </button>
-    </div>
-    <div class="font-medium text-gray-900 text-2xl text-center mb-14">
-      Loại tài khoản
+    <div class="flex justify-between items-center w-full">
+      <div class="font-bold text-gray-900 text-xl">Vietspeak</div>
+      <div class="flex items-center gap-2">
+        <button
+          class="btn--sm"
+          type="button"
+          mat-button
+          [color]="'primary'"
+          (click)="onLogout()"
+        >
+          {{ "OnBoarding.Logout" | translate }}
+        </button>
+      </div>
     </div>
 
-    <div class="flex items-center justify-center gap-20">
-      <a
-        class="flex flex-col gap-5 items-center hover:no-underline cursor-pointer"
-        *ngFor="let type of accountTypeList"
-        (click)="onSelectType(type)"
-      >
+    <div class="w-full">
+      <div class="font-semibold text-gray-700 text-xl text-center mb-14">
+        {{ "OnBoarding.SelectAccountType" | translate }}
+      </div>
+
+      <div class="flex gap-14 justify-center">
         <div
-          class="w-20 h-20 rounded-full flex justify-center items-center overflow-hidden bg-white border border-solid"
-          [ngClass]="
-            type.selected
-              ? 'border-primary ring-primary-300 ring-1'
-              : 'border-gray-300'
-          "
+          class="border rounded p-8 bg-white flex flex-col items-center gap-4 cursor-pointer"
+          *ngFor="let type of accountTypeList"
+          (click)="onSelectAccountType(type)"
         >
           <mat-icon
-            class="text-gray-600 icon-size-10"
+            class="text-gray-600 icon-size-14"
             [svgIcon]="type.icon"
           ></mat-icon>
+          <div
+            class="text-sm font-semibold"
+            [ngClass]="type.selected ? 'text-primary' : 'text-gray-500 '"
+          >
+            {{ type.translateKey | translate }}
+          </div>
         </div>
-        <div
-          class="uppercase text-sm"
-          [ngClass]="type.selected ? 'text-primary' : 'text-gray-500 '"
-        >
-          {{ type.label }}
-        </div>
-      </a>
-    </div>
+      </div>
 
-    <div class="flex mt-14">
-      <app-button
-        [type]="'button'"
-        [variant]="'primary'"
-        class="w-full"
-        [classes]="'!w-full'"
-        [disabled]="isDisabled()"
-        (clicked)="continue()"
-        >Tiếp theo</app-button
-      >
+      <div class="mt-12 flex justify-center">
+        <button
+          type="submit"
+          class="btn w-48"
+          mat-flat-button
+          [color]="'primary'"
+        >
+          Continue
+        </button>
+      </div>
     </div>
   </div>
 </div>

@@ -26,5 +26,12 @@
       "ResetPassword": "Reset password",
       "BackTo": "Back to",
       "AlreadyHaveAccount": "Already have an account"
+   },
+   "OnBoarding": {
+      "Logout": "Logout",
+      "SelectAccountType": "Select account type",
+      "Teacher": "Teacher",
+      "Student": "Student",
+      "Continue": "Continue"
    }
 }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { AccountTypeList } from 'src/app/core/user/user.model';
 
 @Component({
@@ -8,27 +9,20 @@ import { AccountTypeList } from 'src/app/core/user/user.model';
   styleUrls: ['./account-type.component.scss'],
 })
 export class AccountTypeComponent implements OnInit {
-  constructor(private _router: Router) {}
+  constructor(private _router: Router, private _authService: AuthService) {}
 
   accountTypeList: any[] = JSON.parse(JSON.stringify(AccountTypeList));
 
   ngOnInit(): void {}
 
-  onSelectType(type: any) {
-    this.accountTypeList.forEach((type) => (type.selected = false));
-
-    type['selected'] = true;
+  onSelectAccountType(type: any) {
+    
   }
 
-  continue() {
-    this._router.navigate(['/onboarding/basic-info']);
-  }
 
-  isDisabled() {
-    return this.accountTypeList.filter((type) => type.selected).length <= 0;
-  }
 
-  back() {
-    this._router.navigate(['/']);
+
+  onLogout() {
+    this._authService.signOut();
   }
 }

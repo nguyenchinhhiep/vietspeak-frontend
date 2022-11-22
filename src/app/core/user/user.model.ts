@@ -12,13 +12,15 @@ export interface IUser {
 
 export const AccountTypeList = [
   {
-    label: 'Giáo viên',
+    label: 'Teacher',
+    translateKey: 'OnBoarding.Teacher',
     value: Role.Teacher,
-    icon: 'custom:teacher'
+    icon: 'custom:teacher',
   },
   {
-    label: 'Học viên',
+    label: 'Student',
+    translateKey: 'OnBoarding.Student',
     value: Role.Student,
-    icon: 'custom:student'
+    icon: 'custom:student',
   },
 ];
