@@ -7,6 +7,10 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
 import { StudentBasicInfoComponent } from './student-basic-info/student-basic-info.component';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
 
 const routes: Routes = [
   {
@@ -40,9 +44,12 @@ const routes: Routes = [
   imports: [
     CommonModule,
     SharedModule,
-
+    MatFormFieldModule,
+    MatInputModule,
     MatIconModule,
+    MatSelectModule,
     MatButtonModule,
+    MatRadioModule,
     FormsModule,
     ReactiveFormsModule,
     RouterModule.forChild(routes),

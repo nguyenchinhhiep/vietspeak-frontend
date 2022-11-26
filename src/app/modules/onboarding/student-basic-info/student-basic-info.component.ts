@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
 
@@ -8,11 +9,28 @@ import { AuthService } from 'src/app/core/auth/auth.service';
   styleUrls: ['./student-basic-info.component.scss'],
 })
 export class StudentBasicInfoComponent implements OnInit {
-  constructor(private _router: Router, private _authService: AuthService) {}
+  constructor(private _router: Router, private _authService: AuthService, private _fb: FormBuilder) {}
+  studentInfoForm!: FormGroup;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.createForm();
+  }
 
-  continue() {}
+
+
+  submit() {}
+
+  createForm() {
+    this.studentInfoForm = this._fb.group({
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      gender: ['male'],
+      dob: [null],
+      occupation: [null],
+    })
+  }
+
+
 
   logout() {
     this._authService.signOut();

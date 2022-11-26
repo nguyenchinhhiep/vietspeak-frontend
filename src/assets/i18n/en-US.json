@@ -34,6 +34,13 @@
       "Student": "Student",
       "Continue": "Continue",
       "BasicInfo": "Basic info",
-      "Back": "Back"
+      "Back": "Back",
+      "StudentInfo": "Student info",
+      "TeacherInfo": "Teacher info",
+      "FirstName": "First name",
+      "LastName": "Last name",
+      "Gender": "Gender",
+      "Birthday": "Birthday",
+      "Occupation": "Occupation"
    }
 }

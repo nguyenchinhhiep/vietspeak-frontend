@@ -10,6 +10,10 @@ import {
   MatCheckboxDefaultOptions,
   MAT_CHECKBOX_DEFAULT_OPTIONS,
 } from '@angular/material/checkbox';
+import {
+  MatRadioDefaultOptions,
+  MAT_RADIO_DEFAULT_OPTIONS,
+} from '@angular/material/radio';
 
 @NgModule({
   declarations: [AppComponent],
@@ -24,6 +28,10 @@ import {
     {
       provide: MAT_CHECKBOX_DEFAULT_OPTIONS,
       useValue: { color: 'primary' } as MatCheckboxDefaultOptions,
+    },
+    {
+      provide: MAT_RADIO_DEFAULT_OPTIONS,
+      useValue: { color: 'primary' } as MatRadioDefaultOptions,
     },
   ],
   bootstrap: [AppComponent],
