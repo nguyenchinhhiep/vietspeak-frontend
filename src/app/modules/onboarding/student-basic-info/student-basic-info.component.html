@@ -1,0 +1,43 @@
+<div
+  class="w-full min-h-full flex flex-col gap-4 items-center bg-gray-50 relative"
+>
+  <div
+    class="w-full max-w-7xl p-4 flex flex-col gap-20 items-center justify-start"
+  >
+    <div class="flex justify-between items-center w-full">
+      <button mat-button class="btn--sm">
+        <mat-icon class="text-gray-400" svgIcon="mat_outline:arrow_back"></mat-icon>
+        <div class="text-gray-400 ml-2">{{ "OnBoarding.Back" | translate }}</div>
+      </button>
+      <div class="flex items-center gap-2">
+        <button
+          class="btn--sm"
+          type="button"
+          mat-button
+          [color]="'primary'"
+          (click)="logout()"
+        >
+          {{ "OnBoarding.Logout" | translate }}
+        </button>
+      </div>
+    </div>
+
+    <div class="w-full">
+      <div class="font-semibold text-gray-900 text-2xl text-center mb-12">
+        {{ "OnBoarding.BasicInfo" | translate }}
+      </div>
+
+      <div class="mt-12 flex justify-center">
+        <button
+          type="submit"
+          class="btn btn--lg"
+          mat-flat-button
+          [color]="'primary'"
+          (click)="continue()"
+        >
+          Continue
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

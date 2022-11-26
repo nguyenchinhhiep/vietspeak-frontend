@@ -280,6 +280,15 @@
           }
         }
       }
+
+      /* mat-progress-spinner inside buttons */
+      .mat-progress-spinner {
+        &.mat-progress-spinner-indeterminate-animation[mode="indeterminate"] {
+          circle {
+            stroke: currentColor !important;
+          }
+        }
+      }
     }
 
     /* Remove the underline */

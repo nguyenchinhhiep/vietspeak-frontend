@@ -32,6 +32,8 @@
       "SelectAccountType": "Select account type",
       "Teacher": "Teacher",
       "Student": "Student",
-      "Continue": "Continue"
+      "Continue": "Continue",
+      "BasicInfo": "Basic info",
+      "Back": "Back"
    }
 }

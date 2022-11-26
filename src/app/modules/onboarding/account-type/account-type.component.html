@@ -2,7 +2,7 @@
   class="w-full min-h-full flex flex-col gap-4 items-center bg-gray-50 relative"
 >
   <div
-    class="w-full max-w-7xl p-4 flex flex-col gap-14 items-center justify-start"
+    class="w-full max-w-7xl p-4 flex flex-col gap-20 items-center justify-start"
   >
     <div class="flex justify-between items-center w-full">
       <div class="font-bold text-gray-900 text-xl">Vietspeak</div>
@@ -12,7 +12,7 @@
           type="button"
           mat-button
           [color]="'primary'"
-          (click)="onLogout()"
+          (click)="logout()"
         >
           {{ "OnBoarding.Logout" | translate }}
         </button>
@@ -20,23 +20,34 @@
     </div>
 
     <div class="w-full">
-      <div class="font-semibold text-gray-700 text-xl text-center mb-14">
+      <div class="font-semibold text-gray-900 text-2xl text-center mb-12">
         {{ "OnBoarding.SelectAccountType" | translate }}
       </div>
 
-      <div class="flex gap-14 justify-center">
+      <div class="flex gap-12 justify-center">
         <div
-          class="border rounded p-8 bg-white flex flex-col items-center gap-4 cursor-pointer"
+          class="flex flex-col items-center gap-3 cursor-pointer"
           *ngFor="let type of accountTypeList"
-          (click)="onSelectAccountType(type)"
+          (click)="selectedAccountType = type"
         >
-          <mat-icon
-            class="text-gray-600 icon-size-14"
-            [svgIcon]="type.icon"
-          ></mat-icon>
           <div
-            class="text-sm font-semibold"
-            [ngClass]="type.selected ? 'text-primary' : 'text-gray-500 '"
+            class="border-4 rounded-md w-32 h-32 flex justify-center items-center bg-white"
+            [ngClass]="selectedAccountType === type ? 'border-primary' : ''"
+          >
+            <mat-icon
+              class="icon-size-16"
+              [ngClass]="
+                selectedAccountType === type ? 'text-primary' : 'text-gray-400 '
+              "
+              [svgIcon]="type.icon"
+            ></mat-icon>
+          </div>
+
+          <div
+            class="text-sm font-medium uppercase"
+            [ngClass]="
+              selectedAccountType === type ? 'text-primary' : 'text-gray-400 '
+            "
           >
             {{ type.translateKey | translate }}
           </div>
@@ -46,9 +57,11 @@
       <div class="mt-12 flex justify-center">
         <button
           type="submit"
-          class="btn w-48"
+          class="btn btn--lg"
           mat-flat-button
           [color]="'primary'"
+          (click)="continue()"
+          [disabled]="selectedAccountType == null"
         >
           Continue
         </button>

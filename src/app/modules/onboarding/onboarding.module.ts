@@ -6,6 +6,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
+import { StudentBasicInfoComponent } from './student-basic-info/student-basic-info.component';
 
 const routes: Routes = [
   {
@@ -19,15 +20,27 @@ const routes: Routes = [
     data: {
       authLayout: 'blank',
     },
-  }
+  },
+  {
+    path: 'student',
+    children: [
+      {
+        path: 'basic-info',
+        component: StudentBasicInfoComponent,
+        data: {
+          authLayout: 'blank',
+        },
+      },
+    ],
+  },
 ];
 
 @NgModule({
-  declarations: [AccountTypeComponent],
+  declarations: [AccountTypeComponent, StudentBasicInfoComponent],
   imports: [
     CommonModule,
     SharedModule,
-    
+
     MatIconModule,
     MatButtonModule,
     FormsModule,

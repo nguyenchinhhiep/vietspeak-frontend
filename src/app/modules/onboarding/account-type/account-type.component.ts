@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { Role } from 'src/app/core/user/role.model';
 import { AccountTypeList } from 'src/app/core/user/user.model';
 
 @Component({
@@ -12,17 +13,24 @@ export class AccountTypeComponent implements OnInit {
   constructor(private _router: Router, private _authService: AuthService) {}
 
   accountTypeList: any[] = JSON.parse(JSON.stringify(AccountTypeList));
+  selectedAccountType: any = null;
 
   ngOnInit(): void {}
 
-  onSelectAccountType(type: any) {
-    
+  continue() {
+    if (this.selectedAccountType == null) {
+      return;
+    }
+
+    if (this.selectedAccountType.value === Role.Student) {
+      this._router.navigate(['/onboarding/student/basic-info']);
+    }
+
+    if (this.selectedAccountType.value === Role.Teacher) {
+    }
   }
 
-
-
-
-  onLogout() {
+  logout() {
     this._authService.signOut();
   }
 }
