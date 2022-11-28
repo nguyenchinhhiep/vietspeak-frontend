@@ -6,11 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
-import { StudentBasicInfoComponent } from './student-basic-info/student-basic-info.component';
+import { StudentInfoComponent } from './student-info/student-info.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { TutorInfoComponent } from './tutor-info/tutor-info.component';
 
 const routes: Routes = [
   {
@@ -26,21 +29,34 @@ const routes: Routes = [
     },
   },
   {
-    path: 'student',
-    children: [
-      {
-        path: 'basic-info',
-        component: StudentBasicInfoComponent,
-        data: {
-          authLayout: 'blank',
-        },
-      },
-    ],
+    path: 'student-info',
+    component: StudentInfoComponent,
+    data: {
+      authLayout: 'blank',
+    },
+  },
+  {
+    path: 'student-info',
+    component: StudentInfoComponent,
+    data: {
+      authLayout: 'blank',
+    },
+  },
+  {
+    path: 'tutor-info',
+    component: TutorInfoComponent,
+    data: {
+      authLayout: 'blank',
+    },
   },
 ];
 
 @NgModule({
-  declarations: [AccountTypeComponent, StudentBasicInfoComponent],
+  declarations: [
+    AccountTypeComponent,
+    StudentInfoComponent,
+    TutorInfoComponent,
+  ],
   imports: [
     CommonModule,
     SharedModule,
@@ -52,6 +68,8 @@ const routes: Routes = [
     MatRadioModule,
     FormsModule,
     ReactiveFormsModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
     RouterModule.forChild(routes),
   ],
 })

@@ -23,10 +23,11 @@ export class AccountTypeComponent implements OnInit {
     }
 
     if (this.selectedAccountType.value === Role.Student) {
-      this._router.navigate(['/onboarding/student/basic-info']);
+      this._router.navigate(['/onboarding/student-info']);
     }
 
-    if (this.selectedAccountType.value === Role.Teacher) {
+    if (this.selectedAccountType.value === Role.Tutor) {
+      this._router.navigate(['/onboarding/tutor-info']);
     }
   }
 

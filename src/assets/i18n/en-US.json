@@ -30,17 +30,21 @@
    "OnBoarding": {
       "Logout": "Logout",
       "SelectAccountType": "Select account type",
-      "Teacher": "Teacher",
+      "Tutor": "Tutor",
       "Student": "Student",
       "Continue": "Continue",
       "BasicInfo": "Basic info",
       "Back": "Back",
       "StudentInfo": "Student info",
-      "TeacherInfo": "Teacher info",
+      "TutorInfo": "Tutor info",
       "FirstName": "First name",
       "LastName": "Last name",
       "Gender": "Gender",
-      "Birthday": "Birthday",
-      "Occupation": "Occupation"
+      "DateOfBirth": "Date of birth",
+      "Occupation": "Occupation",
+      "Employee": "Employee",
+      "Other": "Other",
+      "Male": "Male",
+      "Female": "Female"
    }
 }

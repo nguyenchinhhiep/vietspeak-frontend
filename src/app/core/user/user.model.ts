@@ -18,9 +18,9 @@ export const AccountTypeList = [
     icon: 'custom:student',
   },
   {
-    label: 'Teacher',
-    translateKey: 'OnBoarding.Teacher',
-    value: Role.Teacher,
-    icon: 'custom:teacher',
+    label: 'Tutor',
+    translateKey: 'OnBoarding.Tutor',
+    value: Role.Tutor,
+    icon: 'custom:tutor',
   },
 ];

@@ -2,25 +2,21 @@
   class="w-full min-h-full flex flex-col gap-4 items-center bg-gray-50 relative"
 >
   <div
-    class="w-full max-w-7xl p-4 flex flex-col gap-20 items-center justify-start"
+    class="w-full max-w-7xl p-4 flex flex-col gap-16 items-center justify-start"
   >
     <div class="flex justify-between items-center w-full">
       <div class="font-bold text-gray-900 text-xl">Vietspeak</div>
       <div class="flex items-center gap-2">
-        <button
-          class="btn"
-          type="button"
-          mat-button
-          [color]="'primary'"
-          (click)="logout()"
-        >
-          {{ "OnBoarding.Logout" | translate }}
+        <button class="btn btn--sm" type="button" mat-button (click)="logout()">
+          <div class="text-primary">{{ "OnBoarding.Logout" | translate }}</div>
         </button>
       </div>
     </div>
 
     <div class="w-full max-w-md rounded-md sm:px-12">
-      <div class="font-semibold text-gray-900 text-2xl text-center mb-12 capitalize">
+      <div
+        class="font-semibold text-gray-900 text-2xl text-center mb-12 capitalize"
+      >
         {{ "OnBoarding.SelectAccountType" | translate }}
       </div>
 

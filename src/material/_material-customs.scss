@@ -104,12 +104,16 @@
         }
       }
 
+      .mat-datepicker-toggle {
+        margin-right: -8px;
+      }
+
       .mat-form-field-prefix,
       .mat-form-field-suffix {
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        @apply text-hint #{'!important'};
+        @apply text-gray-400 #{'!important'};
 
         .mat-icon-button {
           width: 40px;
@@ -121,7 +125,7 @@
         .mat-icon,
         .mat-icon-button:not(.mat-button-disabled),
         .mat-select-value {
-          @apply text-hint;
+          @apply text-gray-400;
         }
 
         /* Remove the margins from the mat-icon if it's inside a button */
@@ -316,7 +320,7 @@
       }
 
       .mat-hint {
-        @apply text-hint #{'!important'};
+        @apply text-gray-400 #{'!important'};
       }
     }
   }
@@ -398,6 +402,31 @@
   .mat-form-field-label {
     text-transform: uppercase;
     font-weight: 500;
+  }
+}
+
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Inputs
+/* ----------------------------------------------------------------------------------------------------- */
+.mat-input-element {
+  &::placeholder {
+    transition: none !important;
+    @apply text-gray-400 #{'!important'};
+  }
+
+  &::-moz-placeholder {
+    transition: none !important;
+    @apply text-gray-400 #{'!important'};
+  }
+
+  &::-webkit-input-placeholder {
+    transition: none !important;
+    @apply text-gray-400 #{'!important'};
+  }
+
+  &:-ms-input-placeholder {
+    transition: none !important;
+    @apply text-gray-400 #{'!important'};
   }
 }
 

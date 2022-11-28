@@ -2,10 +2,10 @@
   class="w-full min-h-full flex flex-col gap-4 items-center bg-gray-50 relative"
 >
   <div
-    class="w-full max-w-7xl p-4 flex flex-col gap-20 items-center justify-start"
+    class="w-full max-w-7xl p-4 flex flex-col gap-16 items-center justify-start"
   >
-    <div class="flex justify-between items-center w-full">
-      <button mat-button class="btn" [color]="'primary'">
+    <div class="flex justify-between w-full">
+      <button mat-button class="btn btn--sm" type="button">
         <mat-icon
           class="!text-gray-500"
           svgIcon="mat_outline:arrow_back"
@@ -14,17 +14,12 @@
           {{ "OnBoarding.Back" | translate }}
         </div>
       </button>
-      <div class="flex items-center gap-2">
-        <button
-          class="btn"
-          type="button"
-          mat-button
-          [color]="'primary'"
-          (click)="logout()"
-        >
+
+      <button mat-button class="btn btn--sm" type="button" (click)="logout()">
+        <div class="text-primary">
           {{ "OnBoarding.Logout" | translate }}
-        </button>
-      </div>
+        </div>
+      </button>
     </div>
 
     <div class="w-full max-w-md rounded-md sm:px-12">
@@ -49,26 +44,27 @@
             >{{ "Errors.Required" | translate }}</mat-error
           >
         </mat-form-field>
-        <div class="flex gap-6 mb-4 items-center">
-          <div class="text-gray-500 font-medium">Gender:</div>
-          <mat-radio-group class="flex gap-4">
-            <mat-radio-button value="male">Male</mat-radio-button>
-            <mat-radio-button value="female">Female</mat-radio-button>
-            <mat-radio-button value="other">Other</mat-radio-button>
-          </mat-radio-group>
-        </div>
 
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>{{ "OnBoarding.Occupation" | translate }}</mat-label>
           <mat-select formControlName="occupation" placeholder="Select">
-            <mat-option> Học sinh - Sinh viên </mat-option>
-            <mat-option> Người đi làm </mat-option>
-            <mat-option> Khác </mat-option>
+            <mat-option *ngFor="let item of occupations" [value]="item.value">
+              {{ item.translateKey | translate }}
+            </mat-option>
           </mat-select>
           <mat-error
             *ngIf="studentInfoForm.get('occupation')?.hasError('required')"
             >{{ "Errors.Required" | translate }}</mat-error
           >
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>{{ "OnBoarding.DateOfBirth" | translate }}</mat-label>
+          <input matInput [matDatepicker]="picker" />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
       </form>
 
