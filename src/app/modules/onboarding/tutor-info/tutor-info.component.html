@@ -2,17 +2,14 @@
   class="w-full min-h-full flex flex-col gap-4 items-center bg-gray-50 relative"
 >
   <div
-    class="w-full max-w-7xl p-4 flex flex-col gap-16 items-center justify-start"
+    class="w-full max-w-7xl p-4 flex flex-col gap-10 items-center justify-start"
   >
     <div class="flex justify-between w-full">
-      <button mat-button class="btn btn--sm" type="button">
+      <button mat-button class="btn btn--sm" type="button" routerLink="/onboarding/account-type">
         <mat-icon
           class="!text-gray-500"
           svgIcon="mat_outline:arrow_back"
         ></mat-icon>
-        <div class="text-gray-500 ml-2">
-          {{ "OnBoarding.Back" | translate }}
-        </div>
       </button>
 
       <button mat-button class="btn btn--sm" type="button" (click)="logout()">
@@ -23,7 +20,7 @@
     </div>
 
     <div class="w-full max-w-md rounded-md sm:px-12">
-      <div class="font-semibold text-gray-900 text-2xl text-center capitalize">
+      <div class="font-semibold text-gray-900 text-2xl text-center">
         {{ "OnBoarding.TutorInfo" | translate }}
       </div>
 

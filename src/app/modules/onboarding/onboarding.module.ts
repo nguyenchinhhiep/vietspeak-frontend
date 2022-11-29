@@ -14,6 +14,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { TutorInfoComponent } from './tutor-info/tutor-info.component';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 const routes: Routes = [
   {
@@ -71,6 +72,23 @@ const routes: Routes = [
     MatDatepickerModule,
     MatMomentDateModule,
     RouterModule.forChild(routes),
+  ],
+  providers: [
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: 'YYYY-MM-DD',
+        },
+        display: {
+          dateInput: 'DD/MM/YYYY',
+          monthLabel: 'MMM',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+      },
+    },
   ],
 })
 export class OnboardingModule {}
