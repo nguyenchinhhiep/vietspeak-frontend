@@ -11,6 +11,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { LanguagesModule } from 'src/app/components/languages/languages.module';
 
 const routes: Routes = [
   {
@@ -32,6 +33,7 @@ const routes: Routes = [
     MatCheckboxModule,
     MatButtonModule,
     MatProgressSpinnerModule,
+    LanguagesModule,
     RouterModule.forChild(routes),
   ],
 })

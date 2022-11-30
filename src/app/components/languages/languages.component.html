@@ -1,0 +1,32 @@
+<button mat-icon-button [matMenuTriggerFor]="languagesMenu">
+  <div class="w-6 overflow-hidden">
+    <img
+      class="w-full"
+      [src]="selectedLanguage?.imgUrl"
+      [attr.alt]="selectedLanguage?.label"
+    />
+  </div>
+</button>
+
+<!-- User menu -->
+<mat-menu #languagesMenu="matMenu" class="text-gray-500">
+  <ng-template matMenuContent>
+    <button
+      mat-menu-item
+      *ngFor="let language of languages"
+      (click)="onLanguageChanged(language)"
+    >
+      <div class="flex items-center">
+        <div class="mr-3 w-6 overflow-hidden">
+          <img
+            class="w-full object-cover"
+            [src]="language.imgUrl"
+            [attr.alt]="language?.label"
+          />
+        </div>
+
+        <div>{{ language.label }}</div>
+      </div>
+    </button>
+  </ng-template>
+</mat-menu>

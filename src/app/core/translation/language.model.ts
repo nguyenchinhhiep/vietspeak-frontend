@@ -8,14 +8,14 @@ export enum LanguageCode {
 export const languages = [
   {
     label: 'English',
-    imgUrl: 'assets/images/languages/en.png',
+    imgUrl: 'assets/images/flags/US.svg',
     value: LanguageCode.English,
-    locale: 'en-gb'
+    locale: 'en-gb',
   },
   {
-    label: 'Vietnamese',
-    imgUrl: 'assets/images/languages/vi.png',
+    label: 'Tiếng Việt',
+    imgUrl: 'assets/images/flags/VN.svg',
     value: LanguageCode.Vietnamese,
-    locale: 'vi'
-  }
-]
+    locale: 'vi',
+  },
+];

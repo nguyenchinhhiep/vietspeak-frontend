@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AlertModule } from 'src/app/components/alert/alert.module';
+import { LanguagesModule } from 'src/app/components/languages/languages.module';
 
 const routes: Routes = [
   {
@@ -31,6 +32,7 @@ const routes: Routes = [
     MatButtonModule,
     MatProgressSpinnerModule,
     AlertModule,
+    LanguagesModule,
     RouterModule.forChild(routes),
   ],
 })

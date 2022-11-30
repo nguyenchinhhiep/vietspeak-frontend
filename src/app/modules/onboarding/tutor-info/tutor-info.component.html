@@ -1,11 +1,14 @@
 <div
-  class="w-full min-h-full flex flex-col gap-4 items-center bg-gray-50 relative"
+  class="w-full min-h-full flex flex-col gap-6 items-center bg-gray-50 relative"
 >
-  <div
-    class="w-full max-w-7xl p-4 flex flex-col gap-10 items-center justify-start"
-  >
-    <div class="flex justify-between w-full">
-      <button mat-button class="btn btn--sm" type="button" routerLink="/onboarding/account-type">
+  <div class="w-full max-w-7xl flex flex-col gap-12 items-center justify-start">
+    <div class="flex justify-between items-center gap-4 w-full p-4 h-16">
+      <button
+        mat-button
+        class="btn btn--sm"
+        type="button"
+        routerLink="/onboarding/account-type"
+      >
         <mat-icon
           class="!text-gray-500"
           svgIcon="mat_outline:arrow_back"
@@ -19,7 +22,7 @@
       </button>
     </div>
 
-    <div class="w-full max-w-md rounded-md sm:px-12">
+    <div class="w-full max-w-md rounded-md sm:px-12 px-4">
       <div class="font-semibold text-gray-900 text-2xl text-center">
         {{ "OnBoarding.TutorInfo" | translate }}
       </div>

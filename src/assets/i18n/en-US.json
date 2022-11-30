@@ -23,7 +23,7 @@
    "ForgotPassword": {
       "Title": "Forgot password",
       "SubTitle": "Fill the form to reset your password",
-      "ResetPassword": "Reset password",
+      "SendLink": "Send link",
       "BackTo": "Back to",
       "AlreadyHaveAccount": "Already have an account"
    },

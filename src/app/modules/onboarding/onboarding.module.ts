@@ -15,6 +15,7 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { TutorInfoComponent } from './tutor-info/tutor-info.component';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { LanguagesModule } from 'src/app/components/languages/languages.module';
 
 const routes: Routes = [
   {
@@ -71,6 +72,7 @@ const routes: Routes = [
     ReactiveFormsModule,
     MatDatepickerModule,
     MatMomentDateModule,
+    LanguagesModule,
     RouterModule.forChild(routes),
   ],
   providers: [

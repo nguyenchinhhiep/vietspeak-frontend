@@ -23,15 +23,28 @@
    "ForgotPassword": {
       "Title": "Forgot password",
       "SubTitle": "Fill the form to reset your password",
-      "ResetPassword": "Reset password",
+      "SendLink": "Send link",
       "BackTo": "Back to",
       "AlreadyHaveAccount": "Already have an account"
    },
    "OnBoarding": {
       "Logout": "Logout",
       "SelectAccountType": "Select account type",
-      "Teacher": "Teacher",
+      "Tutor": "Tutor",
       "Student": "Student",
-      "Continue": "Continue"
+      "Continue": "Continue",
+      "BasicInfo": "Basic info",
+      "Back": "Back",
+      "StudentInfo": "Student info",
+      "TutorInfo": "Tutor info",
+      "FirstName": "First name",
+      "LastName": "Last name",
+      "Gender": "Gender",
+      "DateOfBirth": "Date of birth",
+      "Occupation": "Occupation",
+      "Employee": "Employee",
+      "Other": "Other",
+      "Male": "Male",
+      "Female": "Female"
    }
 }
