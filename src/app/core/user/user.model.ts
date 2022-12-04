@@ -13,13 +13,13 @@ export interface IUser {
 export const AccountTypeList = [
   {
     label: 'Student',
-    translateKey: 'OnBoarding.Student',
+    translateKey: 'SelectAccountType.Student',
     value: Role.Student,
     icon: 'custom:student',
   },
   {
     label: 'Tutor',
-    translateKey: 'OnBoarding.Tutor',
+    translateKey: 'SelectAccountType.Tutor',
     value: Role.Tutor,
     icon: 'custom:tutor',
   },

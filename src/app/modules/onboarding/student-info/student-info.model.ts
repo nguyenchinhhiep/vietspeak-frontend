@@ -1,3 +1,5 @@
+import { Language } from '../onboarding.model';
+
 export enum Gender {
   Male = 'male',
   Female = 'female',
@@ -51,5 +53,36 @@ export const Occupations: {
     label: 'Other',
     translateKey: 'OnBoarding.Other',
     value: Occupation.Other,
+  },
+];
+
+export const learningLanguageOptions = [
+  {
+    label: 'English',
+    value: Language.English,
+  },
+];
+
+export enum LanguageLevel {
+  Beginner = 'Beginner',
+  Intermediate = 'Intermediate',
+  Advanced = 'Advanced',
+}
+
+export const LanguageLevelOptions = [
+  {
+    label: 'Beginner',
+    translateKey: 'StudentInfo.Beginner',
+    value: LanguageLevel.Beginner,
+  },
+  {
+    label: 'Intermediate',
+    translateKey: 'StudentInfo.Intermediate',
+    value: LanguageLevel.Intermediate,
+  },
+  {
+    label: 'Advanced',
+    translateKey: 'StudentInfo.Advanced',
+    value: LanguageLevel.Advanced,
   },
 ];

@@ -17,6 +17,7 @@ export class IconsModule {
         'assets/icons/material-outline.svg'
       )
     );
+    
     this._matIconRegistry.addSvgIconSetInNamespace(
       'custom',
       this._domSanitizer.bypassSecurityTrustResourceUrl(

@@ -654,3 +654,24 @@
     }
   }
 }
+
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Checkbox
+/* ----------------------------------------------------------------------------------------------------- */
+.mat-checkbox {
+  display: inline-flex;
+
+  /* Allow multiline text */
+  .mat-checkbox-layout {
+    white-space: normal;
+
+    .mat-checkbox-inner-container {
+      width: 20px;
+      height: 20px;
+    }
+
+    .mat-checkbox-label {
+      line-height: inherit;
+    }
+  }
+}

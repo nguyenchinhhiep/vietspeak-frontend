@@ -16,6 +16,8 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { TutorInfoComponent } from './tutor-info/tutor-info.component';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { LanguagesModule } from 'src/app/components/languages/languages.module';
+import {MatStepperModule} from '@angular/material/stepper';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 const routes: Routes = [
   {
@@ -73,6 +75,8 @@ const routes: Routes = [
     MatDatepickerModule,
     MatMomentDateModule,
     LanguagesModule,
+    MatStepperModule,
+    MatCheckboxModule,
     RouterModule.forChild(routes),
   ],
   providers: [

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { Language, TeachingLanguageOptions } from '../onboarding.model';
 
 @Component({
   selector: 'app-tutor-info',
@@ -14,7 +15,10 @@ export class TutorInfoComponent implements OnInit {
     private _authService: AuthService,
     private _fb: FormBuilder
   ) {}
-  tutorInfoForm!: FormGroup;
+  teachingLanguageOptions = TeachingLanguageOptions;
+
+  tutorBasicInfoForm!: FormGroup;
+  tutorExperienceForm!: FormGroup;
 
   ngOnInit(): void {
     this.createForm();
@@ -23,7 +27,8 @@ export class TutorInfoComponent implements OnInit {
   submit() {}
 
   createForm() {
-    this.tutorInfoForm = this._fb.group({
+    this.tutorBasicInfoForm = this._fb.group({
+      teachingLanguage: [Language.English],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       dob: [null],

@@ -2,7 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { Gender, Genders, Occupation, Occupations } from './student-info.model';
+import { HeardFrom, HeardFromOptions, Language } from '../onboarding.model';
+import {
+  LanguageLevel,
+  LanguageLevelOptions,
+  learningLanguageOptions,
+} from './student-info.model';
 
 @Component({
   selector: 'app-student-info',
@@ -17,8 +22,9 @@ export class StudentInfoComponent implements OnInit {
   ) {}
   studentInfoForm!: FormGroup;
 
-  genders = Genders;
-  occupations = Occupations;
+  languageLevelOptions = LanguageLevelOptions;
+  heardFromOptions = HeardFromOptions;
+  learningLanguageOptions = learningLanguageOptions;
 
   ngOnInit(): void {
     this.createForm();
@@ -28,10 +34,11 @@ export class StudentInfoComponent implements OnInit {
 
   createForm() {
     this.studentInfoForm = this._fb.group({
+      learningLanguage: [Language.English],
+      currentLevel: [LanguageLevel.Beginner],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      dob: [null],
-      occupation: [Occupation.Student, Validators.required],
+      heardFrom: [HeardFrom.WebSearch],
     });
   }
 

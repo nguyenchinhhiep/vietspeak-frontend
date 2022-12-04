@@ -1,11 +1,11 @@
 <div
-  class="w-full min-h-full flex flex-col gap-6 items-center bg-gray-50 relative"
+  class="w-full min-h-full flex flex-col gap-6 items-center bg-gray-50 relative px-4 pb-20"
 >
-  <div class="w-full max-w-7xl flex flex-col gap-12 items-center justify-start">
-    <div class="flex justify-between items-center gap-4 w-full p-4 h-16">
+  <div class="w-full max-w-7xl flex flex-col gap-6 items-center justify-start">
+    <div class="flex justify-between items-center gap-4 w-full py-4 h-16">
       <button
         mat-button
-        class="btn btn--sm"
+        class="btn"
         type="button"
         routerLink="/onboarding/account-type"
       >
@@ -20,40 +20,44 @@
         </div>
       </button>
 
-      <button mat-button class="btn btn--sm" type="button" (click)="logout()">
+      <button mat-button class="btn" type="button" (click)="logout()">
         <div class="text-primary">
           {{ "OnBoarding.Logout" | translate }}
         </div>
       </button>
     </div>
 
-    <div class="w-full max-w-sm rounded-md px-4 pb-6">
+    <div class="w-full max-w-lg sm:px-6">
       <div class="font-semibold text-gray-900 text-2xl text-center">
-        {{ "OnBoarding.StudentInfo" | translate }}
+        {{ "StudentInfo.Title" | translate }}
       </div>
-
       <form class="mt-8" [formGroup]="studentInfoForm" (ngSubmit)="submit()">
         <mat-form-field appearance="fill" class="w-full">
-          <mat-label>{{ "OnBoarding.FirstName" | translate }}</mat-label>
-          <input matInput formControlName="firstName" />
+          <mat-label>{{
+            "StudentInfo.LanguageWantToLearn" | translate
+          }}</mat-label>
+          <mat-select formControlName="learningLanguage" placeholder="Select">
+            <mat-option
+              *ngFor="let item of learningLanguageOptions"
+              [value]="item.value"
+            >
+              {{ item.label | translate }}
+            </mat-option>
+          </mat-select>
           <mat-error
-            *ngIf="studentInfoForm.get('firstName')?.hasError('required')"
+            *ngIf="
+              studentInfoForm.get('learningLanguage')?.hasError('required')
+            "
             >{{ "Errors.Required" | translate }}</mat-error
           >
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
-          <mat-label>{{ "OnBoarding.LastName" | translate }}</mat-label>
-          <input matInput formControlName="lastName" />
-          <mat-error
-            *ngIf="studentInfoForm.get('lastName')?.hasError('required')"
-            >{{ "Errors.Required" | translate }}</mat-error
-          >
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-label>{{ "OnBoarding.Occupation" | translate }}</mat-label>
-          <mat-select formControlName="occupation" placeholder="Select">
-            <mat-option *ngFor="let item of occupations" [value]="item.value">
+          <mat-label>{{ "StudentInfo.CurrentLevel" | translate }}</mat-label>
+          <mat-select formControlName="currentLevel" placeholder="Select">
+            <mat-option
+              *ngFor="let item of languageLevelOptions"
+              [value]="item.value"
+            >
               {{ item.translateKey | translate }}
             </mat-option>
           </mat-select>
@@ -62,35 +66,48 @@
             >{{ "Errors.Required" | translate }}</mat-error
           >
         </mat-form-field>
-        <mat-form-field
-          appearance="fill"
-          class="w-full"
-          [floatLabel]="'always'"
-          (click)="picker.open()"
-        >
-          <mat-label>{{ "OnBoarding.DateOfBirth" | translate }}</mat-label>
-          <input
-            readonly
-            matInput
-            [matDatepicker]="picker"
-            placeholder="DD/MM/YYYY"
-          />
-          <mat-datepicker-toggle
-            matIconSuffix
-            [for]="picker"
-          ></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>{{ "StudentInfo.FirstName" | translate }}</mat-label>
+          <input matInput formControlName="firstName" />
+          <mat-error
+            *ngIf="studentInfoForm.get('firstName')?.hasError('required')"
+            >{{ "Errors.Required" | translate }}</mat-error
+          >
+        </mat-form-field>
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>{{ "StudentInfo.LastName" | translate }}</mat-label>
+          <input matInput formControlName="lastName" />
+          <mat-error
+            *ngIf="studentInfoForm.get('lastName')?.hasError('required')"
+            >{{ "Errors.Required" | translate }}</mat-error
+          >
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full" floatLabel="always">
+          <mat-label>{{ "OnBoarding.WhereHeardFrom" | translate }}?</mat-label>
+          <mat-select formControlName="heardFrom" placeholder="Select">
+            <mat-option
+              *ngFor="let item of heardFromOptions"
+              [value]="item.value"
+            >
+              {{ item.translateKey | translate }}
+            </mat-option>
+          </mat-select>
+          <mat-error
+            *ngIf="studentInfoForm.get('occupation')?.hasError('required')"
+            >{{ "Errors.Required" | translate }}</mat-error
+          >
         </mat-form-field>
       </form>
 
-      <div class="mt-6 flex justify-center">
+      <div class="mt-4 flex justify-center">
         <button
           type="submit"
           class="btn btn--lg w-full"
           mat-flat-button
           [color]="'primary'"
         >
-          Continue
+          {{ "StudentInfo.Complete" | translate }}
         </button>
       </div>
     </div>

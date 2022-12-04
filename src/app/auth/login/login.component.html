@@ -1,15 +1,17 @@
 <div
-  class="w-full min-h-full flex flex-col gap-6 items-center bg-gray-50 relative"
+  class="w-full min-h-full flex flex-col gap-6 items-center bg-gray-50 relative px-4"
 >
-  <div
-    class="w-full max-w-7xl flex flex-col gap-12 items-center justify-start"
-  >
-    <div class="flex justify-between items-center gap-4 w-full p-4 h-16">
+  <div class="w-full max-w-7xl flex flex-col gap-10 items-center justify-start">
+    <div class="flex justify-between items-center gap-4 w-full py-4 h-16">
       <div class="flex items-center gap-3">
-        <a class="font-bold text-gray-900 text-xl hover:no-underline" routerLink="/">Vietspeak</a>
+        <a
+          class="font-bold text-gray-900 text-xl hover:no-underline"
+          routerLink="/"
+          >Vietspeak</a
+        >
         <app-languages></app-languages>
       </div>
-      
+
       <div class="flex items-center gap-2">
         <div class="text-gray-400">
           {{ "Login.DontHaveAccount" | translate }}?
@@ -24,7 +26,7 @@
         </button>
       </div>
     </div>
-    <div class="w-full max-w-sm rounded-md px-4 pb-6">
+    <div class="w-full max-w-sm">
       <div class="font-semibold text-gray-900 text-2xl text-center">
         {{ "Login.Title" | translate }}
       </div>
@@ -110,7 +112,7 @@
       </form>
     </div>
   </div>
-  <div class="mt-auto text-gray-400 text-sm text-center p-4">
+  <div class="mt-auto text-gray-400 text-sm text-center py-4">
     &copy; 2022 Vietspeak. All rights reserved.
   </div>
 </div>

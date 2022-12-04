@@ -28,23 +28,39 @@
       "AlreadyHaveAccount": "Already have an account"
    },
    "OnBoarding": {
-      "Logout": "Logout",
-      "SelectAccountType": "Select account type",
-      "Tutor": "Tutor",
-      "Student": "Student",
-      "Continue": "Continue",
-      "BasicInfo": "Basic info",
       "Back": "Back",
-      "StudentInfo": "Student info",
-      "TutorInfo": "Tutor info",
+      "Logout": "Logout",
+      "WhereHeardFrom": "Where did you hear about Vietspeak",
+      "WebSearch": "Web search",
+      "SocialMedia": "Social media",
+      "FriendFamily": "Friend / Family",
+      "Other": "Other"
+   },
+   "SelectAccountType": {
+      "Title": "Select account type",
+      "Continue": "Continue",
+      "Student": "Student",
+      "Tutor": "Tutor"
+   },
+   "StudentInfo": {
+      "Title": "Student info",
+      "LanguageWantToLearn": "Which language do you want to learn?",
       "FirstName": "First name",
       "LastName": "Last name",
-      "Gender": "Gender",
-      "DateOfBirth": "Date of birth",
-      "Occupation": "Occupation",
-      "Employee": "Employee",
-      "Other": "Other",
-      "Male": "Male",
-      "Female": "Female"
+      "CurrentLevel": "Current level",
+      "Beginner": "Beginner",
+      "Intermediate": "Intermediate",
+      "Advanced": "Advanced",
+      "Complete": "Complete"
+   },
+   "TutorInfo": {
+      "Title": "Tutor info",
+      "BasicInfo": "Basic info",
+      "PersonalInfo": "Personal info",
+      "Experience": "Experience",
+      "AdditionalInfo": "Additional info",
+      "LanguageWantToTeach": "Which language do you want to teach?",
+      "FirstName": "First name",
+      "LastName": "Last name"
    }
 }
