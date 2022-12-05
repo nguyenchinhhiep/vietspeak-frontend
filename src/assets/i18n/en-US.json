@@ -60,7 +60,10 @@
       "Experience": "Experience",
       "AdditionalInfo": "Additional info",
       "LanguageWantToTeach": "Which language do you want to teach?",
+      "ReasonToBeHere": "Why do you want to tutor on Vietspeak?",
       "FirstName": "First name",
-      "LastName": "Last name"
+      "LastName": "Last name",
+      "Next": "Next",
+      "Complete": "Complete"
    }
 }

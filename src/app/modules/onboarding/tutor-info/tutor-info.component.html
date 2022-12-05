@@ -32,7 +32,11 @@
         {{ "TutorInfo.Title" | translate }}
       </div>
 
-      <mat-stepper orientation="horizontal" class="!bg-inherit" [disableRipple]="true">
+      <mat-stepper
+        orientation="horizontal"
+        class="!bg-inherit"
+        [disableRipple]="true"
+      >
         <mat-step>
           <ng-template matStepLabel>{{
             "TutorInfo.BasicInfo" | translate
@@ -86,13 +90,21 @@
                     <input matInput formControlName="lastName" />
                     <mat-error
                       *ngIf="
-                        tutorBasicInfoForm
-                          .get('lastName')
-                          ?.hasError('required')
+                        tutorBasicInfoForm.get('lastName')?.hasError('required')
                       "
                       >{{ "Errors.Required" | translate }}</mat-error
                     >
                   </mat-form-field>
+                  <div class="mt-4 flex justify-center">
+                    <button
+                      type="submit"
+                      class="btn btn--lg w-full"
+                      mat-flat-button
+                      [color]="'primary'"
+                    >
+                      {{ "TutorInfo.Next" | translate }}
+                    </button>
+                  </div>
                 </form>
               </div>
             </div>
@@ -112,8 +124,65 @@
           <ng-template matStepLabel>{{
             "TutorInfo.AdditionalInfo" | translate
           }}</ng-template>
-          <p>This content was rendered eagerly</p>
-          <button mat-button matStepperPrevious>Back</button>
+          <div class="flex justify-center -mx-6 sm:px-6">
+            <div class="w-full mt-4">
+              <form [formGroup]="tutorAdditionalInfoForm">
+                <mat-form-field appearance="fill" class="w-full">
+                  <mat-label>{{
+                    "OnBoarding.WhereHeardFrom" | translate
+                  }}</mat-label>
+                  <mat-select formControlName="heardFrom" placeholder="Select">
+                    <mat-option
+                      *ngFor="let item of heardFromOptions"
+                      [value]="item.value"
+                    >
+                      {{ item.label | translate }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error
+                    *ngIf="
+                      tutorAdditionalInfoForm
+                        .get('heardForm')
+                        ?.hasError('required')
+                    "
+                    >{{ "Errors.Required" | translate }}</mat-error
+                  >
+                </mat-form-field>
+                <mat-form-field appearance="fill" class="w-full">
+                  <mat-label>{{
+                    "TutorInfo.ReasonToBeHere" | translate
+                  }}</mat-label>
+                  <textarea
+                    matInput
+                    formControlName="reasonToBeHere"
+                    rows="5"
+                  ></textarea>
+                  <mat-hint class="w-full">
+                    <div class="text-right">500 characters remaining</div>
+                  </mat-hint>
+                  <mat-error
+                    *ngIf="
+                      tutorBasicInfoForm
+                        .get('reasonToBeHere')
+                        ?.hasError('required')
+                    "
+                    >{{ "Errors.Required" | translate }}</mat-error
+                  >
+                </mat-form-field>
+
+                <div class="mt-4 flex justify-center">
+                  <button
+                    type="submit"
+                    class="btn btn--lg w-full"
+                    mat-flat-button
+                    [color]="'primary'"
+                  >
+                    {{ "TutorInfo.Complete" | translate }}
+                  </button>
+                </div>
+              </form>
+            </div>
+          </div>
         </mat-step>
       </mat-stepper>
     </div>
