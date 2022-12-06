@@ -7,6 +7,9 @@
       "MustMatch": "{{control}} and {{matchingControl}} must match",
       "MinLength": "{{control}} must be at least {{length}} characters"
    },
+   "Hints": {
+      "CharacterRemaining": "{{remainingLength}} characters remaining"
+   },
    "Login": {
       "Title": "Login",
       "Password": "Password",
@@ -60,9 +63,11 @@
       "Experience": "Experience",
       "AdditionalInfo": "Additional info",
       "LanguageWantToTeach": "Which language do you want to teach?",
-      "ReasonToBeHere": "Why do you want to tutor on Vietspeak?",
+      "ReasonHere": "Why do you want to tutor on Vietspeak?",
       "FirstName": "First name",
       "LastName": "Last name",
+      "DateOfBirth": "Date of birth",
+      "DateOfBirthNotDisplay": "Your date of birth will not be displayed to students",
       "Next": "Next",
       "Complete": "Complete"
    }

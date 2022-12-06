@@ -33,11 +33,21 @@
       </div>
 
       <mat-stepper
+        #stepper
         orientation="horizontal"
         class="!bg-inherit"
         [disableRipple]="true"
+        labelPosition="bottom"
+        [linear]="true"
+        animationDuration="0"
       >
-        <mat-step>
+        <ng-template matStepperIcon="edit">
+          <mat-icon class="text-white" svgIcon="mat_outline:edit"></mat-icon>
+        </ng-template>
+        <ng-template matStepperIcon="done">
+          <mat-icon class="text-white" svgIcon="mat_outline:done"></mat-icon>
+        </ng-template>
+        <mat-step [editable]="true" [stepControl]="tutorBasicInfoForm">
           <ng-template matStepLabel>{{
             "TutorInfo.BasicInfo" | translate
           }}</ng-template>
@@ -95,12 +105,38 @@
                       >{{ "Errors.Required" | translate }}</mat-error
                     >
                   </mat-form-field>
+                  <mat-form-field
+                    appearance="fill"
+                    floatLabel="always"
+                    class="w-full"
+                    (click)="picker.open()"
+                  >
+                    <mat-label>{{
+                      "TutorInfo.DateOfBirth" | translate
+                    }}</mat-label>
+                    <input
+                      readonly
+                      matInput
+                      formControlName="dob"
+                      [matDatepicker]="picker"
+                      placeholder="DD/MM/YYYY"
+                    />
+                    <mat-hint>{{
+                      "TutorInfo.DateOfBirthNotDisplay" | translate
+                    }}</mat-hint>
+                    <mat-datepicker-toggle
+                      matIconSuffix
+                      [for]="picker"
+                    ></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                  </mat-form-field>
                   <div class="mt-4 flex justify-center">
                     <button
                       type="submit"
                       class="btn btn--lg w-full"
                       mat-flat-button
                       [color]="'primary'"
+                      (click)="submitTutorBasicInfoForm()"
                     >
                       {{ "TutorInfo.Next" | translate }}
                     </button>
@@ -110,17 +146,17 @@
             </div>
           </ng-template>
         </mat-step>
-        <mat-step>
+        <mat-step [editable]="true" [stepControl]="tutorExperienceForm">
           <ng-template matStepLabel>{{
             "TutorInfo.Experience" | translate
           }}</ng-template>
-          <ng-template matStepContent>
-            <p>This content was also rendered lazily</p>
-            <button mat-button matStepperPrevious>Back</button>
-            <button mat-button matStepperNext>Next</button>
-          </ng-template>
+          <div class="flex justify-center -mx-6 sm:px-6">
+            <div class="w-full mt-4">
+              <form [formGroup]="tutorExperienceForm"></form>
+            </div>
+          </div>
         </mat-step>
-        <mat-step>
+        <mat-step [editable]="true" [stepControl]="tutorAdditionalInfoForm">
           <ng-template matStepLabel>{{
             "TutorInfo.AdditionalInfo" | translate
           }}</ng-template>
@@ -150,30 +186,32 @@
                 </mat-form-field>
                 <mat-form-field appearance="fill" class="w-full">
                   <mat-label>{{
-                    "TutorInfo.ReasonToBeHere" | translate
+                    "TutorInfo.ReasonHere" | translate
                   }}</mat-label>
                   <textarea
                     matInput
-                    formControlName="reasonToBeHere"
+                    formControlName="reasonHere"
+                    maxlength="500"
                     rows="5"
                   ></textarea>
                   <mat-hint class="w-full">
-                    <div class="text-right">500 characters remaining</div>
+                    <div class="text-right -mr-3">500 characters remaining</div>
                   </mat-hint>
                   <mat-error
                     *ngIf="
-                      tutorBasicInfoForm
-                        .get('reasonToBeHere')
-                        ?.hasError('required')
+                      tutorBasicInfoForm.get('reasonHere')?.hasError('required')
                     "
                     >{{ "Errors.Required" | translate }}</mat-error
                   >
                 </mat-form-field>
 
-                <div class="mt-4 flex justify-center">
+                <div class="mt-4 flex justify-between gap-4">
+                  <button class="btn btn--lg" mat-button matStepperPrevious>
+                    {{ "OnBoarding.Back" | translate }}
+                  </button>
                   <button
                     type="submit"
-                    class="btn btn--lg w-full"
+                    class="btn btn--lg !px-6"
                     mat-flat-button
                     [color]="'primary'"
                   >

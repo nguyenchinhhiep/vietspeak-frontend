@@ -1,8 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { HeardFrom, HeardFromOptions, Language, TeachingLanguageOptions } from '../onboarding.model';
+import {
+  HeardFrom,
+  HeardFromOptions,
+  Language,
+  TeachingLanguageOptions,
+} from '../onboarding.model';
 
 @Component({
   selector: 'app-tutor-info',
@@ -22,11 +28,25 @@ export class TutorInfoComponent implements OnInit {
   tutorExperienceForm!: FormGroup;
   tutorAdditionalInfoForm!: FormGroup;
 
+  @ViewChild('stepper') stepper!: MatStepper;
+
+
   ngOnInit(): void {
     this.createForm();
   }
 
-  submit() {}
+  submitTutorBasicInfoForm() {
+    for (let control in this.tutorBasicInfoForm.controls) {
+      this.tutorBasicInfoForm.controls[control].markAsDirty();
+      this.tutorBasicInfoForm.controls[control].markAsTouched();
+    }
+
+    if(this.tutorBasicInfoForm.invalid) {
+      return;
+    }
+
+    this.stepper.next();
+  }
 
   createForm() {
     this.tutorBasicInfoForm = this._fb.group({
@@ -40,7 +60,7 @@ export class TutorInfoComponent implements OnInit {
 
     this.tutorAdditionalInfoForm = this._fb.group({
       heardFrom: [HeardFrom.WebSearch],
-      reasonToBeHere: []
+      reasonHere: [],
     });
   }
 
