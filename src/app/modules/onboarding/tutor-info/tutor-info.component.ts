@@ -9,6 +9,10 @@ import {
   Language,
   TeachingLanguageOptions,
 } from '../onboarding.model';
+import {
+  TeachingExperience,
+  TeachingExperienceOptions,
+} from './tutor-info.model';
 
 @Component({
   selector: 'app-tutor-info',
@@ -23,13 +27,15 @@ export class TutorInfoComponent implements OnInit {
   ) {}
   teachingLanguageOptions = TeachingLanguageOptions;
   heardFromOptions = HeardFromOptions;
+  teachingExperienceOptions = TeachingExperienceOptions;
 
   tutorBasicInfoForm!: FormGroup;
   tutorExperienceForm!: FormGroup;
   tutorAdditionalInfoForm!: FormGroup;
 
-  @ViewChild('stepper') stepper!: MatStepper;
+  maxDate: Date = new Date();
 
+  @ViewChild('stepper') stepper!: MatStepper;
 
   ngOnInit(): void {
     this.createForm();
@@ -41,7 +47,20 @@ export class TutorInfoComponent implements OnInit {
       this.tutorBasicInfoForm.controls[control].markAsTouched();
     }
 
-    if(this.tutorBasicInfoForm.invalid) {
+    if (this.tutorBasicInfoForm.invalid) {
+      return;
+    }
+
+    this.stepper.next();
+  }
+
+  submitTutorExperienceForm() {
+    for (let control in this.tutorExperienceForm.controls) {
+      this.tutorExperienceForm.controls[control].markAsDirty();
+      this.tutorExperienceForm.controls[control].markAsTouched();
+    }
+
+    if (this.tutorExperienceForm.invalid) {
       return;
     }
 
@@ -53,10 +72,14 @@ export class TutorInfoComponent implements OnInit {
       teachingLanguage: [Language.English],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
-      dob: [null],
+      dob: [null, [Validators.required]],
     });
 
-    this.tutorExperienceForm = this._fb.group({});
+    this.tutorExperienceForm = this._fb.group({
+      teachingExperience: [TeachingExperience.ZeroToSixMonths],
+      haveExperienceTeachingOnline: [true],
+      teachingCertificates: [[]],
+    });
 
     this.tutorAdditionalInfoForm = this._fb.group({
       heardFrom: [HeardFrom.WebSearch],

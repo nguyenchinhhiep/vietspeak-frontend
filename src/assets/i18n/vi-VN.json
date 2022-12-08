@@ -68,6 +68,15 @@
       "LastName": "Last name",
       "DateOfBirth": "Date of birth",
       "DateOfBirthNotDisplay": "Your date of birth will not be displayed to students",
+      "TeachingExperience": "Teaching experience",
+      "No": "No",
+      "Yes": "Yes",
+      "ZeroToSixMonths": "0 - 6 months",
+      "SevenToTwelveMonths": "7 - 12 months",
+      "OneToTwoYears": "1 - 2 years",
+      "MoreThanTwoYears": "More than 2 years",
+      "HaveExperienceTeachingOnline": "Do you have experience teaching online?",
+      "TeachingCertificates": "Teaching certificates",
       "Next": "Next",
       "Complete": "Complete"
    }

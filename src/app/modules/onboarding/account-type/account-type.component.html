@@ -13,7 +13,7 @@
       </button>
     </div>
 
-    <div class="w-full max-w-sm">
+    <div class="w-full max-w-md">
       <div class="font-semibold text-gray-900 text-2xl text-center mb-10">
         {{ "SelectAccountType.Title" | translate }}
       </div>
@@ -25,7 +25,7 @@
           (click)="selectedAccountType = type"
         >
           <div
-            class="border-4 rounded-md w-44 h-44 flex justify-center items-center bg-white"
+            class="border-4 rounded-md w-48 h-48 flex justify-center items-center bg-white"
             [ngClass]="selectedAccountType === type ? 'border-primary' : ''"
           >
             <mat-icon

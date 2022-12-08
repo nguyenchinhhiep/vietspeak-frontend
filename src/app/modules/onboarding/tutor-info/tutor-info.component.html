@@ -119,11 +119,18 @@
                       matInput
                       formControlName="dob"
                       [matDatepicker]="picker"
+                      [max]="maxDate"
                       placeholder="DD/MM/YYYY"
                     />
                     <mat-hint>{{
                       "TutorInfo.DateOfBirthNotDisplay" | translate
                     }}</mat-hint>
+                    <mat-error
+                      *ngIf="
+                        tutorBasicInfoForm.get('dob')?.hasError('required')
+                      "
+                      >{{ "Errors.Required" | translate }}</mat-error
+                    >
                     <mat-datepicker-toggle
                       matIconSuffix
                       [for]="picker"
@@ -150,77 +157,196 @@
           <ng-template matStepLabel>{{
             "TutorInfo.Experience" | translate
           }}</ng-template>
-          <div class="flex justify-center -mx-6 sm:px-6">
-            <div class="w-full mt-4">
-              <form [formGroup]="tutorExperienceForm"></form>
+          <ng-template matStepContent>
+            <div class="flex justify-center -mx-6 sm:px-6">
+              <div class="w-full mt-4">
+                <form [formGroup]="tutorExperienceForm">
+                  <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>{{
+                      "TutorInfo.TeachingExperience" | translate
+                    }}</mat-label>
+                    <mat-select
+                      formControlName="teachingExperience"
+                      placeholder="Select"
+                    >
+                      <mat-option
+                        *ngFor="let item of teachingExperienceOptions"
+                        [value]="item.value"
+                      >
+                        {{ item.translateKey | translate }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        tutorExperienceForm
+                          .get('teachingExperience')
+                          ?.hasError('required')
+                      "
+                      >{{ "Errors.Required" | translate }}</mat-error
+                    >
+                  </mat-form-field>
+                  <div class="flex flex-col gap-4 mb-6 mt-2">
+                    <div class="text-gray-500 font-medium">
+                      {{ "TutorInfo.HaveExperienceTeachingOnline" | translate }}
+                    </div>
+                    <mat-radio-group
+                      formControlName="haveExperienceTeachingOnline"
+                      class="flex gap-3.5"
+                    >
+                      <mat-radio-button [value]="false">{{
+                        "TutorInfo.No" | translate
+                      }}</mat-radio-button>
+                      <mat-radio-button [value]="true">{{
+                        "TutorInfo.Yes" | translate
+                      }}</mat-radio-button>
+                    </mat-radio-group>
+                  </div>
+                  <div class="flex flex-col gap-4 mb-8">
+                    <div class="text-gray-500 font-medium">
+                      {{ "TutorInfo.TeachingCertificates" | translate }}
+                    </div>
+                    <div class="flex flex-col gap-4">
+                      <div
+                        class="rounded border border-dashed bg-white border-gray-300 p-6 flex flex-col gap-2 items-center justify-center"
+                      >
+                        <mat-icon
+                          class="icon-size-12"
+                          svgIcon="mat_outline:upload_file"
+                        ></mat-icon>
+                        <div class="text-base">Drag and drop files here</div>
+                        <div class="text-gray-400">or</div>
+                        <button
+                          mat-flat-button
+                          [color]="'primary'"
+                          class="btn btn--sm"
+                        >
+                          Browse files
+                        </button>
+                      </div>
+                      <div class="flex flex-col gap-2">
+                        <div
+                          class="bg-white rounded flex gap-4 items-center px-4 py-2"
+                        >
+                          <div class="flex flex-col gap-1">
+                            <div class="text-gray-600 font-medium">
+                              File-name.pdf
+                            </div>
+                            <div class="text-gray-400">1.2mb</div>
+                          </div>
+
+                          <div class="flex-shrink-0 ml-auto">
+                            <button mat-icon-button>
+                              <mat-icon
+                                class="text-danger"
+                                svgIcon="mat_outline:clear"
+                              ></mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="mt-4 flex justify-between gap-4">
+                    <button
+                      class="btn btn--lg"
+                      mat-stroked-button
+                      matStepperPrevious
+                    >
+                      {{ "OnBoarding.Back" | translate }}
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn--lg !px-6"
+                      mat-flat-button
+                      [color]="'primary'"
+                      (click)="submitTutorExperienceForm()"
+                    >
+                      {{ "TutorInfo.Next" | translate }}
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
+          </ng-template>
         </mat-step>
         <mat-step [editable]="true" [stepControl]="tutorAdditionalInfoForm">
           <ng-template matStepLabel>{{
             "TutorInfo.AdditionalInfo" | translate
           }}</ng-template>
-          <div class="flex justify-center -mx-6 sm:px-6">
-            <div class="w-full mt-4">
-              <form [formGroup]="tutorAdditionalInfoForm">
-                <mat-form-field appearance="fill" class="w-full">
-                  <mat-label>{{
-                    "OnBoarding.WhereHeardFrom" | translate
-                  }}</mat-label>
-                  <mat-select formControlName="heardFrom" placeholder="Select">
-                    <mat-option
-                      *ngFor="let item of heardFromOptions"
-                      [value]="item.value"
+          <ng-template matStepContent>
+            <div class="flex justify-center -mx-6 sm:px-6">
+              <div class="w-full mt-4">
+                <form [formGroup]="tutorAdditionalInfoForm">
+                  <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>{{
+                      "OnBoarding.WhereHeardFrom" | translate
+                    }}</mat-label>
+                    <mat-select
+                      formControlName="heardFrom"
+                      placeholder="Select"
                     >
-                      {{ item.label | translate }}
-                    </mat-option>
-                  </mat-select>
-                  <mat-error
-                    *ngIf="
-                      tutorAdditionalInfoForm
-                        .get('heardForm')
-                        ?.hasError('required')
-                    "
-                    >{{ "Errors.Required" | translate }}</mat-error
-                  >
-                </mat-form-field>
-                <mat-form-field appearance="fill" class="w-full">
-                  <mat-label>{{
-                    "TutorInfo.ReasonHere" | translate
-                  }}</mat-label>
-                  <textarea
-                    matInput
-                    formControlName="reasonHere"
-                    maxlength="500"
-                    rows="5"
-                  ></textarea>
-                  <mat-hint class="w-full">
-                    <div class="text-right -mr-3">500 characters remaining</div>
-                  </mat-hint>
-                  <mat-error
-                    *ngIf="
-                      tutorBasicInfoForm.get('reasonHere')?.hasError('required')
-                    "
-                    >{{ "Errors.Required" | translate }}</mat-error
-                  >
-                </mat-form-field>
+                      <mat-option
+                        *ngFor="let item of heardFromOptions"
+                        [value]="item.value"
+                      >
+                        {{ item.translateKey | translate }}
+                      </mat-option>
+                    </mat-select>
+                    <mat-error
+                      *ngIf="
+                        tutorAdditionalInfoForm
+                          .get('heardForm')
+                          ?.hasError('required')
+                      "
+                      >{{ "Errors.Required" | translate }}</mat-error
+                    >
+                  </mat-form-field>
+                  <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>{{
+                      "TutorInfo.ReasonHere" | translate
+                    }}</mat-label>
+                    <textarea
+                      matInput
+                      formControlName="reasonHere"
+                      maxlength="500"
+                      rows="5"
+                    ></textarea>
+                    <mat-hint class="w-full">
+                      <div class="text-right -mr-3">
+                        500 characters remaining
+                      </div>
+                    </mat-hint>
+                    <mat-error
+                      *ngIf="
+                        tutorBasicInfoForm
+                          .get('reasonHere')
+                          ?.hasError('required')
+                      "
+                      >{{ "Errors.Required" | translate }}</mat-error
+                    >
+                  </mat-form-field>
 
-                <div class="mt-4 flex justify-between gap-4">
-                  <button class="btn btn--lg" mat-button matStepperPrevious>
-                    {{ "OnBoarding.Back" | translate }}
-                  </button>
-                  <button
-                    type="submit"
-                    class="btn btn--lg !px-6"
-                    mat-flat-button
-                    [color]="'primary'"
-                  >
-                    {{ "TutorInfo.Complete" | translate }}
-                  </button>
-                </div>
-              </form>
+                  <div class="mt-4 flex justify-between gap-4">
+                    <button
+                      class="btn btn--lg"
+                      mat-stroked-button
+                      matStepperPrevious
+                    >
+                      {{ "OnBoarding.Back" | translate }}
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn--lg !px-6"
+                      mat-flat-button
+                      [color]="'primary'"
+                    >
+                      {{ "TutorInfo.Complete" | translate }}
+                    </button>
+                  </div>
+                </form>
+              </div>
             </div>
-          </div>
+          </ng-template>
         </mat-step>
       </mat-stepper>
     </div>
