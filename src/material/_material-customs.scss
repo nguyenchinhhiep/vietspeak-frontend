@@ -272,7 +272,7 @@
         }
 
         .mat-form-field-label-wrapper {
-          top: -25px;
+          top: -28px;
           height: auto;
           padding-top: 0;
           overflow: visible;
@@ -311,7 +311,7 @@
       top: auto;
       padding: 0;
       margin-top: 0;
-      font-size: 12px;
+      font-size: 13px;
       font-weight: 500;
 
       // > div {
@@ -322,6 +322,7 @@
       .mat-hint {
         display: block;
         margin-top: 4px;
+        
       }
 
       .mat-hint {
@@ -333,7 +334,7 @@
   /* Adjustments for mat-label */
   &.mat-form-field-has-label {
     .mat-form-field-wrapper {
-      margin-top: 24px;
+      margin-top: 28px;
     }
   }
 

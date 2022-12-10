@@ -5,10 +5,22 @@
       "ExistingEmail": "Email already exists",
       "NotFoundEmail": "Email not found",
       "MustMatch": "{{control}} and {{matchingControl}} must match",
-      "MinLength": "{{control}} must be at least {{length}} characters"
+      "MinLength": "{{control}} must be at least {{length}} characters",
+      "File": "Please upload a document"
    },
    "Hints": {
-      "CharacterRemaining": "{{remainingLength}} characters remaining"
+      "CharactersRemaining": "{{remainingLength}} characters remaining"
+   },
+   "Actions": {
+      "Select": "Select"
+   },
+   "FileUpload": {
+      "DragAndDropHere": "Drag and drop file(s) here",
+      "BrowseFiles": "Browse files",
+      "OnlyAllowedFileType": "You are allowed to only upload {{fileType}} file",
+      "FileTooLarge": "File is too large. Maximum upload size is {{maxUploadSize}}",
+      "OnlyAllowedFileQuantity": "You are allowed to only upload maximum {{quantity}} file(s)",
+      "OnlyFileTypeAndMaxSize": "only {{fileType}}, max size: {{maxSize}}"
    },
    "Login": {
       "Title": "Login",
@@ -25,15 +37,14 @@
    },
    "ForgotPassword": {
       "Title": "Forgot password",
-      "SubTitle": "Fill the form to reset your password",
-      "SendLink": "Send link",
-      "BackTo": "Back to",
+      "SubTitle": "Enter your email address and we will send you instructions to reset your password",
+      "Continue": "Continue",
       "AlreadyHaveAccount": "Already have an account"
    },
    "OnBoarding": {
       "Back": "Back",
       "Logout": "Logout",
-      "WhereHeardFrom": "Where did you hear about Vietspeak",
+      "WhereHeardFrom": "Where did you hear about Vietspeak?",
       "WebSearch": "Web search",
       "SocialMedia": "Social media",
       "FriendFamily": "Friend / Family",
@@ -71,12 +82,14 @@
       "TeachingExperience": "Teaching experience",
       "No": "No",
       "Yes": "Yes",
-      "ZeroToSixMonths": "0 - 6 months",
+      "OneToSixMonths": "1 - 6 months",
       "SevenToTwelveMonths": "7 - 12 months",
       "OneToTwoYears": "1 - 2 years",
       "MoreThanTwoYears": "More than 2 years",
       "HaveExperienceTeachingOnline": "Do you have experience teaching online?",
       "TeachingCertificates": "Teaching certificates",
+      "Introduction": "Introduction",
+      "IntroductionDescription": "Say hello and introduce yourself to students! This will be the first thing students read about you when looking at their tutor profile",
       "Next": "Next",
       "Complete": "Complete"
    }

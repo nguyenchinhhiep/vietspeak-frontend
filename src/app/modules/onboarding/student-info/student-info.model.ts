@@ -1,5 +1,3 @@
-import { Language } from '../onboarding.model';
-
 export enum Gender {
   Male = 'male',
   Female = 'female',
@@ -56,10 +54,15 @@ export const Occupations: {
   },
 ];
 
+export enum Language {
+  English = 'English',
+}
+
 export const learningLanguageOptions = [
   {
     label: 'English',
     value: Language.English,
+    imgUrl: 'assets/images/flags/US.svg',
   },
 ];
 

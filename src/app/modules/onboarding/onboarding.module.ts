@@ -18,6 +18,7 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { LanguagesModule } from 'src/app/components/languages/languages.module';
 import {MatStepperModule} from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { ToastModule } from 'src/app/components/toast/toast.module';
 
 const routes: Routes = [
   {
@@ -77,6 +78,7 @@ const routes: Routes = [
     LanguagesModule,
     MatStepperModule,
     MatCheckboxModule,
+    ToastModule,
     RouterModule.forChild(routes),
   ],
   providers: [

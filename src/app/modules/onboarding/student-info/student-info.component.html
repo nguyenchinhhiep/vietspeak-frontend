@@ -27,7 +27,7 @@
       </button>
     </div>
 
-    <div class="w-full max-w-lg sm:px-6">
+    <div class="w-full max-w-xl sm:px-6">
       <div class="font-semibold text-gray-900 text-2xl text-center">
         {{ "StudentInfo.Title" | translate }}
       </div>
@@ -36,12 +36,43 @@
           <mat-label>{{
             "StudentInfo.LanguageWantToLearn" | translate
           }}</mat-label>
-          <mat-select formControlName="learningLanguage" placeholder="Select">
+          <mat-select formControlName="learningLanguage" placeholder="{{'Actions.Select' | translate}}">
+            <mat-select-trigger>
+              <div class="flex gap-3 items-center">
+                <div class="w-6 overflow-hidden">
+                  <img
+                    class="w-full object-cover"
+                    [src]="
+                      this.studentInfoForm.get('learningLanguage')?.value.imgUrl
+                    "
+                    [attr.alt]="
+                      this.studentInfoForm.get('learningLanguage')?.value.label
+                    "
+                  />
+                </div>
+
+                <div>
+                  {{
+                    this.studentInfoForm.get("learningLanguage")?.value.label
+                  }}
+                </div>
+              </div>
+            </mat-select-trigger>
             <mat-option
               *ngFor="let item of learningLanguageOptions"
-              [value]="item.value"
+              [value]="item"
             >
-              {{ item.label | translate }}
+              <div class="flex gap-3 items-center">
+                <div class="w-6 overflow-hidden">
+                  <img
+                    class="w-full object-cover"
+                    [src]="item.imgUrl"
+                    [attr.alt]="item?.label"
+                  />
+                </div>
+
+                <div>{{ item.label }}</div>
+              </div>
             </mat-option>
           </mat-select>
           <mat-error
@@ -53,7 +84,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>{{ "StudentInfo.CurrentLevel" | translate }}</mat-label>
-          <mat-select formControlName="currentLevel" placeholder="Select">
+          <mat-select formControlName="currentLevel" placeholder="{{'Actions.Select' | translate}}">
             <mat-option
               *ngFor="let item of languageLevelOptions"
               [value]="item.value"
@@ -68,7 +99,19 @@
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>{{ "StudentInfo.FirstName" | translate }}</mat-label>
-          <input matInput formControlName="firstName" />
+          <input matInput formControlName="firstName" #firstName />
+          <button
+            mat-icon-button
+            type="button"
+            matSuffix
+            *ngIf="firstName.value != ''"
+            (click)="studentInfoForm.get('firstName')?.setValue('')"
+          >
+            <mat-icon
+              class="icon-size-5"
+              [svgIcon]="'mat_outline:close'"
+            ></mat-icon>
+          </button>
           <mat-error
             *ngIf="studentInfoForm.get('firstName')?.hasError('required')"
             >{{ "Errors.Required" | translate }}</mat-error
@@ -76,7 +119,19 @@
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>{{ "StudentInfo.LastName" | translate }}</mat-label>
-          <input matInput formControlName="lastName" />
+          <input matInput formControlName="lastName" #lastName />
+          <button
+            mat-icon-button
+            type="button"
+            matSuffix
+            *ngIf="lastName.value != ''"
+            (click)="studentInfoForm.get('lastName')?.setValue('')"
+          >
+            <mat-icon
+              class="icon-size-5"
+              [svgIcon]="'mat_outline:close'"
+            ></mat-icon>
+          </button>
           <mat-error
             *ngIf="studentInfoForm.get('lastName')?.hasError('required')"
             >{{ "Errors.Required" | translate }}</mat-error
@@ -84,8 +139,8 @@
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="w-full" floatLabel="always">
-          <mat-label>{{ "OnBoarding.WhereHeardFrom" | translate }}?</mat-label>
-          <mat-select formControlName="heardFrom" placeholder="Select">
+          <mat-label>{{ "OnBoarding.WhereHeardFrom" | translate }}</mat-label>
+          <mat-select formControlName="heardFrom" placeholder="{{'Actions.Select' | translate}}">
             <mat-option
               *ngFor="let item of heardFromOptions"
               [value]="item.value"

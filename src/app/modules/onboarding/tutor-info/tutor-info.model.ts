@@ -1,6 +1,6 @@
 export enum TeachingExperience {
   No = 'No',
-  ZeroToSixMonths = '0 - 6 months',
+  OneToSixMonths = '1 - 6 months',
   SevenToTwelveMonths = '7 - 12 months',
   OneToTwoYears = '1 - 2 years',
   MoreThanTwoYears = 'More than 2 years',
@@ -13,9 +13,9 @@ export const TeachingExperienceOptions = [
     value: TeachingExperience.No,
   },
   {
-    label: '0 - 6 months',
-    translateKey: 'TutorInfo.ZeroToSixMonths',
-    value: TeachingExperience.ZeroToSixMonths,
+    label: '1 - 6 months',
+    translateKey: 'TutorInfo.OneToSixMonths',
+    value: TeachingExperience.OneToSixMonths,
   },
   {
     label: '7 - 12 months',
@@ -31,5 +31,17 @@ export const TeachingExperienceOptions = [
     label: 'More than 2 years',
     translateKey: 'TutorInfo.MoreThanTwoYears',
     value: TeachingExperience.MoreThanTwoYears,
+  },
+];
+
+export enum Language {
+  English = 'English',
+}
+
+export const TeachingLanguageOptions = [
+  {
+    label: 'English',
+    value: Language.English,
+    imgUrl: 'assets/images/flags/US.svg',
   },
 ];

@@ -51,12 +51,16 @@ module.exports = {
   darkMode: "class",
   theme: {
     fontFamily: {
-      sans: ["Inter", ...defaultTheme.fontFamily.sans],
+      sans: ["Roboto", ...defaultTheme.fontFamily.sans],
       mono: defaultTheme.fontFamily.mono,
     },
     extend: {
       boxShadow: {
         base: "rgba(0, 0, 0, 0.1) 0px 0px 2px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px",
+      },
+      fontSize: {
+        xs: "0.8125rem",
+        base: "0.9375rem",
       },
     },
   },

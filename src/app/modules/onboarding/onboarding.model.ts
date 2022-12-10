@@ -28,14 +28,4 @@ export const HeardFromOptions = [
   },
 ];
 
-export enum Language {
-  English = 'English',
-}
-
-export const TeachingLanguageOptions = [
-  {
-    label: 'English',
-    value: Language.English,
-  },
-];
 

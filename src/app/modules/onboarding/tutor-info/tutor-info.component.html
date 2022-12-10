@@ -27,7 +27,7 @@
       </button>
     </div>
 
-    <div class="w-full max-w-lg">
+    <div class="w-full max-w-xl">
       <div class="font-semibold text-gray-900 text-2xl text-center mb-4">
         {{ "TutorInfo.Title" | translate }}
       </div>
@@ -61,13 +61,47 @@
                     }}</mat-label>
                     <mat-select
                       formControlName="teachingLanguage"
-                      placeholder="Select"
+                      placeholder="{{'Actions.Select' | translate}}"
                     >
+                      <mat-select-trigger>
+                        <div class="flex gap-3 items-center">
+                          <div class="w-6 overflow-hidden">
+                            <img
+                              class="w-full object-cover"
+                              [src]="
+                                this.tutorBasicInfoForm.get('teachingLanguage')
+                                  ?.value.imgUrl
+                              "
+                              [attr.alt]="
+                                this.tutorBasicInfoForm.get('teachingLanguage')
+                                  ?.value.label
+                              "
+                            />
+                          </div>
+
+                          <div>
+                            {{
+                              this.tutorBasicInfoForm.get("teachingLanguage")
+                                ?.value.label
+                            }}
+                          </div>
+                        </div>
+                      </mat-select-trigger>
                       <mat-option
                         *ngFor="let item of teachingLanguageOptions"
-                        [value]="item.value"
+                        [value]="item"
                       >
-                        {{ item.label | translate }}
+                        <div class="flex gap-3 items-center">
+                          <div class="w-6 overflow-hidden">
+                            <img
+                              class="w-full object-cover"
+                              [src]="item.imgUrl"
+                              [attr.alt]="item?.label"
+                            />
+                          </div>
+
+                          <div>{{ item.label }}</div>
+                        </div>
                       </mat-option>
                     </mat-select>
                     <mat-error
@@ -83,7 +117,21 @@
                     <mat-label>{{
                       "TutorInfo.FirstName" | translate
                     }}</mat-label>
-                    <input matInput formControlName="firstName" />
+                    <input matInput formControlName="firstName" #firstName />
+                    <button
+                      mat-icon-button
+                      type="button"
+                      matSuffix
+                      *ngIf="firstName.value != ''"
+                      (click)="
+                        tutorBasicInfoForm.get('firstName')?.setValue('')
+                      "
+                    >
+                      <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'mat_outline:close'"
+                      ></mat-icon>
+                    </button>
                     <mat-error
                       *ngIf="
                         tutorBasicInfoForm
@@ -97,7 +145,21 @@
                     <mat-label>{{
                       "TutorInfo.LastName" | translate
                     }}</mat-label>
-                    <input matInput formControlName="lastName" />
+                    <input matInput formControlName="lastName" #lastName />
+                    <button
+                      mat-icon-button
+                      type="button"
+                      matSuffix
+                      *ngIf="lastName.value != ''"
+                      (click)="
+                        tutorBasicInfoForm.get('firstName')?.setValue('')
+                      "
+                    >
+                      <mat-icon
+                        class="icon-size-5"
+                        [svgIcon]="'mat_outline:close'"
+                      ></mat-icon>
+                    </button>
                     <mat-error
                       *ngIf="
                         tutorBasicInfoForm.get('lastName')?.hasError('required')
@@ -137,6 +199,7 @@
                     ></mat-datepicker-toggle>
                     <mat-datepicker #picker></mat-datepicker>
                   </mat-form-field>
+
                   <div class="mt-4 flex justify-center">
                     <button
                       type="submit"
@@ -167,7 +230,7 @@
                     }}</mat-label>
                     <mat-select
                       formControlName="teachingExperience"
-                      placeholder="Select"
+                      placeholder="{{'Actions.Select' | translate}}"
                     >
                       <mat-option
                         *ngFor="let item of teachingExperienceOptions"
@@ -185,7 +248,116 @@
                       >{{ "Errors.Required" | translate }}</mat-error
                     >
                   </mat-form-field>
-                  <div class="flex flex-col gap-4 mb-6 mt-2">
+
+                  <div class="flex flex-col mb-6">
+                    <div
+                      class="text-gray-500 font-medium flex gap-1 items-center mb-2"
+                    >
+                      {{ "TutorInfo.TeachingCertificates" | translate }}
+                      <span class="text-danger">*</span>
+                      <span class="text-gray-400 font-normal text-sm"
+                        >({{
+                          "FileUpload.OnlyFileTypeAndMaxSize"
+                            | translate : { fileType: ".pdf", maxSize: "32MB" }
+                        }})</span
+                      >
+                    </div>
+                    <div class="flex flex-col">
+                      <div
+                        class="rounded border-2 border-dashed bg-white border-gray-300 p-6 flex flex-col gap-2 items-center justify-center relative"
+                        [ngClass]="
+                          isOnDropFilesContainer
+                            ? '!border-primary !bg-gray-50'
+                            : ''
+                        "
+                        (dragenter)="onDragEnter($event)"
+                        (dragleave)="onDragLeave($event)"
+                        (dragover)="onDragOver($event)"
+                        (drop)="onDrop($event)"
+                      >
+                        <mat-icon
+                          class="icon-size-12"
+                          svgIcon="mat_outline:upload_file"
+                        ></mat-icon>
+                        <div class="text-base">
+                          {{ "FileUpload.DragAndDropHere" | translate }}
+                        </div>
+                        <div class="text-gray-400">or</div>
+                        <button
+                          mat-flat-button
+                          [color]="'primary'"
+                          class="btn btn--sm"
+                          (click)="uploadFile.click()"
+                        >
+                          {{ "FileUpload.BrowseFiles" | translate }}
+                        </button>
+                        <input
+                          hidden
+                          multiple
+                          type="file"
+                          accept=".pdf"
+                          #uploadFile
+                          (change)="onFileSelected($event, uploadFile)"
+                        />
+                      </div>
+                      <div
+                        class="flex flex-col gap-2 mt-4"
+                        *ngIf="
+                          this.tutorExperienceForm.get('teachingCertificates')
+                            ?.value
+                        "
+                      >
+                        <div
+                          class="bg-white rounded flex gap-4 items-center px-4 py-2 border-2"
+                          *ngFor="
+                            let file of this.tutorExperienceForm.get(
+                              'teachingCertificates'
+                            )?.value || [];
+                            let i = index
+                          "
+                        >
+                          <div class="flex flex-col gap-1 overflow-hidden">
+                            <div
+                              class="text-gray-600 font-medium overflow-hidden text-ellipsis whitespace-nowrap"
+                            >
+                              {{ file.name }}
+                            </div>
+                            <div class="text-gray-400">
+                              {{ file.size / 1024 | number : "1.2" }} KB
+                            </div>
+                          </div>
+
+                          <div class="flex-shrink-0 ml-auto">
+                            <button
+                              mat-icon-button
+                              type="button"
+                              (click)="removeFile(i)"
+                            >
+                              <mat-icon
+                                class="text-danger"
+                                svgIcon="mat_outline:clear"
+                              ></mat-icon>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div
+                      class="font-medium text-xs text-danger mt-2"
+                      *ngIf="
+                        this.tutorExperienceForm
+                          .get('teachingCertificates')
+                          ?.hasError('required') &&
+                        (this.tutorExperienceForm.get('teachingCertificates')
+                          ?.touched ||
+                          this.tutorExperienceForm.get('teachingCertificates')
+                            ?.dirty)
+                      "
+                    >
+                      {{ "Errors.File" | translate }}
+                    </div>
+                  </div>
+                  <div class="flex flex-col gap-2">
                     <div class="text-gray-500 font-medium">
                       {{ "TutorInfo.HaveExperienceTeachingOnline" | translate }}
                     </div>
@@ -201,52 +373,7 @@
                       }}</mat-radio-button>
                     </mat-radio-group>
                   </div>
-                  <div class="flex flex-col gap-4 mb-8">
-                    <div class="text-gray-500 font-medium">
-                      {{ "TutorInfo.TeachingCertificates" | translate }}
-                    </div>
-                    <div class="flex flex-col gap-4">
-                      <div
-                        class="rounded border border-dashed bg-white border-gray-300 p-6 flex flex-col gap-2 items-center justify-center"
-                      >
-                        <mat-icon
-                          class="icon-size-12"
-                          svgIcon="mat_outline:upload_file"
-                        ></mat-icon>
-                        <div class="text-base">Drag and drop files here</div>
-                        <div class="text-gray-400">or</div>
-                        <button
-                          mat-flat-button
-                          [color]="'primary'"
-                          class="btn btn--sm"
-                        >
-                          Browse files
-                        </button>
-                      </div>
-                      <div class="flex flex-col gap-2">
-                        <div
-                          class="bg-white rounded flex gap-4 items-center px-4 py-2"
-                        >
-                          <div class="flex flex-col gap-1">
-                            <div class="text-gray-600 font-medium">
-                              File-name.pdf
-                            </div>
-                            <div class="text-gray-400">1.2mb</div>
-                          </div>
-
-                          <div class="flex-shrink-0 ml-auto">
-                            <button mat-icon-button>
-                              <mat-icon
-                                class="text-danger"
-                                svgIcon="mat_outline:clear"
-                              ></mat-icon>
-                            </button>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="mt-4 flex justify-between gap-4">
+                  <div class="mt-10 flex justify-between gap-4">
                     <button
                       class="btn btn--lg"
                       mat-stroked-button
@@ -277,13 +404,85 @@
             <div class="flex justify-center -mx-6 sm:px-6">
               <div class="w-full mt-4">
                 <form [formGroup]="tutorAdditionalInfoForm">
+                  <mat-form-field
+                    appearance="fill"
+                    class="w-full"
+                    floatLabel="always"
+                  >
+                    <mat-label>{{
+                      "TutorInfo.Introduction" | translate
+                    }}</mat-label>
+                    <textarea
+                      matInput
+                      class="!resize-none !leading-normal"
+                      formControlName="introduction"
+                      placeholder="{{
+                        'TutorInfo.IntroductionDescription' | translate
+                      }}"
+                      maxlength="1000"
+                      rows="8"
+                    ></textarea>
+                    <mat-hint class="w-full">
+                      <div class="text-right -mr-3">
+                        {{
+                          "Hints.CharactersRemaining"
+                            | translate
+                              : {
+                                  remainingLength:
+                                    remainingCharactersIntroduction
+                                }
+                        }}
+                      </div>
+                    </mat-hint>
+                    <mat-error
+                      *ngIf="
+                        tutorAdditionalInfoForm
+                          .get('introduction')
+                          ?.hasError('required')
+                      "
+                      >{{ "Errors.Required" | translate }}</mat-error
+                    >
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill" class="w-full">
+                    <mat-label>{{
+                      "TutorInfo.ReasonHere" | translate
+                    }}</mat-label>
+                    <textarea
+                      matInput
+                      class="!resize-none !leading-normal"
+                      formControlName="reasonHere"
+                      maxlength="500"
+                      rows="4"
+                    ></textarea>
+                    <mat-hint class="w-full">
+                      <div class="text-right -mr-3">
+                        {{
+                          "Hints.CharactersRemaining"
+                            | translate
+                              : {
+                                  remainingLength: remainingCharactersReasonHere
+                                }
+                        }}
+                      </div>
+                    </mat-hint>
+                    <mat-error
+                      *ngIf="
+                        tutorAdditionalInfoForm
+                          .get('reasonHere')
+                          ?.hasError('required')
+                      "
+                      >{{ "Errors.Required" | translate }}</mat-error
+                    >
+                  </mat-form-field>
+
                   <mat-form-field appearance="fill" class="w-full">
                     <mat-label>{{
                       "OnBoarding.WhereHeardFrom" | translate
                     }}</mat-label>
                     <mat-select
                       formControlName="heardFrom"
-                      placeholder="Select"
+                      placeholder="{{'Actions.Select' | translate}}"
                     >
                       <mat-option
                         *ngFor="let item of heardFromOptions"
@@ -296,30 +495,6 @@
                       *ngIf="
                         tutorAdditionalInfoForm
                           .get('heardForm')
-                          ?.hasError('required')
-                      "
-                      >{{ "Errors.Required" | translate }}</mat-error
-                    >
-                  </mat-form-field>
-                  <mat-form-field appearance="fill" class="w-full">
-                    <mat-label>{{
-                      "TutorInfo.ReasonHere" | translate
-                    }}</mat-label>
-                    <textarea
-                      matInput
-                      formControlName="reasonHere"
-                      maxlength="500"
-                      rows="5"
-                    ></textarea>
-                    <mat-hint class="w-full">
-                      <div class="text-right -mr-3">
-                        500 characters remaining
-                      </div>
-                    </mat-hint>
-                    <mat-error
-                      *ngIf="
-                        tutorBasicInfoForm
-                          .get('reasonHere')
                           ?.hasError('required')
                       "
                       >{{ "Errors.Required" | translate }}</mat-error

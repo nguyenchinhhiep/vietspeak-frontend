@@ -14,6 +14,9 @@ import {
   MatRadioDefaultOptions,
   MAT_RADIO_DEFAULT_OPTIONS,
 } from '@angular/material/radio';
+import { ToastrModule } from 'ngx-toastr';
+import { ToastComponent } from './components/toast/toast.component';
+import { ToastModule } from './components/toast/toast.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,6 +25,13 @@ import {
     CoreModule,
     LayoutModule,
     BrowserAnimationsModule,
+    // Toastr options
+    ToastModule,
+    ToastrModule.forRoot({
+      toastComponent: ToastComponent,
+      toastClass: 'custom-toast',
+      positionClass: 'toast-bottom-left',
+    }),
     AppRoutingModule,
   ],
   providers: [
