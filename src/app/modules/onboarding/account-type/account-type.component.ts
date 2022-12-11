@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { Role } from 'src/app/core/user/role.model';
 import { AccountTypeList } from 'src/app/core/user/user.model';
@@ -10,7 +12,10 @@ import { AccountTypeList } from 'src/app/core/user/user.model';
   styleUrls: ['./account-type.component.scss'],
 })
 export class AccountTypeComponent implements OnInit {
-  constructor(private _router: Router, private _authService: AuthService) {}
+  constructor(
+    private _router: Router,
+    private _authService: AuthService
+  ) {}
 
   accountTypeList: any[] = JSON.parse(JSON.stringify(AccountTypeList));
   selectedAccountType: any = null;
@@ -34,4 +39,6 @@ export class AccountTypeComponent implements OnInit {
   logout() {
     this._authService.signOut();
   }
+
+ 
 }

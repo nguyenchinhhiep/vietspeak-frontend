@@ -26,8 +26,8 @@
         </button>
       </div>
     </div>
-    <div class="w-full max-w-md md:bg-white md:px-8 md:py-14 md:rounded-md md:shadow-base">
-      <div class="font-semibold text-gray-900 text-2xl text-center">
+    <div class="w-full max-w-md md:bg-white md:px-8 md:pb-14 md:pt-10 md:rounded-md md:shadow-base">
+      <div class="font-semibold text-gray-900 text-2xl text-center capitalize">
         {{ "Login.Title" | translate }}
       </div>
 
@@ -100,7 +100,7 @@
           [disabled]="loginForm.disabled"
         >
           <span *ngIf="!loginForm.disabled">
-            {{ "Login.Title" | translate }}
+            {{ "Actions.Continue" | translate }}
           </span>
           <mat-progress-spinner
             *ngIf="loginForm.disabled"

@@ -8,6 +8,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { Observable, of, timer } from 'rxjs';
 import { map, switchMap } from 'rxjs/operators';
 import { AlertType } from 'src/app/components/alert/alert.model';
@@ -23,7 +24,8 @@ export class ForgotPasswordComponent implements OnInit {
   constructor(
     private _router: Router,
     private _fb: UntypedFormBuilder,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _translateService: TranslateService
   ) {}
   @ViewChild('forgotPasswordNgForm') forgotPasswordNgForm!: NgForm;
 
@@ -79,8 +81,7 @@ export class ForgotPasswordComponent implements OnInit {
       // Set the alert
       this.alert = {
         type: 'success',
-        message:
-          "We've sent a link to your email with instructions to reset your password",
+        message: this._translateService.instant('Errors.SentEmailSuccess'),
       };
     }, 5000);
   }

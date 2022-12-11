@@ -14,7 +14,7 @@
     </div>
 
     <div class="w-full max-w-md">
-      <div class="font-semibold text-gray-900 text-2xl text-center mb-10">
+      <div class="font-semibold text-gray-900 text-2xl text-center mb-10 capitalize">
         {{ "SelectAccountType.Title" | translate }}
       </div>
 
@@ -57,7 +57,7 @@
           (click)="continue()"
           [disabled]="selectedAccountType == null"
         >
-          {{ "SelectAccountType.Continue" | translate }}
+          {{ "Actions.Continue" | translate }}
         </button>
       </div>
     </div>

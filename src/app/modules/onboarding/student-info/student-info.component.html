@@ -15,7 +15,7 @@
             svgIcon="mat_outline:arrow_back"
           ></mat-icon>
           <div class="text-gray-500">
-            {{ "OnBoarding.Back" | translate }}
+            {{ "Actions.Back" | translate }}
           </div>
         </div>
       </button>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="w-full max-w-xl sm:px-6">
-      <div class="font-semibold text-gray-900 text-2xl text-center">
+      <div class="font-semibold text-gray-900 text-2xl text-center capitalize">
         {{ "StudentInfo.Title" | translate }}
       </div>
       <form class="mt-8" [formGroup]="studentInfoForm" (ngSubmit)="submit()">
@@ -36,7 +36,10 @@
           <mat-label>{{
             "StudentInfo.LanguageWantToLearn" | translate
           }}</mat-label>
-          <mat-select formControlName="learningLanguage" placeholder="{{'Actions.Select' | translate}}">
+          <mat-select
+            formControlName="learningLanguage"
+            placeholder="{{ 'Actions.Select' | translate }}"
+          >
             <mat-select-trigger>
               <div class="flex gap-3 items-center">
                 <div class="w-6 overflow-hidden">
@@ -84,7 +87,10 @@
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>{{ "StudentInfo.CurrentLevel" | translate }}</mat-label>
-          <mat-select formControlName="currentLevel" placeholder="{{'Actions.Select' | translate}}">
+          <mat-select
+            formControlName="currentLevel"
+            placeholder="{{ 'Actions.Select' | translate }}"
+          >
             <mat-option
               *ngFor="let item of languageLevelOptions"
               [value]="item.value"
@@ -104,7 +110,7 @@
             mat-icon-button
             type="button"
             matSuffix
-            *ngIf="firstName.value != ''"
+            *ngIf="firstName.value != '' && !studentInfoForm.disabled"
             (click)="studentInfoForm.get('firstName')?.setValue('')"
           >
             <mat-icon
@@ -124,7 +130,7 @@
             mat-icon-button
             type="button"
             matSuffix
-            *ngIf="lastName.value != ''"
+            *ngIf="lastName.value != '' && !studentInfoForm.disabled"
             (click)="studentInfoForm.get('lastName')?.setValue('')"
           >
             <mat-icon
@@ -140,7 +146,10 @@
 
         <mat-form-field appearance="fill" class="w-full" floatLabel="always">
           <mat-label>{{ "OnBoarding.WhereHeardFrom" | translate }}</mat-label>
-          <mat-select formControlName="heardFrom" placeholder="{{'Actions.Select' | translate}}">
+          <mat-select
+            formControlName="heardFrom"
+            placeholder="{{ 'Actions.Select' | translate }}"
+          >
             <mat-option
               *ngFor="let item of heardFromOptions"
               [value]="item.value"
@@ -153,18 +162,27 @@
             >{{ "Errors.Required" | translate }}</mat-error
           >
         </mat-form-field>
-      </form>
+        <div class="mt-4 flex justify-center">
+          <button
+            type="submit"
+            class="btn btn--lg w-full"
+            mat-flat-button
+            [color]="'primary'"
+            [disabled]="studentInfoForm.disabled"
+          >
+            <span *ngIf="!studentInfoForm.disabled">
+              {{ "Actions.Continue" | translate }}
+            </span>
 
-      <div class="mt-4 flex justify-center">
-        <button
-          type="submit"
-          class="btn btn--lg w-full"
-          mat-flat-button
-          [color]="'primary'"
-        >
-          {{ "StudentInfo.Complete" | translate }}
-        </button>
-      </div>
+            <mat-progress-spinner
+              *ngIf="studentInfoForm.disabled"
+              [diameter]="24"
+              mode="indeterminate"
+            >
+            </mat-progress-spinner>
+          </button>
+        </div>
+      </form>
     </div>
   </div>
 </div>

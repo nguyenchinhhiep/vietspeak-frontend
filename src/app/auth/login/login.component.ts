@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
 import { AlertType } from 'src/app/components/alert/alert.model';
 import { CustomValidators } from 'src/app/core/validators/validators';
 
@@ -15,7 +16,11 @@ import { CustomValidators } from 'src/app/core/validators/validators';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  constructor(private _router: Router, private _fb: UntypedFormBuilder) {}
+  constructor(
+    private _router: Router,
+    private _fb: UntypedFormBuilder,
+    private _translateService: TranslateService
+  ) {}
   @ViewChild('loginNgForm') loginNgForm!: NgForm;
 
   alert: { type: AlertType; message: string } | any = {
@@ -62,7 +67,9 @@ export class LoginComponent implements OnInit {
       // Set the alert
       this.alert = {
         type: 'error',
-        message: 'Invalid email or password',
+        message: this._translateService.instant(
+          'Errors.InvalidEmailOrPassword'
+        ),
       };
     }, 5000);
   }

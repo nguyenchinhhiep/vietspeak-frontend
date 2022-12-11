@@ -15,7 +15,7 @@
             svgIcon="mat_outline:arrow_back"
           ></mat-icon>
           <div class="text-gray-500">
-            {{ "OnBoarding.Back" | translate }}
+            {{ "Actions.Back" | translate }}
           </div>
         </div>
       </button>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="w-full max-w-xl">
-      <div class="font-semibold text-gray-900 text-2xl text-center mb-4">
+      <div class="font-semibold text-gray-900 text-2xl text-center mb-4 capitalize">
         {{ "TutorInfo.Title" | translate }}
       </div>
 
@@ -61,7 +61,7 @@
                     }}</mat-label>
                     <mat-select
                       formControlName="teachingLanguage"
-                      placeholder="{{'Actions.Select' | translate}}"
+                      placeholder="{{ 'Actions.Select' | translate }}"
                     >
                       <mat-select-trigger>
                         <div class="flex gap-3 items-center">
@@ -208,7 +208,7 @@
                       [color]="'primary'"
                       (click)="submitTutorBasicInfoForm()"
                     >
-                      {{ "TutorInfo.Next" | translate }}
+                      {{ "Actions.Continue" | translate }}
                     </button>
                   </div>
                 </form>
@@ -230,7 +230,7 @@
                     }}</mat-label>
                     <mat-select
                       formControlName="teachingExperience"
-                      placeholder="{{'Actions.Select' | translate}}"
+                      placeholder="{{ 'Actions.Select' | translate }}"
                     >
                       <mat-option
                         *ngFor="let item of teachingExperienceOptions"
@@ -379,7 +379,7 @@
                       mat-stroked-button
                       matStepperPrevious
                     >
-                      {{ "OnBoarding.Back" | translate }}
+                      {{ "Actions.Back" | translate }}
                     </button>
                     <button
                       type="submit"
@@ -388,7 +388,7 @@
                       [color]="'primary'"
                       (click)="submitTutorExperienceForm()"
                     >
-                      {{ "TutorInfo.Next" | translate }}
+                      {{ "Actions.Continue" | translate }}
                     </button>
                   </div>
                 </form>
@@ -414,13 +414,13 @@
                     }}</mat-label>
                     <textarea
                       matInput
-                      class="!resize-none !leading-normal"
+                      cdkTextareaAutosize
+                      cdkAutosizeMinRows="8"
                       formControlName="introduction"
                       placeholder="{{
                         'TutorInfo.IntroductionDescription' | translate
                       }}"
                       maxlength="1000"
-                      rows="8"
                     ></textarea>
                     <mat-hint class="w-full">
                       <div class="text-right -mr-3">
@@ -450,10 +450,10 @@
                     }}</mat-label>
                     <textarea
                       matInput
-                      class="!resize-none !leading-normal"
+                      cdkTextareaAutosize
+                      cdkAutosizeMinRows="4"
                       formControlName="reasonHere"
                       maxlength="500"
-                      rows="4"
                     ></textarea>
                     <mat-hint class="w-full">
                       <div class="text-right -mr-3">
@@ -482,7 +482,7 @@
                     }}</mat-label>
                     <mat-select
                       formControlName="heardFrom"
-                      placeholder="{{'Actions.Select' | translate}}"
+                      placeholder="{{ 'Actions.Select' | translate }}"
                     >
                       <mat-option
                         *ngFor="let item of heardFromOptions"
@@ -507,15 +507,25 @@
                       mat-stroked-button
                       matStepperPrevious
                     >
-                      {{ "OnBoarding.Back" | translate }}
+                      {{ "Actions.Back" | translate }}
                     </button>
                     <button
                       type="submit"
                       class="btn btn--lg !px-6"
                       mat-flat-button
                       [color]="'primary'"
+                      [disabled]="tutorAdditionalInfoForm.disabled"
                     >
-                      {{ "TutorInfo.Complete" | translate }}
+                      <span *ngIf="!tutorAdditionalInfoForm.disabled">
+                        {{ "Actions.Continue" | translate }}
+                      </span>
+
+                      <mat-progress-spinner
+                        *ngIf="tutorAdditionalInfoForm.disabled"
+                        [diameter]="24"
+                        mode="indeterminate"
+                      >
+                      </mat-progress-spinner>
                     </button>
                   </div>
                 </form>

@@ -4,6 +4,7 @@
       "Email": "Please enter a valid email",
       "ExistingEmail": "Email already exists",
       "NotFoundEmail": "Email not found",
+      "InvalidEmailOrPassword": "Invalid email or password",
       "MustMatch": "{{control}} and {{matchingControl}} must match",
       "MinLength": "{{control}} must be at least {{length}} characters",
       "File": "Please upload a document"
@@ -12,7 +13,17 @@
       "CharactersRemaining": "{{remainingLength}} characters remaining"
    },
    "Actions": {
-      "Select": "Select"
+      "Select": "Select",
+      "Continue": "Continue",
+      "Back": "Back",
+      "Close": "Close"
+   },
+   "Confirmation": {
+      "Title": "Confirmation",
+      "Message": "Are you sure you want to {{action}}?",
+      "Confirm": "Confirm",
+      "Cancel": "Cancel",
+      "UnsavedChanges": "You have unsaved changes that will be lost if you decide to continue. Are you sure want to leave?"
    },
    "FileUpload": {
       "DragAndDropHere": "Drag and drop file(s) here",
@@ -26,20 +37,30 @@
       "Title": "Login",
       "Password": "Password",
       "ForgotPassword": "Forgot password",
-      "DontHaveAccount": "Don't have an account yet"
+      "DontHaveAccount": "Don't have an account yet",
+      "Continue": "Continue"
    },
    "Register": {
       "Title": "Register",
       "Password": "Password",
       "ConfirmPassword": "Confirm password",
       "Agreement": "By creating an account, you agree to the <a>Terms of Service</a> and <a>Privacy Policy</a>",
-      "AlreadyHaveAccount": "Already have an account"
+      "AlreadyHaveAccount": "Already have an account",
+      "Continue": "Continue"
    },
    "ForgotPassword": {
       "Title": "Forgot password",
       "SubTitle": "Enter your email address and we will send you instructions to reset your password",
       "Continue": "Continue",
-      "AlreadyHaveAccount": "Already have an account"
+      "BackTo": "Back to",
+      "AlreadyHaveAccount": "Already have an account",
+      "SentEmailSuccess": "We've sent a link to your email with instructions to reset your password"
+   },
+   "PasswordReset": {
+      "Title": "Reset password",
+      "SubTitle": "Enter your new password for your account",
+      "Password": "Password",
+      "ConfirmPassword": "Confirm password"
    },
    "OnBoarding": {
       "Back": "Back",
@@ -65,7 +86,8 @@
       "Beginner": "Beginner",
       "Intermediate": "Intermediate",
       "Advanced": "Advanced",
-      "Complete": "Complete"
+      "Complete": "Complete",
+      "Continue": "Continue"
    },
    "TutorInfo": {
       "Title": "Tutor info",
@@ -91,6 +113,7 @@
       "Introduction": "Introduction",
       "IntroductionDescription": "Say hello and introduce yourself to students! This will be the first thing students read about you when looking at their tutor profile",
       "Next": "Next",
+      "Continue": "Continue",
       "Complete": "Complete"
    }
 }

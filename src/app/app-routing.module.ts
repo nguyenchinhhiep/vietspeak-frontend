@@ -35,6 +35,13 @@ const routes: Routes = [
           ),
       },
       {
+        path: 'password-reset',
+        loadChildren: () =>
+          import('./auth/password-reset/password-reset.module').then(
+            (m) => m.PasswordResetModule
+          ),
+      },
+      {
         path: 'onboarding',
         loadChildren: () =>
           import('./modules/onboarding/onboarding.module').then(

@@ -16,9 +16,13 @@ import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { TutorInfoComponent } from './tutor-info/tutor-info.component';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { LanguagesModule } from 'src/app/components/languages/languages.module';
-import {MatStepperModule} from '@angular/material/stepper';
+import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ToastModule } from 'src/app/components/toast/toast.module';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { TextFieldModule } from '@angular/cdk/text-field';
+import { ConfirmationDialogModule } from 'src/app/components/confirmation-dialog/confirmation-dialog.module';
+import { CongratulationsComponent } from './congratulations/congratulations.component';
 
 const routes: Routes = [
   {
@@ -54,6 +58,13 @@ const routes: Routes = [
       authLayout: 'blank',
     },
   },
+  {
+    path: 'congratulations',
+    component: CongratulationsComponent,
+    data: {
+      authLayout: 'blank',
+    },
+  },
 ];
 
 @NgModule({
@@ -61,6 +72,7 @@ const routes: Routes = [
     AccountTypeComponent,
     StudentInfoComponent,
     TutorInfoComponent,
+    CongratulationsComponent,
   ],
   imports: [
     CommonModule,
@@ -79,6 +91,8 @@ const routes: Routes = [
     MatStepperModule,
     MatCheckboxModule,
     ToastModule,
+    MatProgressSpinnerModule,
+    ConfirmationDialogModule,
     RouterModule.forChild(routes),
   ],
   providers: [

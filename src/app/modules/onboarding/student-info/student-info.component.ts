@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { HeardFrom, HeardFromOptions } from '../onboarding.model';
 import {
@@ -19,7 +21,9 @@ export class StudentInfoComponent implements OnInit {
   constructor(
     private _router: Router,
     private _authService: AuthService,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
+    private _confirmationDialogService: ConfirmationDialogService,
+    private _translateService: TranslateService
   ) {}
   studentInfoForm!: FormGroup;
 
@@ -31,7 +35,18 @@ export class StudentInfoComponent implements OnInit {
     this.createForm();
   }
 
-  submit() {}
+  submit() {
+    for (let control in this.studentInfoForm.controls) {
+      this.studentInfoForm.controls[control].markAsDirty();
+      this.studentInfoForm.controls[control].markAsTouched();
+    }
+
+    // Return if the form is invalid
+    if (this.studentInfoForm.invalid) return;
+
+    // Disable the form
+    this.studentInfoForm.disable();
+  }
 
   createForm() {
     this.studentInfoForm = this._fb.group({
@@ -45,5 +60,28 @@ export class StudentInfoComponent implements OnInit {
 
   logout() {
     this._authService.signOut();
+  }
+
+  openConfirmationUnsavedChanges() {
+    const confirmRef = this._confirmationDialogService.open({
+      message: this._translateService.instant('Confirmation.UnsavedChanges'),
+      title: this._translateService.instant('Confirmation.Title'),
+      actions: {
+        cancel: {
+          show: true,
+          label: this._translateService.instant('Confirmation.Cancel'),
+        },
+        confirm: {
+          show: true,
+          label: this._translateService.instant('Confirmation.Confirm'),
+          color: 'primary',
+        },
+      },
+    });
+
+    confirmRef.afterClosed().subscribe((type: string) => {
+      if (type === 'confirmed') {
+      }
+    });
   }
 }
