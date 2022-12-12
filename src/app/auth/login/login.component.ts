@@ -8,6 +8,7 @@ import {
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertType } from 'src/app/components/alert/alert.model';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { CustomValidators } from 'src/app/core/validators/validators';
 
 @Component({
@@ -19,7 +20,8 @@ export class LoginComponent implements OnInit {
   constructor(
     private _router: Router,
     private _fb: UntypedFormBuilder,
-    private _translateService: TranslateService
+    private _translateService: TranslateService,
+    private _authService: AuthService
   ) {}
   @ViewChild('loginNgForm') loginNgForm!: NgForm;
 
@@ -57,20 +59,34 @@ export class LoginComponent implements OnInit {
     // Reset the alert
     this.alert = {};
 
-    setTimeout(() => {
-      // Re-enable the form
-      this.loginForm.enable();
+    const payload = {
+      email: this.loginForm.value.email,
+      password: this.loginForm.value.password,
+    };
 
-      // Reset the form
-      this.loginNgForm.resetForm();
+    this._authService.login(payload).subscribe({
+      next: (res) => {
+        // Re-enable the form
+        this.loginForm.enable();
 
-      // Set the alert
-      this.alert = {
-        type: 'error',
-        message: this._translateService.instant(
-          'Errors.InvalidEmailOrPassword'
-        ),
-      };
-    }, 5000);
+        // Reset the form
+        this.loginNgForm.resetForm();
+
+        // Navigate to onboarding
+        this._router.navigate(['/onboarding']);
+      },
+      error: (e) => {
+        // Re-enable the form
+        this.loginForm.enable();
+
+        // Set the alert
+        this.alert = {
+          type: 'error',
+          message: this._translateService.instant(
+            'Errors.InvalidEmailOrPassword'
+          ),
+        };
+      },
+    });
   }
 }

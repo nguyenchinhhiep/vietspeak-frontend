@@ -37,7 +37,7 @@ export class AccountTypeComponent implements OnInit {
   }
 
   logout() {
-    this._authService.signOut();
+    this._authService.logout();
   }
 
  

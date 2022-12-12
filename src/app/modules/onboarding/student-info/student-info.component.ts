@@ -59,7 +59,7 @@ export class StudentInfoComponent implements OnInit {
   }
 
   logout() {
-    this._authService.signOut();
+    this._authService.logout();
   }
 
   openConfirmationUnsavedChanges() {

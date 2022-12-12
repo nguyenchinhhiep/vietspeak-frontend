@@ -7,7 +7,8 @@
       "InvalidEmailOrPassword": "Invalid email or password",
       "MustMatch": "{{control}} and {{matchingControl}} must match",
       "MinLength": "{{control}} must be at least {{length}} characters",
-      "File": "Please upload a document"
+      "File": "Please upload a document",
+      "InvalidRequest": "Invalid request"
    },
    "Hints": {
       "CharactersRemaining": "{{remainingLength}} characters remaining"
@@ -16,7 +17,9 @@
       "Select": "Select",
       "Continue": "Continue",
       "Back": "Back",
-      "Close": "Close"
+      "Close": "Close",
+      "Login": "Login",
+      "Register": "Register"
    },
    "Confirmation": {
       "Title": "Confirmation",
@@ -60,7 +63,9 @@
       "Title": "Reset password",
       "SubTitle": "Enter your new password for your account",
       "Password": "Password",
-      "ConfirmPassword": "Confirm password"
+      "ConfirmPassword": "Confirm password",
+      "ChangedPasswordSuccessfully": "Changed your password successfully",
+      "GoLoginWithNewPassword": "You can now use your new password to login to your account"
    },
    "OnBoarding": {
       "Back": "Back",

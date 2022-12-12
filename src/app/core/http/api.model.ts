@@ -7,9 +7,16 @@ export enum ApiMethod {
 }
 
 export enum ApiEndpoint {
-  SignIn = 'auth/sign-in',
-  SignUp = 'auth/sign-up',
-  ForgotPassword = 'auth/forgot',
-  RefreshToken = 'auth/refresh-token',
-  checkExistingEmail = 'auth/check-email',
+  Login = 'login',
+  Register = 'register',
+  ForgotPassword = 'forgot-password',
+  PasswordReset = 'password-reset',
+  RefreshToken = 'refresh-token',
+  checkExistingEmail = 'check-existing-email',
+}
+
+export interface IApiResponse<DataType = any> {
+  status: 'success' | 'error' | 'fail';
+  message?: string;
+  data?: DataType;
 }

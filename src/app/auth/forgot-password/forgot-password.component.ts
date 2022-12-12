@@ -10,7 +10,7 @@ import {
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { Observable, of, timer } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { delay, map, switchMap } from 'rxjs/operators';
 import { AlertType } from 'src/app/components/alert/alert.model';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { CustomValidators } from 'src/app/core/validators/validators';
@@ -71,19 +71,30 @@ export class ForgotPasswordComponent implements OnInit {
     // Reset the alert
     this.alert = null;
 
-    setTimeout(() => {
-      // Re-enable the form
-      this.forgotPasswordForm.enable();
+    const email = String(this.forgotPasswordForm.value.email);
 
-      // Reset the form
-      this.forgotPasswordNgForm.resetForm();
+    this._authService.forgotPassword(email).subscribe({
+      next: (res) => {
+        // Enable the form
+        this.forgotPasswordForm.enable();
 
-      // Set the alert
-      this.alert = {
-        type: 'success',
-        message: this._translateService.instant('Errors.SentEmailSuccess'),
-      };
-    }, 5000);
+        // Reset the form
+        this.forgotPasswordNgForm.resetForm();
+
+        // Set the alert
+        this.alert = {
+          type: 'success',
+          message: this._translateService.instant('ForgotPassword.SentEmailSuccess'),
+        };
+      },
+      error: (err) => {
+        // Enable the form
+        this.forgotPasswordForm.enable();
+
+        // Reset the form
+        this.forgotPasswordNgForm.resetForm();
+      },
+    });
   }
 
   private _validateExistingEmail(authService: AuthService) {
@@ -91,9 +102,10 @@ export class ForgotPasswordComponent implements OnInit {
       if (control.hasError('required') || control.hasError('isEmail')) {
         return of(null);
       }
-      return timer(5000).pipe(
-        switchMap((_) => {
-          return authService.checkExistingEmail(control.value).pipe(
+      return of(control.value).pipe(
+        delay(500),
+        switchMap((email) => {
+          return authService.checkExistingEmail(email).pipe(
             map((isExisting: boolean) => {
               if (isExisting) {
                 return null;

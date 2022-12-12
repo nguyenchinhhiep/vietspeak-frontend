@@ -109,7 +109,7 @@ export class TutorInfoComponent implements OnInit {
   }
 
   logout() {
-    this._authService.signOut();
+    this._authService.logout();
   }
 
   // On file input change event

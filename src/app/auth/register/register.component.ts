@@ -8,8 +8,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { Observable, of, timer } from 'rxjs';
-import { map, switchMap } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { delay, map, switchMap } from 'rxjs/operators';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { CustomValidators } from 'src/app/core/validators/validators';
 
@@ -60,15 +60,23 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid || this.registerForm.status === 'PENDING')
       return;
 
+    // Disable the form
     this.registerForm.disable();
 
-    setTimeout(() => {
-      // Re-enable the form
+    const payload = {
+      email: this.registerForm.value.email,
+      password: this.registerForm.value.password,
+    };
+
+    this._authService.register(payload).subscribe((res) => {
+      // Enable the form
       this.registerForm.enable();
 
       // Reset the form
       this.registerNgForm.resetForm();
-    }, 5000);
+
+      this._router.navigate(['/onboarding']);
+    });
   }
 
   private _validateExistingEmail(authService: AuthService) {
@@ -76,9 +84,10 @@ export class RegisterComponent implements OnInit {
       if (control.hasError('required') || control.hasError('isEmail')) {
         return of(null);
       }
-      return timer(5000).pipe(
-        switchMap((_) => {
-          return authService.checkExistingEmail(control.value).pipe(
+      return of(control.value).pipe(
+        delay(500),
+        switchMap((email) => {
+          return authService.checkExistingEmail(email).pipe(
             map((isExisting: boolean) => {
               if (!isExisting) {
                 return null;

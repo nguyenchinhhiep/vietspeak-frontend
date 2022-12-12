@@ -37,7 +37,7 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
     } else if ([401, 403].includes(error.status)) {
       // Do something with authentication error
       log.error('Authentication error.');
-      this._authService.signOut();
+      // this._authService.signOut();
     } else {
       // The backend returned an unsuccessful response code.
       // The response body may contain clues as to what went wrong.
