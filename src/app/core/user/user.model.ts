@@ -1,13 +1,10 @@
 import { Role } from './role.model';
 
 export interface IUser {
-  id?: string;
-  firstName?: string;
-  lastName?: string;
+  _id?: string;
   email: string;
-  avatarUrl?: string;
   role?: Role;
-  claims: any[];
+  claims?: any[];
 }
 
 export const AccountTypeList = [

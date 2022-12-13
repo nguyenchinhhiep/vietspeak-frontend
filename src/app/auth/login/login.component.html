@@ -26,7 +26,9 @@
         </button>
       </div>
     </div>
-    <div class="w-full max-w-md md:bg-white md:px-8 md:pb-14 md:pt-10 md:rounded-md md:shadow-base">
+    <div
+      class="w-full max-w-md md:bg-white md:px-8 md:pb-14 md:pt-10 md:rounded-md md:shadow-base"
+    >
       <div class="font-semibold text-gray-900 text-2xl text-center capitalize">
         {{ "Login.Title" | translate }}
       </div>
@@ -44,7 +46,7 @@
 
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email" />
+          <input matInput name="email" formControlName="email" />
           <mat-error *ngIf="loginForm.get('email')?.hasError('required')">{{
             "Errors.Required" | translate
           }}</mat-error>

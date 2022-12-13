@@ -5,7 +5,6 @@ import { ApiEndpoint, ApiMethod, IApiResponse } from '../http/api.model';
 import { HttpService } from '../http/services/http.service';
 import { StorageKey, StorageType } from '../storage/storage.model';
 import { StorageService } from '../storage/storage.service';
-import { IUser } from '../user/user.model';
 import { UserService } from '../user/user.service';
 import { AuthUtils } from './auth.utils';
 
@@ -306,7 +305,7 @@ export class AuthService {
       }
       // Attempt to find the claim
       result =
-        currentUser.claims.find((item) => {
+        currentUser.claims?.find((item) => {
           return (
             item.claimType.toLowerCase() === claimType &&
             item.claimValue === claimValue

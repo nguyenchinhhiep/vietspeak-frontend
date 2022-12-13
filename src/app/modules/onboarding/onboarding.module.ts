@@ -23,6 +23,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TextFieldModule } from '@angular/cdk/text-field';
 import { ConfirmationDialogModule } from 'src/app/components/confirmation-dialog/confirmation-dialog.module';
 import { CongratulationsComponent } from './congratulations/congratulations.component';
+import { PreventAutofillModule } from 'src/app/directives/prevent-autofill/prevent-autofill.module';
 
 const routes: Routes = [
   {
@@ -93,6 +94,7 @@ const routes: Routes = [
     ToastModule,
     MatProgressSpinnerModule,
     ConfirmationDialogModule,
+    PreventAutofillModule,
     RouterModule.forChild(routes),
   ],
   providers: [

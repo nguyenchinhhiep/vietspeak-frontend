@@ -105,7 +105,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>{{ "StudentInfo.FirstName" | translate }}</mat-label>
-          <input matInput formControlName="firstName" #firstName />
+          <input matInput formControlName="firstName" appPreventAutoFill #firstName />
           <button
             mat-icon-button
             type="button"
@@ -125,7 +125,7 @@
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>{{ "StudentInfo.LastName" | translate }}</mat-label>
-          <input matInput formControlName="lastName" #lastName />
+          <input matInput formControlName="lastName" appPreventAutoFill #lastName />
           <button
             mat-icon-button
             type="button"

@@ -28,7 +28,9 @@
     </div>
 
     <div class="w-full max-w-xl">
-      <div class="font-semibold text-gray-900 text-2xl text-center mb-4 capitalize">
+      <div
+        class="font-semibold text-gray-900 text-2xl text-center mb-4 capitalize"
+      >
         {{ "TutorInfo.Title" | translate }}
       </div>
 
@@ -117,7 +119,12 @@
                     <mat-label>{{
                       "TutorInfo.FirstName" | translate
                     }}</mat-label>
-                    <input matInput formControlName="firstName" #firstName />
+                    <input
+                      matInput
+                      formControlName="firstName"
+                      appPreventAutoFill
+                      #firstName
+                    />
                     <button
                       mat-icon-button
                       type="button"
@@ -145,7 +152,12 @@
                     <mat-label>{{
                       "TutorInfo.LastName" | translate
                     }}</mat-label>
-                    <input matInput formControlName="lastName" #lastName />
+                    <input
+                      matInput
+                      formControlName="lastName"
+                      appPreventAutoFill
+                      #lastName
+                    />
                     <button
                       mat-icon-button
                       type="button"
@@ -421,6 +433,7 @@
                         'TutorInfo.IntroductionDescription' | translate
                       }}"
                       maxlength="1000"
+                      appPreventAutoFill
                     ></textarea>
                     <mat-hint class="w-full">
                       <div class="text-right -mr-3">
@@ -454,6 +467,7 @@
                       cdkAutosizeMinRows="4"
                       formControlName="reasonHere"
                       maxlength="500"
+                      appPreventAutoFill
                     ></textarea>
                     <mat-hint class="w-full">
                       <div class="text-right -mr-3">

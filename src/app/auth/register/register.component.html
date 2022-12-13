@@ -28,7 +28,9 @@
     <div
       class="w-full max-w-md md:bg-white md:px-8 md:pb-14 md:pt-10 md:rounded-md md:shadow-base"
     >
-      <div class="font-semibold text-gray-900 text-2xl mb-2 text-center capitalize">
+      <div
+        class="font-semibold text-gray-900 text-2xl mb-2 text-center capitalize"
+      >
         {{ "Register.Title" | translate }}
       </div>
 
@@ -40,7 +42,7 @@
       >
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email" #email />
+          <input matInput name="email" formControlName="email" #email />
           <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
             {{ "Errors.Required" | translate }}
           </mat-error>

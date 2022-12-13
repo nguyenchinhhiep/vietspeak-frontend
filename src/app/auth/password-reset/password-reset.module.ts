@@ -11,6 +11,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AlertModule } from 'src/app/components/alert/alert.module';
 import { LanguagesModule } from 'src/app/components/languages/languages.module';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { PreventAutofillModule } from 'src/app/directives/prevent-autofill/prevent-autofill.module';
 
 const routes: Routes = [
   {
@@ -35,6 +36,7 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     AlertModule,
     LanguagesModule,
+    PreventAutofillModule,
     RouterModule.forChild(routes),
   ]
 })

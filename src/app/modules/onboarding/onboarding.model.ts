@@ -1,7 +1,7 @@
 export enum HeardFrom {
-  WebSearch = 'WebSearch',
-  SocialMedia = 'SocialMedia',
-  FriendFamily = 'FriendFamily',
+  WebSearch = 'Web Search',
+  SocialMedia = 'Social Media',
+  FriendFamily = 'Friend / Family',
   Other = 'Other',
 }
 
@@ -17,7 +17,7 @@ export const HeardFromOptions = [
     value: HeardFrom.SocialMedia,
   },
   {
-    label: 'Friend/Family',
+    label: 'Friend / Family',
     translateKey: 'OnBoarding.FriendFamily',
     value: HeardFrom.FriendFamily,
   },
@@ -27,5 +27,3 @@ export const HeardFromOptions = [
     value: HeardFrom.Other,
   },
 ];
-
-
