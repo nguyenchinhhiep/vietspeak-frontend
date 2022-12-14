@@ -30,7 +30,9 @@
    },
    "FileUpload": {
       "DragAndDropHere": "Drag and drop file(s) here",
+      "Or": "or",
       "BrowseFiles": "Browse files",
+      "Change": "Change",
       "OnlyAllowedFileType": "You are allowed to only upload {{fileType}} file",
       "FileTooLarge": "File is too large. Maximum upload size is {{maxUploadSize}}",
       "OnlyAllowedFileQuantity": "You are allowed to only upload maximum {{quantity}} file(s)",
@@ -115,6 +117,7 @@
       "MoreThanTwoYears": "More than 2 years",
       "HaveExperienceTeachingOnline": "Do you have experience teaching online?",
       "TeachingCertificates": "Teaching certificates",
+      "ProfilePicture": "Profile picture",
       "Introduction": "Introduction",
       "IntroductionDescription": "Say hello and introduce yourself to students! This will be the first thing students read about you when looking at their tutor profile",
       "Next": "Next",

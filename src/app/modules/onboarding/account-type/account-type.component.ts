@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { HttpService } from 'src/app/core/http/services/http.service';
 import { Role } from 'src/app/core/user/role.model';
 import { AccountTypeList } from 'src/app/core/user/user.model';
 
@@ -14,18 +16,39 @@ import { AccountTypeList } from 'src/app/core/user/user.model';
 export class AccountTypeComponent implements OnInit {
   constructor(
     private _router: Router,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _httpService: HttpService,
+    private _fb: FormBuilder
   ) {}
+
+  accountTypeForm!: FormGroup;
 
   accountTypeList: any[] = JSON.parse(JSON.stringify(AccountTypeList));
   selectedAccountType: any = null;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.createForm();
+  }
+
+  createForm() {
+    this.accountTypeForm = this._fb.group({
+      role: ['', Validators.required],
+    });
+  }
+
+  onSelectAccountType(type: any) {
+    this.selectedAccountType = type;
+    this.accountTypeForm.get('role')?.setValue(type.value);
+  }
 
   continue() {
-    if (this.selectedAccountType == null) {
-      return;
+    for (let control in this.accountTypeForm.controls) {
+      this.accountTypeForm.controls[control].markAsDirty();
+      this.accountTypeForm.controls[control].markAsTouched();
     }
+
+    // Return if the form is invalid
+    if (this.accountTypeForm.invalid) return;
 
     if (this.selectedAccountType.value === Role.Student) {
       this._router.navigate(['/onboarding/student-info']);
@@ -39,6 +62,4 @@ export class AccountTypeComponent implements OnInit {
   logout() {
     this._authService.logout();
   }
-
- 
 }

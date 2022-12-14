@@ -294,7 +294,9 @@
                         <div class="text-base">
                           {{ "FileUpload.DragAndDropHere" | translate }}
                         </div>
-                        <div class="text-gray-400">or</div>
+                        <div class="text-gray-400">
+                          {{ "FileUpload.Or" | translate }}
+                        </div>
                         <button
                           mat-flat-button
                           [color]="'primary'"
@@ -416,6 +418,92 @@
             <div class="flex justify-center -mx-6 sm:px-6">
               <div class="w-full mt-4">
                 <form [formGroup]="tutorAdditionalInfoForm">
+                  <div class="flex flex-col gap-2 mb-4">
+                    <div
+                      class="text-gray-500 font-medium flex gap-1 items-center"
+                    >
+                      {{ "TutorInfo.ProfilePicture" | translate }}
+                      <span class="text-gray-400 font-normal text-sm"
+                        >({{
+                          "FileUpload.OnlyFileTypeAndMaxSize"
+                            | translate
+                              : { fileType: ".image ", maxSize: "2MB" }
+                        }})</span
+                      >
+                    </div>
+                    <div
+                      class="rounded border-2 border-dashed bg-white border-gray-300 p-6 flex flex-col items-center justify-center"
+                    >
+                      <div class="flex flex-col gap-6 items-center">
+                        <div class="w-24 h-24 relative">
+                          <mat-icon
+                            *ngIf="
+                              !tutorAdditionalInfoForm.get('profilePictureUrl')
+                                ?.value
+                            "
+                            class="icon-size-24 text-gray-200"
+                            svgIcon="mat_outline:account_circle"
+                          ></mat-icon>
+                          <img
+                            class="w-full h-full rounded-full overflow-hidden object-cover"
+                            *ngIf="
+                              tutorAdditionalInfoForm.get('profilePictureUrl')
+                                ?.value
+                            "
+                            [src]="
+                              tutorAdditionalInfoForm.get('profilePictureUrl')
+                                ?.value
+                            "
+                            alt="Profile picture"
+                          />
+                        </div>
+                        <div class="flex gap-4 justify-center">
+                          <!-- Remove image -->
+                          <button
+                            *ngIf="
+                              tutorAdditionalInfoForm.get('profilePictureUrl')
+                                ?.value
+                            "
+                            type="button"
+                            class="btn btn--sm"
+                            mat-button
+                            [color]="'primary'"
+                            (click)="onRemoveProfilePicture()"
+                          >
+                            Remove
+                          </button>
+
+                          <button
+                            type="button"
+                            class="btn btn--sm"
+                            mat-flat-button
+                            [color]="'primary'"
+                            (click)="uploadProfilePictureFile.click()"
+                          >
+                            {{
+                              tutorAdditionalInfoForm.get("profilePictureUrl")
+                                ?.value
+                                ? ("FileUpload.Change" | translate)
+                                : ("FileUpload.BrowseFiles" | translate)
+                            }}
+                          </button>
+                        </div>
+                      </div>
+
+                      <input
+                        hidden
+                        type="file"
+                        accept="image/*"
+                        #uploadProfilePictureFile
+                        (change)="
+                          onProfilePictureFileSelected(
+                            $event,
+                            uploadProfilePictureFile
+                          )
+                        "
+                      />
+                    </div>
+                  </div>
                   <mat-form-field
                     appearance="fill"
                     class="w-full"

@@ -81,7 +81,9 @@
           margin-left: -8px;
         }
 
-        > *:not(.mat-icon):not(.mat-icon-button):not(.mat-select):not(.mat-datepicker-toggle) {
+        > *:not(.mat-icon):not(.mat-icon-button):not(.mat-select):not(
+            .mat-datepicker-toggle
+          ) {
           margin-right: 12px;
         }
       }
@@ -322,7 +324,6 @@
       .mat-hint {
         display: block;
         margin-top: 4px;
-        
       }
 
       .mat-hint {
@@ -469,7 +470,7 @@
   }
 
   &.btn--sm {
-    height: 30px;
+    height: 32px;
     min-height: 32px;
     max-height: 32px;
     padding: -0 14px;
@@ -637,6 +638,15 @@
   }
 }
 
+/* Icon buttons */
+.mat-icon-button {
+  &.btn--sm {
+    width: 32px;
+    min-width: 32px;
+    max-width: 32px;
+  }
+}
+
 /* ----------------------------------------------------------------------------------------------------- */
 /*  @ Datepicker
 /* ----------------------------------------------------------------------------------------------------- */
@@ -650,7 +660,9 @@
 .cdk-keyboard-focused .mat-calendar-body-active,
 .cdk-program-focused .mat-calendar-body-active {
   & > .mat-calendar-body-cell-content {
-    &:not(.mat-calendar-body-selected):not(.mat-calendar-body-comparison-identical) {
+    &:not(.mat-calendar-body-selected):not(
+        .mat-calendar-body-comparison-identical
+      ) {
       @apply bg-primary bg-opacity-30 #{'!important'};
     }
   }

@@ -88,6 +88,8 @@ export class TutorInfoComponent implements OnInit {
     });
 
     this.tutorAdditionalInfoForm = this._fb.group({
+      profilePicture: [],
+      profilePictureUrl: [],
       heardFrom: [HeardFrom.WebSearch],
       reasonHere: ['', [Validators.required]],
       introduction: ['', [Validators.required]],
@@ -119,6 +121,7 @@ export class TutorInfoComponent implements OnInit {
     fileInput.value = null;
   }
 
+  // Handle certificate files
   handleFilesUpload(uploadFiles: any[]) {
     const maxSize = 33554432;
     const files =
@@ -170,6 +173,7 @@ export class TutorInfoComponent implements OnInit {
     }
   }
 
+  // On remove certificate file
   removeFile(index: number) {
     const files =
       this.tutorExperienceForm.get('teachingCertificates')?.value || [];
@@ -181,21 +185,25 @@ export class TutorInfoComponent implements OnInit {
       ?.setValue(files.length > 0 ? files : null);
   }
 
+  // On drag enter
   onDragEnter(event: any) {
     this.preventDefaults(event);
     this.isOnDropFilesContainer = true;
   }
 
+  // On drag over
   onDragOver(event: any) {
     this.preventDefaults(event);
     this.isOnDropFilesContainer = true;
   }
 
+  // On drag leave
   onDragLeave(event: any) {
     this.preventDefaults(event);
     this.isOnDropFilesContainer = false;
   }
 
+  // On drop files
   onDrop(event: any) {
     this.preventDefaults(event);
     this.isOnDropFilesContainer = false;
@@ -207,5 +215,62 @@ export class TutorInfoComponent implements OnInit {
   preventDefaults(event: any) {
     event.preventDefault();
     event.stopPropagation();
+  }
+
+  // Upload profile picture
+  onProfilePictureFileSelected(event: any, profilePictureInput: any) {
+    const maxSize = 2097152;
+    const file = event.target.files[0];
+    if (file) {
+      if (!file.type.includes('image')) {
+        this._toastService.open({
+          message: this._translateService.instant(
+            'FileUpload.OnlyAllowedFileType',
+            {
+              fileType: 'image',
+            }
+          ),
+          configs: {
+            payload: {
+              type: 'error',
+            },
+          },
+        });
+
+        return;
+      }
+
+      // Limit file size to 2mb
+      if (file.size > maxSize) {
+        this._toastService.open({
+          message: this._translateService.instant('FileUpload.FileTooLarge', {
+            maxUploadSize: '2mb',
+          }),
+          configs: {
+            payload: {
+              type: 'error',
+            },
+          },
+        });
+        return;
+      }
+
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        this.tutorAdditionalInfoForm
+          .get('profilePictureUrl')
+          ?.setValue(e.target?.result);
+        this.tutorAdditionalInfoForm.get('profilePicture')?.setValue(file);
+
+        profilePictureInput.value = null;
+      };
+      reader.readAsDataURL(file);
+    }
+  }
+
+  // Remove profile picture
+  onRemoveProfilePicture() {
+    this.tutorAdditionalInfoForm.get('profilePictureUrl')?.setValue(null);
+    this.tutorAdditionalInfoForm.get('profilePicture')?.setValue(null);
   }
 }

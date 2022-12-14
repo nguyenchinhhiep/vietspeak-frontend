@@ -14,7 +14,9 @@
     </div>
 
     <div class="w-full max-w-md">
-      <div class="font-semibold text-gray-900 text-2xl text-center mb-10 capitalize">
+      <div
+        class="font-semibold text-gray-900 text-2xl text-center mb-10 capitalize"
+      >
         {{ "SelectAccountType.Title" | translate }}
       </div>
 
@@ -22,7 +24,7 @@
         <div
           class="flex flex-col items-center gap-4 cursor-pointer"
           *ngFor="let type of accountTypeList"
-          (click)="selectedAccountType = type"
+          (click)="onSelectAccountType(type)"
         >
           <div
             class="border-4 rounded-md w-48 h-48 flex justify-center items-center bg-white"
@@ -55,9 +57,18 @@
           mat-flat-button
           [color]="'primary'"
           (click)="continue()"
-          [disabled]="selectedAccountType == null"
+          [disabled]="accountTypeForm.disabled"
         >
-          {{ "Actions.Continue" | translate }}
+          <span *ngIf="!accountTypeForm.disabled">
+            {{ "Actions.Continue" | translate }}
+          </span>
+
+          <mat-progress-spinner
+            *ngIf="accountTypeForm.disabled"
+            [diameter]="24"
+            mode="indeterminate"
+          >
+          </mat-progress-spinner>
         </button>
       </div>
     </div>
