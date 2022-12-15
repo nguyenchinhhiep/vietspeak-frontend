@@ -12,9 +12,9 @@
     typography: mat.define-typography-config(
         $font-family: theme("fontFamily.sans"),
         $title: mat.define-typography-level(1.25rem, 2rem, 600),
-        $body-2: mat.define-typography-level(0.9375rem, 1.5rem, 600),
-        $button: mat.define-typography-level(0.9375rem, 0.9375rem, 500),
-        $input: mat.define-typography-level(0.9375rem, 1.5, 400)
+        $body-2: mat.define-typography-level(1rem, 1.5rem, 600),
+        $button: mat.define-typography-level(1rem, 1, 500),
+        $input: mat.define-typography-level(1rem, 1.5, 400)
     )
 ));
 

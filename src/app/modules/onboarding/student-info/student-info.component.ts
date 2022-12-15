@@ -4,13 +4,12 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { HeardFrom, HeardFromOptions } from '../onboarding.model';
 import {
-  Language,
   LanguageLevel,
   LanguageLevelOptions,
   learningLanguageOptions,
-} from './student-info.model';
+} from '../languages.model';
+import { HeardFrom, HeardFromOptions } from '../onboarding.model';
 
 @Component({
   selector: 'app-student-info',

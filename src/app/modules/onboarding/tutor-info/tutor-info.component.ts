@@ -1,16 +1,20 @@
-import { AfterViewInit, Component, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ToastService } from 'src/app/components/toast/toast.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { HeardFrom, HeardFromOptions } from '../onboarding.model';
 import {
+  Fluency,
+  FluencyOptions,
+  Language,
+  LanguageOptions,
   TeachingExperience,
   TeachingExperienceOptions,
   TeachingLanguageOptions,
-} from './tutor-info.model';
+} from '../languages.model';
+import { HeardFrom, HeardFromOptions } from '../onboarding.model';
 
 @Component({
   selector: 'app-tutor-info',
@@ -29,6 +33,8 @@ export class TutorInfoComponent implements OnInit {
   teachingLanguageOptions = TeachingLanguageOptions;
   heardFromOptions = HeardFromOptions;
   teachingExperienceOptions = TeachingExperienceOptions;
+  languageOptions = LanguageOptions;
+  fluencyOptions = FluencyOptions;
 
   tutorBasicInfoForm!: FormGroup;
   tutorExperienceForm!: FormGroup;
@@ -83,6 +89,7 @@ export class TutorInfoComponent implements OnInit {
 
     this.tutorExperienceForm = this._fb.group({
       teachingExperience: [TeachingExperience.OneToSixMonths],
+      languages: this._fb.array([this.createlanguageFormGroup()]),
       haveExperienceTeachingOnline: [true],
       teachingCertificates: [null, [Validators.required]],
     });
@@ -94,6 +101,14 @@ export class TutorInfoComponent implements OnInit {
       reasonHere: ['', [Validators.required]],
       introduction: ['', [Validators.required]],
     });
+
+    this.tutorBasicInfoForm
+      .get('teachingLanguage')
+      ?.valueChanges.subscribe((option) => {
+        this.languagesFormArray.at(0).get('language')?.setValue(option?.value);
+      });
+
+    this.languagesFormArray.at(0).get('language')?.disable();
 
     this.tutorAdditionalInfoForm
       .get('reasonHere')
@@ -112,6 +127,31 @@ export class TutorInfoComponent implements OnInit {
 
   logout() {
     this._authService.logout();
+  }
+
+  // Get language form array
+  get languagesFormArray(): FormArray {
+    return this.tutorExperienceForm.get('languages') as FormArray;
+  }
+
+  // Create language form group
+  createlanguageFormGroup(): FormGroup {
+    const fg = this._fb.group({
+      language: [Language.English],
+      fluency: [Fluency.A1],
+    });
+
+    return fg;
+  }
+
+  // Add language
+  addLanguage() {
+    this.languagesFormArray.push(this.createlanguageFormGroup());
+  }
+
+  // Remove language form group
+  removeLanguage(i: number) {
+    this.languagesFormArray.removeAt(i);
   }
 
   // On file input change event
@@ -273,4 +313,7 @@ export class TutorInfoComponent implements OnInit {
     this.tutorAdditionalInfoForm.get('profilePictureUrl')?.setValue(null);
     this.tutorAdditionalInfoForm.get('profilePicture')?.setValue(null);
   }
+
+  // On step changed
+  onStepChanged() {}
 }

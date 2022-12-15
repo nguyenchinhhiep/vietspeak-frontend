@@ -58,7 +58,7 @@
       position: relative;
       display: flex;
       align-items: stretch;
-      min-height: 48px;
+      min-height: 50px;
       border-radius: 6px;
       padding: 0 16px;
       border-width: 2px;
@@ -213,7 +213,7 @@
         border: 0;
 
         .mat-input-element {
-          padding: 14px 0;
+          padding: 11px 0;
           margin-top: 0;
         }
 
@@ -438,6 +438,26 @@
 }
 
 /* ----------------------------------------------------------------------------------------------------- */
+/*  @ Select
+/* ----------------------------------------------------------------------------------------------------- */
+.mat-select {
+  .mat-select-placeholder {
+    @apply text-gray-400 #{'!important'};
+  }
+}
+
+.mat-select-panel:not([class*="mat-elevation-z"]) {
+  @apply shadow-md #{'!important'};
+}
+
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Menu
+/* ----------------------------------------------------------------------------------------------------- */
+.mat-menu-panel {
+  @apply shadow-md #{'!important'};
+}
+
+/* ----------------------------------------------------------------------------------------------------- */
 /*  @ Buttons
 /* ----------------------------------------------------------------------------------------------------- */
 .mat-button,
@@ -477,10 +497,9 @@
   }
 
   &.btn--lg {
-    font-size: 15px;
-    height: 48px;
-    min-height: 48px;
-    max-height: 48px;
+    height: 50px;
+    min-height: 50px;
+    max-height: 50px;
   }
 
   /* mat-progress-spinner inside buttons */
@@ -653,6 +672,10 @@
 
 .mat-calendar {
   @apply leading-none;
+}
+
+.mat-datepicker-content {
+  @apply shadow-md #{'!important'};
 }
 
 /* Hover and active cell content background opacity */

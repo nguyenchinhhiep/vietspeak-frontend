@@ -1,1 +1,1 @@
-export type Layout = 'unauthenticated' | 'authenticated' | 'blank' | 'admin';
+export type Layout = 'unauthenticated' | 'authenticated' | 'blank' | 'admin' | 'client';

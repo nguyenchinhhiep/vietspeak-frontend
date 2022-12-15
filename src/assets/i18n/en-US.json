@@ -1,4 +1,13 @@
 {
+   "Languages": {
+      "English": "English",
+      "Chinese": "Chinese",
+      "Thai": "Thai",
+      "Japanese": "Japanese",
+      "Korean": "Korean",
+      "Native": "Native",
+      "No": "No"
+   },
    "Errors": {
       "Required": "This field is required",
       "Email": "Please enter a valid email",
@@ -115,6 +124,11 @@
       "SevenToTwelveMonths": "7 - 12 months",
       "OneToTwoYears": "1 - 2 years",
       "MoreThanTwoYears": "More than 2 years",
+      "LanguagesYouSpeak": "Languages that you speak",
+      "Languages": "Languages",
+      "Language": "Language",
+      "Fluency": "Fluency",
+      "AddLanguage": "Add language",
       "HaveExperienceTeachingOnline": "Do you have experience teaching online?",
       "TeachingCertificates": "Teaching certificates",
       "ProfilePicture": "Profile picture",

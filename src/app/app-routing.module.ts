@@ -41,13 +41,6 @@ const routes: Routes = [
             (m) => m.PasswordResetModule
           ),
       },
-      {
-        path: 'onboarding',
-        loadChildren: () =>
-          import('./modules/onboarding/onboarding.module').then(
-            (m) => m.OnboardingModule
-          ),
-      },
     ],
   },
   {
@@ -56,7 +49,15 @@ const routes: Routes = [
     data: {
       layout: 'authenticated',
     },
-    children: [],
+    children: [
+      {
+        path: 'onboarding',
+        loadChildren: () =>
+          import('./modules/onboarding/onboarding.module').then(
+            (m) => m.OnboardingModule
+          ),
+      },
+    ],
   },
 ];
 

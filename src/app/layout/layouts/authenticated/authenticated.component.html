@@ -1,2 +1,3 @@
 <admin-layout *ngIf="layout === 'admin'"></admin-layout>
-<blank-layout *ngIf="layout !== 'admin'"></blank-layout>
+<client-layout *ngIf="layout === 'client'"></client-layout>
+<blank-layout *ngIf="layout !== 'admin' && layout !== 'client'"></blank-layout>

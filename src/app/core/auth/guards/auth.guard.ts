@@ -55,7 +55,7 @@ export class AuthGuard implements CanActivate {
           log.debug('Not authenticated, redirecting...');
 
           // Redirect to sign in page
-          this._router.navigate(['/', 'sign-in'], {
+          this._router.navigate(['/', 'login'], {
             queryParams: { redirectUrl: redirectUrl },
           });
 
