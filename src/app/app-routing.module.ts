@@ -1,5 +1,8 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from './core/auth/guards/auth.guard';
+import { NoAuthGuard } from './core/auth/guards/noAuth.guard';
+import { Role } from './core/user/role.model';
 import { LayoutComponent } from './layout/layout.component';
 
 const routes: Routes = [
@@ -11,6 +14,8 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canActivate: [NoAuthGuard],
+    canActivateChild: [NoAuthGuard],
     data: {
       layout: 'unauthenticated',
     },
@@ -46,16 +51,27 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    // canActivate: [AuthGuard],
+    // canActivateChild: [AuthGuard],
     data: {
       layout: 'authenticated',
     },
     children: [
       {
-        path: 'onboarding',
+        path: '',
+        // data: {
+        //   roles: [Role.Tutor, Role.Student],
+        // },
         loadChildren: () =>
-          import('./modules/onboarding/onboarding.module').then(
-            (m) => m.OnboardingModule
-          ),
+          import('./modules/client/client.module').then((m) => m.ClientModule),
+      },
+      {
+        path: 'admin',
+        // data: {
+        //   roles: [Role.Admin],
+        // },
+        loadChildren: () =>
+          import('./modules/admin/admin.module').then((m) => m.AdminModule),
       },
     ],
   },

@@ -76,10 +76,10 @@ export class AuthenticatedLayoutComponent implements OnInit {
       if (
         path.routeConfig &&
         path.routeConfig.data &&
-        path.routeConfig.data['layout']
+        path.routeConfig.data['authLayout']
       ) {
         // Set the layout
-        this.layout = path.routeConfig.data['layout'];
+        this.layout = path.routeConfig.data['authLayout'];
       }
     });
   }

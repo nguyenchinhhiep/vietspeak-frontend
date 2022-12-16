@@ -13,11 +13,11 @@
       </div>
 
       <div class="flex items-center gap-2">
-        <div class="text-gray-400">
+        <div class="text-gray-400 hidden md:inline-block">
           {{ "Login.DontHaveAccount" | translate }}?
         </div>
         <button
-          class="btn--sm"
+          class="btn--sm flex-shrink-0"
           mat-flat-button
           [color]="'primary'"
           routerLink="/register"

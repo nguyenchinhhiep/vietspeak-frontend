@@ -57,7 +57,7 @@
           mat-flat-button
           [color]="'primary'"
           (click)="continue()"
-          [disabled]="accountTypeForm.disabled"
+          [disabled]="accountTypeForm.disabled || accountTypeForm.invalid"
         >
           <span *ngIf="!accountTypeForm.disabled">
             {{ "Actions.Continue" | translate }}

@@ -1,3 +1,5 @@
+import { Role } from "src/app/core/user/role.model";
+
 export enum HeardFrom {
   WebSearch = 'Web Search',
   SocialMedia = 'Social Media',
@@ -25,5 +27,20 @@ export const HeardFromOptions = [
     label: 'Other',
     translateKey: 'OnBoarding.Other',
     value: HeardFrom.Other,
+  },
+];
+
+export const AccountTypeList = [
+  {
+    label: 'Student',
+    translateKey: 'SelectAccountType.Student',
+    value: Role.Student,
+    icon: 'custom:student',
+  },
+  {
+    label: 'Tutor',
+    translateKey: 'SelectAccountType.Tutor',
+    value: Role.Tutor,
+    icon: 'custom:tutor',
   },
 ];

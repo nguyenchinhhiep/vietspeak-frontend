@@ -237,7 +237,9 @@ export class AuthService {
     }
 
     // Get new access token
-    return this.getNewAccessToken();
+    // return this.getNewAccessToken();
+
+    return of(false);
   }
 
   checkExistingEmail(email: string): Observable<boolean> {

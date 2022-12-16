@@ -20,10 +20,10 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ToastModule } from 'src/app/components/toast/toast.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { TextFieldModule } from '@angular/cdk/text-field';
 import { ConfirmationDialogModule } from 'src/app/components/confirmation-dialog/confirmation-dialog.module';
 import { CongratulationsComponent } from './congratulations/congratulations.component';
 import { PreventAutofillModule } from 'src/app/directives/prevent-autofill/prevent-autofill.module';
+import { OnboardingGuard } from './onboarding.guard';
 
 const routes: Routes = [
   {
@@ -39,21 +39,14 @@ const routes: Routes = [
     },
   },
   {
-    path: 'student-info',
+    path: 'student',
     component: StudentInfoComponent,
     data: {
       authLayout: 'blank',
     },
   },
   {
-    path: 'student-info',
-    component: StudentInfoComponent,
-    data: {
-      authLayout: 'blank',
-    },
-  },
-  {
-    path: 'tutor-info',
+    path: 'tutor',
     component: TutorInfoComponent,
     data: {
       authLayout: 'blank',
@@ -113,6 +106,7 @@ const routes: Routes = [
         },
       },
     },
+    OnboardingGuard,
   ],
 })
 export class OnboardingModule {}

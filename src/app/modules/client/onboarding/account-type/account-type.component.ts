@@ -1,12 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { TranslateService } from '@ngx-translate/core';
-import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { HttpService } from 'src/app/core/http/services/http.service';
 import { Role } from 'src/app/core/user/role.model';
-import { AccountTypeList } from 'src/app/core/user/user.model';
+import { AccountTypeList } from '../onboarding.model';
 
 @Component({
   selector: 'app-account-type',
@@ -51,11 +49,11 @@ export class AccountTypeComponent implements OnInit {
     if (this.accountTypeForm.invalid) return;
 
     if (this.selectedAccountType.value === Role.Student) {
-      this._router.navigate(['/onboarding/student-info']);
+      this._router.navigate(['/onboarding/student']);
     }
 
     if (this.selectedAccountType.value === Role.Tutor) {
-      this._router.navigate(['/onboarding/tutor-info']);
+      this._router.navigate(['/onboarding/tutor']);
     }
   }
 
