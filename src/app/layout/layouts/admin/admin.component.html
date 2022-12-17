@@ -1,1 +1,22 @@
-<router-outlet *ngIf="true"></router-outlet>
+<div class="w-full h-full overflow-hidden flex flex-col relative bg-gray-50">
+  <!-- Header -->
+  <admin-header></admin-header>
+  <div class="flex-grow flex flex-auto w-full overflow-hidden">
+    <!-- Navigation -->
+    <div>
+      <vertical-navigation
+        [appearance]="'classic'"
+        [name]="'adminNavigation'"
+        [navigation]="navigation"
+        [mode]="isScreenSmall ? 'over' : 'side'"
+        [opened]="!isScreenSmall"
+        class="bg-white"
+      >
+      </vertical-navigation>
+    </div>
+    <!-- Main -->
+    <div class="flex-grow px-5 md:px-7 py-6 overflow-auto" scrollReset>
+      <router-outlet *ngIf="true"></router-outlet>
+    </div>
+  </div>
+</div>

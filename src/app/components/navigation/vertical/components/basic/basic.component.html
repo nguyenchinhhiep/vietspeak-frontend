@@ -1,0 +1,149 @@
+<!-- Item wrapper -->
+<div
+  class="vertical-navigation-item__wrapper"
+  [ngClass]="item.classes?.wrapper"
+>
+  <!-- Item with an internal link -->
+  <ng-container
+    *ngIf="item.link && !item.externalLink && !item.function && !item.disabled"
+  >
+    <a
+      class="vertical-navigation-item flex justify-center items-center hover:no-underline text-current rounded-md"
+      [matTooltip]="item.tooltip || ''"
+      [matTooltipPosition]="'right'"
+      [routerLink]="[item.link]"
+      [routerLinkActive]="'vertical-navigation-item--active'"
+      [routerLinkActiveOptions]="isActiveMatchOptions"
+    >
+      <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+    </a>
+  </ng-container>
+
+  <!-- Item with an external link -->
+  <ng-container
+    *ngIf="item.link && item.externalLink && !item.function && !item.disabled"
+  >
+    <a
+      class="vertical-navigation-item flex justify-center items-center hover:no-underline text-current rounded-md"
+      [matTooltip]="item.tooltip || ''"
+      [matTooltipPosition]="'right'"
+      [href]="item.link"
+      [target]="item.target || '_self'"
+    >
+      <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+    </a>
+  </ng-container>
+
+  <!-- Item with a function -->
+  <ng-container *ngIf="!item.link && item.function && !item.disabled">
+    <div
+      class="vertical-navigation-item"
+      (click)="item.function(item)"
+      [matTooltip]="item.tooltip || ''"
+      [matTooltipPosition]="'right'"
+    >
+      <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+    </div>
+  </ng-container>
+
+  <!-- Item with an internal link and function -->
+  <ng-container
+    *ngIf="item.link && !item.externalLink && item.function && !item.disabled"
+  >
+    <a
+      class="vertical-navigation-item flex justify-center items-center hover:no-underline text-current rounded-md"
+      [matTooltip]="item.tooltip || ''"
+      [matTooltipPosition]="'right'"
+      [routerLink]="[item.link]"
+      [routerLinkActive]="'vertical-navigation-item--active'"
+      [routerLinkActiveOptions]="isActiveMatchOptions"
+      (click)="item.function(item)"
+    >
+      <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+    </a>
+  </ng-container>
+
+  <!-- Item with an external link and function -->
+  <ng-container
+    *ngIf="item.link && item.externalLink && item.function && !item.disabled"
+  >
+    <a
+      class="vertical-navigation-item flex justify-center items-center hover:no-underline text-current rounded-md"
+      [matTooltip]="item.tooltip || ''"
+      [matTooltipPosition]="'right'"
+      [href]="item.link"
+      [target]="item.target || '_self'"
+      (click)="item.function(item)"
+    >
+      <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+    </a>
+  </ng-container>
+
+  <!-- Item with a no link and no function -->
+  <ng-container *ngIf="!item.link && !item.function && !item.disabled">
+    <div
+      class="vertical-navigation-item flex items-center hover:no-underline text-current rounded-md"
+      [matTooltip]="item.tooltip || ''"
+      [matTooltipPosition]="'right'"
+    >
+      <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+    </div>
+  </ng-container>
+
+  <!-- Item is disabled -->
+  <ng-container *ngIf="item.disabled">
+    <div
+      class="vertical-navigation-item flex items-center hover:no-underline text-current rounded-md vertical-navigation-item--disabled"
+      [matTooltip]="item.tooltip || ''"
+      [matTooltipPosition]="'right'"
+    >
+      <ng-container *ngTemplateOutlet="itemTemplate"></ng-container>
+    </div>
+  </ng-container>
+</div>
+
+<!-- Item template -->
+<ng-template #itemTemplate>
+  <!-- Icon -->
+  <ng-container *ngIf="item.icon">
+    <mat-icon
+      class="vertical-navigation-item__icon"
+      [ngClass]="item.classes?.icon"
+      [svgIcon]="item.icon"
+    >
+    </mat-icon>
+  </ng-container>
+
+  <!-- Title & Subtitle -->
+  <div
+    class="vertical-navigation-item-title__wrapper flex-grow overflow-hidden"
+  >
+    <div class="vertical-navigation-item__title">
+      <span
+        [ngClass]="item.classes?.title"
+        class="block overflow-hidden whitespace-nowrap overflow-ellipsis"
+      >
+        {{ item.title }}
+      </span>
+    </div>
+    <ng-container *ngIf="item.subtitle">
+      <div class="vertical-navigation-item__subtitle">
+        <span [ngClass]="item.classes?.subtitle">
+          {{ item.subtitle }}
+        </span>
+      </div>
+    </ng-container>
+  </div>
+
+  <!-- Badge -->
+  <ng-container *ngIf="item.badge">
+    <div class="vertical-navigation-item__badge ml-auto">
+      <div
+        class="vertical-navigation-item-badge__content px-2 h-5 rounded-lg bg-red-500 text-white font-medium text-xs flex justify-center items-center"
+        [ngClass]="item.badge.classes"
+      >
+        {{ item.badge.title }}
+      </div>
+    </div>
+  </ng-container>
+</ng-template>

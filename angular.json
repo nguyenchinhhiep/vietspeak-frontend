@@ -32,7 +32,8 @@
             ],
             "scripts": [],
             "allowedCommonJsDependencies": [
-              "moment"
+              "moment",
+              "overlayscrollbars"
             ]
           },
           "configurations": {

@@ -1,0 +1,86 @@
+<!-- Item wrapper -->
+<div
+  class="vertical-navigation-item__wrapper"
+  [ngClass]="item.classes?.wrapper"
+>
+  <div class="vertical-navigation-item flex">
+    <!-- Icon -->
+    <ng-container *ngIf="item.icon">
+      <mat-icon
+        class="vertical-navigation-item__icon"
+        [ngClass]="item.classes?.icon"
+        [svgIcon]="item.icon"
+      >
+      </mat-icon>
+    </ng-container>
+
+    <!-- Title & Subtitle -->
+    <div class="vertical-navigation-item-title__wrapper">
+      <div
+        class="vertical-navigation-item__title uppercase text-xs font-medium"
+      >
+        <span [ngClass]="item.classes?.title">
+          {{ item.title }}
+        </span>
+      </div>
+      <ng-container *ngIf="item.subtitle">
+        <div class="vertical-navigation-item__subtitle text-xs font-medium">
+          <span [ngClass]="item.classes?.subtitle">
+            {{ item.subtitle }}
+          </span>
+        </div>
+      </ng-container>
+    </div>
+
+    <!-- Badge -->
+    <ng-container *ngIf="item.badge">
+      <div class="vertical-navigation-item__badge ml-auto">
+        <div
+          class="vertical-navigation-item-badge__content px-2 h-5 rounded-lg bg-red-500 text-white font-medium text-xs flex justify-center items-center"
+          [ngClass]="item.badge.classes"
+        >
+          {{ item.badge.title }}
+        </div>
+      </div>
+    </ng-container>
+  </div>
+</div>
+
+<ng-container *ngFor="let item of item.children; trackBy: trackByFn">
+  <!-- Skip the hidden items -->
+  <ng-container *ngIf="(item.hidden && !item.hidden(item)) || !item.hidden">
+    <!-- Basic -->
+    <ng-container *ngIf="item.type === 'basic'">
+      <vertical-navigation-basic-item
+        [item]="item"
+        [name]="name"
+      ></vertical-navigation-basic-item>
+    </ng-container>
+
+    <!-- Collapsable -->
+    <ng-container *ngIf="item.type === 'collapsable'">
+      <vertical-navigation-collapsable-item
+        [item]="item"
+        [name]="name"
+        [autoCollapse]="autoCollapse"
+      >
+      </vertical-navigation-collapsable-item>
+    </ng-container>
+
+    <!-- Divider -->
+    <ng-container *ngIf="item.type === 'divider'">
+      <vertical-navigation-divider-item
+        [item]="item"
+        [name]="name"
+      ></vertical-navigation-divider-item>
+    </ng-container>
+
+    <!-- Group -->
+    <ng-container *ngIf="item.type === 'group'">
+      <vertical-navigation-group-item
+        [item]="item"
+        [name]="name"
+      ></vertical-navigation-group-item>
+    </ng-container>
+  </ng-container>
+</ng-container>

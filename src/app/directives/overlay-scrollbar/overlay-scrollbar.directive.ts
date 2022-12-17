@@ -2,7 +2,6 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Platform } from '@angular/cdk/platform';
 import { Directive, ElementRef, Input, SimpleChanges } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
-import OverlayScrollbars from 'overlayscrollbars';
 import {
   debounceTime,
   filter,
@@ -11,6 +10,8 @@ import {
   Subscription,
   takeUntil,
 } from 'rxjs';
+
+import OverlayScrollbars from 'overlayscrollbars';
 
 @Directive({
   selector: '[overlayScrollbar]',

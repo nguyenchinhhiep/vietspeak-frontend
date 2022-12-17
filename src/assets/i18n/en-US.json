@@ -1,4 +1,9 @@
 {
+   "AdminNavigations": {
+      "Home": "Home",
+      "Tutors": "Tutors",
+      "Students": "Students"
+   },
    "Languages": {
       "English": "English",
       "Chinese": "Chinese",
@@ -7,6 +12,9 @@
       "Korean": "Korean",
       "Native": "Native",
       "No": "No"
+   },
+   "Settings": {
+      "Title": "Settings"
    },
    "Errors": {
       "Required": "This field is required",
@@ -28,7 +36,8 @@
       "Back": "Back",
       "Close": "Close",
       "Login": "Login",
-      "Register": "Register"
+      "Register": "Register",
+      "Logout": "Logout"
    },
    "Confirmation": {
       "Title": "Confirmation",

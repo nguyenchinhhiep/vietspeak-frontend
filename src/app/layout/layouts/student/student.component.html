@@ -1,1 +1,10 @@
-<p>student works!</p>
+<div class="w-full h-full overflow-hidden flex flex-col relative bg-gray-50">
+  <!-- Header -->
+  <student-header></student-header>
+  <div class="flex-grow flex flex-auto w-full overflow-hidden">
+    <!-- Main -->
+    <div class="flex-grow px-5 md:px-7 py-6 overflow-auto" scrollReset>
+      <router-outlet *ngIf="true"></router-outlet>
+    </div>
+  </div>
+</div>

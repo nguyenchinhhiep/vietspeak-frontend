@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-// import { NavigationItem } from 'src/app/components/navigation/navigation.model';
+import {
+  INavigation,
+  NavigationItem,
+} from 'src/app/components/navigation/navigation.model';
 import { MediaWatcherService } from 'src/app/core/media-watcher/media-watcher.service';
-// import { defaultNavigation } from 'src/app/core/navigation/navigation';
-// import { NavigationService } from 'src/app/core/navigation/navigation.service';
+import { adminNavigation } from 'src/app/core/navigation/navigation';
+import { NavigationService } from 'src/app/core/navigation/navigation.service';
 
 @Component({
   selector: 'admin-layout',
@@ -11,26 +14,30 @@ import { MediaWatcherService } from 'src/app/core/media-watcher/media-watcher.se
   styleUrls: ['./admin.component.scss'],
 })
 export class AdminLayoutComponent implements OnInit {
-  // navigation!: NavigationItem[];
-
+  navigation!: NavigationItem[];
+  navigationConfig!: INavigation;
   private _unsubscribeAll: Subject<any> = new Subject<any>();
   isScreenSmall: boolean = false;
 
   constructor(
-    // private _navigationService: NavigationService,
+    private _navigationService: NavigationService,
     private _mediaWatcherService: MediaWatcherService
   ) {}
 
   ngOnInit(): void {
     // Set navigation
-    // this._navigationService.navigation = defaultNavigation;
+    this._navigationService.navigation = adminNavigation;
 
-    // // Subscribe to navigation data
-    // this._navigationService.navigation$
-    //   .pipe(takeUntil(this._unsubscribeAll))
-    //   .subscribe((navigation: NavigationItem[]) => {
-    //     this.navigation = navigation;
-    //   });
+    // Subscribe to navigation data
+    this._navigationService.navigation$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((navigation: NavigationItem[]) => {
+        // Update the language of  the navigation
+        this._navigationService.updateLanguageNavigation(navigation);
+
+        // Update the navigation
+        this.navigation = navigation;
+      });
 
     // Subscribe to media changes
     this._mediaWatcherService.onMediaChange$
