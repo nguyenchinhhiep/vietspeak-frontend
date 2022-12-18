@@ -30,6 +30,11 @@ const routes: Routes = [
     loadChildren: () =>
       import('./students/students.module').then((m) => m.StudentsModule),
   },
+  {
+    path: '**',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({

@@ -61,7 +61,7 @@
       min-height: 50px;
       border-radius: 6px;
       padding: 0 16px;
-      border-width: 2px;
+      border-width: 1px;
       @apply shadow-sm bg-white border-gray-300 dark:bg-black dark:bg-opacity-5 dark:border-gray-500 #{'!important'};
 
       .mat-form-field-prefix {
@@ -70,11 +70,11 @@
         }
 
         > .mat-icon-button {
-          margin: 0 4px 0 -10px;
+          margin: 0 4px 0 -8px;
         }
 
         > .mat-select {
-          margin-right: 10px;
+          margin-right: 8px;
         }
 
         > .mat-datepicker-toggle {
@@ -94,11 +94,11 @@
         }
 
         > .mat-icon-button {
-          margin: 0 -10px 0 4px;
+          margin: 0 -8px 0 4px;
         }
 
         > .mat-select {
-          margin-left: 10px;
+          margin-left: 8px;
         }
 
         > .mat-datepicker-toggle {
@@ -109,6 +109,13 @@
       .mat-datepicker-toggle {
         margin-right: -8px;
         @apply text-gray-400;
+
+        .mat-icon-button {
+          min-width: 40px !important;
+          width: 40px !important;
+          height: 40px !important;
+          min-height: 40px !important;
+        }
       }
 
       .mat-select-arrow {
@@ -123,10 +130,10 @@
         @apply text-gray-400 #{'!important'};
 
         .mat-icon-button {
-          width: 40px;
-          min-width: 40px;
-          height: 40px;
-          min-height: 40px;
+          width: 40px !important;
+          min-width: 40px !important;
+          height: 40px !important;
+          min-height: 40px !important;
         }
 
         .mat-icon,
@@ -286,7 +293,7 @@
             margin-top: 0;
             backface-visibility: hidden;
             transition: none;
-            font-weight: 500;
+            font-weight: 400;
             @apply text-secondary #{'!important'};
           }
         }
@@ -314,7 +321,7 @@
       padding: 0;
       margin-top: 0;
       font-size: 13px;
-      font-weight: 500;
+      font-weight: 400;
 
       // > div {
       //   display: contents; /* Remove the div from flow to stop the subscript animation */
@@ -447,14 +454,14 @@
 }
 
 .mat-select-panel:not([class*="mat-elevation-z"]) {
-  @apply shadow-md #{'!important'};
+  @apply shadow #{'!important'};
 }
 
 /* ----------------------------------------------------------------------------------------------------- */
 /*  @ Menu
 /* ----------------------------------------------------------------------------------------------------- */
 .mat-menu-panel {
-  @apply shadow-base #{'!important'};
+  @apply shadow #{'!important'};
 }
 
 /* ----------------------------------------------------------------------------------------------------- */
@@ -470,9 +477,9 @@
   display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  height: 40px;
-  min-height: 40px;
-  max-height: 40px;
+  height: 48px;
+  min-height: 48px;
+  max-height: 48px;
   line-height: 1 !important;
 
   .mat-button-wrapper {
@@ -493,7 +500,7 @@
     height: 32px;
     min-height: 32px;
     max-height: 32px;
-    padding: -0 14px;
+    padding: 0 14px;
   }
 
   &.btn--lg {
@@ -659,23 +666,37 @@
 
 /* Icon buttons */
 .mat-icon-button {
+  width: 48px !important;
+  min-width: 48px !important;
+  max-width: 48px !important;
+
   &.btn--sm {
-    width: 32px;
-    min-width: 32px;
-    max-width: 32px;
-    height: 32px;
-    min-height: 32px;
+    width: 32px !important;
+    min-width: 32px !important;
+    max-width: 32px !important;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
   }
 
   &.btn--lg {
     width: 50px;
     min-width: 50px;
     max-width: 50px;
-    height: 50px;
-    min-height: 50px;
+    height: 50px !important;
+    min-height: 50px !important;
+    max-height: 50px !important;
   }
 }
 
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Mat icon
+/* ----------------------------------------------------------------------------------------------------- */
+.mat-icon {
+  display: inline-flex !important;
+  justify-content: center;
+  align-items: center;
+}
 /* ----------------------------------------------------------------------------------------------------- */
 /*  @ Datepicker
 /* ----------------------------------------------------------------------------------------------------- */
@@ -685,7 +706,7 @@
 }
 
 .mat-datepicker-content {
-  @apply shadow-base #{'!important'};
+  @apply shadow #{'!important'};
 }
 
 /* Hover and active cell content background opacity */
@@ -720,4 +741,23 @@
       line-height: inherit;
     }
   }
+}
+
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @ Stepper
+/* ----------------------------------------------------------------------------------------------------- */
+mat-stepper {
+  // Step label
+  .mat-step-label {
+    &.mat-step-label-selected {
+      font-weight: 500;
+    }
+  }
+}
+
+/* ----------------------------------------------------------------------------------------------------- */
+/*  @Dialog
+/* ----------------------------------------------------------------------------------------------------- */
+.mat-dialog-container {
+  padding: 0 !important;
 }

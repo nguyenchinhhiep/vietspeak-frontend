@@ -1,23 +1,26 @@
 <div
-  class="bg-white border-0 border-b border-solid border-light flex px-2 md:px-3 h-16"
+  class="bg-white border-0 border-b border-solid border-light flex px-2 md:px-4 h-16"
 >
-  <div class="flex justify-center items-center gap-2">
-    <button
-      mat-icon-button
-      type="button"
-      class="btn--lg"
-      (click)="toggleNavigation()"
-    >
-      <mat-icon svgIcon="mat_outline:menu" class="icon-size-6"></mat-icon>
-    </button>
+  <div class="flex justify-center items-center gap-1">
+    <div class="block md:hidden">
+      <button
+        mat-icon-button
+        type="button"
+        (click)="toggleNavigation()"
+        class=""
+      >
+        <mat-icon svgIcon="mat_outline:menu" class="icon-size-6"></mat-icon>
+      </button>
+    </div>
+
     <a
       class="font-semibold text-gray-900 text-lg hover:no-underline cursor-pointer select-none"
-      routerLink="/admin/home"
+      routerLink="admin"
       >Vietspeak</a
     >
   </div>
 
-  <div class="ml-auto flex items-center gap-4">
+  <div class="ml-auto flex items-center gap-2">
     <languages></languages>
     <user></user>
   </div>

@@ -3,6 +3,7 @@ import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatStepper } from '@angular/material/stepper';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { ImageCropperDialogService } from 'src/app/components/image-cropper/image-cropper.service';
 import { ToastService } from 'src/app/components/toast/toast.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import {
@@ -27,7 +28,8 @@ export class TutorInfoComponent implements OnInit {
     private _authService: AuthService,
     private _fb: FormBuilder,
     private _toastService: ToastService,
-    private _translateService: TranslateService
+    private _translateService: TranslateService,
+    private _imageCropperDialogService: ImageCropperDialogService
   ) {}
 
   teachingLanguageOptions = TeachingLanguageOptions;
@@ -295,16 +297,9 @@ export class TutorInfoComponent implements OnInit {
         return;
       }
 
-      const reader = new FileReader();
-      reader.onload = (e) => {
-        this.tutorAdditionalInfoForm
-          .get('profilePictureUrl')
-          ?.setValue(e.target?.result);
-        this.tutorAdditionalInfoForm.get('profilePicture')?.setValue(file);
+      profilePictureInput.value = null;
 
-        profilePictureInput.value = null;
-      };
-      reader.readAsDataURL(file);
+      this.openImageCropper(file);
     }
   }
 
@@ -316,4 +311,25 @@ export class TutorInfoComponent implements OnInit {
 
   // On step changed
   onStepChanged() {}
+
+  // Open crop image dialog
+  openImageCropper(imageFile: File) {
+    const dialogRef = this._imageCropperDialogService.open(imageFile, {
+      cropperMaxWidth: 150,
+      cropperMaxHeight: 150,
+      cropperMinWidth: 100,
+      cropperMinHeight: 100,
+    });
+
+    dialogRef?.afterClosed().subscribe((croppedImage) => {
+      if (croppedImage != null) {
+        this.tutorAdditionalInfoForm
+          .get('profilePictureUrl')
+          ?.setValue(croppedImage);
+        this.tutorAdditionalInfoForm
+          .get('profilePicture')
+          ?.setValue(croppedImage);
+      }
+    });
+  }
 }

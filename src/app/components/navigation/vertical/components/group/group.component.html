@@ -3,7 +3,7 @@
   class="vertical-navigation-item__wrapper"
   [ngClass]="item.classes?.wrapper"
 >
-  <div class="vertical-navigation-item flex">
+  <div class="vertical-navigation-item">
     <!-- Icon -->
     <ng-container *ngIf="item.icon">
       <mat-icon
@@ -16,15 +16,13 @@
 
     <!-- Title & Subtitle -->
     <div class="vertical-navigation-item-title__wrapper">
-      <div
-        class="vertical-navigation-item__title uppercase text-xs font-medium"
-      >
+      <div class="vertical-navigation-item__title">
         <span [ngClass]="item.classes?.title">
           {{ item.title }}
         </span>
       </div>
       <ng-container *ngIf="item.subtitle">
-        <div class="vertical-navigation-item__subtitle text-xs font-medium">
+        <div class="vertical-navigation-item__subtitle">
           <span [ngClass]="item.classes?.subtitle">
             {{ item.subtitle }}
           </span>
@@ -34,9 +32,9 @@
 
     <!-- Badge -->
     <ng-container *ngIf="item.badge">
-      <div class="vertical-navigation-item__badge ml-auto">
+      <div class="vertical-navigation-item__badge">
         <div
-          class="vertical-navigation-item-badge__content px-2 h-5 rounded-lg bg-red-500 text-white font-medium text-xs flex justify-center items-center"
+          class="vertical-navigation-item-badge__content"
           [ngClass]="item.badge.classes"
         >
           {{ item.badge.title }}

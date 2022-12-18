@@ -31,7 +31,7 @@ export interface NavigationItem {
   meta?: any;
 }
 
-export type VerticalNavigationAppearance = 'classic' | 'thin';
+export type VerticalNavigationAppearance = 'classic' | 'thin' | 'compact';
 
 export type VerticalNavigationMode = 'over' | 'side';
 

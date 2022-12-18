@@ -5,17 +5,17 @@
     <!-- Navigation -->
     <div>
       <vertical-navigation
-        [appearance]="'classic'"
+        [appearance]="'compact'"
         [name]="'adminNavigation'"
         [navigation]="navigation"
         [mode]="isScreenSmall ? 'over' : 'side'"
         [opened]="!isScreenSmall"
-        class="bg-white"
+        class="bg-white text-gray-700"
       >
       </vertical-navigation>
     </div>
     <!-- Main -->
-    <div class="flex-grow px-5 md:px-7 py-6 overflow-auto" scrollReset>
+    <div class="flex-grow p-8 overflow-auto" scrollReset>
       <router-outlet *ngIf="true"></router-outlet>
     </div>
   </div>

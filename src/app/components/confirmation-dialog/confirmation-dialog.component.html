@@ -3,7 +3,10 @@
   <ng-container *ngIf="data.dismissible">
     <div class="absolute top-0 right-0 pt-4 pr-4">
       <button mat-icon-button [matDialogClose]="undefined">
-        <mat-icon class="text-secondary" [svgIcon]="'mat_outline:close'"></mat-icon>
+        <mat-icon
+          class="text-secondary"
+          [svgIcon]="'mat_outline:close'"
+        ></mat-icon>
       </button>
     </div>
   </ng-container>
@@ -71,12 +74,7 @@
     >
       <!-- Cancel -->
       <ng-container *ngIf="data.actions?.cancel?.show">
-        <button
-          class="btn"
-          mat-button
-          [matDialogClose]="'cancelled'"
-          tabindex="0"
-        >
+        <button mat-button [matDialogClose]="'cancelled'" tabindex="0">
           {{ data.actions?.cancel?.label }}
         </button>
       </ng-container>
@@ -84,7 +82,6 @@
       <!-- Confirm -->
       <ng-container *ngIf="data.actions?.confirm?.show">
         <button
-          class="btn"
           mat-flat-button
           [autoFocus]="true"
           [color]="

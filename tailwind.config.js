@@ -56,10 +56,16 @@ module.exports = {
     },
     extend: {
       boxShadow: {
-        base: "rgba(0, 0, 0, 0.1) 0px 0px 2px 0px, rgba(0, 0, 0, 0.1) 0px 0px 1px 0px",
+        base: "rgba(0, 0, 0, 0.1) 0px 0px 6px 0px, rgba(0, 0, 0, 0.1) 0px 0px 3px 0px",
       },
       fontSize: {
         xs: "0.8125rem",
+      },
+      screens: {
+        sm: "600px",
+        md: "960px",
+        lg: "1280px",
+        xl: "1440px",
       },
     },
   },

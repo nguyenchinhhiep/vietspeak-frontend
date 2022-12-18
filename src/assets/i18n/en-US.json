@@ -1,4 +1,7 @@
 {
+   "ImageCropper": {
+      "Title": "Crop image"
+   },
    "AdminNavigations": {
       "Home": "Home",
       "Tutors": "Tutors",
@@ -37,7 +40,9 @@
       "Close": "Close",
       "Login": "Login",
       "Register": "Register",
-      "Logout": "Logout"
+      "Logout": "Logout",
+      "Confirm": "Confirm",
+      "Cancel": "Cancel"
    },
    "Confirmation": {
       "Title": "Confirmation",
@@ -97,7 +102,7 @@
       "Other": "Other"
    },
    "SelectAccountType": {
-      "Title": "Select account type",
+      "Title": "Choose account type",
       "Continue": "Continue",
       "Student": "Student",
       "Tutor": "Tutor"
@@ -107,7 +112,7 @@
       "LanguageWantToLearn": "Which language do you want to learn?",
       "FirstName": "First name",
       "LastName": "Last name",
-      "CurrentLevel": "Current level",
+      "Level": "Level",
       "Beginner": "Beginner",
       "Intermediate": "Intermediate",
       "Advanced": "Advanced",

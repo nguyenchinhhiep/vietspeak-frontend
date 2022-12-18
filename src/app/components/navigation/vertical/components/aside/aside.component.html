@@ -3,7 +3,7 @@
   [ngClass]="item.classes?.wrapper"
 >
   <div
-    class="vertical-navigation-item flex items-center text-current rounded-md"
+    class="vertical-navigation-item"
     [matTooltip]="item.tooltip || ''"
     [matTooltipPosition]="'right'"
     [ngClass]="{
@@ -23,7 +23,7 @@
 
     <!-- Title & Subtitle -->
     <div
-      class="vertical-navigation-item-title__wrapper flex-grow overflow-hidden"
+      class="vertical-navigation-item-title__wrapper"
     >
       <div class="vertical-navigation-item__title">
         <span
@@ -44,9 +44,9 @@
 
     <!-- Badge -->
     <ng-container *ngIf="item.badge">
-      <div class="vertical-navigation-item__badge ml-auto">
+      <div class="vertical-navigation-item__badge">
         <div
-          class="vertical-navigation-item-badge__content px-2 h-5 rounded-lg bg-red-500 text-white font-medium text-xs flex justify-center items-center"
+          class="vertical-navigation-item-badge__content"
           [ngClass]="item.badge.classes"
         >
           {{ item.badge.title }}

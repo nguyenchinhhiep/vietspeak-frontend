@@ -4,6 +4,11 @@ import { RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'home',
     data: {
       authLayout: 'student',
     },
@@ -16,6 +21,11 @@ const routes: Routes = [
     },
     loadChildren: () =>
       import('./settings/settings.module').then((m) => m.SettingsModule),
+  },
+  {
+    path: '**',
+    redirectTo: 'home',
+    pathMatch: 'full',
   },
 ];
 

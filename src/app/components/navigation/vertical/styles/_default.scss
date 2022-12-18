@@ -1,5 +1,7 @@
 /* Variables */
-$vertical-navigation-width: 260;
+:root {
+  --vertical-navigation-width: 260px;
+}
 
 vertical-navigation {
   position: relative;
@@ -11,9 +13,9 @@ vertical-navigation {
   z-index: 200;
 
   .vertical-navigation__wrapper {
-    width: #{$vertical-navigation-width}px;
-    min-width: #{$vertical-navigation-width}px;
-    max-width: #{$vertical-navigation-width}px;
+    width: var(--vertical-navigation-width);
+    min-width: var(--vertical-navigation-width);
+    max-width: var(--vertical-navigation-width);
     border-right: 1px solid;
     @apply border-gray-200;
   }
@@ -48,7 +50,7 @@ vertical-navigation {
   &.vertical-navigation--position-left {
     /* Side mode */
     &.vertical-navigation--mode-side {
-      margin-left: -#{$vertical-navigation-width}px;
+      margin-left: calc(var(--vertical-navigation-width) * -1);
 
       &.vertical-navigation--opened {
         margin-left: 0;
@@ -70,7 +72,7 @@ vertical-navigation {
   &.vertical-navigation--position-right {
     /* Side mode */
     &.vertical-navigation--mode-side {
-      margin-right: -#{$vertical-navigation-width}px;
+      margin-right: calc(var(--vertical-navigation-width) * -1);
 
       &.vertical-navigation--opened {
         margin-right: 0;
@@ -128,7 +130,6 @@ vertical-navigation {
 
     /* Body */
     .vertical-navigation__body {
-      padding: 16px 0;
       flex: 1 1 auto;
       overflow: hidden;
       overscroll-behavior: contain;
@@ -156,8 +157,7 @@ vertical-navigation {
 
     > .vertical-navigation-item__wrapper {
       > .vertical-navigation-item {
-        text-decoration: none;
-        @apply p-3;
+        @apply p-3 flex items-center justify-center hover:no-underline text-current rounded-md;
 
         /* Disabled state */
         &.vertical-navigation-item--disabled {
@@ -172,16 +172,29 @@ vertical-navigation {
 
         /* Title */
         .vertical-navigation-item-title__wrapper {
-          @apply text-sm;
+          @apply text-sm flex-grow overflow-hidden;
 
           > .vertical-navigation-item__title {
             @apply font-medium;
+
+            > span {
+              @apply block overflow-hidden whitespace-nowrap overflow-ellipsis;
+            }
           }
         }
 
         /* Arrow */
         .vertical-navigation-item__arrow {
           @apply icon-size-5 ml-2;
+        }
+
+        /* Badges */
+        &.vertical-navigation-item-badge {
+          @apply ml-auto;
+
+          &__content {
+            @apply px-2 h-5 rounded-lg bg-red-500 text-white font-medium text-xs flex justify-center items-center;
+          }
         }
       }
     }
@@ -221,6 +234,10 @@ vertical-navigation {
 
   /* Divider */
   vertical-navigation-divider-item {
+    /* Wrapper */
+    > .vertical-navigation-item__wrapper {
+      @apply my-3 border-0 border-b border-solid dark:border-none border-gray-300;
+    }
   }
 
   /* Group */
@@ -228,6 +245,12 @@ vertical-navigation {
     /* Wrapper */
     > .vertical-navigation-item__wrapper {
       @apply mx-3 mb-1 text-hint;
+
+      .vertical-navigation-item {
+        &__title {
+          @apply uppercase text-xs font-medium;
+        }
+      }
     }
   }
 
@@ -312,8 +335,8 @@ vertical-navigation {
     flex-direction: column;
     border-right: 1px solid;
     @apply border-gray-200;
-    left: #{$vertical-navigation-width}px;
-    width: #{$vertical-navigation-width}px;
+    left: var(--vertical-navigation-width);
+    width: var(--vertical-navigation-width);
     z-index: 5;
     overflow-x: hidden;
     overflow-y: auto;

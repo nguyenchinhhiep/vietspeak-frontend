@@ -3,9 +3,7 @@ import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { ConfirmationDialogComponent } from './confirmation-dialog.component';
 import { IConfirmationDialogConfig } from './confirmation-dialog.model';
 
-@Injectable({
-  providedIn: 'root',
-})
+@Injectable()
 export class ConfirmationDialogService {
   private _defaultConfig: IConfirmationDialogConfig = {
     title: 'Confirm action',

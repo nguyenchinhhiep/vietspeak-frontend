@@ -24,6 +24,7 @@ import { ConfirmationDialogModule } from 'src/app/components/confirmation-dialog
 import { CongratulationsComponent } from './congratulations/congratulations.component';
 import { PreventAutofillModule } from 'src/app/directives/prevent-autofill/prevent-autofill.module';
 import { OnboardingGuard } from './onboarding.guard';
+import { ImageCropperDialogModule } from 'src/app/components/image-cropper/image-cropper.module';
 
 const routes: Routes = [
   {
@@ -88,6 +89,7 @@ const routes: Routes = [
     MatProgressSpinnerModule,
     ConfirmationDialogModule,
     PreventAutofillModule,
+    ImageCropperDialogModule,
     RouterModule.forChild(routes),
   ],
   providers: [

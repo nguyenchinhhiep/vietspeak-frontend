@@ -1,1 +1,65 @@
-<p>image-cropper works!</p>
+<div class="dialog">
+  <div class="dialog__close">
+    <button mat-icon-button [matDialogClose]="undefined">
+      <mat-icon
+        class="text-secondary"
+        [svgIcon]="'mat_outline:close'"
+      ></mat-icon>
+    </button>
+  </div>
+  <!-- Header -->
+  <div class="dialog__header">
+    <h4 class="font-medium text-2xl">
+      {{ "ImageCropper.Title" | translate }}
+    </h4>
+  </div>
+
+  <!-- Body -->
+  <div class="dialog__body">
+    <div class="flex flex-col">
+      <image-cropper
+        [imageFile]="data.imageFile"
+        [maintainAspectRatio]="data.config.maintainAspectRatio"
+        [aspectRatio]="data.config.aspectRatio"
+        [cropperMinHeight]="data.config.cropperMinHeight"
+        [cropperMinWidth]="data.config.cropperMinWidth"
+        [cropperMaxWidth]="data.config.cropperMaxWidth"
+        [cropperMaxHeight]="data.config.cropperMaxHeight"
+        [resizeToWidth]="data.config.resizeToWidth"
+        [resizeToHeight]="data.config.resizeToHeight"
+        [cropperStaticWidth]="data.config.cropperStaticWidth"
+        [cropperStaticHeight]="data.config.cropperStaticHeight"
+        [roundCropper]="data.config.roundCropper"
+        format="png"
+        (imageCropped)="imageCropped($event)"
+        (imageLoaded)="imageLoaded($event)"
+        (cropperReady)="cropperReady()"
+        (loadImageFailed)="loadImageFailed()"
+      ></image-cropper>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div class="dialog__footer">
+    <div class="flex gap-4 justify-end">
+      <button
+        mat-button
+        [matDialogClose]="undefined"
+        [color]="'primary'"
+        tabindex="0"
+      >
+        {{ "Actions.Cancel" | translate }}
+      </button>
+      <button
+        type="button"
+        mat-flat-button
+        [autoFocus]="true"
+        [color]="'primary'"
+        (click)="confirm()"
+        tabindex="0"
+      >
+        {{ "Actions.Confirm" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

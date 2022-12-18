@@ -16,7 +16,7 @@ export class AccountTypeComponent implements OnInit {
     private _router: Router,
     private _authService: AuthService,
     private _httpService: HttpService,
-    private _fb: FormBuilder
+    private _fb: FormBuilder,
   ) {}
 
   accountTypeForm!: FormGroup;
