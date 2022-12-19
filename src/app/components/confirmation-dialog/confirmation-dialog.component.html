@@ -74,7 +74,7 @@
     >
       <!-- Cancel -->
       <ng-container *ngIf="data.actions?.cancel?.show">
-        <button mat-button [matDialogClose]="'cancelled'" tabindex="0">
+        <button mat-button [color]="'primary'" [matDialogClose]="'cancelled'" tabindex="0">
           {{ data.actions?.cancel?.label }}
         </button>
       </ng-container>

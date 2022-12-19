@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { Role } from 'src/app/core/user/role.model';
+import { IUser } from 'src/app/core/user/user.model';
 import { UserService } from 'src/app/core/user/user.service';
 
 @Component({
@@ -15,23 +17,26 @@ export class UserComponent implements OnInit {
     private _userService: UserService
   ) {}
 
-  ngOnInit(): void {}
+  currentUser: IUser | null = null;
+
+  ngOnInit(): void {
+    this.currentUser = this._userService.currentUserValue;
+  }
 
   logout() {
     this._authService.logout().subscribe();
   }
 
   onSettings() {
-    const currentUser = this._userService.currentUserValue;
-    const role = currentUser?.role;
-    if (role === 'Admin') {
+    const role = this.currentUser?.role;
+    if (role === Role.Admin) {
       this._router.navigate(['/admin/settings']);
     }
-    if (role === 'Tutor') {
+    if (role === Role.Tutor) {
       this._router.navigate(['/tutor/settings']);
     }
 
-    if (role === 'Student') {
+    if (role === Role.Student) {
       this._router.navigate(['/student/settings']);
     }
   }

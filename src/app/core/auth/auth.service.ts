@@ -11,7 +11,7 @@ import { AuthUtils } from './auth.utils';
 @Injectable()
 export class AuthService {
   // Create authenticated flag
-  private _isAuthenticated: boolean = false;
+  private _isAuthenticated: boolean = true;
 
   constructor(
     private _storageService: StorageService,

@@ -33,7 +33,8 @@ export class ToastComponent extends Toast implements OnInit {
       this.type = this.payload.type || 'primary';
       this.appearance = this.payload.appearance || 'fill';
       this.dismissable = !!this.payload.dismissable;
-      this.showIcon = !!this.payload.showIcon;
+      this.showIcon =
+        this.payload.showIcon == null ? true : !!this.payload.showIcon;
     }
   }
 

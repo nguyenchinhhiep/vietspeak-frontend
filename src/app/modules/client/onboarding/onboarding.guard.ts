@@ -12,6 +12,7 @@ import {
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { Role } from 'src/app/core/user/role.model';
+import { UserStatus } from 'src/app/core/user/user.model';
 import { UserService } from 'src/app/core/user/user.service';
 
 @Injectable()
@@ -75,7 +76,7 @@ export class OnboardingGuard implements CanActivate, CanActivateChild, CanLoad {
     // If current url is onboarding
     if (currentUrl.includes('onboarding')) {
       // If user is pending
-      if (currentUser?.isPending) {
+      if (currentUser?.status === UserStatus.Pending) {
         // Handle based on current role
         this._checkRole(currentRole);
 
@@ -91,7 +92,7 @@ export class OnboardingGuard implements CanActivate, CanActivateChild, CanLoad {
     }
 
     // If user is pending
-    if (currentUser?.isPending) {
+    if (currentUser?.status === UserStatus.Pending) {
       // Handle based on current role
       this._checkRole(currentRole);
 

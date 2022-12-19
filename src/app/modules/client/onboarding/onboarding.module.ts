@@ -20,7 +20,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ToastModule } from 'src/app/components/toast/toast.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { ConfirmationDialogModule } from 'src/app/components/confirmation-dialog/confirmation-dialog.module';
 import { CongratulationsComponent } from './congratulations/congratulations.component';
 import { PreventAutofillModule } from 'src/app/directives/prevent-autofill/prevent-autofill.module';
 import { OnboardingGuard } from './onboarding.guard';
@@ -87,7 +86,6 @@ const routes: Routes = [
     MatCheckboxModule,
     ToastModule,
     MatProgressSpinnerModule,
-    ConfirmationDialogModule,
     PreventAutofillModule,
     ImageCropperDialogModule,
     RouterModule.forChild(routes),

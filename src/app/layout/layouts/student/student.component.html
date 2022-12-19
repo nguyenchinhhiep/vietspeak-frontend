@@ -1,10 +1,8 @@
-<div class="w-full h-full overflow-hidden flex flex-col relative bg-gray-50">
+<div class="w-full h-full overflow-hidden flex flex-col relative bg-gray-100">
   <!-- Header -->
   <student-header></student-header>
-  <div class="flex-grow flex flex-auto w-full overflow-hidden">
-    <!-- Main -->
-    <div class="flex-grow p-8 overflow-auto" scrollReset>
-      <router-outlet *ngIf="true"></router-outlet>
-    </div>
+  <!-- Main -->
+  <div class="flex-grow p-6 pb-10 overflow-auto" scrollReset>
+    <router-outlet *ngIf="true"></router-outlet>
   </div>
 </div>

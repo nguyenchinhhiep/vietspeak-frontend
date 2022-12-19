@@ -7,8 +7,14 @@
       "Tutors": "Tutors",
       "Students": "Students"
    },
+   "Toast": {
+      "CreateSuccess": "Create successfully",
+      "UpdateSuccess": "Update successfully",
+      "DeleteSuccess": "Delete successfully"
+   },
    "Languages": {
       "English": "English",
+      "Vietnamese": "Vietnamese",
       "Chinese": "Chinese",
       "Thai": "Thai",
       "Japanese": "Japanese",
@@ -17,7 +23,20 @@
       "No": "No"
    },
    "Settings": {
-      "Title": "Settings"
+      "Title": "Settings",
+      "Profile": "Profile",
+      "Password": "Password"
+   },
+   "UserProfile": {
+      "Title": "Profile",
+      "FirstName": "First name",
+      "LastName": "Last name"
+   },
+   "ChangePassword": {
+      "Title": "Change password",
+      "CurrentPassword": "Current password",
+      "NewPassword": "New password",
+      "ConfirmNewPassword": "Confirm new password"
    },
    "Errors": {
       "Required": "This field is required",
@@ -42,7 +61,9 @@
       "Register": "Register",
       "Logout": "Logout",
       "Confirm": "Confirm",
-      "Cancel": "Cancel"
+      "Cancel": "Cancel",
+      "Save": "Save",
+      "Change": "Change"
    },
    "Confirmation": {
       "Title": "Confirmation",

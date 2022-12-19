@@ -140,7 +140,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     }
 
     if (currentRole === Role.Student) {
-      this._router.navigate(['/']);
+      this._router.navigate(['/student']);
     }
 
     if (currentRole === Role.Tutor) {

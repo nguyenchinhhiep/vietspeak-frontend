@@ -1,17 +1,26 @@
-<button mat-button class="!rounded-full" type="button" [matMenuTriggerFor]="userMenu">
+<button
+  mat-button
+  class="!rounded-full"
+  type="button"
+  [matMenuTriggerFor]="userMenu"
+>
   <div class="flex flex-col">
-    <!-- <img
+    <img
+      *ngIf="currentUser?.avatarUrl"
       class="w-8 h-8 rounded-full overflow-hidden"
-      src="assets/images/user.png"
+      [src]="currentUser?.avatarUrl"
       alt=""
-    /> -->
+    />
     <div
-      class="w-8 h-8 rounded-full overflow-hidden flex justify-center items-center font-medium bg-accent text-white"
+      *ngIf="!currentUser?.avatarUrl"
+      class="w-8 h-8 rounded-full overflow-hidden flex justify-center items-center font-medium bg-accent text-white uppercase"
     >
-      H
+      {{ currentUser?.fullName?.charAt(0) || 'H' }}
     </div>
   </div>
-  <div class="ml-2 font-medium text-sm max-w">Hiep Nguyen</div>
+  <div *ngIf="currentUser?.fullName" class="ml-2 font-medium text-sm max-w">
+    {{ currentUser?.fullName }}
+  </div>
   <div class="ml-2 flex items-center">
     <mat-icon svgIcon="mat_outline:expand_more" class="icon-size-5"></mat-icon>
   </div>

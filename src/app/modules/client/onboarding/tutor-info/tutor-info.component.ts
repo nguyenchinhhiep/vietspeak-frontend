@@ -44,9 +44,6 @@ export class TutorInfoComponent implements OnInit {
 
   maxDate: Date = new Date();
 
-  remainingCharactersReasonHere: number = 500;
-  remainingCharactersIntroduction: number = 1000;
-
   isOnDropFilesContainer: boolean = false;
 
   @ViewChild('stepper') stepper!: MatStepper;
@@ -111,20 +108,6 @@ export class TutorInfoComponent implements OnInit {
       });
 
     this.languagesFormArray.at(0).get('language')?.disable();
-
-    this.tutorAdditionalInfoForm
-      .get('reasonHere')
-      ?.valueChanges.subscribe((val) => {
-        const value = val || '';
-        this.remainingCharactersReasonHere = 500 - value.length;
-      });
-
-    this.tutorAdditionalInfoForm
-      .get('introduction')
-      ?.valueChanges.subscribe((val) => {
-        const value = val || '';
-        this.remainingCharactersIntroduction = 1000 - value.length;
-      });
   }
 
   logout() {

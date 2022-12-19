@@ -17,6 +17,7 @@ import {
 import { ToastrModule } from 'ngx-toastr';
 import { ToastComponent } from './components/toast/toast.component';
 import { ToastModule } from './components/toast/toast.module';
+import { ConfirmationDialogModule } from './components/confirmation-dialog/confirmation-dialog.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -32,6 +33,7 @@ import { ToastModule } from './components/toast/toast.module';
       toastClass: 'custom-toast',
       positionClass: 'toast-bottom-left',
     }),
+    ConfirmationDialogModule,
     AppRoutingModule,
   ],
   providers: [

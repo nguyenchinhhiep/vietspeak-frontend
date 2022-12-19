@@ -51,25 +51,22 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
-    // canActivate: [AuthGuard],
-    // canActivateChild: [AuthGuard],
+    canActivate: [AuthGuard],
+    canActivateChild: [AuthGuard],
     data: {
       layout: 'authenticated',
     },
     children: [
       {
         path: '',
-        // data: {
-        //   roles: [Role.Tutor, Role.Student],
-        // },
         loadChildren: () =>
           import('./modules/client/client.module').then((m) => m.ClientModule),
       },
       {
         path: 'admin',
-        // data: {
-        //   roles: [Role.Admin],
-        // },
+        data: {
+          roles: [Role.Admin],
+        },
         loadChildren: () =>
           import('./modules/admin/admin.module').then((m) => m.AdminModule),
       },

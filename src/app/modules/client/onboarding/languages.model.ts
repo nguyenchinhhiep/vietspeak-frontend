@@ -4,6 +4,7 @@ export enum Language {
   Thai = 'Thai',
   Japanese = 'Japanese',
   Korean = 'Korean',
+  Vietnamese = 'Vietnamese',
 }
 
 export const LanguageOptions = [
@@ -11,6 +12,11 @@ export const LanguageOptions = [
     label: 'English',
     translateKey: 'Languages.English',
     value: Language.English,
+  },
+  {
+    label: 'Vietnamese',
+    translateKey: 'Languages.Vietnamese',
+    value: Language.Vietnamese,
   },
   {
     label: 'Chinese',

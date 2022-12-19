@@ -425,7 +425,7 @@
                         "
                       >
                         <div
-                          class="bg-white rounded flex gap-4 items-center px-3 py-2 border-2 shadow-sm"
+                          class="bg-white rounded flex gap-4 items-center px-3 py-2 border border-solid border-gray-300 shadow-sm"
                           *ngFor="
                             let file of this.tutorExperienceForm.get(
                               'teachingCertificates'
@@ -627,13 +627,9 @@
                     <mat-hint class="w-full">
                       <div class="text-right -mr-3">
                         {{
-                          "Hints.CharactersRemaining"
-                            | translate
-                              : {
-                                  remainingLength:
-                                    remainingCharactersIntroduction
-                                }
-                        }}
+                          tutorAdditionalInfoForm.get("introduction")?.value
+                            .length || 0
+                        }}/1000
                       </div>
                     </mat-hint>
                     <mat-error
@@ -661,12 +657,8 @@
                     <mat-hint class="w-full">
                       <div class="text-right -mr-3">
                         {{
-                          "Hints.CharactersRemaining"
-                            | translate
-                              : {
-                                  remainingLength: remainingCharactersReasonHere
-                                }
-                        }}
+                          tutorAdditionalInfoForm.get("reasonHere")?.value.length || 0
+                        }}/500
                       </div>
                     </mat-hint>
                     <mat-error

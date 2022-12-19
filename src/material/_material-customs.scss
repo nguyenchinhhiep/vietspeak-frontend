@@ -454,14 +454,14 @@
 }
 
 .mat-select-panel:not([class*="mat-elevation-z"]) {
-  @apply shadow #{'!important'};
+  @apply shadow-base #{'!important'};
 }
 
 /* ----------------------------------------------------------------------------------------------------- */
 /*  @ Menu
 /* ----------------------------------------------------------------------------------------------------- */
 .mat-menu-panel {
-  @apply shadow #{'!important'};
+  @apply shadow-base #{'!important'};
 }
 
 /* ----------------------------------------------------------------------------------------------------- */
@@ -703,10 +703,17 @@
 
 .mat-calendar {
   @apply leading-none;
+
+  .mat-icon-button {
+    width: 40px !important;
+    min-width: 40px !important;
+    height: 40px !important;
+    min-height: 40px !important;
+  }
 }
 
 .mat-datepicker-content {
-  @apply shadow #{'!important'};
+  @apply shadow-base #{'!important'};
 }
 
 /* Hover and active cell content background opacity */

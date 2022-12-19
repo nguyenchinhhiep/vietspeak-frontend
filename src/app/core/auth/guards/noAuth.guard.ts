@@ -13,13 +13,20 @@ import {
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Logger } from '../../logger/logger.service';
+import { Role } from '../../user/role.model';
+import { IUser } from '../../user/user.model';
+import { UserService } from '../../user/user.service';
 import { AuthService } from '../auth.service';
 
 const log = new Logger('NoAuthGuard');
 
 @Injectable()
 export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad {
-  constructor(private _authService: AuthService, private _router: Router) {}
+  constructor(
+    private _authService: AuthService,
+    private _router: Router,
+    private _userService: UserService
+  ) {}
 
   /**
    *
@@ -79,8 +86,11 @@ export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad {
         if (authenticated) {
           log.debug('already authenticated, redirecting...');
 
+          // Get the current user value
+          const currentUser: IUser | null = this._userService.currentUserValue;
+
           // Redirect to the root
-          this._router.navigate(['']);
+          this._checkRole(currentUser?.role);
 
           // Prevent the access
           return of(false);
@@ -90,5 +100,23 @@ export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad {
         return of(true);
       })
     );
+  }
+
+  private _checkRole(currentRole: any): void {
+    if (currentRole == null) {
+      this._router.navigate(['/onboarding']);
+    }
+
+    if (currentRole === Role.Student) {
+      this._router.navigate(['/student']);
+    }
+
+    if (currentRole === Role.Tutor) {
+      this._router.navigate(['/tutor']);
+    }
+
+    if (currentRole === Role.Admin) {
+      this._router.navigate(['/admin']);
+    }
   }
 }

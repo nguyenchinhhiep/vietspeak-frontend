@@ -1,0 +1,130 @@
+<div class="w-full h-full flex flex-col max-w-md">
+  <div class="font-semibold text-gray-900 text-xl mb-4">
+    {{ "UserProfile.Title" | translate }}
+  </div>
+
+  <form [formGroup]="profileForm" class="flex flex-col">
+    <div class="flex flex-col gap-2 mb-4">
+      <div class="text-gray-500">Profile picture</div>
+      <div
+        class="rounded border border-solid bg-white border-gray-300 p-6 flex flex-col justify-center shadow-sm"
+      >
+        <div class="flex gap-6 items-center">
+          <img
+            *ngIf="profileForm.get('profilePictureUrl')?.value"
+            class="w-20 h-20 rounded-full overflow-hidden"
+            [src]="profileForm.get('profilePictureUrl')?.value"
+            alt=""
+          />
+          <div
+            *ngIf="!profileForm.get('profilePictureUrl')?.value"
+            class="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center font-medium bg-accent text-white uppercase text-2xl"
+          >
+            {{ profileForm.get("firstName")?.value?.charAt(0) || "H" }}
+          </div>
+
+          <div class="flex gap-4 justify-center">
+            <!-- Remove image -->
+            <button
+              *ngIf="profileForm.get('profilePictureUrl')?.value"
+              type="button"
+              class="btn--sm"
+              mat-button
+              [color]="'primary'"
+              (click)="onRemoveProfilePicture()"
+            >
+              Remove
+            </button>
+
+            <button
+              type="button"
+              class="btn--sm"
+              mat-flat-button
+              [color]="'primary'"
+              (click)="uploadProfilePictureFile.click()"
+            >
+              {{
+                profileForm.get("profilePictureUrl")?.value
+                  ? ("FileUpload.Change" | translate)
+                  : ("FileUpload.BrowseFiles" | translate)
+              }}
+            </button>
+          </div>
+        </div>
+
+        <input
+          hidden
+          type="file"
+          accept="image/*"
+          #uploadProfilePictureFile
+          (change)="
+            onProfilePictureFileSelected($event, uploadProfilePictureFile)
+          "
+        />
+      </div>
+    </div>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>{{ "UserProfile.FirstName" | translate }}</mat-label>
+      <input
+        matInput
+        formControlName="firstName"
+        appPreventAutoFill
+        #firstName
+      />
+      <button
+        mat-icon-button
+        type="button"
+        matSuffix
+        *ngIf="firstName.value != '' && !profileForm.disabled"
+        (click)="profileForm.get('firstName')?.setValue('')"
+      >
+        <mat-icon
+          class="icon-size-5"
+          [svgIcon]="'mat_outline:close'"
+        ></mat-icon>
+      </button>
+      <mat-error *ngIf="profileForm.get('firstName')?.hasError('required')">{{
+        "Errors.Required" | translate
+      }}</mat-error>
+    </mat-form-field>
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>{{ "UserProfile.LastName" | translate }}</mat-label>
+      <input matInput formControlName="lastName" appPreventAutoFill #lastName />
+      <button
+        mat-icon-button
+        type="button"
+        matSuffix
+        *ngIf="lastName.value != '' && !profileForm.disabled"
+        (click)="profileForm.get('lastName')?.setValue('')"
+      >
+        <mat-icon
+          class="icon-size-5"
+          [svgIcon]="'mat_outline:close'"
+        ></mat-icon>
+      </button>
+      <mat-error *ngIf="profileForm.get('lastName')?.hasError('required')">{{
+        "Errors.Required" | translate
+      }}</mat-error>
+    </mat-form-field>
+    <div class="mt-4 flex justify-center">
+      <button
+        type="submit"
+        class="btn--lg w-full"
+        mat-flat-button
+        [color]="'primary'"
+        [disabled]="profileForm.disabled"
+      >
+        <span *ngIf="!profileForm.disabled">
+          {{ "Actions.Save" | translate }}
+        </span>
+
+        <mat-progress-spinner
+          *ngIf="profileForm.disabled"
+          [diameter]="24"
+          mode="indeterminate"
+        >
+        </mat-progress-spinner>
+      </button>
+    </div>
+  </form>
+</div>

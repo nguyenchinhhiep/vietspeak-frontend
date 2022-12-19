@@ -31,6 +31,16 @@ const routes: Routes = [
       import('./students/students.module').then((m) => m.StudentsModule),
   },
   {
+    path: 'settings',
+    data: {
+      authLayout: 'admin',
+    },
+    loadChildren: () =>
+      import('src/app/modules/common/settings/settings.module').then(
+        (m) => m.SettingsModule
+      ),
+  },
+  {
     path: '**',
     redirectTo: 'home',
     pathMatch: 'full',

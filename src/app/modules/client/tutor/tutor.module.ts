@@ -5,7 +5,7 @@ const routes: Routes = [
   {
     path: '',
     redirectTo: 'home',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: 'home',
@@ -20,7 +20,9 @@ const routes: Routes = [
       authLayout: 'tutor',
     },
     loadChildren: () =>
-      import('./settings/settings.module').then((m) => m.SettingsModule),
+      import('src/app/modules/common/settings/settings.module').then(
+        (m) => m.SettingsModule
+      ),
   },
   {
     path: '**',

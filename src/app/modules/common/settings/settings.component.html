@@ -1,0 +1,25 @@
+<div class="flex flex-col w-full max-w-4xl mx-auto gap-6 overflow-hidden">
+  <div class="font-semibold text-gray-900 text-2xl">
+    {{ "Settings.Title" | translate }}
+  </div>
+  <div class="flex-grow flex-wrap flex gap-8">
+    <div class="flex flex-col w-64 flex-shrink-0">
+      <a
+        class="flex items-center gap-3 hover:no-underline p-3 rounded text-gray-500 cursor-pointer hover:!text-primary"
+        *ngFor="let item of navigation"
+        [routerLink]="item.routerLink"
+        routerLinkActive="bg-white shadow-sm"
+      >
+        <mat-icon
+          class="text-current"
+          routerLinkActive="!text-primary font-medium"
+          [svgIcon]="item.icon"
+        ></mat-icon>
+        <div routerLinkActive="text-primary font-medium">{{ item.label }}</div>
+      </a>
+    </div>
+    <div class="flex-grow">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>
