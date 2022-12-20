@@ -1,7 +1,14 @@
 /* ----------------------------------------------------------------------------------------------------- */
 /*  @ Angular Material CDK helpers & overrides
 /* ----------------------------------------------------------------------------------------------------- */
-
+/* ----------------------------------------------------------------------------------------------------- */
+/*  CDK Scrollblock
+/* ----------------------------------------------------------------------------------------------------- */
+.cdk-global-scrollblock {
+  position: static !important;
+  width: initial !important;
+  overflow-y: inherit !important;
+}
 /* ----------------------------------------------------------------------------------------------------- */
 /*  @ Form fields
 /* ----------------------------------------------------------------------------------------------------- */
@@ -403,6 +410,23 @@
       }
     }
   }
+
+  /* Add style for smaller inputs */
+  &.mat-form-field--sm {
+    .mat-form-field-wrapper {
+      .mat-form-field-flex {
+        min-height: 42px;
+        border-radius: 4px;
+
+        .mat-form-field-infix {
+          .mat-input-element {
+            padding: 9px 0;
+          }
+        }
+      }
+    }
+  }
+
 }
 
 /* Fix the outline appearance */
@@ -501,6 +525,7 @@
     min-height: 32px;
     max-height: 32px;
     padding: 0 14px;
+    font-size: 14px;
   }
 
   &.btn--lg {
@@ -689,6 +714,21 @@
   }
 }
 
+/* Mat buttons */
+.mat-button {
+  &.mat-primary:not(.mat-button-disabled).btn--soft {
+    @apply bg-primary-100;
+  }
+
+  &.mat-accent:not(.mat-button-disabled).btn--soft {
+    @apply bg-accent-100;
+  }
+
+  &.mat-warn:not(.mat-button-disabled).btn--soft {
+    @apply bg-warn-100;
+  }
+}
+
 /* ----------------------------------------------------------------------------------------------------- */
 /*  @ Mat icon
 /* ----------------------------------------------------------------------------------------------------- */
@@ -767,4 +807,53 @@ mat-stepper {
 /* ----------------------------------------------------------------------------------------------------- */
 .mat-dialog-container {
   padding: 0 !important;
+}
+
+/* ----------------------------------------------------------------------------------------------------- */
+/*  Table
+/* ----------------------------------------------------------------------------------------------------- */
+.mat-table {
+  // Header cell
+  .mat-header-cell {
+    @apply border-gray-200 #{!important};
+    @apply whitespace-nowrap text-sm font-medium;
+    @apply text-gray-700 #{'!important'};
+  }
+
+  th.mat-header-cell:first-of-type,
+  td.mat-cell:first-of-type,
+  td.mat-footer-cell:first-of-type {
+    @apply pl-4;
+  }
+  th.mat-header-cell:last-of-type,
+  td.mat-cell:last-of-type,
+  td.mat-footer-cell:last-of-type {
+    @apply pr-4;
+  }
+
+  // Cell
+  .mat-cell {
+    @apply border-gray-200 text-gray-700 #{!important};
+    @apply py-2;
+  }
+
+  // Body cell
+  tbody {
+    > tr:last-of-type {
+      > td {
+        border-bottom: 0;
+      }
+    }
+  }
+
+  // Footer cell
+  .mat-footer-cell {
+    @apply border-gray-200 #{!important};
+  }
+
+  th.mat-header-cell,
+  td.mat-cell,
+  td.mat-footer-cell {
+    @apply px-4;
+  }
 }

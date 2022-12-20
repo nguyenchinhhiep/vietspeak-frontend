@@ -1,0 +1,36 @@
+// Basic
+.tag {
+   @apply text-xs py-1 px-3 inline-flex items-center font-medium select-none rounded bg-surface text-current whitespace-nowrap h-8;
+
+   // Rounded
+   &--rounded {
+      @apply rounded-full;
+   }
+
+   // Alternative
+   &--primary {
+      @apply bg-primary-100 text-primary;
+   }
+
+   &--accent {
+      @apply bg-accent-100 text-accent;
+   }
+
+   &--success {
+      @apply bg-success-100 text-success;
+   }
+
+   &--info {
+      @apply bg-info-100 text-info;
+   }
+
+   &--warning {
+      @apply bg-warn-100 text-warn-700;
+   }
+
+   &--danger {
+      @apply bg-danger-100 text-danger;
+   }
+}
+
+

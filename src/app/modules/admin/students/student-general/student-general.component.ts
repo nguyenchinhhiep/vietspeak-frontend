@@ -1,64 +1,60 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { ImageCropperDialogService } from 'src/app/components/image-cropper/image-cropper.service';
 import { ToastService } from 'src/app/components/toast/toast.service';
 import { CustomValidators } from 'src/app/core/validators/validators';
+import {
+  LanguageLevelOptions,
+  learningLanguageOptions,
+  LanguageLevel,
+} from 'src/app/modules/client/onboarding/languages.model';
 
 @Component({
-  selector: 'app-user-profile',
-  templateUrl: './user-profile.component.html',
-  styleUrls: ['./user-profile.component.scss'],
+  selector: 'app-student-general',
+  templateUrl: './student-general.component.html',
+  styleUrls: ['./student-general.component.scss'],
 })
-export class UserProfileComponent implements OnInit {
+export class StudentGeneralComponent implements OnInit {
   constructor(
-    private _imageCropperDialogService: ImageCropperDialogService,
+    private _router: Router,
     private _fb: FormBuilder,
-    private _toastService: ToastService,
+    private _confirmationDialogService: ConfirmationDialogService,
     private _translateService: TranslateService,
-    private _confirmationDialogService: ConfirmationDialogService
+    private _toastService: ToastService,
+    private _imageCropperDialogService: ImageCropperDialogService
   ) {}
+  studentGeneralForm!: FormGroup;
 
-  profileForm!: FormGroup;
+  languageLevelOptions = LanguageLevelOptions;
+  learningLanguageOptions = learningLanguageOptions;
 
   ngOnInit(): void {
     this.createForm();
   }
 
-  createForm() {
-    this.profileForm = this._fb.group({
-      profilePicture: [],
-      profilePictureUrl: [],
-      firstName: ['', Validators.required],
-      lastName: ['', Validators.required],
-      email: ['', [Validators.required, CustomValidators.isEmail()]],
-    });
+  submit() {
+    for (let control in this.studentGeneralForm.controls) {
+      this.studentGeneralForm.controls[control].markAsDirty();
+      this.studentGeneralForm.controls[control].markAsTouched();
+    }
+
+    // Return if the form is invalid
+    if (this.studentGeneralForm.invalid) return;
+
+    // Disable the form
+    this.studentGeneralForm.disable();
   }
 
-  submit() {
-    for (const control in this.profileForm.controls) {
-      this.profileForm.controls[control].markAsTouched();
-      this.profileForm.controls[control].markAsDirty();
-    }
-
-    if (this.profileForm.invalid) {
-      return;
-    }
-
-    const payload = {
-      ...this.profileForm.value,
-    };
-
-    this.profileForm.disable();
-
-    this._toastService.open({
-      message: this._translateService.instant('Toast.UpdateSuccess'),
-      configs: {
-        payload: {
-          type: 'success',
-        },
-      },
+  createForm() {
+    this.studentGeneralForm = this._fb.group({
+      profilePicture: [''],
+      profilePictureUrl: [''],
+      firstName: ['', [Validators.required]],
+      lastName: ['', [Validators.required]],
+      email: ['', [Validators.required, CustomValidators.isEmail()]],
     });
   }
 
@@ -117,8 +113,10 @@ export class UserProfileComponent implements OnInit {
 
     dialogRef?.afterClosed().subscribe((croppedImage) => {
       if (croppedImage != null) {
-        this.profileForm.get('profilePictureUrl')?.setValue(croppedImage);
-        this.profileForm.get('profilePicture')?.setValue(croppedImage);
+        this.studentGeneralForm
+          .get('profilePictureUrl')
+          ?.setValue(croppedImage);
+        this.studentGeneralForm.get('profilePicture')?.setValue(croppedImage);
       }
     });
   }
@@ -129,8 +127,8 @@ export class UserProfileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res === 'confirmed') {
-        this.profileForm.get('profilePictureUrl')?.setValue(null);
-        this.profileForm.get('profilePicture')?.setValue(null);
+        this.studentGeneralForm.get('profilePictureUrl')?.setValue(null);
+        this.studentGeneralForm.get('profilePicture')?.setValue(null);
       }
     });
   }

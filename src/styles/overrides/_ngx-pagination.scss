@@ -1,0 +1,16 @@
+pagination-controls {
+  .ngx-pagination {
+    margin-bottom: 0;
+
+    li {
+      @apply rounded-sm mx-1;
+      a {
+        @apply hover:bg-gray-100 hover:bg-opacity-50 text-gray-500 rounded-sm;
+      }
+    }
+
+    .current {
+      @apply bg-primary text-on-primary;
+    }
+  }
+}

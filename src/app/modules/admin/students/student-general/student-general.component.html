@@ -1,9 +1,8 @@
-<div class="w-full h-full flex flex-col max-w-md">
-  <div class="font-semibold text-gray-900 text-xl mb-3">
-    {{ "UserProfile.Title" | translate }}
+<div class="w-full h-full max-w-md">
+  <div class="font-semibold text-gray-900 text-xl">
+    {{ "General" | translate }}
   </div>
-
-  <form [formGroup]="profileForm" class="flex flex-col">
+  <form class="mt-3" [formGroup]="studentGeneralForm" (ngSubmit)="submit()">
     <div class="flex flex-col gap-2 mb-2">
       <div class="text-gray-500">Profile picture</div>
       <div
@@ -11,22 +10,22 @@
       >
         <div class="flex gap-6 items-center">
           <img
-            *ngIf="profileForm.get('profilePictureUrl')?.value"
+            *ngIf="studentGeneralForm.get('profilePictureUrl')?.value"
             class="w-16 h-16 rounded-full overflow-hidden"
-            [src]="profileForm.get('profilePictureUrl')?.value"
+            [src]="studentGeneralForm.get('profilePictureUrl')?.value"
             alt=""
           />
           <div
-            *ngIf="!profileForm.get('profilePictureUrl')?.value"
+            *ngIf="!studentGeneralForm.get('profilePictureUrl')?.value"
             class="w-16 h-16 rounded-full overflow-hidden flex justify-center items-center font-medium bg-primary text-white uppercase text-2xl"
           >
-            {{ profileForm.get("firstName")?.value?.charAt(0) || "H" }}
+            {{ studentGeneralForm.get("firstName")?.value?.charAt(0) || "H" }}
           </div>
 
           <div class="flex gap-4 justify-center">
             <!-- Remove image -->
             <button
-              *ngIf="profileForm.get('profilePictureUrl')?.value"
+              *ngIf="studentGeneralForm.get('profilePictureUrl')?.value"
               type="button"
               class="btn--sm"
               mat-button
@@ -44,7 +43,7 @@
               (click)="uploadProfilePictureFile.click()"
             >
               {{
-                profileForm.get("profilePictureUrl")?.value
+                studentGeneralForm.get("profilePictureUrl")?.value
                   ? ("FileUpload.Change" | translate)
                   : ("FileUpload.BrowseFiles" | translate)
               }}
@@ -64,7 +63,7 @@
       </div>
     </div>
     <mat-form-field appearance="fill" class="w-full mat-form-field--sm">
-      <mat-label>{{ "UserProfile.FirstName" | translate }}</mat-label>
+      <mat-label>{{ "StudentInfo.FirstName" | translate }}</mat-label>
       <input
         matInput
         formControlName="firstName"
@@ -75,68 +74,75 @@
         mat-icon-button
         type="button"
         matSuffix
-        *ngIf="firstName.value != '' && !profileForm.disabled"
-        (click)="profileForm.get('firstName')?.setValue('')"
+        *ngIf="firstName.value != '' && !studentGeneralForm.disabled"
+        (click)="studentGeneralForm.get('firstName')?.setValue('')"
       >
         <mat-icon
           class="icon-size-5"
           [svgIcon]="'mat_outline:close'"
         ></mat-icon>
       </button>
-      <mat-error *ngIf="profileForm.get('firstName')?.hasError('required')">{{
-        "Errors.Required" | translate
-      }}</mat-error>
+      <mat-error
+        *ngIf="studentGeneralForm.get('firstName')?.hasError('required')"
+        >{{ "Errors.Required" | translate }}</mat-error
+      >
     </mat-form-field>
     <mat-form-field appearance="fill" class="w-full mat-form-field--sm">
-      <mat-label>{{ "UserProfile.LastName" | translate }}</mat-label>
+      <mat-label>{{ "StudentInfo.LastName" | translate }}</mat-label>
       <input matInput formControlName="lastName" appPreventAutoFill #lastName />
       <button
         mat-icon-button
         type="button"
         matSuffix
-        *ngIf="lastName.value != '' && !profileForm.disabled"
-        (click)="profileForm.get('lastName')?.setValue('')"
+        *ngIf="lastName.value != '' && !studentGeneralForm.disabled"
+        (click)="studentGeneralForm.get('lastName')?.setValue('')"
       >
         <mat-icon
           class="icon-size-5"
           [svgIcon]="'mat_outline:close'"
         ></mat-icon>
       </button>
-      <mat-error *ngIf="profileForm.get('lastName')?.hasError('required')">{{
-        "Errors.Required" | translate
-      }}</mat-error>
+      <mat-error
+        *ngIf="studentGeneralForm.get('lastName')?.hasError('required')"
+        >{{ "Errors.Required" | translate }}</mat-error
+      >
     </mat-form-field>
     <mat-form-field appearance="fill" class="w-full mat-form-field--sm">
       <mat-label>Email</mat-label>
       <input matInput name="email" formControlName="email" #email />
-      <mat-error *ngIf="profileForm.get('email')?.hasError('required')">
+      <mat-error *ngIf="studentGeneralForm.get('email')?.hasError('required')">
         {{ "Errors.Required" | translate }}
       </mat-error>
-      <mat-error *ngIf="profileForm.get('email')?.hasError('email')">{{
+      <mat-error *ngIf="studentGeneralForm.get('email')?.hasError('email')">{{
         "Errors.Email" | translate
       }}</mat-error>
-      <mat-error *ngIf="profileForm.get('email')?.hasError('existingEmail')">{{
-        "Errors.ExistingEmail" | translate
-      }}</mat-error>
+      <mat-error
+        *ngIf="studentGeneralForm.get('email')?.hasError('existingEmail')"
+        >{{ "Errors.ExistingEmail" | translate }}</mat-error
+      >
 
       <button
         mat-icon-button
         type="button"
         matSuffix
         *ngIf="
-          profileForm.get('email')?.status !== 'PENDING' &&
+          studentGeneralForm.get('email')?.status !== 'PENDING' &&
           email.value != '' &&
-          !profileForm.disabled &&
-          !profileForm.get('email')?.valid
+          !studentGeneralForm.disabled &&
+          !studentGeneralForm.get('email')?.valid
         "
-        (click)="profileForm.get('email')?.setValue('')"
+        (click)="studentGeneralForm.get('email')?.setValue('')"
       >
         <mat-icon
           class="icon-size-5"
           [svgIcon]="'mat_outline:close'"
         ></mat-icon>
       </button>
-      <div class="ml-2" matSuffix *ngIf="profileForm.get('email')?.valid">
+      <div
+        class="ml-2"
+        matSuffix
+        *ngIf="studentGeneralForm.get('email')?.valid"
+      >
         <mat-icon
           class="!text-success"
           [svgIcon]="'mat_outline:check_circle'"
@@ -144,7 +150,7 @@
       </div>
       <mat-progress-spinner
         [diameter]="24"
-        *ngIf="profileForm.get('email')?.status === 'PENDING'"
+        *ngIf="studentGeneralForm.get('email')?.status === 'PENDING'"
         mode="indeterminate"
         matSuffix
       >
@@ -156,14 +162,14 @@
         class="btn--lg w-full"
         mat-flat-button
         [color]="'primary'"
-        [disabled]="profileForm.disabled"
+        [disabled]="studentGeneralForm.disabled"
       >
-        <span *ngIf="!profileForm.disabled">
+        <span *ngIf="!studentGeneralForm.disabled">
           {{ "Actions.Save" | translate }}
         </span>
 
         <mat-progress-spinner
-          *ngIf="profileForm.disabled"
+          *ngIf="studentGeneralForm.disabled"
           [diameter]="24"
           mode="indeterminate"
         >

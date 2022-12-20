@@ -16,7 +16,7 @@ export const adminNavigation: NavigationItem[] = [
     translateKey: 'AdminNavigations.Tutors',
     type: 'basic',
     icon: 'mat_outline:portrait',
-    link: '/admin/tutors',
+    link: '/admin/tutor',
     disabled: false,
   },
   {
@@ -25,7 +25,7 @@ export const adminNavigation: NavigationItem[] = [
     translateKey: 'AdminNavigations.Students',
     type: 'basic',
     icon: 'mat_outline:portrait',
-    link: '/admin/students',
+    link: '/admin/student',
     disabled: false,
   },
 ];

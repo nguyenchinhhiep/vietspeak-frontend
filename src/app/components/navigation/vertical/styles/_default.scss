@@ -213,13 +213,13 @@ vertical-navigation {
         &:not(.vertical-navigation-item--disabled) {
           &:hover,
           &.vertical-navigation-item--active {
-            @apply bg-hover text-current;
+            @apply bg-primary-100 text-current;
           }
 
           &.vertical-navigation-item--active {
             /* Icon */
             .vertical-navigation-item__icon {
-              @apply text-default;
+              @apply text-primary;
             }
 
             /* Title */

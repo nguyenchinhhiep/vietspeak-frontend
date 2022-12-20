@@ -15,7 +15,7 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   {
-    path: 'tutors',
+    path: 'tutor',
     data: {
       authLayout: 'admin',
     },
@@ -23,7 +23,7 @@ const routes: Routes = [
       import('./tutors/tutors.module').then((m) => m.TutorsModule),
   },
   {
-    path: 'students',
+    path: 'student',
     data: {
       authLayout: 'admin',
     },
