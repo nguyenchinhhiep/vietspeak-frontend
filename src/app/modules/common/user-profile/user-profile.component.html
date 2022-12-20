@@ -1,5 +1,5 @@
 <div class="w-full h-full flex flex-col max-w-md">
-  <div class="font-semibold text-gray-900 text-xl mb-3">
+  <div class="font-medium text-gray-900 text-xl mb-3">
     {{ "UserProfile.Title" | translate }}
   </div>
 
@@ -7,9 +7,9 @@
     <div class="flex flex-col gap-2 mb-2">
       <div class="text-gray-500">Profile picture</div>
       <div
-        class="rounded border border-solid bg-white border-gray-300 px-6 py-3 flex flex-col justify-center shadow-sm"
+        class="rounded border border-solid bg-white border-gray-300 px-6 py-4 flex flex-col items-center shadow-sm"
       >
-        <div class="flex gap-6 items-center">
+        <div class="flex flex-col gap-4 items-center">
           <img
             *ngIf="profileForm.get('profilePictureUrl')?.value"
             class="w-16 h-16 rounded-full overflow-hidden"

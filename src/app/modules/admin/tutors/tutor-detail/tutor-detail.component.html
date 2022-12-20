@@ -1,11 +1,11 @@
-<div class="flex flex-col w-full max-w-6xl mx-auto gap-4 overflow-hidden">
-  <div class="font-semibold text-gray-900 text-2xl">
-    {{ "Tutor info" | translate }}
-  </div>
+<div class="flex flex-col w-full max-w-6xl mx-auto overflow-hidden">
   <div class="flex-grow flex-wrap md:flex-nowrap flex gap-8">
     <div class="flex flex-col w-64 flex-shrink-0">
+      <div class="font-semibold text-gray-900 text-2xl mb-4">
+        {{ "Tutor info" | translate }}
+      </div>
       <a
-        class="flex items-center gap-3 hover:no-underline px-3 py-2 rounded text-gray-500 cursor-pointer hover:bg-gray-200"
+        class="flex items-center gap-3 hover:no-underline px-3 py-2 rounded text-gray-500 cursor-pointer mb-2 hover:bg-gray-200"
         *ngFor="let item of navigation"
         [routerLink]="item.routerLink"
         routerLinkActive="bg-gray-200"
