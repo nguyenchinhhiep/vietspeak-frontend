@@ -11,37 +11,20 @@ import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { StudentDetailComponent } from './student-detail/student-detail.component';
-import { StudentGeneralComponent } from './student-general/student-general.component';
 import { ImageCropperDialogModule } from 'src/app/components/image-cropper/image-cropper.module';
+import { MatMenuModule } from '@angular/material/menu';
 
 const routes: Routes = [
   {
     path: '',
     component: StudentsComponent,
   },
-  {
-    path: ':id',
-    component: StudentDetailComponent,
-    children: [
-      {
-        path: '',
-        redirectTo: 'general',
-        pathMatch: 'full',
-      },
-      {
-        path: 'general',
-        component: StudentGeneralComponent,
-      },
-    ],
-  },
+
 ];
 
 @NgModule({
   declarations: [
     StudentsComponent,
-    StudentGeneralComponent,
-    StudentDetailComponent,
   ],
   imports: [
     CommonModule,
@@ -56,6 +39,7 @@ const routes: Routes = [
     MatSelectModule,
     MatButtonModule,
     ImageCropperDialogModule,
+    MatMenuModule,
     RouterModule.forChild(routes),
   ],
 })

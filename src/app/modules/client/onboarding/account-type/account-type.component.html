@@ -10,13 +10,13 @@
         <languages></languages>
       </div>
 
-      <button class="btn" type="button" mat-button (click)="logout()">
+      <button type="button" mat-button (click)="logout()">
         <div class="text-primary">{{ "OnBoarding.Logout" | translate }}</div>
       </button>
     </div>
 
     <div class="w-full max-w-md">
-      <div class="font-semibold text-gray-900 text-2xl text-center mb-10">
+      <div class="font-medium text-gray-900 text-2xl text-center mb-10">
         {{ "SelectAccountType.Title" | translate }}
       </div>
 
@@ -27,11 +27,11 @@
           (click)="onSelectAccountType(type)"
         >
           <div
-            class="shadow rounded-md w-48 h-48 flex justify-center items-center bg-white shadow-sm"
+            class="shadow rounded-md w-48 h-48 flex justify-center items-center bg-white shadow-sm border-solid"
             [ngClass]="
               selectedAccountType === type
                 ? 'border-primary border-4'
-                : 'border-gray-300 border-2 '
+                : 'border-gray-200 border-1 '
             "
           >
             <mat-icon
@@ -64,7 +64,7 @@
           [disabled]="accountTypeForm.disabled || accountTypeForm.invalid"
         >
           <span *ngIf="!accountTypeForm.disabled">
-            {{ "Actions.Continue" | translate }}
+            {{ "Action.Continue" | translate }}
           </span>
 
           <mat-progress-spinner

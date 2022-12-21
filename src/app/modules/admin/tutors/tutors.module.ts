@@ -9,11 +9,16 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTableModule } from '@angular/material/table';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { TutorDetailComponent } from './tutor-detail/tutor-detail.component';
-import { TutorGeneralComponent } from './tutor-general/tutor-general.component';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { TranslateModule } from '@ngx-translate/core';
 import { ImageCropperDialogModule } from 'src/app/components/image-cropper/image-cropper.module';
+import { MatMenuModule } from '@angular/material/menu';
+import { TutorDetailComponent } from './tutor-detail/tutor-detail.component';
+import { TutorProfileComponent } from './tutor-profile/tutor-profile.component';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
+import { MatRadioModule } from '@angular/material/radio';
 
 const routes: Routes = [
   {
@@ -26,19 +31,19 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        redirectTo: 'general',
+        redirectTo: 'profile',
         pathMatch: 'full',
       },
       {
-        path: 'general',
-        component: TutorGeneralComponent,
+        path: 'profile',
+        component: TutorProfileComponent,
       },
     ],
   },
 ];
 
 @NgModule({
-  declarations: [TutorsComponent, TutorDetailComponent, TutorGeneralComponent],
+  declarations: [TutorsComponent, TutorDetailComponent, TutorProfileComponent],
   imports: [
     CommonModule,
     TranslateModule,
@@ -52,7 +57,28 @@ const routes: Routes = [
     MatSelectModule,
     MatButtonModule,
     ImageCropperDialogModule,
+    MatMenuModule,
+    MatDatepickerModule,
+    MatMomentDateModule,
+    MatRadioModule,
     RouterModule.forChild(routes),
+  ],
+  providers: [
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: 'YYYY-MM-DD',
+        },
+        display: {
+          dateInput: 'DD/MM/YYYY',
+          monthLabel: 'MMM',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+      },
+    },
   ],
 })
 export class TutorsModule {}

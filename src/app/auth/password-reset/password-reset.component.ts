@@ -44,7 +44,7 @@ export class PasswordResetComponent implements OnInit {
 
       if (!token || !userId) {
         this._toastService.open({
-          message: this._translateService.instant('Errors.InvalidRequest'),
+          message: this._translateService.instant('Error.InvalidRequest'),
           configs: {
             payload: {
               type: 'error',

@@ -1,47 +1,6 @@
 {
-   "Home": {
-      "Welcome": "Welcome, {{name}}!"
-   },
-   "ImageCropper": {
-      "Title": "Crop image"
-   },
-   "AdminNavigations": {
-      "Home": "Home",
-      "Tutors": "Tutors",
-      "Students": "Students"
-   },
-   "Toast": {
-      "CreateSuccess": "Create successfully",
-      "UpdateSuccess": "Update successfully",
-      "DeleteSuccess": "Delete successfully"
-   },
-   "Languages": {
-      "English": "English",
-      "Vietnamese": "Vietnamese",
-      "Chinese": "Chinese",
-      "Thai": "Thai",
-      "Japanese": "Japanese",
-      "Korean": "Korean",
-      "Native": "Native",
-      "No": "No"
-   },
-   "Settings": {
-      "Title": "Settings",
-      "Profile": "Profile",
-      "Password": "Password"
-   },
-   "UserProfile": {
-      "Title": "Profile",
-      "FirstName": "First name",
-      "LastName": "Last name"
-   },
-   "ChangePassword": {
-      "Title": "Change password",
-      "CurrentPassword": "Current password",
-      "NewPassword": "New password",
-      "ConfirmNewPassword": "Confirm new password"
-   },
-   "Errors": {
+   "Error": {
+      "Title": "Error",
       "Required": "This field is required",
       "Email": "Please enter a valid email",
       "ExistingEmail": "Email already exists",
@@ -52,10 +11,18 @@
       "File": "Please upload a document",
       "InvalidRequest": "Invalid request"
    },
-   "Hints": {
+   "Hint": {
+      "Title": "Hint",
       "CharactersRemaining": "{{remainingLength}} characters remaining"
    },
-   "Actions": {
+   "Status": {
+      "Title": "Status",
+      "Active": "Active",
+      "Inactive": "Inactive",
+      "Pending": "Pending"
+   },
+   "Action": {
+      "Title": "Action",
       "Select": "Select",
       "Continue": "Continue",
       "Back": "Back",
@@ -66,7 +33,18 @@
       "Confirm": "Confirm",
       "Cancel": "Cancel",
       "Save": "Save",
-      "Change": "Change"
+      "Change": "Change",
+      "Delete": "Delete",
+      "Edit": "Edit",
+      "Update": "Update",
+      "Remove": "Remove",
+      "Approve": "Approve",
+      "Reject": "Reject"
+   },
+   "Toast": {
+      "CreateSuccessfully": "Create successfully",
+      "UpdateSuccessfully": "Update successfully",
+      "DeleteSuccessfully": "Delete successfully"
    },
    "Confirmation": {
       "Title": "Confirmation",
@@ -80,33 +58,51 @@
       "Or": "or",
       "BrowseFiles": "Browse files",
       "Change": "Change",
+      "AddAPhoto": "Add a photo",
       "OnlyAllowedFileType": "You are allowed to only upload {{fileType}} file",
       "FileTooLarge": "File is too large. Maximum upload size is {{maxUploadSize}}",
       "OnlyAllowedFileQuantity": "You are allowed to only upload maximum {{quantity}} file(s)",
-      "OnlyFileTypeAndMaxSize": "only {{fileType}}, max size: {{maxSize}}"
+      "OnlyFileTypeAndMaxSize": "only {{fileType}}, max size: {{maxSize}}",
+      "MaxSize": "max size: {{maxSize}}"
+   },
+   "ImageCropper": {
+      "Title": "Crop image"
+   },
+   "Role": {
+      "Admin": "Admin",
+      "Tutor": "Tutor",
+      "Student": "Student"
+   },
+   "Table": {
+      "NoData": "No data",
+      "To": "to",
+      "Of": "of",
+      "Records": "records",
+      "No": "No",
+      "Photo": "Photo",
+      "Name": "Name",
+      "Status": "Status",
+      "Action": "Action"
    },
    "Login": {
       "Title": "Login",
       "Password": "Password",
       "ForgotPassword": "Forgot password",
-      "DontHaveAccount": "Don't have an account yet",
-      "Continue": "Continue"
+      "DontHaveAccount": "Don't have an account yet"
    },
    "Register": {
       "Title": "Register",
       "Password": "Password",
       "ConfirmPassword": "Confirm password",
       "Agreement": "By creating an account, you agree to the <a>Terms of Service</a> and <a>Privacy Policy</a>",
-      "AlreadyHaveAccount": "Already have an account",
-      "Continue": "Continue"
+      "AlreadyHaveAccount": "Already have an account"
    },
    "ForgotPassword": {
       "Title": "Forgot password",
       "SubTitle": "Enter your email address and we will send you instructions to reset your password",
-      "Continue": "Continue",
-      "BackTo": "Back to",
       "AlreadyHaveAccount": "Already have an account",
-      "SentEmailSuccess": "We've sent a link to your email with instructions to reset your password"
+      "SentEmailSuccess": "We've sent a link to your email with instructions to reset your password",
+      "BackTo": "Back to"
    },
    "PasswordReset": {
       "Title": "Reset password",
@@ -117,7 +113,6 @@
       "GoLoginWithNewPassword": "You can now use your new password to login to your account"
    },
    "OnBoarding": {
-      "Back": "Back",
       "Logout": "Logout",
       "WhereHeardFrom": "Where did you hear about Vietspeak?",
       "WebSearch": "Web search",
@@ -127,7 +122,6 @@
    },
    "SelectAccountType": {
       "Title": "Choose account type",
-      "Continue": "Continue",
       "Student": "Student",
       "Tutor": "Tutor"
    },
@@ -136,12 +130,10 @@
       "LanguageWantToLearn": "Which language do you want to learn?",
       "FirstName": "First name",
       "LastName": "Last name",
-      "Level": "Level",
+      "Level": "Current level",
       "Beginner": "Beginner",
       "Intermediate": "Intermediate",
-      "Advanced": "Advanced",
-      "Complete": "Complete",
-      "Continue": "Continue"
+      "Advanced": "Advanced"
    },
    "TutorInfo": {
       "Title": "Tutor info",
@@ -170,10 +162,51 @@
       "HaveExperienceTeachingOnline": "Do you have experience teaching online?",
       "TeachingCertificates": "Teaching certificates",
       "ProfilePicture": "Profile picture",
-      "Introduction": "Introduction",
-      "IntroductionDescription": "Say hello and introduce yourself to students! This will be the first thing students read about you when looking at their tutor profile",
-      "Next": "Next",
-      "Continue": "Continue",
-      "Complete": "Complete"
+      "AboutMe": "About me",
+      "IntroductionDescription": "Say hello and introduce yourself to students! This will be the first thing students read about you when looking at their tutor profile"
+   },
+   "Home": {
+      "Welcome": "Welcome, {{name}}!"
+   },
+   "AdminNavigations": {
+      "Home": "Home",
+      "Tutors": "Tutors",
+      "Students": "Students"
+   },
+   "Languages": {
+      "English": "English",
+      "Vietnamese": "Vietnamese",
+      "Chinese": "Chinese",
+      "Thai": "Thai",
+      "Japanese": "Japanese",
+      "Korean": "Korean",
+      "Native": "Native",
+      "No": "No"
+   },
+   "Settings": {
+      "Title": "Settings",
+      "Profile": "Profile",
+      "Password": "Password"
+   },
+   "UserProfile": {
+      "Title": "Profile",
+      "FirstName": "First name",
+      "LastName": "Last name"
+   },
+   "ChangePassword": {
+      "Title": "Change password",
+      "CurrentPassword": "Current password",
+      "NewPassword": "New password",
+      "ConfirmNewPassword": "Confirm new password"
+   },
+   "Tutor": {
+      "Title": "Tutor",
+      "Titles": "Tutors",
+      "SearchPlaceholder": "Find by name or email"
+   },
+   "Student": {
+      "Title": "Student",
+      "Titles": "Students",
+      "SearchPlaceholder": "Find by name or email"
    }
 }

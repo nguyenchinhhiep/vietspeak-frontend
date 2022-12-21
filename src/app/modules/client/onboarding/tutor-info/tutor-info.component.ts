@@ -98,7 +98,7 @@ export class TutorInfoComponent implements OnInit {
       profilePictureUrl: [],
       heardFrom: [HeardFrom.WebSearch],
       reasonHere: ['', [Validators.required]],
-      introduction: ['', [Validators.required]],
+      aboutMe: ['', [Validators.required]],
     });
 
     this.tutorBasicInfoForm

@@ -73,28 +73,10 @@ export class OnboardingGuard implements CanActivate, CanActivateChild, CanLoad {
     // Get current user role
     const currentRole = currentUser?.role;
 
-    // If current url is onboarding
-    if (currentUrl.includes('onboarding')) {
-      // If user is pending
-      if (currentUser?.status === UserStatus.Pending) {
-        // Handle based on current role
-        this._checkRole(currentRole);
-
-        // Allow the access
-        return of(true);
-      }
-
-      // Redirect to the root
-      this._router.navigate(['']);
-
-      // Prevent the access
-      return of(false);
-    }
-
-    // If user is pending
+    // If the user is pending
     if (currentUser?.status === UserStatus.Pending) {
-      // Handle based on current role
-      this._checkRole(currentRole);
+      // Navigate based on current role
+      this._navigateBasedOnRole(currentRole);
 
       // Prevent the access
       return of(false);
@@ -103,10 +85,17 @@ export class OnboardingGuard implements CanActivate, CanActivateChild, CanLoad {
     // Allow the access
     return of(true);
   }
-
-  private _checkRole(currentRole: any): void {
+  /**
+   *
+   * @param currentRole
+   */
+  private _navigateBasedOnRole(currentRole: any): void {
     if (currentRole == null) {
       this._router.navigate(['/onboarding']);
+    }
+
+    if (currentRole === Role.Admin) {
+      this._router.navigate(['/admin']);
     }
 
     if (currentRole === Role.Student) {

@@ -1,27 +1,27 @@
 import { Role } from './role.model';
 
 export enum UserStatus {
-  Active = 'active',
-  Inactive = 'inactive',
-  Pending = 'pending',
+  Active = 'Active',
+  Inactive = 'Inactive',
+  Pending = 'Pending',
 }
 
 export const UserStatusOptions = [
   {
     label: 'Active',
-    translateKey: 'UserStatus.Active',
+    translateKey: 'Status.Active',
     class: 'tag--success',
     value: UserStatus.Active,
   },
   {
     label: 'Inactive',
-    translateKey: 'UserStatus.Inactive',
+    translateKey: 'Status.Inactive',
     class: 'tag--danger',
     value: UserStatus.Active,
   },
   {
     label: 'Pending',
-    translateKey: 'UserStatus.Pending',
+    translateKey: 'Status.Pending',
     class: 'tag--warning',
     value: UserStatus.Active,
   },
@@ -30,7 +30,7 @@ export const UserStatusOptions = [
 export interface IUser {
   id: string;
   email: string;
-  role: Role;
+  role?: Role;
   status: UserStatus;
   firstName?: string;
   lastName?: string;

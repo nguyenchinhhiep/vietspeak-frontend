@@ -25,8 +25,10 @@
         </button>
       </div>
     </div>
-    <div class="w-full max-w-sm">
-      <div class="font-semibold text-gray-900 text-2xl mb-2 text-center">
+    <div
+      class="w-full max-w-md sm:bg-white sm:p-10 sm:py-12 sm:rounded-md sm:shadow-sm sm:border border-solid border-gray-200"
+    >
+      <div class="font-medium text-gray-900 text-2xl mb-2 text-center">
         {{ "Register.Title" | translate }}
       </div>
 
@@ -40,14 +42,14 @@
           <mat-label>Email</mat-label>
           <input matInput name="email" formControlName="email" #email />
           <mat-error *ngIf="registerForm.get('email')?.hasError('required')">
-            {{ "Errors.Required" | translate }}
+            {{ "Error.Required" | translate }}
           </mat-error>
           <mat-error *ngIf="registerForm.get('email')?.hasError('email')">{{
-            "Errors.Email" | translate
+            "Error.Email" | translate
           }}</mat-error>
           <mat-error
             *ngIf="registerForm.get('email')?.hasError('existingEmail')"
-            >{{ "Errors.ExistingEmail" | translate }}</mat-error
+            >{{ "Error.ExistingEmail" | translate }}</mat-error
           >
 
           <button
@@ -111,13 +113,13 @@
             ></mat-icon>
           </button>
           <mat-error *ngIf="registerForm.get('password')?.hasError('required')">
-            {{ "Errors.Required" | translate }}
+            {{ "Error.Required" | translate }}
           </mat-error>
           <mat-error
             *ngIf="registerForm.get('password')?.hasError('minlength')"
           >
             {{
-              "Errors.MinLength"
+              "Error.MinLength"
                 | translate
                   : { control: ("Register.Password" | translate), length: "6" }
             }}
@@ -155,13 +157,13 @@
           <mat-error
             *ngIf="registerForm.get('confirmPassword')?.hasError('required')"
           >
-            {{ "Errors.Required" | translate }}
+            {{ "Error.Required" | translate }}
           </mat-error>
           <mat-error
             *ngIf="registerForm.get('confirmPassword')?.hasError('mustMatch')"
           >
             {{
-              "Errors.MustMatch"
+              "Error.MustMatch"
                 | translate
                   : {
                       control: ("Register.Password" | translate),
@@ -181,7 +183,7 @@
           [disabled]="registerForm.disabled"
         >
           <span *ngIf="!registerForm.disabled">
-            {{ "Actions.Continue" | translate }}
+            {{ "Action.Continue" | translate }}
           </span>
           <mat-progress-spinner
             *ngIf="registerForm.disabled"

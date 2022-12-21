@@ -15,7 +15,7 @@
             svgIcon="mat_outline:arrow_back"
           ></mat-icon>
           <div class="text-gray-500">
-            {{ "Actions.Back" | translate }}
+            {{ "Action.Back" | translate }}
           </div>
         </div>
       </button>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="w-full max-w-xl sm:px-6">
-      <div class="font-semibold text-gray-900 text-2xl text-center">
+      <div class="font-medium text-gray-900 text-2xl text-center">
         {{ "StudentInfo.Title" | translate }}
       </div>
       <form class="mt-8" [formGroup]="studentInfoForm" (ngSubmit)="submit()">
@@ -38,7 +38,7 @@
           }}</mat-label>
           <mat-select
             formControlName="learningLanguage"
-            placeholder="{{ 'Actions.Select' | translate }}"
+            placeholder="{{ 'Action.Select' | translate }}"
           >
             <mat-select-trigger>
               <div class="flex gap-3 items-center">
@@ -82,14 +82,14 @@
             *ngIf="
               studentInfoForm.get('learningLanguage')?.hasError('required')
             "
-            >{{ "Errors.Required" | translate }}</mat-error
+            >{{ "Error.Required" | translate }}</mat-error
           >
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>{{ "StudentInfo.Level" | translate }}</mat-label>
           <mat-select
             formControlName="currentLevel"
-            placeholder="{{ 'Actions.Select' | translate }}"
+            placeholder="{{ 'Action.Select' | translate }}"
           >
             <mat-option
               *ngFor="let item of languageLevelOptions"
@@ -100,7 +100,7 @@
           </mat-select>
           <mat-error
             *ngIf="studentInfoForm.get('occupation')?.hasError('required')"
-            >{{ "Errors.Required" | translate }}</mat-error
+            >{{ "Error.Required" | translate }}</mat-error
           >
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
@@ -125,7 +125,7 @@
           </button>
           <mat-error
             *ngIf="studentInfoForm.get('firstName')?.hasError('required')"
-            >{{ "Errors.Required" | translate }}</mat-error
+            >{{ "Error.Required" | translate }}</mat-error
           >
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
@@ -150,7 +150,7 @@
           </button>
           <mat-error
             *ngIf="studentInfoForm.get('lastName')?.hasError('required')"
-            >{{ "Errors.Required" | translate }}</mat-error
+            >{{ "Error.Required" | translate }}</mat-error
           >
         </mat-form-field>
 
@@ -158,7 +158,7 @@
           <mat-label>{{ "OnBoarding.WhereHeardFrom" | translate }}</mat-label>
           <mat-select
             formControlName="heardFrom"
-            placeholder="{{ 'Actions.Select' | translate }}"
+            placeholder="{{ 'Action.Select' | translate }}"
           >
             <mat-option
               *ngFor="let item of heardFromOptions"
@@ -169,7 +169,7 @@
           </mat-select>
           <mat-error
             *ngIf="studentInfoForm.get('occupation')?.hasError('required')"
-            >{{ "Errors.Required" | translate }}</mat-error
+            >{{ "Error.Required" | translate }}</mat-error
           >
         </mat-form-field>
         <div class="mt-4 flex justify-center">
@@ -181,7 +181,7 @@
             [disabled]="studentInfoForm.disabled"
           >
             <span *ngIf="!studentInfoForm.disabled">
-              {{ "Actions.Continue" | translate }}
+              {{ "Action.Continue" | translate }}
             </span>
 
             <mat-progress-spinner

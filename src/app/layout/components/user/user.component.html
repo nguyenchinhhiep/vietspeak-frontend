@@ -1,6 +1,6 @@
 <button
   mat-button
-  class="!rounded-full"
+  class="!rounded-full btn--lg"
   type="button"
   [matMenuTriggerFor]="userMenu"
 >
@@ -36,7 +36,7 @@
     <mat-divider></mat-divider>
     <button type="button" mat-menu-item (click)="logout()">
       <mat-icon svgIcon="mat_outline:logout" class="text-icon"></mat-icon>
-      <span>{{ "Actions.Logout" | translate }}</span>
+      <span>{{ "Action.Logout" | translate }}</span>
     </button>
   </ng-template>
 </mat-menu>

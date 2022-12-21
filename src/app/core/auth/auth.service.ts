@@ -5,6 +5,7 @@ import { ApiEndpoint, ApiMethod, IApiResponse } from '../http/api.model';
 import { HttpService } from '../http/services/http.service';
 import { StorageKey, StorageType } from '../storage/storage.model';
 import { StorageService } from '../storage/storage.service';
+import { Role } from '../user/role.model';
 import { UserService } from '../user/user.service';
 import { AuthUtils } from './auth.utils';
 
@@ -316,5 +317,27 @@ export class AuthService {
     }
 
     return result;
+  }
+
+  /**
+   * 
+   * @param role 
+   */
+  navigateBasedOnRole(role: any): void {
+    if (role == null) {
+      this._router.navigate(['/onboarding']);
+    }
+
+    if (role === Role.Student) {
+      this._router.navigate(['/student']);
+    }
+
+    if (role === Role.Tutor) {
+      this._router.navigate(['/tutor']);
+    }
+
+    if (role === Role.Admin) {
+      this._router.navigate(['/admin']);
+    }
   }
 }

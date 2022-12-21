@@ -57,7 +57,7 @@ export class ChangePasswordComponent implements OnInit {
     this.changePasswordForm.disable();
 
     this._toastService.open({
-      message: this._translateService.instant('Toast.UpdateSuccess'),
+      message: this._translateService.instant('Toast.UpdateSuccessfully'),
       configs: {
         payload: {
           type: 'success',

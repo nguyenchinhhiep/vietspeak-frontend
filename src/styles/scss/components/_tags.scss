@@ -1,36 +1,34 @@
 // Basic
 .tag {
-   @apply text-xs py-1 px-3 inline-flex items-center font-medium select-none rounded bg-surface text-current whitespace-nowrap h-8;
+  @apply text-xs py-1 px-3 inline-flex items-center font-medium select-none rounded bg-surface text-current whitespace-nowrap h-8;
 
-   // Rounded
-   &--rounded {
-      @apply rounded-full;
-   }
+  // Rounded
+  &--rounded {
+    @apply rounded-full;
+  }
 
-   // Alternative
-   &--primary {
-      @apply bg-primary-100 text-primary;
-   }
+  // Alternative
+  &--primary {
+    @apply bg-primary text-white;
+  }
 
-   &--accent {
-      @apply bg-accent-100 text-accent;
-   }
+  &--accent {
+    @apply bg-accent text-white;
+  }
 
-   &--success {
-      @apply bg-success-100 text-success;
-   }
+  &--success {
+    @apply bg-success text-white;
+  }
 
-   &--info {
-      @apply bg-info-100 text-info;
-   }
+  &--info {
+    @apply bg-info text-white;
+  }
 
-   &--warning {
-      @apply bg-warn-100 text-warn-700;
-   }
+  &--warning {
+    @apply bg-warn text-on-warn-700;
+  }
 
-   &--danger {
-      @apply bg-danger-100 text-danger;
-   }
+  &--danger {
+    @apply bg-danger text-white;
+  }
 }
-
-

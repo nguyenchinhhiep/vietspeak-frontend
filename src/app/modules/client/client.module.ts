@@ -1,17 +1,20 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { Role } from 'src/app/core/user/role.model';
-import { OnboardingGuard } from './onboarding/onboarding.guard';
+import { NoOnboardingGuard } from './onboarding/guards/no-onboarding.guard';
+import { OnboardingGuard } from './onboarding/guards/onboarding.guard';
 
 const routes: Routes = [
   {
     path: 'onboarding',
-    canActivate: [OnboardingGuard],
+    canLoad: [NoOnboardingGuard],
+    canActivate: [NoOnboardingGuard],
     loadChildren: () =>
       import('./onboarding/onboarding.module').then((m) => m.OnboardingModule),
   },
   {
     path: 'tutor',
+    canLoad: [OnboardingGuard],
     canActivate: [OnboardingGuard],
     data: {
       roles: [Role.Tutor],
@@ -21,6 +24,7 @@ const routes: Routes = [
   },
   {
     path: 'student',
+    canLoad: [OnboardingGuard],
     canActivate: [OnboardingGuard],
     data: {
       roles: [Role.Student],
@@ -32,6 +36,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],
-  providers: [OnboardingGuard],
+  providers: [OnboardingGuard, NoOnboardingGuard],
 })
 export class ClientModule {}

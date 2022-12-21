@@ -426,7 +426,6 @@
       }
     }
   }
-
 }
 
 /* Fix the outline appearance */
@@ -501,9 +500,9 @@
   display: inline-flex !important;
   align-items: center;
   justify-content: center;
-  height: 48px;
-  min-height: 48px;
-  max-height: 48px;
+  height: 40px !important;
+  min-height: 40px !important;
+  max-height: 40px !important;
   line-height: 1 !important;
 
   .mat-button-wrapper {
@@ -521,17 +520,17 @@
   }
 
   &.btn--sm {
-    height: 32px;
-    min-height: 32px;
-    max-height: 32px;
+    height: 32px !important;
+    min-height: 32px !important;
+    max-height: 32px !important;
     padding: 0 14px;
     font-size: 14px;
   }
 
   &.btn--lg {
-    height: 50px;
-    min-height: 50px;
-    max-height: 50px;
+    height: 50px !important;
+    min-height: 50px !important;
+    max-height: 50px !important;
   }
 
   /* mat-progress-spinner inside buttons */
@@ -691,9 +690,9 @@
 
 /* Icon buttons */
 .mat-icon-button {
-  width: 48px !important;
-  min-width: 48px !important;
-  max-width: 48px !important;
+  width: 40px !important;
+  min-width: 40px !important;
+  max-width: 40px !important;
 
   &.btn--sm {
     width: 32px !important;
@@ -705,9 +704,9 @@
   }
 
   &.btn--lg {
-    width: 50px;
-    min-width: 50px;
-    max-width: 50px;
+    width: 50px !important;
+    min-width: 50px !important;
+    max-width: 50px !important;
     height: 50px !important;
     min-height: 50px !important;
     max-height: 50px !important;

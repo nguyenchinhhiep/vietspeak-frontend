@@ -15,7 +15,7 @@
             svgIcon="mat_outline:arrow_back"
           ></mat-icon>
           <div class="text-gray-500">
-            {{ "Actions.Back" | translate }}
+            {{ "Action.Back" | translate }}
           </div>
         </div>
       </button>
@@ -28,7 +28,7 @@
     </div>
 
     <div class="w-full max-w-xl">
-      <div class="font-semibold text-gray-900 text-2xl text-center mb-4">
+      <div class="font-medium text-gray-900 text-2xl text-center mb-4">
         {{ "TutorInfo.Title" | translate }}
       </div>
 
@@ -66,7 +66,7 @@
                     }}</mat-label>
                     <mat-select
                       formControlName="teachingLanguage"
-                      placeholder="{{ 'Actions.Select' | translate }}"
+                      placeholder="{{ 'Action.Select' | translate }}"
                     >
                       <mat-select-trigger>
                         <div class="flex gap-3 items-center">
@@ -115,7 +115,7 @@
                           .get('teachingLanguage')
                           ?.hasError('required')
                       "
-                      >{{ "Errors.Required" | translate }}</mat-error
+                      >{{ "Error.Required" | translate }}</mat-error
                     >
                   </mat-form-field>
                   <mat-form-field appearance="fill" class="w-full">
@@ -148,7 +148,7 @@
                           .get('firstName')
                           ?.hasError('required')
                       "
-                      >{{ "Errors.Required" | translate }}</mat-error
+                      >{{ "Error.Required" | translate }}</mat-error
                     >
                   </mat-form-field>
                   <mat-form-field appearance="fill" class="w-full">
@@ -179,7 +179,7 @@
                       *ngIf="
                         tutorBasicInfoForm.get('lastName')?.hasError('required')
                       "
-                      >{{ "Errors.Required" | translate }}</mat-error
+                      >{{ "Error.Required" | translate }}</mat-error
                     >
                   </mat-form-field>
                   <mat-form-field
@@ -206,7 +206,7 @@
                       *ngIf="
                         tutorBasicInfoForm.get('dob')?.hasError('required')
                       "
-                      >{{ "Errors.Required" | translate }}</mat-error
+                      >{{ "Error.Required" | translate }}</mat-error
                     >
                     <mat-datepicker-toggle
                       matIconSuffix
@@ -223,7 +223,7 @@
                       [color]="'primary'"
                       (click)="submitTutorBasicInfoForm()"
                     >
-                      {{ "Actions.Continue" | translate }}
+                      {{ "Action.Continue" | translate }}
                     </button>
                   </div>
                 </form>
@@ -245,7 +245,7 @@
                     }}</mat-label>
                     <mat-select
                       formControlName="teachingExperience"
-                      placeholder="{{ 'Actions.Select' | translate }}"
+                      placeholder="{{ 'Action.Select' | translate }}"
                     >
                       <mat-option
                         *ngFor="let item of teachingExperienceOptions"
@@ -260,7 +260,7 @@
                           .get('teachingExperience')
                           ?.hasError('required')
                       "
-                      >{{ "Errors.Required" | translate }}</mat-error
+                      >{{ "Error.Required" | translate }}</mat-error
                     >
                   </mat-form-field>
                   <div class="flex flex-col mb-4">
@@ -286,7 +286,7 @@
                               {{ "TutorInfo.Language" | translate }}
                             </mat-label>
                             <mat-select
-                              placeholder="{{ 'Actions.Select' | translate }}"
+                              placeholder="{{ 'Action.Select' | translate }}"
                               formControlName="language"
                             >
                               <mat-option
@@ -303,7 +303,7 @@
                                   .get('language')
                                   ?.hasError('required')
                               "
-                              >{{ "Errors.Required" | translate }}</mat-error
+                              >{{ "Error.Required" | translate }}</mat-error
                             >
                           </mat-form-field>
                         </div>
@@ -317,7 +317,7 @@
                               {{ "TutorInfo.Fluency" | translate }}
                             </mat-label>
                             <mat-select
-                              placeholder="{{ 'Actions.Select' | translate }}"
+                              placeholder="{{ 'Action.Select' | translate }}"
                               formControlName="fluency"
                             >
                               <mat-option
@@ -334,7 +334,7 @@
                                   .get('fluency')
                                   ?.hasError('required')
                               "
-                              >{{ "Errors.Required" | translate }}</mat-error
+                              >{{ "Error.Required" | translate }}</mat-error
                             >
                           </mat-form-field>
                         </div>
@@ -471,7 +471,7 @@
                             ?.dirty)
                       "
                     >
-                      {{ "Errors.File" | translate }}
+                      {{ "Error.File" | translate }}
                     </div>
                   </div>
                   <div class="flex flex-col gap-2">
@@ -496,7 +496,7 @@
                       mat-stroked-button
                       matStepperPrevious
                     >
-                      {{ "Actions.Back" | translate }}
+                      {{ "Action.Back" | translate }}
                     </button>
                     <button
                       type="submit"
@@ -505,7 +505,7 @@
                       [color]="'primary'"
                       (click)="submitTutorExperienceForm()"
                     >
-                      {{ "Actions.Continue" | translate }}
+                      {{ "Action.Continue" | translate }}
                     </button>
                   </div>
                 </form>
@@ -526,9 +526,7 @@
                       {{ "TutorInfo.ProfilePicture" | translate }}
                       <span class="text-gray-400 font-normal text-sm"
                         >({{
-                          "FileUpload.OnlyFileTypeAndMaxSize"
-                            | translate
-                              : { fileType: ".image ", maxSize: "2MB" }
+                          "FileUpload.MaxSize" | translate : { maxSize: "2MB" }
                         }})</span
                       >
                     </div>
@@ -610,14 +608,12 @@
                     class="w-full"
                     floatLabel="always"
                   >
-                    <mat-label>{{
-                      "TutorInfo.Introduction" | translate
-                    }}</mat-label>
+                    <mat-label>{{ "TutorInfo.AboutMe" | translate }}</mat-label>
                     <textarea
                       matInput
                       cdkTextareaAutosize
                       cdkAutosizeMinRows="8"
-                      formControlName="introduction"
+                      formControlName="aboutMe"
                       placeholder="{{
                         'TutorInfo.IntroductionDescription' | translate
                       }}"
@@ -627,7 +623,7 @@
                     <mat-hint class="w-full">
                       <div class="text-right -mr-3">
                         {{
-                          tutorAdditionalInfoForm.get("introduction")?.value
+                          tutorAdditionalInfoForm.get("aboutMe")?.value
                             .length || 0
                         }}/1000
                       </div>
@@ -635,10 +631,10 @@
                     <mat-error
                       *ngIf="
                         tutorAdditionalInfoForm
-                          .get('introduction')
+                          .get('aboutMe')
                           ?.hasError('required')
                       "
-                      >{{ "Errors.Required" | translate }}</mat-error
+                      >{{ "Error.Required" | translate }}</mat-error
                     >
                   </mat-form-field>
 
@@ -657,7 +653,8 @@
                     <mat-hint class="w-full">
                       <div class="text-right -mr-3">
                         {{
-                          tutorAdditionalInfoForm.get("reasonHere")?.value.length || 0
+                          tutorAdditionalInfoForm.get("reasonHere")?.value
+                            .length || 0
                         }}/500
                       </div>
                     </mat-hint>
@@ -667,7 +664,7 @@
                           .get('reasonHere')
                           ?.hasError('required')
                       "
-                      >{{ "Errors.Required" | translate }}</mat-error
+                      >{{ "Error.Required" | translate }}</mat-error
                     >
                   </mat-form-field>
 
@@ -677,7 +674,7 @@
                     }}</mat-label>
                     <mat-select
                       formControlName="heardFrom"
-                      placeholder="{{ 'Actions.Select' | translate }}"
+                      placeholder="{{ 'Action.Select' | translate }}"
                     >
                       <mat-option
                         *ngFor="let item of heardFromOptions"
@@ -692,7 +689,7 @@
                           .get('heardForm')
                           ?.hasError('required')
                       "
-                      >{{ "Errors.Required" | translate }}</mat-error
+                      >{{ "Error.Required" | translate }}</mat-error
                     >
                   </mat-form-field>
 
@@ -702,7 +699,7 @@
                       mat-stroked-button
                       matStepperPrevious
                     >
-                      {{ "Actions.Back" | translate }}
+                      {{ "Action.Back" | translate }}
                     </button>
                     <button
                       type="submit"
@@ -712,7 +709,7 @@
                       [disabled]="tutorAdditionalInfoForm.disabled"
                     >
                       <span *ngIf="!tutorAdditionalInfoForm.disabled">
-                        {{ "Actions.Continue" | translate }}
+                        {{ "Action.Continue" | translate }}
                       </span>
 
                       <mat-progress-spinner

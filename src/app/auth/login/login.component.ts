@@ -83,7 +83,7 @@ export class LoginComponent implements OnInit {
         this.alert = {
           type: 'error',
           message: this._translateService.instant(
-            'Errors.InvalidEmailOrPassword'
+            'Error.InvalidEmailOrPassword'
           ),
         };
       },

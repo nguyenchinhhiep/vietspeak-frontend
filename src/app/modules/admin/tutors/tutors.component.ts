@@ -5,14 +5,14 @@ import { TranslateService } from '@ngx-translate/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { HttpService } from 'src/app/core/http/services/http.service';
+import { UserStatus, UserStatusOptions } from 'src/app/core/user/user.model';
 
 @Component({
   selector: 'app-tutors',
   templateUrl: './tutors.component.html',
-  styleUrls: ['./tutors.component.scss']
+  styleUrls: ['./tutors.component.scss'],
 })
 export class TutorsComponent implements OnInit {
-
   constructor(
     private _confirmationDialogService: ConfirmationDialogService,
     private _translateService: TranslateService,
@@ -34,9 +34,18 @@ export class TutorsComponent implements OnInit {
 
   searchInput: FormControl = new FormControl();
 
-  displayedColumns: string[] = ['photo', 'name', 'email', 'status', 'action'];
+  displayedColumns: string[] = [
+    'no',
+    'photo',
+    'name',
+    'email',
+    'status',
+    'action',
+  ];
 
-  dataSource = new MatTableDataSource([1,2,3,4,5,6,7,8,9,10,11,12,13,14]);
+  dataSource = new MatTableDataSource([
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+  ]);
 
   ngOnInit(): void {
     // Subscribe to search input change
@@ -52,14 +61,23 @@ export class TutorsComponent implements OnInit {
   getList() {}
 
   // Delete
-  delete(id: string){
+  delete(id: string) {
     const dialogRef = this._confirmationDialogService.open();
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res === 'confirmed') {
-       
       }
     });
+  }
+
+  // Get status
+  getStatus(status: UserStatus) {
+    return (
+      UserStatusOptions.find((item) => item.value === status) || {
+        translateKey: '',
+        class: '',
+      }
+    );
   }
 
   // On page size change
@@ -76,5 +94,4 @@ export class TutorsComponent implements OnInit {
     this.params.pageNumber = pageNumber;
     this.getList();
   }
-
 }

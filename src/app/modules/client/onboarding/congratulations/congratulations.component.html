@@ -2,14 +2,14 @@
   class="w-full min-h-full flex flex-col gap-10 items-center bg-gray-100 relative px-4 justify-center"
 >
   <div
-    class="w-full max-w-md sm:bg-white sm:p-14 rounded-md sm:border border-solid border-gray-300 sm:shadow-sm"
+    class="w-full max-w-md sm:bg-white sm:p-10 sm:py-12 sm:rounded-md sm:shadow-sm sm:border border-solid border-gray-200"
   >
     <div class="flex flex-col gap-3 justify-center items-center">
       <mat-icon
         class="icon-size-18 text-success"
         svgIcon="mat_outline:check_circle"
       ></mat-icon>
-      <div class="font-semibold text-2xl text-gray-900">Congratulations!</div>
+      <div class="font-medium text-2xl text-gray-900">Congratulations!</div>
       <div class="text-gray-500 text-lg">Your account is now ready</div>
       <button
         class="w-full !mt-6 btn--lg"
@@ -17,7 +17,7 @@
         [color]="'primary'"
         routerLink="/"
       >
-        {{ "Actions.Continue" | translate }}
+        {{ "Action.Continue" | translate }}
       </button>
     </div>
   </div>

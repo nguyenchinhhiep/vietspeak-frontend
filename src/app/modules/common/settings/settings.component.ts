@@ -12,7 +12,7 @@ export class SettingsComponent implements OnInit {
   navigation: any = [];
 
   ngOnInit(): void {
-    const userRole = this._userService.currentUserValue?.role;
+    const userRole = this._userService.currentUserValue?.role?.toLowerCase();
 
     this.navigation = [
       {

@@ -6,10 +6,11 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { ConfirmationDialogService } from './confirmation-dialog.service';
 import { AutoFocusModule } from 'src/app/directives/auto-focus/auto-focus.module';
 import { MatButtonModule } from '@angular/material/button';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [ConfirmationDialogComponent],
-  imports: [CommonModule, MatDialogModule, MatIconModule, AutoFocusModule, MatButtonModule],
+  imports: [CommonModule, MatDialogModule, TranslateModule, MatIconModule, AutoFocusModule, MatButtonModule],
   providers: [ConfirmationDialogService],
   exports: [ConfirmationDialogComponent],
 })

@@ -118,7 +118,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
             log.debug('Not authorized, redirecting...');
 
             // Redirect based on role
-            this._checkRole(currentUser!.role);
+            this._authService.navigateBasedOnRole(currentUser?.role);
 
             // Prevent the access
             return of(false);
@@ -134,21 +134,4 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
     );
   }
 
-  private _checkRole(currentRole: any): void {
-    if (currentRole == null) {
-      this._router.navigate(['/onboarding']);
-    }
-
-    if (currentRole === Role.Student) {
-      this._router.navigate(['/student']);
-    }
-
-    if (currentRole === Role.Tutor) {
-      this._router.navigate(['/tutor']);
-    }
-
-    if (currentRole === Role.Admin) {
-      this._router.navigate(['/admin']);
-    }
-  }
 }
