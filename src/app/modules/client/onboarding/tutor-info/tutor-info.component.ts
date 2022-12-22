@@ -80,6 +80,8 @@ export class TutorInfoComponent implements OnInit {
 
   createForm() {
     this.tutorBasicInfoForm = this._fb.group({
+      profilePicture: [],
+      profilePictureUrl: [],
       teachingLanguage: [this.teachingLanguageOptions[0]],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
@@ -94,8 +96,6 @@ export class TutorInfoComponent implements OnInit {
     });
 
     this.tutorAdditionalInfoForm = this._fb.group({
-      profilePicture: [],
-      profilePictureUrl: [],
       heardFrom: [HeardFrom.WebSearch],
       reasonHere: ['', [Validators.required]],
       aboutMe: ['', [Validators.required]],
@@ -140,14 +140,14 @@ export class TutorInfoComponent implements OnInit {
   }
 
   // On file input change event
-  onFileSelected(event: any, fileInput: any) {
+  onCertificatesSelected(event: any, fileInput: any) {
     const uploadFiles = event.target.files || [];
-    this.handleFilesUpload(uploadFiles);
+    this.handleCertificatesUpload(uploadFiles);
     fileInput.value = null;
   }
 
   // Handle certificate files
-  handleFilesUpload(uploadFiles: any[]) {
+  handleCertificatesUpload(uploadFiles: any[]) {
     const maxSize = 33554432;
     const files =
       this.tutorExperienceForm.get('teachingCertificates')?.value || [];
@@ -199,7 +199,7 @@ export class TutorInfoComponent implements OnInit {
   }
 
   // On remove certificate file
-  removeFile(index: number) {
+  removeCertificate(index: number) {
     const files =
       this.tutorExperienceForm.get('teachingCertificates')?.value || [];
 
@@ -234,7 +234,7 @@ export class TutorInfoComponent implements OnInit {
     this.isOnDropFilesContainer = false;
     const dt = event.dataTransfer;
     const files = dt.files || [];
-    this.handleFilesUpload(files);
+    this.handleCertificatesUpload(files);
   }
 
   preventDefaults(event: any) {
@@ -288,12 +288,9 @@ export class TutorInfoComponent implements OnInit {
 
   // Remove profile picture
   onRemoveProfilePicture() {
-    this.tutorAdditionalInfoForm.get('profilePictureUrl')?.setValue(null);
-    this.tutorAdditionalInfoForm.get('profilePicture')?.setValue(null);
+    this.tutorBasicInfoForm.get('profilePictureUrl')?.setValue(null);
+    this.tutorBasicInfoForm.get('profilePicture')?.setValue(null);
   }
-
-  // On step changed
-  onStepChanged() {}
 
   // Open crop image dialog
   openImageCropper(imageFile: File) {
@@ -306,12 +303,10 @@ export class TutorInfoComponent implements OnInit {
 
     dialogRef?.afterClosed().subscribe((croppedImage) => {
       if (croppedImage != null) {
-        this.tutorAdditionalInfoForm
+        this.tutorBasicInfoForm
           .get('profilePictureUrl')
           ?.setValue(croppedImage);
-        this.tutorAdditionalInfoForm
-          .get('profilePicture')
-          ?.setValue(croppedImage);
+        this.tutorBasicInfoForm.get('profilePicture')?.setValue(croppedImage);
       }
     });
   }

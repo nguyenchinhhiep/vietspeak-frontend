@@ -19,6 +19,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatRadioModule } from '@angular/material/radio';
+import { TutorBasicInfoComponent } from './tutor-profile/tutor-basic-info/tutor-basic-info.component';
+import { TutorExperienceComponent } from './tutor-profile/tutor-experience/tutor-experience.component';
+import { TutorAdditionalInfoComponent } from './tutor-profile/tutor-additional-info/tutor-additional-info.component';
 
 const routes: Routes = [
   {
@@ -37,13 +40,39 @@ const routes: Routes = [
       {
         path: 'profile',
         component: TutorProfileComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: 'basic',
+            pathMatch: 'full',
+          },
+          {
+            path: 'basic',
+            component: TutorBasicInfoComponent,
+          },
+          {
+            path: 'experience',
+            component: TutorExperienceComponent,
+          },
+          {
+            path: 'additional',
+            component: TutorAdditionalInfoComponent,
+          },
+        ],
       },
     ],
   },
 ];
 
 @NgModule({
-  declarations: [TutorsComponent, TutorDetailComponent, TutorProfileComponent],
+  declarations: [
+    TutorsComponent,
+    TutorDetailComponent,
+    TutorProfileComponent,
+    TutorBasicInfoComponent,
+    TutorExperienceComponent,
+    TutorAdditionalInfoComponent,
+  ],
   imports: [
     CommonModule,
     TranslateModule,

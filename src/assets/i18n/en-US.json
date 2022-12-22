@@ -133,7 +133,9 @@
       "Level": "Current level",
       "Beginner": "Beginner",
       "Intermediate": "Intermediate",
-      "Advanced": "Advanced"
+      "Advanced": "Advanced",
+      "BasicInfo": "Basic info",
+      "StudentProfile": "Student profile"
    },
    "TutorInfo": {
       "Title": "Tutor info",
@@ -163,7 +165,10 @@
       "TeachingCertificates": "Teaching certificates",
       "ProfilePicture": "Profile picture",
       "AboutMe": "About me",
-      "IntroductionDescription": "Say hello and introduce yourself to students! This will be the first thing students read about you when looking at their tutor profile"
+      "IntroductionDescription": "Say hello and introduce yourself to students! This will be the first thing students read about you when looking at their tutor profile",
+      "TutorProfile": "Tutor profile",
+      "Basic": "Basic",
+      "Additional": "Additional"
    },
    "Home": {
       "Welcome": "Welcome, {{name}}!"
@@ -185,6 +190,7 @@
    },
    "Settings": {
       "Title": "Settings",
+      "AccountSettings": "Account settings",
       "Profile": "Profile",
       "Password": "Password"
    },

@@ -1,0 +1,87 @@
+<div
+  class="w-full h-full flex flex-col max-w-xl bg-white rounded-md p-6 shadow-sm border border-solid border-gray-200"
+>
+  <div class="font-medium text-gray-900 text-xl mb-3">
+    {{ "TutorInfo.AdditionalInfo" | translate }}
+  </div>
+  <form [formGroup]="tutorAdditionalInfoForm">
+    <mat-form-field appearance="fill" class="w-full" floatLabel="always">
+      <mat-label>{{ "TutorInfo.AboutMe" | translate }}</mat-label>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="8"
+        formControlName="aboutMe"
+        maxlength="1000"
+        appPreventAutoFill
+      ></textarea>
+      <mat-hint class="w-full">
+        <div class="text-right -mr-3">
+          {{ tutorAdditionalInfoForm.get("aboutMe")?.value.length || 0 }}/1000
+        </div>
+      </mat-hint>
+      <mat-error
+        *ngIf="tutorAdditionalInfoForm.get('aboutMe')?.hasError('required')"
+        >{{ "Error.Required" | translate }}</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>{{ "TutorInfo.ReasonHere" | translate }}</mat-label>
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="4"
+        formControlName="reasonHere"
+        maxlength="500"
+        appPreventAutoFill
+      ></textarea>
+      <mat-hint class="w-full">
+        <div class="text-right -mr-3">
+          {{ tutorAdditionalInfoForm.get("reasonHere")?.value.length || 0 }}/500
+        </div>
+      </mat-hint>
+      <mat-error
+        *ngIf="tutorAdditionalInfoForm.get('reasonHere')?.hasError('required')"
+        >{{ "Error.Required" | translate }}</mat-error
+      >
+    </mat-form-field>
+
+    <mat-form-field appearance="fill" class="w-full">
+      <mat-label>{{ "OnBoarding.WhereHeardFrom" | translate }}</mat-label>
+      <mat-select
+        formControlName="heardFrom"
+        placeholder="{{ 'Action.Select' | translate }}"
+      >
+        <mat-option *ngFor="let item of heardFromOptions" [value]="item.value">
+          {{ item.translateKey | translate }}
+        </mat-option>
+      </mat-select>
+      <mat-error
+        *ngIf="tutorAdditionalInfoForm.get('heardForm')?.hasError('required')"
+        >{{ "Error.Required" | translate }}</mat-error
+      >
+    </mat-form-field>
+
+    <div class="mt-4 flex justify-between gap-4">
+      <button
+        type="submit"
+        class="btn--lg w-full"
+        mat-flat-button
+        [color]="'primary'"
+        [disabled]="tutorAdditionalInfoForm.disabled"
+      >
+        <span *ngIf="!tutorAdditionalInfoForm.disabled">
+          {{ "Action.Save" | translate }}
+        </span>
+
+        <mat-progress-spinner
+          *ngIf="tutorAdditionalInfoForm.disabled"
+          [diameter]="24"
+          mode="indeterminate"
+        >
+        </mat-progress-spinner>
+      </button>
+    </div>
+  </form>
+</div>

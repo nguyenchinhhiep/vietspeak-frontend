@@ -36,9 +36,7 @@ const routes: Routes = [
       authLayout: 'admin',
     },
     loadChildren: () =>
-      import('src/app/modules/common/settings/settings.module').then(
-        (m) => m.SettingsModule
-      ),
+      import('./settings/settings.module').then((m) => m.SettingsModule),
   },
   {
     path: '**',

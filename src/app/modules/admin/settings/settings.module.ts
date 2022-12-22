@@ -18,16 +18,16 @@ const routes: Routes = [
       {
         path: 'profile',
         loadChildren: () =>
-          import(
-            'src/app/modules/common/user-profile/user-profile.module'
-          ).then((m) => m.UserProfileModule),
+          import('./user-profile/user-profile.module').then(
+            (m) => m.UserProfileModule
+          ),
       },
       {
         path: 'password',
         loadChildren: () =>
-          import(
-            'src/app/modules/common/change-password/change-password.module'
-          ).then((m) => m.ChangePasswordModule),
+          import('./change-password/change-password.module').then(
+            (m) => m.ChangePasswordModule
+          ),
       },
     ],
   },
@@ -35,6 +35,11 @@ const routes: Routes = [
 
 @NgModule({
   declarations: [SettingsComponent],
-  imports: [CommonModule, TranslateModule, MatIconModule, RouterModule.forChild(routes)],
+  imports: [
+    CommonModule,
+    TranslateModule,
+    MatIconModule,
+    RouterModule.forChild(routes),
+  ],
 })
 export class SettingsModule {}
