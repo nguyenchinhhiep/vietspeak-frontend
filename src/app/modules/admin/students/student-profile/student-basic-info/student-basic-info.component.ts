@@ -30,9 +30,7 @@ export class StudentBasicInfoComponent implements OnInit {
   ) {}
   studentBasicInfoForm!: FormGroup;
 
-  languageLevelOptions = LanguageLevelOptions;
   heardFromOptions = HeardFromOptions;
-  learningLanguageOptions = learningLanguageOptions;
 
   ngOnInit(): void {
     this.createForm();
@@ -55,8 +53,6 @@ export class StudentBasicInfoComponent implements OnInit {
     this.studentBasicInfoForm = this._fb.group({
       profilePictureUrl: [''],
       profilePicture: [],
-      learningLanguage: [learningLanguageOptions[0]],
-      currentLevel: [LanguageLevel.Beginner],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       heardFrom: [HeardFrom.WebSearch],

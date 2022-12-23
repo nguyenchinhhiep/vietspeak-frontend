@@ -15,23 +15,32 @@
       *ngIf="!currentUser?.avatarUrl"
       class="w-8 h-8 rounded-full overflow-hidden flex justify-center items-center font-medium bg-primary text-white uppercase"
     >
-      {{ currentUser?.fullName?.charAt(0) || 'H' }}
+      {{ currentUser?.fullName?.charAt(0) || "H" }}
     </div>
   </div>
-  <div *ngIf="currentUser?.fullName" class="ml-2 font-medium text-sm max-w text-current">
+  <div
+    *ngIf="currentUser?.fullName"
+    class="ml-2 font-medium text-sm max-w text-current"
+  >
     {{ currentUser?.fullName }}
   </div>
   <div class="ml-2 flex items-center">
-    <mat-icon svgIcon="mat_outline:expand_more" class="icon-size-5 text-current"></mat-icon>
+    <mat-icon
+      svgIcon="mat_outline:expand_more"
+      class="icon-size-5 text-current"
+    ></mat-icon>
   </div>
 </button>
 
 <!-- User menu -->
 <mat-menu #userMenu="matMenu" class="text-secondary" class="w-44">
   <ng-template matMenuContent>
-    <button type="button" mat-menu-item (click)="onSettings()">
-      <mat-icon svgIcon="mat_outline:settings" class="text-icon"></mat-icon>
-      <span>{{ "Settings.Title" | translate }}</span>
+    <button type="button" mat-menu-item (click)="onAccount()">
+      <mat-icon
+        svgIcon="mat_outline:account_circle"
+        class="text-icon"
+      ></mat-icon>
+      <span>{{ "Account.Title" | translate }}</span>
     </button>
     <mat-divider></mat-divider>
     <button type="button" mat-menu-item (click)="logout()">

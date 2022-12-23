@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SettingsComponent } from './settings.component';
-import { RouterModule, Routes } from '@angular/router';
-import { TranslateModule } from '@ngx-translate/core';
+import { AccountComponent } from './account.component';
 import { MatIconModule } from '@angular/material/icon';
+import { Routes, RouterModule } from '@angular/router';
+import { TranslateModule } from '@ngx-translate/core';
 
 const routes: Routes = [
   {
     path: '',
-    component: SettingsComponent,
+    component: AccountComponent,
     children: [
       {
         path: '',
@@ -34,7 +34,7 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  declarations: [SettingsComponent],
+  declarations: [AccountComponent],
   imports: [
     CommonModule,
     TranslateModule,
@@ -42,4 +42,4 @@ const routes: Routes = [
     RouterModule.forChild(routes),
   ],
 })
-export class SettingsModule {}
+export class AccountModule {}

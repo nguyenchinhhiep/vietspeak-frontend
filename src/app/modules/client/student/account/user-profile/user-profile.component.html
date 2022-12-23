@@ -1,0 +1,259 @@
+<div class="w-full">
+  <form [formGroup]="studentProfileForm" class="flex flex-col gap-4">
+    <div
+      class="w-full flex flex-col bg-white rounded-md p-6 shadow-sm border border-solid border-gray-200"
+    >
+      <div class="font-medium text-gray-900 text-xl mb-3">
+        {{ "StudentInfo.Basic" | translate }}
+      </div>
+
+      <div class="mb-4">
+        <div class="flex gap-5 items-center">
+          <img
+            *ngIf="studentProfileForm.get('profilePictureUrl')?.value"
+            class="w-20 h-20 rounded-full overflow-hidden"
+            [src]="studentProfileForm.get('profilePictureUrl')?.value"
+            alt=""
+          />
+          <div
+            *ngIf="!studentProfileForm.get('profilePictureUrl')?.value"
+            class="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center font-medium bg-primary text-white uppercase text-2xl"
+          >
+            {{ studentProfileForm.get("firstName")?.value?.charAt(0) || "H" }}
+          </div>
+
+          <div class="flex gap-2 justify-center">
+            <!-- Change image -->
+            <button
+              type="button"
+              mat-stroked-button
+              [color]="'primary'"
+              (click)="uploadProfilePictureFile.click()"
+            >
+              {{
+                studentProfileForm.get("profilePictureUrl")?.value
+                  ? ("FileUpload.Change" | translate)
+                  : ("FileUpload.AddAPhoto" | translate)
+              }}
+            </button>
+            <!-- Remove image -->
+            <button
+              *ngIf="studentProfileForm.get('profilePictureUrl')?.value"
+              type="button"
+              mat-button
+              (click)="onRemoveProfilePicture()"
+            >
+              <div class="text-danger">Remove</div>
+            </button>
+          </div>
+        </div>
+
+        <input
+          hidden
+          type="file"
+          accept="image/*"
+          #uploadProfilePictureFile
+          (change)="
+            onProfilePictureFileSelected($event, uploadProfilePictureFile)
+          "
+        />
+      </div>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>{{ "StudentInfo.FirstName" | translate }}</mat-label>
+        <input
+          matInput
+          formControlName="firstName"
+          appPreventAutoFill
+          #firstName
+        />
+        <button
+          mat-icon-button
+          type="button"
+          matSuffix
+          *ngIf="firstName.value != ''"
+          (click)="studentProfileForm.get('firstName')?.setValue('')"
+        >
+          <mat-icon
+            class="icon-size-5"
+            [svgIcon]="'mat_outline:close'"
+          ></mat-icon>
+        </button>
+        <mat-error
+          *ngIf="studentProfileForm.get('firstName')?.hasError('required')"
+          >{{ "Error.Required" | translate }}</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>{{ "StudentInfo.LastName" | translate }}</mat-label>
+        <input
+          matInput
+          formControlName="lastName"
+          appPreventAutoFill
+          #lastName
+        />
+        <button
+          mat-icon-button
+          type="button"
+          matSuffix
+          *ngIf="lastName.value != ''"
+          (click)="studentProfileForm.get('firstName')?.setValue('')"
+        >
+          <mat-icon
+            class="icon-size-5"
+            [svgIcon]="'mat_outline:close'"
+          ></mat-icon>
+        </button>
+        <mat-error
+          *ngIf="studentProfileForm.get('lastName')?.hasError('required')"
+          >{{ "Error.Required" | translate }}</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>Email</mat-label>
+        <input matInput name="email" formControlName="email" #email />
+        <mat-error
+          *ngIf="studentProfileForm.get('email')?.hasError('required')"
+        >
+          {{ "Error.Required" | translate }}
+        </mat-error>
+        <mat-error *ngIf="studentProfileForm.get('email')?.hasError('email')">{{
+          "Error.Email" | translate
+        }}</mat-error>
+        <mat-error
+          *ngIf="studentProfileForm.get('email')?.hasError('existingEmail')"
+          >{{ "Error.ExistingEmail" | translate }}</mat-error
+        >
+
+        <button
+          mat-icon-button
+          type="button"
+          matSuffix
+          *ngIf="
+            studentProfileForm.get('email')?.status !== 'PENDING' &&
+            email.value != '' &&
+            !studentProfileForm.disabled &&
+            !studentProfileForm.get('email')?.valid
+          "
+          (click)="studentProfileForm.get('email')?.setValue('')"
+        >
+          <mat-icon
+            class="icon-size-5"
+            [svgIcon]="'mat_outline:close'"
+          ></mat-icon>
+        </button>
+        <div
+          class="ml-2"
+          matSuffix
+          *ngIf="studentProfileForm.get('email')?.valid"
+        >
+          <mat-icon
+            class="!text-success"
+            [svgIcon]="'mat_outline:check_circle'"
+          ></mat-icon>
+        </div>
+        <mat-progress-spinner
+          [diameter]="24"
+          *ngIf="studentProfileForm.get('email')?.status === 'PENDING'"
+          mode="indeterminate"
+          matSuffix
+        >
+        </mat-progress-spinner>
+      </mat-form-field>
+    </div>
+    <div
+      class="w-full flex flex-col bg-white rounded-md p-6 shadow-sm border border-solid border-gray-200"
+    >
+      <div class="font-medium text-gray-900 text-xl mb-3">
+        {{ "StudentInfo.Learning" | translate }}
+      </div>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>{{
+          "StudentInfo.LanguageWantToLearn" | translate
+        }}</mat-label>
+        <mat-select
+          formControlName="learningLanguage"
+          placeholder="{{ 'Action.Select' | translate }}"
+        >
+          <mat-select-trigger>
+            <div class="flex gap-3 items-center">
+              <div class="w-6 overflow-hidden">
+                <img
+                  class="w-full object-cover"
+                  [src]="
+                    this.studentProfileForm.get('learningLanguage')?.value
+                      .imgUrl
+                  "
+                  [attr.alt]="
+                    this.studentProfileForm.get('learningLanguage')?.value.label
+                  "
+                />
+              </div>
+
+              <div>
+                {{
+                  this.studentProfileForm.get("learningLanguage")?.value.label
+                }}
+              </div>
+            </div>
+          </mat-select-trigger>
+          <mat-option
+            *ngFor="let item of learningLanguageOptions"
+            [value]="item"
+          >
+            <div class="flex gap-3 items-center">
+              <div class="w-6 overflow-hidden">
+                <img
+                  class="w-full object-cover"
+                  [src]="item.imgUrl"
+                  [attr.alt]="item?.label"
+                />
+              </div>
+
+              <div>{{ item.label }}</div>
+            </div>
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="
+            studentProfileForm.get('learningLanguage')?.hasError('required')
+          "
+          >{{ "Error.Required" | translate }}</mat-error
+        >
+      </mat-form-field>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>{{ "StudentInfo.Level" | translate }}</mat-label>
+        <mat-select
+          formControlName="currentLevel"
+          placeholder="{{ 'Action.Select' | translate }}"
+        >
+          <mat-option
+            *ngFor="let item of languageLevelOptions"
+            [value]="item.value"
+          >
+            {{ item.translateKey | translate }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <div class="flex justify-center">
+      <button
+        type="submit"
+        class="btn--lg w-full"
+        mat-flat-button
+        [color]="'primary'"
+        [disabled]="studentProfileForm.disabled"
+      >
+        <span *ngIf="!studentProfileForm.disabled">
+          {{ "Action.Save" | translate }}
+        </span>
+
+        <mat-progress-spinner
+          *ngIf="studentProfileForm.disabled"
+          [diameter]="24"
+          mode="indeterminate"
+        >
+        </mat-progress-spinner>
+      </button>
+    </div>
+  </form>
+</div>

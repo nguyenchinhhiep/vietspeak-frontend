@@ -27,17 +27,17 @@ export class UserComponent implements OnInit {
     this._authService.logout().subscribe();
   }
 
-  onSettings() {
+  onAccount() {
     const role = this.currentUser?.role;
     if (role === Role.Admin) {
-      this._router.navigate(['/admin/settings']);
+      this._router.navigate(['/admin/account']);
     }
     if (role === Role.Tutor) {
-      this._router.navigate(['/tutor/settings']);
+      this._router.navigate(['/tutor/account']);
     }
 
     if (role === Role.Student) {
-      this._router.navigate(['/student/settings']);
+      this._router.navigate(['/student/account']);
     }
   }
 }

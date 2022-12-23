@@ -1,0 +1,26 @@
+<div class="flex flex-col w-full max-w-4xl mx-auto overflow-hidden">
+  <div class="flex-grow flex-wrap flex gap-8">
+    <div class="flex flex-col w-60 flex-shrink-0">
+      <div class="font-medium text-gray-900 text-2xl mb-4">
+        {{ "Account.Title" | translate }}
+      </div>
+      <a
+        class="mb-2 flex items-center gap-3 hover:no-underline px-3 py-2 rounded text-gray-500 cursor-pointer hover:bg-gray-200"
+        *ngFor="let item of navigation"
+        [routerLink]="item.routerLink"
+        routerLinkActive="bg-gray-200"
+      >
+        <mat-icon
+          routerLinkActive="!text-primary font-medium"
+          [svgIcon]="item.icon"
+        ></mat-icon>
+        <div routerLinkActive="text-primary font-medium">
+          {{ item.translateKey | translate }}
+        </div>
+      </a>
+    </div>
+    <div class="flex-grow">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -24,7 +24,6 @@
           <!-- Change image -->
           <button
             type="button"
-            class="btn--sm"
             mat-stroked-button
             [color]="'primary'"
             (click)="uploadProfilePictureFile.click()"
@@ -39,7 +38,6 @@
           <button
             *ngIf="tutorBasicInfoForm.get('profilePictureUrl')?.value"
             type="button"
-            class="btn--sm"
             mat-button
             (click)="onRemoveProfilePicture()"
           >
@@ -58,52 +56,6 @@
         "
       />
     </div>
-    <mat-form-field appearance="fill" class="w-full" floatLabel="always">
-      <mat-label>{{ "TutorInfo.LanguageWantToTeach" | translate }}</mat-label>
-      <mat-select
-        formControlName="teachingLanguage"
-        placeholder="{{ 'Action.Select' | translate }}"
-      >
-        <mat-select-trigger>
-          <div class="flex gap-3 items-center">
-            <div class="w-6 overflow-hidden">
-              <img
-                class="w-full object-cover"
-                [src]="
-                  this.tutorBasicInfoForm.get('teachingLanguage')?.value?.imgUrl
-                "
-                [attr.alt]="
-                  this.tutorBasicInfoForm.get('teachingLanguage')?.value?.label
-                "
-              />
-            </div>
-
-            <div>
-              {{
-                this.tutorBasicInfoForm.get("teachingLanguage")?.value?.label
-              }}
-            </div>
-          </div>
-        </mat-select-trigger>
-        <mat-option *ngFor="let item of teachingLanguageOptions" [value]="item">
-          <div class="flex gap-3 items-center">
-            <div class="w-6 overflow-hidden">
-              <img
-                class="w-full object-cover"
-                [src]="item.imgUrl"
-                [attr.alt]="item?.label"
-              />
-            </div>
-
-            <div>{{ item.label }}</div>
-          </div>
-        </mat-option>
-      </mat-select>
-      <mat-error
-        *ngIf="tutorBasicInfoForm.get('teachingLanguage')?.hasError('required')"
-        >{{ "Error.Required" | translate }}</mat-error
-      >
-    </mat-form-field>
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>{{ "TutorInfo.FirstName" | translate }}</mat-label>
       <input
@@ -174,10 +126,10 @@
       <mat-datepicker #picker></mat-datepicker>
     </mat-form-field>
 
-    <div class="mt-6 flex justify-center">
+    <div class="mt-4 flex justify-center">
       <button
         type="submit"
-        class="btn btn--lg w-full"
+        class="btn--lg w-full"
         mat-flat-button
         [color]="'primary'"
         (click)="submitTutorBasicInfoForm()"

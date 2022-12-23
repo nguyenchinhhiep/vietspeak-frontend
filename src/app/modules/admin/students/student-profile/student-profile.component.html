@@ -1,22 +1,29 @@
-<div class="flex flex-col w-full max-w-6xl mx-auto overflow-hidden">
+<div class="flex flex-col w-full max-w-7xl mx-auto overflow-hidden">
   <div class="flex-grow flex-wrap flex gap-8">
     <div class="flex flex-col w-64 flex-shrink-0">
       <div class="font-medium text-gray-900 text-2xl mb-4">
         {{ "StudentInfo.StudentProfile" | translate }}
       </div>
       <a
-        class="mb-2 flex items-center gap-3 hover:no-underline px-3 py-2 rounded text-gray-500 cursor-pointer hover:bg-gray-200"
+        class="mb-2 flex items-center gap-3 hover:no-underline px-4 py-2 rounded text-gray-500 cursor-pointer hover:bg-gray-200"
         *ngFor="let item of navigation"
-        [routerLink]="item.routerLink"
-        routerLinkActive="bg-gray-200"
+        [ngClass]="selectedItem === item ? 'bg-gray-200' : ''"
+        (click)="selectedItem = item"
       >
-        <div routerLinkActive="text-primary font-medium">
+        <div
+          [ngClass]="selectedItem === item ? 'text-primary font-medium' : ''"
+        >
           {{ item.translateKey | translate }}
         </div>
       </a>
     </div>
     <div class="flex-grow">
-      <router-outlet></router-outlet>
+      <app-student-basic-info
+        *ngIf="selectedItem?.value === 'basic'"
+      ></app-student-basic-info>
+      <app-student-learning
+        *ngIf="selectedItem?.value === 'learning'"
+      ></app-student-learning>
     </div>
   </div>
 </div>

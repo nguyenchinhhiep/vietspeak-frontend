@@ -134,8 +134,10 @@
       "Beginner": "Beginner",
       "Intermediate": "Intermediate",
       "Advanced": "Advanced",
+      "Basic": "Basic",
       "BasicInfo": "Basic info",
-      "StudentProfile": "Student profile"
+      "StudentProfile": "Student profile",
+      "Learning": "Learning"
    },
    "TutorInfo": {
       "Title": "Tutor info",
@@ -168,7 +170,13 @@
       "IntroductionDescription": "Say hello and introduce yourself to students! This will be the first thing students read about you when looking at their tutor profile",
       "TutorProfile": "Tutor profile",
       "Basic": "Basic",
-      "Additional": "Additional"
+      "Additional": "Additional",
+      "Teaching": "Teaching",
+      "WhatITeach": "What I teach",
+      "ITeach": "I teach",
+      "TeachingJobDescription": "Example: Communication, Grammar, Writing,...",
+      "Introduction": "Introduction",
+      "VideoIntroduction": "Video introduction"
    },
    "Home": {
       "Welcome": "Welcome, {{name}}!"
@@ -188,11 +196,11 @@
       "Native": "Native",
       "No": "No"
    },
-   "Settings": {
-      "Title": "Settings",
-      "AccountSettings": "Account settings",
+   "Account": {
+      "Title": "Account",
       "Profile": "Profile",
-      "Password": "Password"
+      "Password": "Password",
+      "Settings": "Settings"
    },
    "UserProfile": {
       "Title": "Profile",

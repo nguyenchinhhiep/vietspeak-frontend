@@ -24,7 +24,6 @@
           <!-- Change image -->
           <button
             type="button"
-            class="btn--sm"
             mat-stroked-button
             [color]="'primary'"
             (click)="uploadProfilePictureFile.click()"
@@ -39,7 +38,6 @@
           <button
             *ngIf="studentBasicInfoForm.get('profilePictureUrl')?.value"
             type="button"
-            class="btn--sm"
             mat-button
             (click)="onRemoveProfilePicture()"
           >
@@ -58,69 +56,7 @@
         "
       />
     </div>
-    <mat-form-field appearance="fill" class="w-full">
-      <mat-label>{{ "StudentInfo.LanguageWantToLearn" | translate }}</mat-label>
-      <mat-select
-        formControlName="learningLanguage"
-        placeholder="{{ 'Action.Select' | translate }}"
-      >
-        <mat-select-trigger>
-          <div class="flex gap-3 items-center">
-            <div class="w-6 overflow-hidden">
-              <img
-                class="w-full object-cover"
-                [src]="
-                  this.studentBasicInfoForm.get('learningLanguage')?.value
-                    .imgUrl
-                "
-                [attr.alt]="
-                  this.studentBasicInfoForm.get('learningLanguage')?.value.label
-                "
-              />
-            </div>
 
-            <div>
-              {{
-                this.studentBasicInfoForm.get("learningLanguage")?.value.label
-              }}
-            </div>
-          </div>
-        </mat-select-trigger>
-        <mat-option *ngFor="let item of learningLanguageOptions" [value]="item">
-          <div class="flex gap-3 items-center">
-            <div class="w-6 overflow-hidden">
-              <img
-                class="w-full object-cover"
-                [src]="item.imgUrl"
-                [attr.alt]="item?.label"
-              />
-            </div>
-
-            <div>{{ item.label }}</div>
-          </div>
-        </mat-option>
-      </mat-select>
-      <mat-error
-        *ngIf="
-          studentBasicInfoForm.get('learningLanguage')?.hasError('required')
-        "
-        >{{ "Error.Required" | translate }}</mat-error
-      >
-    </mat-form-field>
-    <mat-form-field appearance="fill" class="w-full">
-      <mat-label>{{ "StudentInfo.Level" | translate }}</mat-label>
-      <mat-select
-        formControlName="currentLevel"
-        placeholder="{{ 'Action.Select' | translate }}"
-      >
-        <mat-option
-          *ngFor="let item of languageLevelOptions"
-          [value]="item.value"
-        >
-          {{ item.translateKey | translate }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
     <mat-form-field appearance="fill" class="w-full">
       <mat-label>{{ "StudentInfo.FirstName" | translate }}</mat-label>
       <input
@@ -191,7 +127,7 @@
         [disabled]="studentBasicInfoForm.disabled"
       >
         <span *ngIf="!studentBasicInfoForm.disabled">
-          {{ "Action.Continue" | translate }}
+          {{ "Action.Save" | translate }}
         </span>
 
         <mat-progress-spinner

@@ -22,6 +22,7 @@ import { MatRadioModule } from '@angular/material/radio';
 import { TutorBasicInfoComponent } from './tutor-profile/tutor-basic-info/tutor-basic-info.component';
 import { TutorExperienceComponent } from './tutor-profile/tutor-experience/tutor-experience.component';
 import { TutorAdditionalInfoComponent } from './tutor-profile/tutor-additional-info/tutor-additional-info.component';
+import { TutorTeachingComponent } from './tutor-profile/tutor-teaching/tutor-teaching.component';
 
 const routes: Routes = [
   {
@@ -39,26 +40,7 @@ const routes: Routes = [
       },
       {
         path: 'profile',
-        component: TutorProfileComponent,
-        children: [
-          {
-            path: '',
-            redirectTo: 'basic',
-            pathMatch: 'full',
-          },
-          {
-            path: 'basic',
-            component: TutorBasicInfoComponent,
-          },
-          {
-            path: 'experience',
-            component: TutorExperienceComponent,
-          },
-          {
-            path: 'additional',
-            component: TutorAdditionalInfoComponent,
-          },
-        ],
+        component: TutorProfileComponent
       },
     ],
   },
@@ -72,6 +54,7 @@ const routes: Routes = [
     TutorBasicInfoComponent,
     TutorExperienceComponent,
     TutorAdditionalInfoComponent,
+    TutorTeachingComponent,
   ],
   imports: [
     CommonModule,

@@ -15,7 +15,8 @@ import { ImageCropperDialogModule } from 'src/app/components/image-cropper/image
 import { MatMenuModule } from '@angular/material/menu';
 import { StudentDetailComponent } from './student-detail/student-detail.component';
 import { StudentProfileComponent } from './student-profile/student-profile.component';
-import { StudentBasicInfoComponent } from './student-basic-info/student-basic-info.component';
+import { StudentBasicInfoComponent } from './student-profile/student-basic-info/student-basic-info.component';
+import { StudentLearningComponent } from './student-profile/student-learning/student-learning.component';
 
 const routes: Routes = [
   {
@@ -44,6 +45,10 @@ const routes: Routes = [
             path: 'basic',
             component: StudentBasicInfoComponent,
           },
+          {
+            path: 'learning',
+            component: StudentLearningComponent,
+          },
         ],
       },
     ],
@@ -56,6 +61,7 @@ const routes: Routes = [
     StudentDetailComponent,
     StudentProfileComponent,
     StudentBasicInfoComponent,
+    StudentLearningComponent,
   ],
   imports: [
     CommonModule,

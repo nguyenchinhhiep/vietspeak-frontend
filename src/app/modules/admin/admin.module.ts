@@ -31,12 +31,12 @@ const routes: Routes = [
       import('./students/students.module').then((m) => m.StudentsModule),
   },
   {
-    path: 'settings',
+    path: 'account',
     data: {
       authLayout: 'admin',
     },
     loadChildren: () =>
-      import('./settings/settings.module').then((m) => m.SettingsModule),
+      import('./account/account.module').then((m) => m.AccountModule),
   },
   {
     path: '**',

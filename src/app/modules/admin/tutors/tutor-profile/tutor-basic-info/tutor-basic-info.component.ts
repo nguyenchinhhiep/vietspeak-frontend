@@ -19,7 +19,6 @@ export class TutorBasicInfoComponent implements OnInit {
     private _translateService: TranslateService,
     private _imageCropperDialogService: ImageCropperDialogService
   ) {}
-  teachingLanguageOptions = TeachingLanguageOptions;
 
   tutorBasicInfoForm!: FormGroup;
 
@@ -33,7 +32,6 @@ export class TutorBasicInfoComponent implements OnInit {
     this.tutorBasicInfoForm = this._fb.group({
       profilePicture: [],
       profilePictureUrl: [],
-      teachingLanguage: [this.teachingLanguageOptions[0]],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       dob: [null, [Validators.required]],

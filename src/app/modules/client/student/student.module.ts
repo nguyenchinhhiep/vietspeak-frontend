@@ -15,6 +15,14 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   {
+    path: 'account',
+    data: {
+      authLayout: 'student',
+    },
+    loadChildren: () =>
+      import('./account/account.module').then((m) => m.AccountModule),
+  },
+  {
     path: '**',
     redirectTo: 'home',
     pathMatch: 'full',

@@ -10,26 +10,32 @@ export class TutorProfileComponent implements OnInit {
 
   navigation: any = [];
 
+  selectedItem: any = null;
+
   ngOnInit(): void {
     this.navigation = [
       {
-        icon: 'mat_outline:person_outline',
-        label: 'Basic',
-        translateKey: 'TutorInfo.Basic',
-        routerLink: 'basic',
+        label: 'Basic info',
+        translateKey: 'TutorInfo.BasicInfo',
+        value: 'basic',
       },
       {
-        icon: 'mat_outline:lock',
+        label: 'Teaching',
+        translateKey: 'TutorInfo.Teaching',
+        value: 'teaching',
+      },
+      {
         label: 'Experience',
         translateKey: 'TutorInfo.Experience',
-        routerLink: 'experience',
+        value: 'experience',
       },
       {
-        icon: 'mat_outline:lock',
         label: 'Additional',
-        translateKey: 'TutorInfo.Additional',
-        routerLink: 'additional',
+        translateKey: 'TutorInfo.AdditionalInfo',
+        value: 'additional',
       },
     ];
+
+    this.selectedItem = this.navigation[0];
   }
 }
