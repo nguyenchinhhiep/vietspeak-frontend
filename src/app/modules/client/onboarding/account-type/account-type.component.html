@@ -3,12 +3,17 @@
 >
   <div class="w-full max-w-7xl flex flex-col gap-6 items-center justify-start">
     <div class="flex justify-between items-center gap-4 w-full py-4 h-16">
-      <div class="flex items-center gap-2">
-        <div class="font-semibold text-gray-900 text-xl cursor-pointer">
-          Vietspeak
+      <button mat-button type="button" routerLink="/onboarding/welcome">
+        <div class="flex items-center gap-1">
+          <mat-icon
+            class="!text-gray-500"
+            svgIcon="mat_outline:arrow_back"
+          ></mat-icon>
+          <div class="text-gray-500">
+            {{ "Action.Back" | translate }}
+          </div>
         </div>
-        <languages></languages>
-      </div>
+      </button>
 
       <button type="button" mat-button (click)="logout()">
         <div class="text-primary">{{ "OnBoarding.Logout" | translate }}</div>

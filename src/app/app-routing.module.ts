@@ -4,6 +4,8 @@ import { AuthGuard } from './core/auth/guards/auth.guard';
 import { NoAuthGuard } from './core/auth/guards/no-auth.guard';
 import { Role } from './core/user/role.model';
 import { LayoutComponent } from './layout/layout.component';
+import { NoUnderReviewGuard } from './modules/under-review/guards/no-under-review.guard';
+import { UnderReviewGuard } from './modules/under-review/guards/under-review.guard';
 
 const routes: Routes = [
   {
@@ -58,17 +60,37 @@ const routes: Routes = [
     },
     children: [
       {
-        path: '',
+        path: 'under-review',
+        canLoad: [UnderReviewGuard],
+        canActivate: [UnderReviewGuard],
+        canActivateChild: [UnderReviewGuard],
+        data: {
+          authLayout: 'blank',
+        },
         loadChildren: () =>
-          import('./modules/client/client.module').then((m) => m.ClientModule),
+          import('./modules/under-review/under-review.module').then(
+            (m) => m.UnderReviewModule
+          ),
       },
       {
         path: 'admin',
+        canLoad: [NoUnderReviewGuard],
+        canActivate: [NoUnderReviewGuard],
+        canActivateChild: [NoUnderReviewGuard],
         data: {
           roles: [Role.Admin],
         },
         loadChildren: () =>
           import('./modules/admin/admin.module').then((m) => m.AdminModule),
+      },
+
+      {
+        path: '',
+        canLoad: [NoUnderReviewGuard],
+        canActivate: [NoUnderReviewGuard],
+        canActivateChild: [NoUnderReviewGuard],
+        loadChildren: () =>
+          import('./modules/client/client.module').then((m) => m.ClientModule),
       },
     ],
   },

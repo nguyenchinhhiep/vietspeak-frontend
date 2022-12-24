@@ -40,7 +40,8 @@ export class TutorInfoComponent implements OnInit {
 
   tutorBasicInfoForm!: FormGroup;
   tutorExperienceForm!: FormGroup;
-  tutorAdditionalInfoForm!: FormGroup;
+  tutorMotivationForm!: FormGroup;
+  tutorIntroductionForm!: FormGroup;
 
   maxDate: Date = new Date();
 
@@ -65,6 +66,19 @@ export class TutorInfoComponent implements OnInit {
     this.stepper.next();
   }
 
+  submitTutorIntroductionForm() {
+    for (let control in this.tutorIntroductionForm.controls) {
+      this.tutorIntroductionForm.controls[control].markAsDirty();
+      this.tutorIntroductionForm.controls[control].markAsTouched();
+    }
+
+    if (this.tutorIntroductionForm.invalid) {
+      return;
+    }
+
+    this.stepper.next();
+  }
+
   submitTutorExperienceForm() {
     for (let control in this.tutorExperienceForm.controls) {
       this.tutorExperienceForm.controls[control].markAsDirty();
@@ -82,26 +96,31 @@ export class TutorInfoComponent implements OnInit {
     this.tutorBasicInfoForm = this._fb.group({
       profilePicture: [],
       profilePictureUrl: [],
-      teachingLanguage: [this.teachingLanguageOptions[0]],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       dob: [null, [Validators.required]],
     });
 
     this.tutorExperienceForm = this._fb.group({
+      teachingLanguage: [this.teachingLanguageOptions[0]],
+      teachingJob: ['', Validators.required],
       teachingExperience: [TeachingExperience.OneToSixMonths],
       languages: this._fb.array([this.createlanguageFormGroup()]),
       haveExperienceTeachingOnline: [true],
       teachingCertificates: [null, [Validators.required]],
     });
 
-    this.tutorAdditionalInfoForm = this._fb.group({
-      heardFrom: [HeardFrom.WebSearch],
-      reasonHere: ['', [Validators.required]],
-      aboutMe: ['', [Validators.required]],
+    this.tutorIntroductionForm = this._fb.group({
+      introduction: ['', [Validators.required]],
+      videoIntroduction: [''],
     });
 
-    this.tutorBasicInfoForm
+    this.tutorMotivationForm = this._fb.group({
+      heardFrom: [HeardFrom.WebSearch],
+      reasonHere: ['', [Validators.required]],
+    });
+
+    this.tutorExperienceForm
       .get('teachingLanguage')
       ?.valueChanges.subscribe((option) => {
         this.languagesFormArray.at(0).get('language')?.setValue(option?.value);
@@ -109,6 +128,7 @@ export class TutorInfoComponent implements OnInit {
 
     this.languagesFormArray.at(0).get('language')?.disable();
   }
+  
 
   logout() {
     this._authService.logout();

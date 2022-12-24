@@ -1,0 +1,47 @@
+<div
+  class="w-full min-h-full flex flex-col gap-6 items-center bg-gray-100 relative pb-20 px-4"
+>
+  <div class="w-full max-w-7xl flex flex-col gap-6 items-center justify-start">
+    <div class="flex justify-between items-center gap-4 w-full py-4 h-16">
+      <div class="flex items-center gap-2">
+        <div class="font-semibold text-gray-900 text-xl cursor-pointer">
+          Vietspeak
+        </div>
+        <languages></languages>
+      </div>
+
+      <button type="button" mat-button (click)="logout()">
+        <div class="text-primary">{{ "OnBoarding.Logout" | translate }}</div>
+      </button>
+    </div>
+
+    <div
+      class="w-full max-w-md sm:bg-white p-8 py-10 sm:rounded-md sm:shadow-sm sm:border border-solid border-gray-200"
+    >
+      <div
+        class="font-medium text-gray-900 text-2xl text-center mb-4 flex flex-col gap-3 items-center justify-center"
+      >
+        <mat-icon
+          class="text-gray-300 icon-size-24"
+          svgIcon="mat_outline:person_search"
+        ></mat-icon>
+        {{ "UnderReview.Title" | translate }}
+      </div>
+
+      <div class="text-lg text-gray-600">
+        {{ "UnderReview.Description" | translate }}
+      </div>
+      <div class="mt-8 flex justify-center">
+        <button
+          type="submit"
+          class="btn--lg w-full"
+          mat-flat-button
+          [color]="'primary'"
+          (click)="logout()"
+        >
+          {{ "Action.Logout" | translate }}
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

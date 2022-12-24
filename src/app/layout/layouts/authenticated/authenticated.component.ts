@@ -9,7 +9,7 @@ import { Layout } from '../../layout.model';
   styleUrls: ['./authenticated.component.scss'],
 })
 export class AuthenticatedLayoutComponent implements OnInit {
-  layout: Layout = 'admin';
+  layout!: Layout;
   private _unsubscribeAll: Subject<any> = new Subject();
   constructor(
     private _router: Router,

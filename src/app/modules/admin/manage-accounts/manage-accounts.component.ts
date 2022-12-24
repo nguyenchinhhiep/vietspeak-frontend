@@ -2,17 +2,18 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { TranslateService } from '@ngx-translate/core';
-import { debounceTime, distinctUntilChanged } from 'rxjs/operators';
+import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { HttpService } from 'src/app/core/http/services/http.service';
 import { UserStatus, UserStatusOptions } from 'src/app/core/user/user.model';
 
 @Component({
-  selector: 'app-students',
-  templateUrl: './students.component.html',
-  styleUrls: ['./students.component.scss'],
+  selector: 'app-manage-accounts',
+  templateUrl: './manage-accounts.component.html',
+  styleUrls: ['./manage-accounts.component.scss']
 })
-export class StudentsComponent implements OnInit {
+export class ManageAccountsComponent implements OnInit {
+
   constructor(
     private _confirmationDialogService: ConfirmationDialogService,
     private _translateService: TranslateService,
@@ -39,11 +40,14 @@ export class StudentsComponent implements OnInit {
     'photo',
     'name',
     'email',
+    'type',
     'status',
     'action',
   ];
 
-  dataSource = new MatTableDataSource([1, 2, 3, 4, 5, 6, 7, 8, 9]);
+  dataSource = new MatTableDataSource([
+    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
+  ]);
 
   ngOnInit(): void {
     // Subscribe to search input change
@@ -60,11 +64,7 @@ export class StudentsComponent implements OnInit {
 
   // Delete
   delete(id: string) {
-    const dialogRef = this._confirmationDialogService.open({
-      message: this._translateService.instant('Confirmation.Message', {
-        action: this._translateService.instant('Action.Delete').toLowerCase(),
-      }),
-    });
+    const dialogRef = this._confirmationDialogService.open();
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res === 'confirmed') {

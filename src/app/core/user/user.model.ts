@@ -4,6 +4,7 @@ export enum UserStatus {
   Active = 'Active',
   Inactive = 'Inactive',
   Pending = 'Pending',
+  Reviewing = 'Reviewing',
 }
 
 export const UserStatusOptions = [
@@ -24,6 +25,12 @@ export const UserStatusOptions = [
     translateKey: 'Status.Pending',
     class: 'tag--warning',
     value: UserStatus.Active,
+  },
+  {
+    label: 'Under review',
+    translateKey: 'Status.UnderReview',
+    class: 'tag--info',
+    value: UserStatus.Reviewing,
   },
 ];
 

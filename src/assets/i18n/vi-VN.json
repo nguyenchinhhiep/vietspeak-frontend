@@ -39,7 +39,8 @@
       "Update": "Update",
       "Remove": "Remove",
       "Approve": "Approve",
-      "Reject": "Reject"
+      "Reject": "Reject",
+      "GetStarted": "Get started"
    },
    "Toast": {
       "CreateSuccessfully": "Create successfully",
@@ -81,8 +82,17 @@
       "No": "No",
       "Photo": "Photo",
       "Name": "Name",
+      "Type": "Type",
       "Status": "Status",
       "Action": "Action"
+   },
+   "Welcome": {
+      "Title": "Welcome to Vietspeak",
+      "Description": "We are so happy you are here. In order to get started, you need to first choose the account type and complete the needed information."
+   },
+   "UnderReview": {
+      "Title": "Your profile is under review",
+      "Description": "Your profile has been submitted and will be reviewed by our team. You will be notified by email if any extra information is needed."
    },
    "Login": {
       "Title": "Login",
@@ -143,6 +153,8 @@
       "Title": "Tutor info",
       "BasicInfo": "Basic info",
       "PersonalInfo": "Personal info",
+      "TeachingAndExperience": "Teaching & Experience",
+      "Motivation": "Motivation",
       "Experience": "Experience",
       "AdditionalInfo": "Additional info",
       "LanguageWantToTeach": "Which language do you want to teach?",
@@ -172,19 +184,21 @@
       "Basic": "Basic",
       "Additional": "Additional",
       "Teaching": "Teaching",
+      "WhatYouTeach": "What you teach",
       "WhatITeach": "What I teach",
       "ITeach": "I teach",
       "TeachingJobDescription": "Example: Communication, Grammar, Writing,...",
       "Introduction": "Introduction",
-      "VideoIntroduction": "Video introduction"
+      "VideoIntroduction": "Video introduction",
+      "VideoIntroductionDescription": "An introduction video is the quickest way to help students get to know about you, so they can confidently decide to book lessons with you. Upload it on Youtube and paste the video URL here. You can do it later on your profile page.",
+      "VideoUrl": "Video URL"
    },
    "Home": {
       "Welcome": "Welcome, {{name}}!"
    },
    "AdminNavigations": {
       "Home": "Home",
-      "Tutors": "Tutors",
-      "Students": "Students"
+      "Accounts": "Accounts"
    },
    "Languages": {
       "English": "English",
@@ -198,6 +212,8 @@
    },
    "Account": {
       "Title": "Account",
+      "Titles": "Accounts",
+      "SearchPlaceholder": "Find by name or email",
       "Profile": "Profile",
       "Password": "Password",
       "Settings": "Settings"
@@ -215,12 +231,10 @@
    },
    "Tutor": {
       "Title": "Tutor",
-      "Titles": "Tutors",
-      "SearchPlaceholder": "Find by name or email"
+      "Titles": "Tutors"
    },
    "Student": {
       "Title": "Student",
-      "Titles": "Students",
-      "SearchPlaceholder": "Find by name or email"
+      "Titles": "Students"
    }
 }

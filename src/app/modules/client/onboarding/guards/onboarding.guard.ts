@@ -31,10 +31,9 @@ export class OnboardingGuard implements CanActivate, CanActivateChild, CanLoad {
     | boolean
     | UrlTree
     | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree> {
-    // Get current url
-    const currentUrl = state.url;
-    return this._check(currentUrl);
+    | Promise<boolean | UrlTree>
+    {
+    return this._check();
   }
 
   /**
@@ -47,10 +46,9 @@ export class OnboardingGuard implements CanActivate, CanActivateChild, CanLoad {
     | boolean
     | UrlTree
     | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree> {
-    // Get current url
-    const currentUrl = segments[0].path;
-    return this._check(currentUrl);
+    | Promise<boolean | UrlTree>
+    {
+    return this._check();
   }
 
   canActivate(
@@ -61,12 +59,10 @@ export class OnboardingGuard implements CanActivate, CanActivateChild, CanLoad {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    // Get current url
-    const currentUrl = state.url;
-    return this._check(currentUrl);
+    return this._check();
   }
 
-  private _check(currentUrl: string): Observable<boolean> {
+  private _check(): Observable<boolean> {
     // Get curren user
     const currentUser = this._userService.currentUserValue;
 

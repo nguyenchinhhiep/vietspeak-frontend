@@ -210,7 +210,7 @@
         >
       </mat-form-field>
       <mat-form-field appearance="fill" class="w-full" floatLabel="always">
-        <mat-label>{{ "TutorInfo.VideoIntroduction" | translate }}</mat-label>
+        <mat-label>{{ "TutorInfo.VideoUrl" | translate }}</mat-label>
         <input
           matInput
           formControlName="videoIntroduction"
@@ -461,9 +461,8 @@
             </div>
             <button
               type="button"
-              mat-flat-button
+              mat-stroked-button
               [color]="'primary'"
-              class="btn--sm"
               (click)="uploadFile.click()"
             >
               {{ "FileUpload.BrowseFiles" | translate }}

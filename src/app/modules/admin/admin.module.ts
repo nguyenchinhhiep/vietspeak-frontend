@@ -15,21 +15,16 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   {
-    path: 'tutor',
+    path: 'accounts',
     data: {
       authLayout: 'admin',
     },
     loadChildren: () =>
-      import('./tutors/tutors.module').then((m) => m.TutorsModule),
+      import('./manage-accounts/manage-accounts.module').then(
+        (m) => m.ManageAccountsModule
+      ),
   },
-  {
-    path: 'student',
-    data: {
-      authLayout: 'admin',
-    },
-    loadChildren: () =>
-      import('./students/students.module').then((m) => m.StudentsModule),
-  },
+
   {
     path: 'account',
     data: {

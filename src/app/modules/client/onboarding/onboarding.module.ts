@@ -22,14 +22,21 @@ import { ToastModule } from 'src/app/components/toast/toast.module';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CongratulationsComponent } from './congratulations/congratulations.component';
 import { PreventAutofillModule } from 'src/app/directives/prevent-autofill/prevent-autofill.module';
-import { OnboardingGuard } from './guards/onboarding.guard';
 import { ImageCropperDialogModule } from 'src/app/components/image-cropper/image-cropper.module';
+import { WelcomeComponent } from './welcome/welcome.component';
 
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'account-type',
+    redirectTo: 'welcome',
     pathMatch: 'full',
+  },
+  {
+    path: 'welcome',
+    component: WelcomeComponent,
+    data: {
+      authLayout: 'blank',
+    },
   },
   {
     path: 'account-type',
@@ -67,6 +74,7 @@ const routes: Routes = [
     StudentInfoComponent,
     TutorInfoComponent,
     CongratulationsComponent,
+    WelcomeComponent,
   ],
   imports: [
     CommonModule,

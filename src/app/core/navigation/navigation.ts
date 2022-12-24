@@ -11,21 +11,12 @@ export const adminNavigation: NavigationItem[] = [
     disabled: false,
   },
   {
-    id: 'tutors',
-    title: 'Tutors',
-    translateKey: 'AdminNavigations.Tutors',
+    id: 'accounts',
+    title: 'Accounts',
+    translateKey: 'AdminNavigations.Accounts',
     type: 'basic',
-    icon: 'mat_outline:portrait',
-    link: '/admin/tutor',
+    icon: 'mat_outline:manage_accounts',
+    link: '/admin/accounts',
     disabled: false,
-  },
-  {
-    id: 'students',
-    title: 'Students',
-    translateKey: 'AdminNavigations.Students',
-    type: 'basic',
-    icon: 'mat_outline:portrait',
-    link: '/admin/student',
-    disabled: false,
-  },
+  }
 ];
