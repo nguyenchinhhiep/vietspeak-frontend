@@ -1,9 +1,9 @@
 <div class="w-full">
   <form [formGroup]="tutorProfileForm" class="flex flex-col gap-4">
     <div
-      class="w-full flex flex-col bg-white rounded-md p-6 shadow-sm border border-solid border-gray-200"
+      class="w-full flex flex-col bg-surface rounded-md p-6 shadow-sm border border-solid border-light"
     >
-      <div class="font-medium text-gray-900 text-xl mb-3">
+      <div class="font-medium  text-xl mb-3">
         {{ "TutorInfo.Basic" | translate }}
       </div>
 
@@ -183,9 +183,9 @@
       </mat-form-field>
     </div>
     <div
-      class="w-full flex flex-col bg-white rounded-md p-6 pb-2 shadow-sm border border-solid border-gray-200"
+      class="w-full flex flex-col bg-surface rounded-md p-6 pb-2 shadow-sm border border-solid border-light"
     >
-      <div class="font-medium text-gray-900 text-xl mb-3">
+      <div class="font-medium  text-xl mb-3">
         {{ "TutorInfo.Introduction" | translate }}
       </div>
       <mat-form-field appearance="fill" class="w-full" floatLabel="always">
@@ -236,9 +236,9 @@
       </mat-form-field>
     </div>
     <div
-      class="w-full flex flex-col bg-white rounded-md p-6 pb-2 shadow-sm border border-solid border-gray-200"
+      class="w-full flex flex-col bg-surface rounded-md p-6 pb-2 shadow-sm border border-solid border-light"
     >
-      <div class="font-medium text-gray-900 text-xl mb-3">
+      <div class="font-medium  text-xl mb-3">
         {{ "TutorInfo.Teaching" | translate }}
       </div>
       <mat-form-field appearance="fill" class="w-full" floatLabel="always">
@@ -308,9 +308,9 @@
       </mat-form-field>
     </div>
     <div
-      class="w-full flex flex-col bg-white rounded-md p-6 pb-2 shadow-sm border border-solid border-gray-200"
+      class="w-full flex flex-col bg-surface rounded-md p-6 pb-2 shadow-sm border border-solid border-light"
     >
-      <div class="font-medium text-gray-900 text-xl mb-3">
+      <div class="font-medium  text-xl mb-3">
         {{ "TutorInfo.Experience" | translate }}
       </div>
       <mat-form-field appearance="fill" class="w-full">
@@ -334,13 +334,13 @@
         >
       </mat-form-field>
       <div class="flex flex-col mb-4">
-        <div class="text-gray-500 flex gap-1 items-center mb-2">
+        <div class="text-tertiary flex gap-1 items-center mb-2">
           {{ "TutorInfo.LanguagesYouSpeak" | translate }}
         </div>
         <div formArrayName="languages" class="flex flex-col gap-3">
           <div
             *ngFor="let language of languagesFormArray.controls; let i = index"
-            class="flex items-center flex-wrap md:flex-nowrap gap-x-3 rounded border border-gray-300 border-solid px-3 py-2 relative shadow-sm"
+            class="flex items-center flex-wrap md:flex-nowrap gap-x-3 rounded border border-base border-solid px-3 py-2 relative shadow-sm"
             [formGroupName]="i"
           >
             <div class="flex-grow">
@@ -428,7 +428,7 @@
       </div>
 
       <div class="flex flex-col mb-4">
-        <div class="text-gray-500 flex gap-1 items-center mb-2">
+        <div class="text-tertiary flex gap-1 items-center mb-2">
           {{ "TutorInfo.TeachingCertificates" | translate }}
           <span class="text-danger">*</span>
           <span class="text-gray-400 font-normal text-sm"
@@ -440,7 +440,7 @@
         </div>
         <div class="flex flex-col">
           <div
-            class="rounded border border-solid bg-white border-gray-300 p-4 flex flex-col gap-2 items-center justify-center relative shadow-sm"
+            class="rounded border border-solid bg-surface border-base p-4 flex flex-col gap-2 items-center justify-center relative shadow-sm"
             [ngClass]="
               isOnDropFilesContainer ? '!border-primary !bg-gray-50' : ''
             "
@@ -481,7 +481,7 @@
             *ngIf="this.tutorProfileForm.get('teachingCertificates')?.value"
           >
             <div
-              class="bg-white rounded flex gap-4 items-center px-3 py-2 border border-solid border-gray-300 shadow-sm"
+              class="bg-surface rounded flex gap-4 items-center px-3 py-2 border border-solid border-base shadow-sm"
               *ngFor="
                 let file of this.tutorProfileForm.get('teachingCertificates')
                   ?.value || [];

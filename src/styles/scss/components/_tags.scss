@@ -9,26 +9,26 @@
 
   // Alternative
   &--primary {
-    @apply bg-primary text-white;
+    @apply bg-primary-100 text-primary;
   }
 
   &--accent {
-    @apply bg-accent text-white;
+    @apply bg-accent-100 text-accent;
   }
 
   &--success {
-    @apply bg-success text-white;
+    @apply bg-success-100 text-success;
   }
 
   &--info {
-    @apply bg-info text-white;
+    @apply bg-info-100  text-info;
   }
 
   &--warning {
-    @apply bg-warn text-on-warn-700;
+    @apply bg-warn-100 text-warn;
   }
 
   &--danger {
-    @apply bg-danger text-white;
+    @apply bg-danger-100 text-danger;
   }
 }

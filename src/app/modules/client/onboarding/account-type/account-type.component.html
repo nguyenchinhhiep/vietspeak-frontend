@@ -6,10 +6,10 @@
       <button mat-button type="button" routerLink="/onboarding/welcome">
         <div class="flex items-center gap-1">
           <mat-icon
-            class="!text-gray-500"
+            class="!text-tertiary"
             svgIcon="mat_outline:arrow_back"
           ></mat-icon>
-          <div class="text-gray-500">
+          <div class="text-tertiary">
             {{ "Action.Back" | translate }}
           </div>
         </div>
@@ -21,7 +21,7 @@
     </div>
 
     <div class="w-full max-w-md">
-      <div class="font-medium text-gray-900 text-2xl text-center mb-10">
+      <div class="font-medium  text-2xl text-center mb-10">
         {{ "SelectAccountType.Title" | translate }}
       </div>
 
@@ -32,11 +32,11 @@
           (click)="onSelectAccountType(type)"
         >
           <div
-            class="shadow rounded-md w-48 h-48 flex justify-center items-center bg-white shadow-sm border-solid"
+            class="shadow rounded-md w-48 h-48 flex justify-center items-center bg-surface shadow-sm border-solid"
             [ngClass]="
               selectedAccountType === type
                 ? 'border-primary border-4'
-                : 'border-gray-200 border-1 '
+                : 'border-light border-1 '
             "
           >
             <mat-icon

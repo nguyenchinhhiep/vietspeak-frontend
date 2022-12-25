@@ -11,12 +11,12 @@ export const adminNavigation: NavigationItem[] = [
     disabled: false,
   },
   {
-    id: 'accounts',
-    title: 'Accounts',
-    translateKey: 'AdminNavigations.Accounts',
+    id: 'users',
+    title: 'Users',
+    translateKey: 'AdminNavigations.Users',
     type: 'basic',
     icon: 'mat_outline:manage_accounts',
-    link: '/admin/accounts',
+    link: '/admin/users',
     disabled: false,
   }
 ];

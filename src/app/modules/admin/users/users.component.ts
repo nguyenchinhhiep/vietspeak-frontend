@@ -5,15 +5,15 @@ import { TranslateService } from '@ngx-translate/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { HttpService } from 'src/app/core/http/services/http.service';
+import { Role, RoleOptions } from 'src/app/core/user/role.model';
 import { UserStatus, UserStatusOptions } from 'src/app/core/user/user.model';
 
 @Component({
-  selector: 'app-manage-accounts',
-  templateUrl: './manage-accounts.component.html',
-  styleUrls: ['./manage-accounts.component.scss']
+  selector: 'app-users',
+  templateUrl: './users.component.html',
+  styleUrls: ['./users.component.scss'],
 })
-export class ManageAccountsComponent implements OnInit {
-
+export class UsersComponent implements OnInit {
   constructor(
     private _confirmationDialogService: ConfirmationDialogService,
     private _translateService: TranslateService,
@@ -76,6 +76,18 @@ export class ManageAccountsComponent implements OnInit {
   getStatus(status: UserStatus) {
     return (
       UserStatusOptions.find((item) => item.value === status) || {
+        label: '',
+        translateKey: '',
+        class: '',
+      }
+    );
+  }
+
+  // Get role
+  getRole(role: Role) {
+    return (
+      RoleOptions.find((item) => item.value === role) || {
+        label: '',
         translateKey: '',
         class: '',
       }

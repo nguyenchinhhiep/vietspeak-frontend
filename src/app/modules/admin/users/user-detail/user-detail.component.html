@@ -1,0 +1,19 @@
+<div class="w-full mx-auto min-h-full max-w-7xl -mt-4">
+  <div class="mb-4">
+    <nav mat-tab-nav-bar [disableRipple]="true" [color]="'primary'">
+      <a
+        mat-tab-link
+        [routerLink]="link.link"
+        [queryParamsHandling]="'merge'"
+        *ngFor="let link of links"
+        [active]="activeLink === link"
+        [disabled]="link.disabled()"
+      >
+        {{ link.label }}
+      </a>
+    </nav>
+  </div>
+  <div class="w-full">
+    <router-outlet></router-outlet>
+  </div>
+</div>

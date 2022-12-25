@@ -15,14 +15,12 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
   {
-    path: 'accounts',
+    path: 'users',
     data: {
       authLayout: 'admin',
     },
     loadChildren: () =>
-      import('./manage-accounts/manage-accounts.module').then(
-        (m) => m.ManageAccountsModule
-      ),
+      import('./users/users.module').then((m) => m.UsersModule),
   },
 
   {

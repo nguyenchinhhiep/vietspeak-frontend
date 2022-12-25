@@ -198,7 +198,7 @@
    },
    "AdminNavigations": {
       "Home": "Home",
-      "Accounts": "Accounts"
+      "Users": "Users"
    },
    "Languages": {
       "English": "English",
@@ -212,11 +212,13 @@
    },
    "Account": {
       "Title": "Account",
-      "Titles": "Accounts",
-      "SearchPlaceholder": "Find by name or email",
       "Profile": "Profile",
       "Password": "Password",
       "Settings": "Settings"
+   },
+   "Users": {
+      "Title": "Users",
+      "SearchPlaceholder": "Find by name or email"
    },
    "UserProfile": {
       "Title": "Profile",

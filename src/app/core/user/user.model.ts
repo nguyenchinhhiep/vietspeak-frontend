@@ -11,25 +11,25 @@ export const UserStatusOptions = [
   {
     label: 'Active',
     translateKey: 'Status.Active',
-    class: 'tag--success',
+    class: 'bg-success',
     value: UserStatus.Active,
   },
   {
     label: 'Inactive',
     translateKey: 'Status.Inactive',
-    class: 'tag--danger',
+    class: 'bg-danger',
     value: UserStatus.Active,
   },
   {
     label: 'Pending',
     translateKey: 'Status.Pending',
-    class: 'tag--warning',
+    class: 'bg-warn-400',
     value: UserStatus.Active,
   },
   {
     label: 'Under review',
     translateKey: 'Status.UnderReview',
-    class: 'tag--info',
+    class: 'bg-info',
     value: UserStatus.Reviewing,
   },
 ];

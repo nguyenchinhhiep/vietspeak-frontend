@@ -6,10 +6,10 @@
       <button mat-button type="button" routerLink="/onboarding/account-type">
         <div class="flex items-center gap-1">
           <mat-icon
-            class="!text-gray-500"
+            class="!text-tertiary"
             svgIcon="mat_outline:arrow_back"
           ></mat-icon>
-          <div class="text-gray-500">
+          <div class="text-tertiary">
             {{ "Action.Back" | translate }}
           </div>
         </div>
@@ -23,7 +23,7 @@
     </div>
 
     <div class="w-full max-w-xl">
-      <div class="font-medium text-gray-900 text-2xl text-center mb-4">
+      <div class="font-medium  text-2xl text-center mb-4">
         {{ "TutorInfo.TutorProfile" | translate }}
       </div>
 
@@ -51,11 +51,11 @@
               <div class="w-full pt-4">
                 <form [formGroup]="tutorBasicInfoForm">
                   <div class="flex flex-col gap-2 mb-4">
-                    <div class="text-gray-500 flex gap-1 items-center">
+                    <div class="text-tertiary flex gap-1 items-center">
                       {{ "TutorInfo.ProfilePicture" | translate }}
                     </div>
                     <div
-                      class="rounded border border-solid bg-white border-gray-300 p-4 flex flex-col shadow-sm"
+                      class="rounded border border-solid bg-surface border-base p-4 flex flex-col shadow-sm"
                     >
                       <div
                         class="flex flex-col items-center gap-3 items-center"
@@ -362,7 +362,7 @@
                     >
                   </mat-form-field>
                   <div class="flex flex-col mb-4">
-                    <div class="text-gray-500 flex gap-1 items-center mb-2">
+                    <div class="text-tertiary flex gap-1 items-center mb-2">
                       {{ "TutorInfo.LanguagesYouSpeak" | translate }}
                     </div>
                     <div formArrayName="languages" class="flex flex-col gap-3">
@@ -371,7 +371,7 @@
                           let language of languagesFormArray.controls;
                           let i = index
                         "
-                        class="flex items-center flex-wrap md:flex-nowrap gap-x-3 rounded border border-gray-300 border-solid px-3 py-2 bg-white relative shadow-sm"
+                        class="flex items-center flex-wrap md:flex-nowrap gap-x-3 rounded border border-base border-solid px-3 py-2 bg-surface relative shadow-sm"
                         [formGroupName]="i"
                       >
                         <div class="flex-grow">
@@ -465,7 +465,7 @@
                   </div>
 
                   <div class="flex flex-col mb-4">
-                    <div class="text-gray-500 flex gap-1 items-center mb-2">
+                    <div class="text-tertiary flex gap-1 items-center mb-2">
                       {{ "TutorInfo.TeachingCertificates" | translate }}
                       <span class="text-danger">*</span>
                       <span class="text-gray-400 font-normal text-sm"
@@ -477,7 +477,7 @@
                     </div>
                     <div class="flex flex-col">
                       <div
-                        class="rounded border border-solid bg-white border-gray-300 p-4 flex flex-col gap-2 items-center justify-center relative shadow-sm"
+                        class="rounded border border-solid bg-surface border-base p-4 flex flex-col gap-2 items-center justify-center relative shadow-sm"
                         [ngClass]="
                           isOnDropFilesContainer
                             ? '!border-primary !bg-gray-50'
@@ -523,7 +523,7 @@
                         "
                       >
                         <div
-                          class="bg-white rounded flex gap-4 items-center px-3 py-2 border border-solid border-gray-300 shadow-sm"
+                          class="bg-surface rounded flex gap-4 items-center px-3 py-2 border border-solid border-base shadow-sm"
                           *ngFor="
                             let file of this.tutorExperienceForm.get(
                               'teachingCertificates'
@@ -573,7 +573,7 @@
                     </div>
                   </div>
                   <div class="flex flex-col gap-2">
-                    <div class="text-gray-500">
+                    <div class="text-tertiary">
                       {{ "TutorInfo.HaveExperienceTeachingOnline" | translate }}
                     </div>
                     <mat-radio-group
@@ -657,11 +657,11 @@
                   </mat-form-field>
 
                   <div class="mb-4">
-                    <div class="text-gray-500 mb-2">
+                    <div class="text-tertiary mb-2">
                       {{ "TutorInfo.VideoIntroduction" | translate }}
                     </div>
                     <div
-                      class="p-3 rounded bg-white shadow-sm border border-solid border-gray-300"
+                      class="p-3 rounded bg-surface shadow-sm border border-solid border-base"
                     >
                       <div class="mb-3 text-gray-600">
                         {{

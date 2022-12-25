@@ -10,10 +10,10 @@
       >
         <div class="flex items-center gap-1">
           <mat-icon
-            class="!text-gray-500"
+            class="!text-tertiary"
             svgIcon="mat_outline:arrow_back"
           ></mat-icon>
-          <div class="text-gray-500">
+          <div class="text-tertiary">
             {{ "Action.Back" | translate }}
           </div>
         </div>
@@ -27,7 +27,7 @@
     </div>
 
     <div class="w-full max-w-xl sm:px-6">
-      <div class="font-medium text-gray-900 text-2xl text-center">
+      <div class="font-medium  text-2xl text-center">
         {{ "StudentInfo.StudentProfile" | translate }}
       </div>
       <form class="mt-8" [formGroup]="studentInfoForm" (ngSubmit)="submit()">
