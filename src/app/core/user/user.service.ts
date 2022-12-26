@@ -10,7 +10,7 @@ export class UserService {
       id: '1',
       email: 'nguyenchinhhiep95@gmail.com',
       role: Role.Admin,
-      status: UserStatus.Active,
+      status: UserStatus.Pending,
       fullName: 'Hiep Nguyen',
     });
 

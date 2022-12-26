@@ -3,7 +3,7 @@
     <div
       class="w-full flex flex-col bg-surface rounded-md p-6 shadow-sm border border-solid border-light"
     >
-      <div class="font-medium  text-xl mb-3">
+      <div class="font-medium text-xl mb-3">
         {{ "StudentInfo.Basic" | translate }}
       </div>
 
@@ -26,8 +26,9 @@
             <!-- Change image -->
             <button
               type="button"
-              mat-stroked-button
+              mat-flat-button
               [color]="'primary'"
+              class="btn--sm"
               (click)="uploadProfilePictureFile.click()"
             >
               {{
@@ -41,9 +42,11 @@
               *ngIf="studentProfileForm.get('profilePictureUrl')?.value"
               type="button"
               mat-button
+              [color]="'primary'"
+              class="btn--sm"
               (click)="onRemoveProfilePicture()"
             >
-              <div class="text-danger">Remove</div>
+              {{ "Action.Remove" | translate }}
             </button>
           </div>
         </div>
@@ -163,7 +166,7 @@
     <div
       class="w-full flex flex-col bg-surface rounded-md p-6 shadow-sm border border-solid border-light"
     >
-      <div class="font-medium  text-xl mb-3">
+      <div class="font-medium text-xl mb-3">
         {{ "StudentInfo.Learning" | translate }}
       </div>
       <mat-form-field appearance="fill" class="w-full">

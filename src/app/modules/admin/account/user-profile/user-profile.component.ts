@@ -109,10 +109,10 @@ export class UserProfileComponent implements OnInit {
   // Open crop image dialog
   openImageCropper(imageFile: File) {
     const dialogRef = this._imageCropperDialogService.open(imageFile, {
-      cropperMaxWidth: 150,
-      cropperMaxHeight: 150,
-      cropperMinWidth: 100,
-      cropperMinHeight: 100,
+      cropperMaxWidth: 200,
+      cropperMaxHeight: 200,
+      cropperMinWidth: 150,
+      cropperMinHeight: 150,
     });
 
     dialogRef?.afterClosed().subscribe((croppedImage) => {

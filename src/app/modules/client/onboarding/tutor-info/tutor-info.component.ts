@@ -16,6 +16,8 @@ import {
   TeachingLanguageOptions,
 } from '../languages.model';
 import { HeardFrom, HeardFromOptions } from '../onboarding.model';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { MatChipInputEvent } from '@angular/material/chips';
 
 @Component({
   selector: 'app-tutor-info',
@@ -47,10 +49,40 @@ export class TutorInfoComponent implements OnInit {
 
   isOnDropFilesContainer: boolean = false;
 
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+
   @ViewChild('stepper') stepper!: MatStepper;
 
   ngOnInit(): void {
     this.createForm();
+  }
+
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      const teachingJob =
+        this.tutorExperienceForm.get('teachingJob')?.value || [];
+      this.tutorExperienceForm
+        .get('teachingJob')
+        ?.setValue([...teachingJob, value]);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+  }
+
+  remove(job: string): void {
+    const teachingJob =
+      this.tutorExperienceForm.get('teachingJob')?.value || [];
+    const index = teachingJob.indexOf(job);
+
+    if (index >= 0) {
+      teachingJob.splice(index, 1);
+
+      this.tutorExperienceForm.get('teachingJob')?.setValue(teachingJob);
+    }
   }
 
   submitTutorBasicInfoForm() {
@@ -103,7 +135,7 @@ export class TutorInfoComponent implements OnInit {
 
     this.tutorExperienceForm = this._fb.group({
       teachingLanguage: [this.teachingLanguageOptions[0]],
-      teachingJob: ['', Validators.required],
+      teachingJob: [[], Validators.required],
       teachingExperience: [TeachingExperience.OneToSixMonths],
       languages: this._fb.array([this.createlanguageFormGroup()]),
       haveExperienceTeachingOnline: [true],
@@ -128,7 +160,6 @@ export class TutorInfoComponent implements OnInit {
 
     this.languagesFormArray.at(0).get('language')?.disable();
   }
-  
 
   logout() {
     this._authService.logout();
@@ -315,10 +346,10 @@ export class TutorInfoComponent implements OnInit {
   // Open crop image dialog
   openImageCropper(imageFile: File) {
     const dialogRef = this._imageCropperDialogService.open(imageFile, {
-      cropperMaxWidth: 150,
-      cropperMaxHeight: 150,
-      cropperMinWidth: 100,
-      cropperMinHeight: 100,
+      cropperMaxWidth: 200,
+      cropperMaxHeight: 200,
+      cropperMinWidth: 150,
+      cropperMinHeight: 150,
     });
 
     dialogRef?.afterClosed().subscribe((croppedImage) => {

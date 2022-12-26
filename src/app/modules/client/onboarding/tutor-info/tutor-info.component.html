@@ -23,7 +23,7 @@
     </div>
 
     <div class="w-full max-w-xl">
-      <div class="font-medium  text-2xl text-center mb-4">
+      <div class="font-medium text-2xl text-center mb-4">
         {{ "TutorInfo.TutorProfile" | translate }}
       </div>
 
@@ -49,13 +49,16 @@
           <ng-template matStepContent>
             <div class="flex justify-center -mx-6 sm:px-6">
               <div class="w-full pt-4">
-                <form [formGroup]="tutorBasicInfoForm">
+                <form
+                  [formGroup]="tutorBasicInfoForm"
+                  (keydown.enter)="(false)"
+                >
                   <div class="flex flex-col gap-2 mb-4">
                     <div class="text-tertiary flex gap-1 items-center">
                       {{ "TutorInfo.ProfilePicture" | translate }}
                     </div>
                     <div
-                      class="rounded border border-solid bg-surface border-base p-4 flex flex-col shadow-sm"
+                      class="rounded border border-solid bg-surface border-light p-4 flex flex-col shadow-sm"
                     >
                       <div
                         class="flex flex-col items-center gap-3 items-center"
@@ -67,7 +70,7 @@
                                 ?.value
                             "
                             class="icon-size-24 text-gray-200"
-                            svgIcon="mat_outline:photo_camera"
+                            svgIcon="mat_outline:account_circle"
                           ></mat-icon>
                           <img
                             class="w-full h-full rounded-full overflow-hidden object-cover"
@@ -89,17 +92,17 @@
                             type="button"
                             mat-button
                             color="primary"
+                            class="btn--sm"
                             (click)="onRemoveProfilePicture()"
                           >
-                            <div class="text-danger">
-                              {{ "Action.Remove" | translate }}
-                            </div>
+                            {{ "Action.Remove" | translate }}
                           </button>
 
                           <button
                             type="button"
-                            mat-stroked-button
+                            mat-flat-button
                             [color]="'primary'"
+                            class="btn--sm"
                             (click)="uploadProfilePictureFile.click()"
                           >
                             {{
@@ -246,7 +249,10 @@
           <ng-template matStepContent>
             <div class="flex justify-center -mx-6 sm:px-6">
               <div class="w-full pt-4">
-                <form [formGroup]="tutorExperienceForm">
+                <form
+                  [formGroup]="tutorExperienceForm"
+                  (keydown.enter)="(false)"
+                >
                   <mat-form-field
                     appearance="fill"
                     class="w-full"
@@ -317,17 +323,34 @@
                     <mat-label>{{
                       "TutorInfo.WhatYouTeach" | translate
                     }}</mat-label>
-                    <textarea
-                      matInput
-                      cdkTextareaAutosize
-                      cdkAutosizeMinRows="3"
-                      formControlName="teachingJob"
-                      maxlength="200"
-                      placeholder="{{
-                        'TutorInfo.TeachingJobDescription' | translate
-                      }}"
-                      appPreventAutoFill
-                    ></textarea>
+                    <mat-chip-list #chipTeachingJobList>
+                      <mat-chip
+                        [disableRipple]="true"
+                        *ngFor="
+                          let job of this.tutorExperienceForm.get('teachingJob')
+                            ?.value || []
+                        "
+                        (removed)="remove(job)"
+                      >
+                        {{ job }}
+                        <button matChipRemove>
+                          <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
+                        </button>
+                      </mat-chip>
+                      <input
+                        placeholder="{{
+                          'TutorInfo.TeachingJobDescription' | translate
+                        }}"
+                        [matChipInputFor]="chipTeachingJobList"
+                        [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+                        (matChipInputTokenEnd)="add($event)"
+                        #teachingJobInput
+                        (blur)="teachingJobInput.value = ''"
+                      />
+                    </mat-chip-list>
+                    <mat-hint>{{
+                      "Action.PressEnterToAdd" | translate
+                    }}</mat-hint>
                     <mat-error
                       *ngIf="
                         tutorExperienceForm
@@ -371,7 +394,7 @@
                           let language of languagesFormArray.controls;
                           let i = index
                         "
-                        class="flex items-center flex-wrap md:flex-nowrap gap-x-3 rounded border border-base border-solid px-3 py-2 bg-surface relative shadow-sm"
+                        class="flex items-center flex-wrap md:flex-nowrap gap-x-3 rounded border border-light border-solid px-3 py-2 bg-surface relative shadow-sm"
                         [formGroupName]="i"
                       >
                         <div class="flex-grow">
@@ -477,7 +500,7 @@
                     </div>
                     <div class="flex flex-col">
                       <div
-                        class="rounded border border-solid bg-surface border-base p-4 flex flex-col gap-2 items-center justify-center relative shadow-sm"
+                        class="rounded border border-solid bg-surface border-light p-4 flex flex-col gap-2 items-center justify-center relative shadow-sm"
                         [ngClass]="
                           isOnDropFilesContainer
                             ? '!border-primary !bg-gray-50'
@@ -500,8 +523,9 @@
                         </div>
                         <button
                           type="button"
-                          mat-stroked-button
+                          mat-flat-button
                           [color]="'primary'"
+                          class="btn--sm"
                           (click)="uploadFile.click()"
                         >
                           {{ "FileUpload.BrowseFiles" | translate }}
@@ -523,7 +547,7 @@
                         "
                       >
                         <div
-                          class="bg-surface rounded flex gap-4 items-center px-3 py-2 border border-solid border-base shadow-sm"
+                          class="bg-surface rounded flex gap-4 items-center px-3 py-2 border border-solid border-light shadow-sm"
                           *ngFor="
                             let file of this.tutorExperienceForm.get(
                               'teachingCertificates'
@@ -618,7 +642,10 @@
           <ng-template matStepContent>
             <div class="flex justify-center -mx-6 sm:px-6">
               <div class="w-full mt-4">
-                <form [formGroup]="tutorIntroductionForm">
+                <form
+                  [formGroup]="tutorIntroductionForm"
+                  (keydown.enter)="(false)"
+                >
                   <mat-form-field
                     appearance="fill"
                     class="w-full"
@@ -661,7 +688,7 @@
                       {{ "TutorInfo.VideoIntroduction" | translate }}
                     </div>
                     <div
-                      class="p-3 rounded bg-surface shadow-sm border border-solid border-base"
+                      class="p-3 rounded bg-surface shadow-sm border border-solid border-light"
                     >
                       <div class="mb-3 text-gray-600">
                         {{
@@ -746,7 +773,10 @@
           <ng-template matStepContent>
             <div class="flex justify-center -mx-6 sm:px-6">
               <div class="w-full mt-4">
-                <form [formGroup]="tutorMotivationForm">
+                <form
+                  [formGroup]="tutorMotivationForm"
+                  (keydown.enter)="(false)"
+                >
                   <mat-form-field appearance="fill" class="w-full">
                     <mat-label>{{
                       "TutorInfo.ReasonHere" | translate

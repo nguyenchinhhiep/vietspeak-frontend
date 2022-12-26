@@ -40,7 +40,8 @@
       "Remove": "Remove",
       "Approve": "Approve",
       "Reject": "Reject",
-      "GetStarted": "Get started"
+      "GetStarted": "Get started",
+      "PressEnterToAdd": "Press Enter to add"
    },
    "Toast": {
       "CreateSuccessfully": "Create successfully",
@@ -187,7 +188,7 @@
       "WhatYouTeach": "What you teach",
       "WhatITeach": "What I teach",
       "ITeach": "I teach",
-      "TeachingJobDescription": "Example: Communication, Grammar, Writing,...",
+      "TeachingJobDescription": "E.g., Speaking, Writing...",
       "Introduction": "Introduction",
       "VideoIntroduction": "Video introduction",
       "VideoIntroductionDescription": "An introduction video is the quickest way to help students get to know about you, so they can confidently decide to book lessons with you. Upload it on Youtube and paste the video URL here. You can do it later on your profile page.",

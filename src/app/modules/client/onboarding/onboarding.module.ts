@@ -19,6 +19,7 @@ import { LanguagesModule } from 'src/app/components/languages/languages.module';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ToastModule } from 'src/app/components/toast/toast.module';
+import {MatChipsModule} from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CongratulationsComponent } from './congratulations/congratulations.component';
 import { PreventAutofillModule } from 'src/app/directives/prevent-autofill/prevent-autofill.module';
@@ -95,7 +96,9 @@ const routes: Routes = [
     ToastModule,
     MatProgressSpinnerModule,
     PreventAutofillModule,
+    MatChipsModule,
     ImageCropperDialogModule,
+    
     RouterModule.forChild(routes),
   ],
   providers: [

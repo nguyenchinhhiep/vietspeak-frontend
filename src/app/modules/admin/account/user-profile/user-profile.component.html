@@ -25,8 +25,9 @@
             <!-- Change image -->
             <button
               type="button"
-              mat-stroked-button
+              mat-flat-button
               [color]="'primary'"
+              class="btn--sm"
               (click)="uploadProfilePictureFile.click()"
             >
               {{
@@ -40,9 +41,11 @@
               *ngIf="profileForm.get('profilePictureUrl')?.value"
               type="button"
               mat-button
+              [color]="'primary'"
+              class="btn--sm"
               (click)="onRemoveProfilePicture()"
             >
-              <div class="text-danger">Remove</div>
+              {{ "Action.Remove" | translate }}
             </button>
           </div>
         </div>
