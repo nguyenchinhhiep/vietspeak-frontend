@@ -1,5 +1,5 @@
 <div
-  class="w-full min-h-full flex flex-col gap-6 items-center bg-gray-100 relative pb-20 px-4"
+  class="w-full min-h-full flex flex-col gap-6 items-center bg-primary-50 bg-opacity-80 relative pb-20 px-4"
 >
   <div class="w-full max-w-7xl flex flex-col gap-6 items-center justify-start">
     <div class="flex justify-between items-center gap-4 w-full py-4 h-16">
@@ -32,17 +32,17 @@
           (click)="onSelectAccountType(type)"
         >
           <div
-            class="shadow rounded-md w-48 h-48 flex justify-center items-center bg-surface shadow-sm border-solid"
+            class="rounded w-48 h-48 flex justify-center items-center bg-surface border-solid"
             [ngClass]="
               selectedAccountType === type
                 ? 'border-primary border-4'
-                : 'border-light border-1 '
+                : 'border-light border'
             "
           >
             <mat-icon
               class="icon-size-18"
               [ngClass]="
-                selectedAccountType === type ? 'text-primary' : 'text-gray-400 '
+                selectedAccountType === type ? 'text-primary' : 'text-tertiary '
               "
               [svgIcon]="type.icon"
             ></mat-icon>
@@ -51,7 +51,7 @@
           <div
             class="text-sm font-medium uppercase"
             [ngClass]="
-              selectedAccountType === type ? 'text-primary' : 'text-gray-400 '
+              selectedAccountType === type ? 'text-primary' : 'text-tertiary'
             "
           >
             {{ type.translateKey | translate }}

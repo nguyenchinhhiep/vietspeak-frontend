@@ -229,7 +229,7 @@ const theming = plugin.withOptions(
           foreground: {
             light: {
               "text-default": colors.gray[900],
-              "text-secondary": colors.gray[700],
+              "text-secondary": colors.gray[600],
               "text-tertiary": colors.gray[500],
               "text-hint": colors.gray[400],
               "text-disabled": colors.gray[400],

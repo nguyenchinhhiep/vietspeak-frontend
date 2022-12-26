@@ -1,5 +1,5 @@
 <div
-  class="w-full min-h-full flex flex-col gap-6 items-center bg-gray-100 relative pb-20 px-4"
+  class="w-full min-h-full flex flex-col gap-6 items-center bg-primary-50 bg-opacity-80 relative pb-20 px-4"
 >
   <div class="w-full max-w-7xl flex flex-col gap-6 items-center justify-start">
     <div class="flex justify-between items-center gap-4 w-full py-4 h-16">
@@ -58,7 +58,7 @@
                       {{ "TutorInfo.ProfilePicture" | translate }}
                     </div>
                     <div
-                      class="rounded border border-solid bg-surface border-light p-4 flex flex-col shadow-sm"
+                      class="rounded border border-solid bg-surface border-base p-4 flex flex-col"
                     >
                       <div
                         class="flex flex-col items-center gap-3 items-center"
@@ -394,7 +394,7 @@
                           let language of languagesFormArray.controls;
                           let i = index
                         "
-                        class="flex items-center flex-wrap md:flex-nowrap gap-x-3 rounded border border-light border-solid px-3 py-2 bg-surface relative shadow-sm"
+                        class="flex items-center flex-wrap md:flex-nowrap gap-x-3 rounded border border-base border-solid px-3 py-2 bg-surface relative"
                         [formGroupName]="i"
                       >
                         <div class="flex-grow">
@@ -500,7 +500,7 @@
                     </div>
                     <div class="flex flex-col">
                       <div
-                        class="rounded border border-solid bg-surface border-light p-4 flex flex-col gap-2 items-center justify-center relative shadow-sm"
+                        class="rounded border border-solid bg-surface border-base p-4 flex flex-col gap-2 items-center justify-center relative"
                         [ngClass]="
                           isOnDropFilesContainer
                             ? '!border-primary !bg-gray-50'
@@ -547,7 +547,7 @@
                         "
                       >
                         <div
-                          class="bg-surface rounded flex gap-4 items-center px-3 py-2 border border-solid border-light shadow-sm"
+                          class="bg-surface rounded flex gap-4 items-center px-3 py-2 border border-solid border-base"
                           *ngFor="
                             let file of this.tutorExperienceForm.get(
                               'teachingCertificates'
@@ -688,7 +688,7 @@
                       {{ "TutorInfo.VideoIntroduction" | translate }}
                     </div>
                     <div
-                      class="p-3 rounded bg-surface shadow-sm border border-solid border-light"
+                      class="p-3 rounded bg-surface border border-solid border-base"
                     >
                       <div class="mb-3 text-gray-600">
                         {{

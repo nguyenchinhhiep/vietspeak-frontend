@@ -12,7 +12,7 @@ button {
  }
  
  .btn {
-   @apply outline-none inline-flex items-center justify-center gap-2 border border-solid border-transparent px-3 py-2 rounded-md font-medium;
+   @apply outline-none inline-flex items-center justify-center gap-2 border border-solid border-transparent px-3 py-2 rounded font-medium;
    min-height: 48px;
    transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out,
      border-color 0.15s ease-in-out;

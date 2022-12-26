@@ -1,4 +1,6 @@
-<div class="w-full h-full overflow-hidden flex flex-col relative bg-gray-100">
+<div
+  class="w-full h-full overflow-hidden flex flex-col relative bg-primary-50 bg-opacity-80"
+>
   <!-- Header -->
   <admin-header></admin-header>
   <div class="flex-grow flex flex-auto w-full overflow-hidden">
@@ -10,13 +12,16 @@
         [navigation]="navigation"
         [mode]="isScreenSmall ? 'over' : 'side'"
         [opened]="!isScreenSmall"
-        class="bg-surface text-secondary"
+        class="text-secondary bg-surface md:!bg-transparent"
       >
       </vertical-navigation>
     </div>
     <!-- Main -->
     <div class="flex-grow">
-      <div class="h-full px-6 py-8 overflow-auto" scrollReset>
+      <div class="h-full p-6 overflow-auto" scrollReset>
+        <div class="font-medium text-2xl w-full mb-4">
+          <app-breadcrumb></app-breadcrumb>
+        </div>
         <router-outlet *ngIf="true"></router-outlet>
       </div>
     </div>

@@ -1,5 +1,5 @@
 .form__input {
-   @apply w-full text-base px-3 py-2 border-2 border-solid border-gray-200 rounded-md text-gray-700 bg-white appearance-none outline-none  font-normal overflow-hidden overflow-ellipsis caret-primary;
+   @apply w-full text-base px-3 py-2 border-2 border-solid border-gray-200 rounded text-gray-700 bg-white appearance-none outline-none  font-normal overflow-hidden overflow-ellipsis caret-primary;
    min-height: 48px;
  
    &:focus {

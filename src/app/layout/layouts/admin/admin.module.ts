@@ -6,6 +6,7 @@ import { UserModule } from '../../components/user/user.module';
 import { NavigationComponentModule } from 'src/app/components/navigation/navigation.module';
 import { AdminLayoutComponent } from './admin.component';
 import { ScrollResetModule } from 'src/app/directives/scroll-reset/scroll-reset.module';
+import { BreadcrumbModule } from 'src/app/components/breadcrumb/breadcrumb.module';
 
 @NgModule({
   declarations: [AdminLayoutComponent],
@@ -15,6 +16,7 @@ import { ScrollResetModule } from 'src/app/directives/scroll-reset/scroll-reset.
     AdminHeaderModule,
     UserModule,
     ScrollResetModule,
+    BreadcrumbModule,
     RouterModule,
   ],
   exports: [AdminLayoutComponent],

@@ -157,7 +157,7 @@ vertical-navigation {
 
     > .vertical-navigation-item__wrapper {
       > .vertical-navigation-item {
-        @apply p-3 flex items-center justify-center hover:no-underline text-current rounded-md;
+        @apply p-3 flex items-center justify-center hover:no-underline text-current rounded;
 
         /* Disabled state */
         &.vertical-navigation-item--disabled {

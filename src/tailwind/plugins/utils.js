@@ -40,7 +40,7 @@ const utils = plugin(({ addComponents }) => {
     },
 
     ".border-base": {
-      "border-color": "var(--border) !important",
+      "border-color": "var(--border-base) !important",
     },
 
     ".border-dark": {

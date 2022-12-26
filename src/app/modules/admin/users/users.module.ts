@@ -19,14 +19,21 @@ import { ImageCropperDialogModule } from 'src/app/components/image-cropper/image
 import { MatTabsModule } from '@angular/material/tabs';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
+import { BreadcrumbModule } from 'src/app/components/breadcrumb/breadcrumb.module';
 
 const routes: Routes = [
   {
     path: '',
+    data: {
+      breadcrumb: 'Users',
+    },
     component: UsersComponent,
   },
   {
     path: ':id',
+    data: {
+      breadcrumb: 'Users',
+    },
     component: UserDetailComponent,
     children: [
       {
@@ -37,6 +44,9 @@ const routes: Routes = [
       {
         path: 'profile',
         component: UserProfileComponent,
+        data: {
+          breadcrumb: 'User profile',
+        },
       },
     ],
   },
@@ -62,6 +72,7 @@ const routes: Routes = [
     MatMomentDateModule,
     MatRadioModule,
     MatTabsModule,
+    BreadcrumbModule,
     RouterModule.forChild(routes),
   ],
 })
