@@ -27,6 +27,9 @@ const routes: Routes = [
     path: 'account',
     data: {
       authLayout: 'admin',
+      breadcrumb: {
+        label: 'Account.Title',
+      },
     },
     loadChildren: () =>
       import('./account/account.module').then((m) => m.AccountModule),

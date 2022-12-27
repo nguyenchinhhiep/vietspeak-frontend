@@ -20,40 +20,66 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { UserDetailComponent } from './user-detail/user-detail.component';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 import { BreadcrumbModule } from 'src/app/components/breadcrumb/breadcrumb.module';
+import { TutorProfileComponent } from './user-profile/tutor-profile/tutor-profile.component';
+import { StudentProfileComponent } from './user-profile/student-profile/student-profile.component';
+import { MatChipsModule } from '@angular/material/chips';
+import { UserChangePasswordComponent } from './user-change-password/user-change-password.component';
 
 const routes: Routes = [
   {
     path: '',
     data: {
-      breadcrumb: 'Users',
+      breadcrumb: {
+        label: 'User.Titles',
+      },
     },
-    component: UsersComponent,
-  },
-  {
-    path: ':id',
-    data: {
-      breadcrumb: 'Users',
-    },
-    component: UserDetailComponent,
     children: [
       {
         path: '',
-        redirectTo: 'profile',
-        pathMatch: 'full',
+        component: UsersComponent,
       },
       {
-        path: 'profile',
-        component: UserProfileComponent,
-        data: {
-          breadcrumb: 'User profile',
-        },
+        path: ':id',
+        component: UserDetailComponent,
+        children: [
+          {
+            path: '',
+            redirectTo: 'profile',
+            pathMatch: 'full',
+          },
+          {
+            path: 'profile',
+            component: UserProfileComponent,
+            data: {
+              breadcrumb: {
+                label: 'User.Profile',
+              },
+            },
+          },
+          {
+            path: 'password',
+            component: UserChangePasswordComponent,
+            data: {
+              breadcrumb: {
+                label: 'User.Password',
+              },
+            },
+          },
+        ],
       },
     ],
   },
 ];
 
 @NgModule({
-  declarations: [UsersComponent, UserDetailComponent, UserProfileComponent],
+  declarations: [
+    UsersComponent,
+    UserDetailComponent,
+    UserProfileComponent,
+    TutorProfileComponent,
+    StudentProfileComponent,
+    UserChangePasswordComponent,
+  ],
   imports: [
     CommonModule,
     TranslateModule,
@@ -73,6 +99,7 @@ const routes: Routes = [
     MatRadioModule,
     MatTabsModule,
     BreadcrumbModule,
+    MatChipsModule,
     RouterModule.forChild(routes),
   ],
 })

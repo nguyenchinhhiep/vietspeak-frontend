@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
+import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
@@ -17,7 +18,9 @@ export class UsersComponent implements OnInit {
   constructor(
     private _confirmationDialogService: ConfirmationDialogService,
     private _translateService: TranslateService,
-    private _httpService: HttpService
+    private _httpService: HttpService,
+    private _router: Router,
+    private _activatedRoute: ActivatedRoute
   ) {}
 
   paginationConfig = {
@@ -33,7 +36,12 @@ export class UsersComponent implements OnInit {
     filter: '',
   };
 
+  userStatuses = UserStatusOptions;
+  userTypes = RoleOptions.filter(item => item.value !== Role.Admin);
+
   searchInput: FormControl = new FormControl();
+  userType: FormControl = new FormControl();
+  userStatus: FormControl = new FormControl();
 
   displayedColumns: string[] = [
     'no',
@@ -61,6 +69,12 @@ export class UsersComponent implements OnInit {
   }
 
   getList() {}
+
+  onDetail() {
+    this._router.navigate(['1'], {
+      relativeTo: this._activatedRoute,
+    });
+  }
 
   // Delete
   delete(id: string) {

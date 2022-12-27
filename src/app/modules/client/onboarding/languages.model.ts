@@ -84,22 +84,22 @@ export const TeachingExperienceOptions = [
   },
   {
     label: '1 - 6 months',
-    translateKey: 'TutorInfo.OneToSixMonths',
+    translateKey: 'TutorProfile.OneToSixMonths',
     value: TeachingExperience.OneToSixMonths,
   },
   {
     label: '7 - 12 months',
-    translateKey: 'TutorInfo.SevenToTwelveMonths',
+    translateKey: 'TutorProfile.SevenToTwelveMonths',
     value: TeachingExperience.SevenToTwelveMonths,
   },
   {
     label: '1 - 2 years',
-    translateKey: 'TutorInfo.OneToTwoYears',
+    translateKey: 'TutorProfile.OneToTwoYears',
     value: TeachingExperience.OneToTwoYears,
   },
   {
     label: 'More than 2 years',
-    translateKey: 'TutorInfo.MoreThanTwoYears',
+    translateKey: 'TutorProfile.MoreThanTwoYears',
     value: TeachingExperience.MoreThanTwoYears,
   },
 ];
@@ -121,17 +121,17 @@ export enum LanguageLevel {
 export const LanguageLevelOptions = [
   {
     label: 'Beginner',
-    translateKey: 'StudentInfo.Beginner',
+    translateKey: 'StudentProfile.Beginner',
     value: LanguageLevel.Beginner,
   },
   {
     label: 'Intermediate',
-    translateKey: 'StudentInfo.Intermediate',
+    translateKey: 'StudentProfile.Intermediate',
     value: LanguageLevel.Intermediate,
   },
   {
     label: 'Advanced',
-    translateKey: 'StudentInfo.Advanced',
+    translateKey: 'StudentProfile.Advanced',
     value: LanguageLevel.Advanced,
   },
 ];

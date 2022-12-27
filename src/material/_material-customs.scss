@@ -65,7 +65,7 @@
       position: relative;
       display: flex;
       align-items: stretch;
-      height: 50px;
+      min-height: 50px;
       border-radius: 4px;
       padding: 0 16px;
       border-width: 1px;
@@ -223,11 +223,11 @@
         display: flex;
         align-items: center;
         width: 88px;
-        padding: 8px 0;
+        padding: 4px 0;
         border: 0;
 
         .mat-input-element {
-          padding: 0;
+          padding: 4px 0;
           margin-top: 0;
         }
 
@@ -415,7 +415,7 @@
   &.mat-form-field--sm {
     .mat-form-field-wrapper {
       .mat-form-field-flex {
-        height: 42px;
+        min-height: 42px;
       }
     }
   }
@@ -440,7 +440,7 @@
 /* ----------------------------------------------------------------------------------------------------- */
 .mat-input-element {
   @apply overflow-ellipsis;
-  
+
   &::placeholder {
     transition: none !important;
     @apply text-hint #{'!important'};
@@ -872,5 +872,6 @@ mat-stepper {
 /* ----------------------------------------------------------------------------------------------------- */
 .mat-chip {
   font-weight: 500;
+  @apply text-secondary #{!important};
   @apply bg-hover #{!important};
 }

@@ -11,13 +11,13 @@ export const UserStatusOptions = [
   {
     label: 'Active',
     translateKey: 'Status.Active',
-    class: 'bg-success',
+    class: 'bg-success-500',
     value: UserStatus.Active,
   },
   {
     label: 'Inactive',
     translateKey: 'Status.Inactive',
-    class: 'bg-danger',
+    class: 'bg-danger-500',
     value: UserStatus.Active,
   },
   {
@@ -27,9 +27,9 @@ export const UserStatusOptions = [
     value: UserStatus.Active,
   },
   {
-    label: 'Under review',
+    label: 'Reviewing',
     translateKey: 'Status.UnderReview',
-    class: 'bg-info',
+    class: 'bg-info-500',
     value: UserStatus.Reviewing,
   },
 ];

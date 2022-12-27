@@ -1,24 +1,23 @@
 export enum Role {
   Admin = 'Admin',
   Tutor = 'Tutor',
-  Student = 'Student'
+  Student = 'Student',
 }
 
 export const RoleOptions = [
   {
     label: 'Admin',
-    class: 'tag--info',
+    class: 'bg-purple-500',
     value: Role.Admin,
   },
   {
     label: 'Tutor',
-    class: 'tag--accent',
+    class: 'bg-accent-500',
     value: Role.Tutor,
   },
   {
     label: 'Student',
-    class: 'tag--primary',
+    class: 'bg-primary-500',
     value: Role.Student,
   },
-]
-
+];

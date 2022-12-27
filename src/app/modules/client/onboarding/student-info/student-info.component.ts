@@ -16,7 +16,7 @@ import { HeardFrom, HeardFromOptions } from '../onboarding.model';
   templateUrl: './student-info.component.html',
   styleUrls: ['./student-info.component.scss'],
 })
-export class StudentInfoComponent implements OnInit {
+export class StudentProfileComponent implements OnInit {
   constructor(
     private _router: Router,
     private _authService: AuthService,
@@ -24,7 +24,7 @@ export class StudentInfoComponent implements OnInit {
     private _confirmationDialogService: ConfirmationDialogService,
     private _translateService: TranslateService
   ) {}
-  studentInfoForm!: FormGroup;
+  StudentProfileForm!: FormGroup;
 
   languageLevelOptions = LanguageLevelOptions;
   heardFromOptions = HeardFromOptions;
@@ -35,20 +35,20 @@ export class StudentInfoComponent implements OnInit {
   }
 
   submit() {
-    for (let control in this.studentInfoForm.controls) {
-      this.studentInfoForm.controls[control].markAsDirty();
-      this.studentInfoForm.controls[control].markAsTouched();
+    for (let control in this.StudentProfileForm.controls) {
+      this.StudentProfileForm.controls[control].markAsDirty();
+      this.StudentProfileForm.controls[control].markAsTouched();
     }
 
     // Return if the form is invalid
-    if (this.studentInfoForm.invalid) return;
+    if (this.StudentProfileForm.invalid) return;
 
     // Disable the form
-    this.studentInfoForm.disable();
+    this.StudentProfileForm.disable();
   }
 
   createForm() {
-    this.studentInfoForm = this._fb.group({
+    this.StudentProfileForm = this._fb.group({
       learningLanguage: [learningLanguageOptions[0]],
       currentLevel: [LanguageLevel.Beginner],
       firstName: ['', [Validators.required]],

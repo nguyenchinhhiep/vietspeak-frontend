@@ -1,40 +1,100 @@
-<div class="w-full mx-auto min-h-full flex flex-col max-w-7xl">
+<div class="w-full mx-auto min-h-full flex flex-col max-w-5xl overflow-hidden">
   <div class="flex gap-2 flex-wrap md:flex-nowrap justify-between">
-    <!-- <div class="font-medium text-2xl w-full">
-      {{ "Users.Title" | translate }}
-    </div> -->
-    <mat-form-field
-      class="w-full md:w-1/2 mat-form-field--sm"
-      appearance="fill"
-      [floatLabel]="'always'"
-      [ngClass]=""
-    >
-      <input
-        matInput
-        type="text"
-        [placeholder]="'Users.SearchPlaceholder' | translate"
-        name="search"
-        [formControl]="searchInput"
-        #search
-      />
-      <button matPrefix type="button">
-        <mat-icon [svgIcon]="'mat_outline:search'"> </mat-icon>
-      </button>
-      <button
-        matSuffix
-        mat-icon-button
-        type="button"
-        *ngIf="search.value !== ''"
-        (click)="searchInput.setValue('')"
+    <div class="flex flex-wrap sm:flex-nowrap gap-x-4 w-full">
+      <mat-form-field
+        class="w-full sm:w-1/2 mat-form-field--sm"
+        appearance="fill"
+        [floatLabel]="'always'"
+        [ngClass]=""
       >
-        <mat-icon class="icon-size-5" [svgIcon]="'mat_outline:close'">
-        </mat-icon>
+        <input
+          matInput
+          type="text"
+          [placeholder]="'User.SearchPlaceholder' | translate"
+          name="search"
+          [formControl]="searchInput"
+          #search
+        />
+        <button matPrefix type="button">
+          <mat-icon [svgIcon]="'mat_outline:search'"> </mat-icon>
+        </button>
+        <button
+          matSuffix
+          mat-icon-button
+          type="button"
+          *ngIf="search.value !== ''"
+          (click)="searchInput.setValue('')"
+        >
+          <mat-icon class="icon-size-5" [svgIcon]="'mat_outline:close'">
+          </mat-icon>
+        </button>
+      </mat-form-field>
+      <mat-form-field
+        appearance="fill"
+        class="w-40 md:w-48 mat-form-field--sm flex-shrink-0"
+      >
+        <mat-select
+          placeholder="{{ 'Filter by type' | translate }}"
+          [formControl]="userType"
+        >
+          <mat-select-trigger>
+            <div class="flex gap-2 items-center">
+              <div
+                class="w-4 h-4 rounded-full flex-shrink-0"
+                [ngClass]="userType.value?.class"
+              ></div>
+              <div class="text-sm">{{ userType.value?.label }}</div>
+            </div>
+          </mat-select-trigger>
+          <mat-option *ngFor="let item of userTypes" [value]="item">
+            <div class="flex gap-2 items-center">
+              <div
+                class="w-4 h-4 rounded-full flex-shrink-0"
+                [ngClass]="item.class"
+              ></div>
+              <div class="text-sm">{{ item.label }}</div>
+            </div>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field
+        appearance="fill"
+        class="w-40 md:w-48 mat-form-field--sm flex-shrink-0"
+      >
+        <mat-select
+          placeholder="{{ 'Filter by status' | translate }}"
+          [formControl]="userStatus"
+        >
+          <mat-select-trigger>
+            <div class="flex gap-2 items-center">
+              <div
+                class="w-4 h-4 rounded-full flex-shrink-0"
+                [ngClass]="userStatus.value?.class"
+              ></div>
+              <div class="text-sm">{{ userStatus.value?.label }}</div>
+            </div>
+          </mat-select-trigger>
+          <mat-option *ngFor="let item of userStatuses" [value]="item">
+            <div class="flex gap-2 items-center">
+              <div
+                class="w-4 h-4 rounded-full flex-shrink-0"
+                [ngClass]="item.class"
+              ></div>
+              <div class="text-sm">{{ item.label }}</div>
+            </div>
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <button mat-button class="flex-shrink-0">
+        <div class="text-sm text-danger">Clear</div>
       </button>
-    </mat-form-field>
+    </div>
   </div>
-  <div class="flex-grow">
-    <div class="border border-solid border-light rounded overflow-hidden">
-      <div class="overflow-auto">
+  <div class="flex-grow overflow-hidden">
+    <div
+      class="border border-solid border-light rounded overflow-hidden select-none"
+    >
+      <div class="overflow-auto w-full h-full">
         <table mat-table [dataSource]="dataSource" class="w-full" matSort>
           <ng-container matColumnDef="no">
             <th mat-header-cell *matHeaderCellDef class="w-20">
@@ -76,7 +136,7 @@
               {{ "Table.Name" | translate }}
             </th>
             <td mat-cell *matCellDef="let element; let i = index">
-              {{ "Hiep Nguyen" }}
+              <div class="whitespace-nowrap">{{ "Hiep Nguyen" }}</div>
             </td>
           </ng-container>
 
@@ -92,7 +152,10 @@
               {{ "Table.Type" | translate }}
             </th>
             <td mat-cell *matCellDef="let element; let i = index">
-              <div class="tag tag--accent">{{ "Tutor" }}</div>
+              <div class="flex gap-2 items-center">
+                <div class="w-4 h-4 rounded-full bg-accent"></div>
+                <div>Tutor</div>
+              </div>
             </td>
           </ng-container>
 
@@ -141,7 +204,7 @@
                       class="text-danger"
                       svgIcon="mat_outline:edit"
                     ></mat-icon>
-                    <span>{{ "Action.Edit" | translate }}</span>
+                    <span>{{ "Action.Update" | translate }}</span>
                   </button>
                   <button
                     type="button"
@@ -164,7 +227,11 @@
             mat-header-row
             *matHeaderRowDef="displayedColumns; sticky: false"
           ></tr>
-          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+          <tr
+            (dblclick)="onDetail()"
+            mat-row
+            *matRowDef="let row; columns: displayedColumns"
+          ></tr>
           <tr class="mat-row" *matNoDataRow>
             <td
               class="mat-cell text-center"

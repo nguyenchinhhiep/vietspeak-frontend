@@ -1,5 +1,7 @@
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatChipInputEvent } from '@angular/material/chips';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { ImageCropperDialogService } from 'src/app/components/image-cropper/image-cropper.service';
@@ -38,10 +40,38 @@ export class UserProfileComponent implements OnInit {
 
   maxDate: Date = new Date();
 
+  readonly separatorKeysCodes = [ENTER, COMMA] as const;
+
   isOnDropFilesContainer: boolean = false;
 
   ngOnInit(): void {
     this.createForm();
+  }
+
+  add(event: MatChipInputEvent): void {
+    const value = (event.value || '').trim();
+
+    // Add our fruit
+    if (value) {
+      const teachingJob = this.tutorProfileForm.get('teachingJob')?.value || [];
+      this.tutorProfileForm
+        .get('teachingJob')
+        ?.setValue([...teachingJob, value]);
+    }
+
+    // Clear the input value
+    event.chipInput!.clear();
+  }
+
+  remove(job: string): void {
+    const teachingJob = this.tutorProfileForm.get('teachingJob')?.value || [];
+    const index = teachingJob.indexOf(job);
+
+    if (index >= 0) {
+      teachingJob.splice(index, 1);
+
+      this.tutorProfileForm.get('teachingJob')?.setValue(teachingJob);
+    }
   }
 
   createForm() {
@@ -59,7 +89,7 @@ export class UserProfileComponent implements OnInit {
       haveExperienceTeachingOnline: [true],
       teachingCertificates: [null, [Validators.required]],
       introduction: ['', [Validators.required]],
-      videoIntroduction: ['']
+      videoIntroduction: [''],
     });
   }
 

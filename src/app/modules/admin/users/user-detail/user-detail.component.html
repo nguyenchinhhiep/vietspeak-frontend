@@ -1,19 +1,67 @@
-<div class="w-full mx-auto min-h-full max-w-7xl relative">
-  <div class="mb-4">
-    <nav mat-tab-nav-bar [disableRipple]="true" [color]="'primary'">
-      <a
-        mat-tab-link
-        [routerLink]="link.link"
-        [queryParamsHandling]="'merge'"
-        *ngFor="let link of links"
-        [active]="activeLink === link"
-        [disabled]="link.disabled()"
+<div class="w-full mx-auto max-w-5xl relative">
+  <div class="flex gap-4 justify-between items-center mb-4">
+    <div class="flex gap-4 items-center">
+      <div
+        class="w-16 h-16 rounded-full overflow-hidden flex justify-center items-center font-medium bg-accent text-white uppercase text-2xl"
       >
-        {{ link.label }}
-      </a>
-    </nav>
+        {{ "H" }}
+      </div>
+      <div class="flex flex-col gap-1">
+        <div class="font-medium text-primary">Hiep Nguyen</div>
+        <div class="text-tertiary text-sm font-medium">Tutor</div>
+      </div>
+    </div>
+    <button mat-icon-button [matMenuTriggerFor]="actionMenu">
+      <mat-icon [svgIcon]="'mat_outline:more_vert'"></mat-icon>
+    </button>
+
+    <mat-menu #actionMenu="matMenu" [xPosition]="'before'">
+      <ng-template matMenuContent>
+        <button
+          type="button"
+          mat-menu-item
+          *ngIf="userDetail?.status === userStatus.Pending"
+        >
+          <mat-icon class="text-primary" svgIcon="mat_outline:done"></mat-icon>
+          <span>{{ "Action.Approve" | translate }}</span>
+        </button>
+        <button
+          type="button"
+          mat-menu-item
+          *ngIf="userDetail?.status === userStatus.Pending"
+        >
+          <mat-icon class="text-warn" svgIcon="mat_outline:close"></mat-icon>
+          <span>{{ "Action.Reject" | translate }}</span>
+        </button>
+        <button type="button" mat-menu-item mat-menu-item (click)="delete()">
+          <mat-icon class="text-danger" svgIcon="mat_outline:delete"></mat-icon>
+          <span>{{ "Action.Delete" | translate }}</span>
+        </button>
+      </ng-template>
+    </mat-menu>
   </div>
-  <div class="w-full">
-    <router-outlet></router-outlet>
+
+  <div class="flex-grow flex-wrap flex gap-4 md:gap-10">
+    <div class="flex md:flex-col md:w-60 w-full">
+      <a
+        class="mb-2 flex items-center gap-3 hover:no-underline px-3 py-2 rounded text-tertiary cursor-pointer hover:bg-hover"
+        *ngFor="let item of navigation"
+        [routerLink]="item.routerLink"
+        routerLinkActive="bg-hover"
+      >
+        <mat-icon
+          routerLinkActive="!text-primary font-medium"
+          [svgIcon]="item.icon"
+        ></mat-icon>
+        <div routerLinkActive="text-primary font-medium">
+          {{ item.translateKey | translate }}
+        </div>
+      </a>
+    </div>
+    <div class="flex-grow flex-shrink-0">
+      <div class="w-full">
+        <router-outlet></router-outlet>
+      </div>
+    </div>
   </div>
 </div>

@@ -145,14 +145,11 @@
           ></mat-icon>
         </button>
         <div
-          class="ml-2"
+          class="ml-2 flex justify-center items-center"
           matSuffix
           *ngIf="studentProfileForm.get('email')?.valid"
         >
-          <mat-icon
-            class="!text-success"
-            [svgIcon]="'mat_outline:check_circle'"
-          ></mat-icon>
+          <mat-icon [svgIcon]="'mat_outline:check'"></mat-icon>
         </div>
         <mat-progress-spinner
           [diameter]="24"
@@ -238,24 +235,41 @@
         </mat-select>
       </mat-form-field>
     </div>
+    <div
+      class="w-full flex flex-col bg-surface rounded p-6 pb-2 border border-solid border-light"
+    >
+      <div class="font-medium text-xl mb-3">
+        {{ "StudentProfile.SupplementalInfo" | translate }}
+      </div>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>{{ "OnBoarding.WhereHeardFrom" | translate }}</mat-label>
+        <mat-select
+          formControlName="heardFrom"
+          placeholder="{{ 'Action.Select' | translate }}"
+        >
+          <mat-option
+            *ngFor="let item of heardFromOptions"
+            [value]="item.value"
+          >
+            {{ item.translateKey | translate }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="studentProfileForm.get('heardForm')?.hasError('required')"
+          >{{ "Error.Required" | translate }}</mat-error
+        >
+      </mat-form-field>
+    </div>
     <div class="flex justify-center">
       <button
         type="submit"
         class="btn--lg w-full"
         mat-flat-button
         [color]="'primary'"
-        [disabled]="studentProfileForm.disabled"
+        (click)="submit()"
       >
-        <span *ngIf="!studentProfileForm.disabled">
-          {{ "Action.Save" | translate }}
-        </span>
-
-        <mat-progress-spinner
-          *ngIf="studentProfileForm.disabled"
-          [diameter]="24"
-          mode="indeterminate"
-        >
-        </mat-progress-spinner>
+        {{ "Action.Save" | translate }}
       </button>
     </div>
   </form>

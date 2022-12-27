@@ -3,11 +3,9 @@
     *ngFor="let item of breadcrumbs; let i = index"
     class="flex gap-2 items-center cursor-default hover:text-default"
     [routerLink]="item.routerLink"
-    [ngClass]="
-      i === breadcrumbs.length - 1 ? 'text-default' : 'text-tertiary'
-    "
+    [ngClass]="i === breadcrumbs.length - 1 ? 'text-default' : 'text-tertiary'"
   >
-    <span>{{ item.label }}</span>
+    <span>{{ item.label | translate }}</span>
     <mat-icon
       *ngIf="i < breadcrumbs.length - 1"
       [svgIcon]="'mat_outline:navigate_next'"

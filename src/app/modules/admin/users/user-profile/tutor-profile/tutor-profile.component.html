@@ -167,13 +167,12 @@
           ></mat-icon>
         </button>
         <div
-          class="ml-2"
+          class="ml-2 flex items-center justify-center"
           matSuffix
           *ngIf="tutorProfileForm.get('email')?.valid"
         >
           <mat-icon
-            class="!text-success"
-            [svgIcon]="'mat_outline:check_circle'"
+            [svgIcon]="'mat_outline:check'"
           ></mat-icon>
         </div>
         <mat-progress-spinner
@@ -198,7 +197,7 @@
           cdkTextareaAutosize
           cdkAutosizeMinRows="2"
           formControlName="introduction"
-          placeholder="{{ 'TutorProfile.IntroductionDescription' | translate }}"
+          placeholder=""
           maxlength="1000"
           appPreventAutoFill
         ></textarea>
@@ -499,7 +498,7 @@
             *ngIf="this.tutorProfileForm.get('teachingCertificates')?.value"
           >
             <div
-              class="bg-surface rounded flex gap-4 items-center px-3 py-2 border border-solid border-base"
+              class="bg-surface rounded flex gap-4 items-center px-3 py-2 border border-solid border-base shadow-sm"
               *ngFor="
                 let file of this.tutorProfileForm.get('teachingCertificates')
                   ?.value || [];
@@ -545,6 +544,52 @@
           {{ "Error.File" | translate }}
         </div>
       </div>
+    </div>
+    <div
+      class="w-full flex flex-col bg-surface rounded p-6 pb-2 border border-solid border-light"
+    >
+      <div class="font-medium text-xl mb-3">
+        {{ "TutorProfile.Motivation" | translate }}
+      </div>
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>{{ "TutorProfile.ReasonHere" | translate }}</mat-label>
+        <textarea
+          matInput
+          cdkTextareaAutosize
+          cdkAutosizeMinRows="2"
+          formControlName="reasonHere"
+          maxlength="500"
+          appPreventAutoFill
+        ></textarea>
+        <mat-hint class="w-full">
+          <div class="text-right -mr-3">
+            {{ tutorProfileForm.get("reasonHere")?.value.length || 0 }}/500
+          </div>
+        </mat-hint>
+        <mat-error
+          *ngIf="tutorProfileForm.get('reasonHere')?.hasError('required')"
+          >{{ "Error.Required" | translate }}</mat-error
+        >
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" class="w-full">
+        <mat-label>{{ "OnBoarding.WhereHeardFrom" | translate }}</mat-label>
+        <mat-select
+          formControlName="heardFrom"
+          placeholder="{{ 'Action.Select' | translate }}"
+        >
+          <mat-option
+            *ngFor="let item of heardFromOptions"
+            [value]="item.value"
+          >
+            {{ item.translateKey | translate }}
+          </mat-option>
+        </mat-select>
+        <mat-error
+          *ngIf="tutorProfileForm.get('heardForm')?.hasError('required')"
+          >{{ "Error.Required" | translate }}</mat-error
+        >
+      </mat-form-field>
     </div>
 
     <div class="flex justify-center">

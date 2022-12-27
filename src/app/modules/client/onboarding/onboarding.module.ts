@@ -6,14 +6,14 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
-import { StudentInfoComponent } from './student-info/student-info.component';
+import { StudentProfileComponent } from './student-info/student-info.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import { TutorInfoComponent } from './tutor-info/tutor-info.component';
+import { TutorProfileComponent } from './tutor-info/tutor-info.component';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
 import { LanguagesModule } from 'src/app/components/languages/languages.module';
 import { MatStepperModule } from '@angular/material/stepper';
@@ -48,14 +48,14 @@ const routes: Routes = [
   },
   {
     path: 'student',
-    component: StudentInfoComponent,
+    component: StudentProfileComponent,
     data: {
       authLayout: 'blank',
     },
   },
   {
     path: 'tutor',
-    component: TutorInfoComponent,
+    component: TutorProfileComponent,
     data: {
       authLayout: 'blank',
     },
@@ -72,8 +72,8 @@ const routes: Routes = [
 @NgModule({
   declarations: [
     AccountTypeComponent,
-    StudentInfoComponent,
-    TutorInfoComponent,
+    StudentProfileComponent,
+    TutorProfileComponent,
     CongratulationsComponent,
     WelcomeComponent,
   ],

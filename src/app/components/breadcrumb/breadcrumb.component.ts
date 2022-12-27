@@ -53,10 +53,10 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
     breadcrumbs: IBreadCrumb[] = []
   ): IBreadCrumb[] {
     //If no routeConfig is avalailable we are on the root path
-    let label =
+    let breadcrumbData =
       route.routeConfig && route.routeConfig.data
         ? route.routeConfig.data['breadcrumb']
-        : '';
+        : {};
     let path =
       route.routeConfig && route.routeConfig.data ? route.routeConfig.path : '';
 
@@ -74,8 +74,8 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
     const nextUrl = path ? `${url}/${path}` : url;
 
     const breadcrumb: IBreadCrumb = {
-      label: label,
-      routerLink: nextUrl,
+      label: breadcrumbData?.label,
+      routerLink: breadcrumbData?.routerLink || nextUrl,
     };
     // Only adding route with non-empty label
     const newBreadcrumbs = breadcrumb.label

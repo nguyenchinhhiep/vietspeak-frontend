@@ -24,7 +24,7 @@
 
     <div class="w-full max-w-xl">
       <div class="font-medium text-2xl text-center mb-4">
-        {{ "TutorInfo.TutorProfile" | translate }}
+        {{ "TutorProfile.TutorProfile" | translate }}
       </div>
 
       <mat-stepper
@@ -44,7 +44,7 @@
         </ng-template>
         <mat-step [editable]="true" [stepControl]="tutorBasicInfoForm">
           <ng-template matStepLabel>{{
-            "TutorInfo.Basic" | translate
+            "TutorProfile.Basic" | translate
           }}</ng-template>
           <ng-template matStepContent>
             <div class="flex justify-center -mx-6 sm:px-6">
@@ -55,7 +55,7 @@
                 >
                   <div class="flex flex-col gap-2 mb-4">
                     <div class="text-tertiary flex gap-1 items-center">
-                      {{ "TutorInfo.ProfilePicture" | translate }}
+                      {{ "TutorProfile.ProfilePicture" | translate }}
                     </div>
                     <div
                       class="rounded border border-solid bg-surface border-base p-4 flex flex-col"
@@ -131,7 +131,7 @@
 
                   <mat-form-field appearance="fill" class="w-full">
                     <mat-label>{{
-                      "TutorInfo.FirstName" | translate
+                      "TutorProfile.FirstName" | translate
                     }}</mat-label>
                     <input
                       matInput
@@ -164,7 +164,7 @@
                   </mat-form-field>
                   <mat-form-field appearance="fill" class="w-full">
                     <mat-label>{{
-                      "TutorInfo.LastName" | translate
+                      "TutorProfile.LastName" | translate
                     }}</mat-label>
                     <input
                       matInput
@@ -200,7 +200,7 @@
                     (click)="picker.open()"
                   >
                     <mat-label>{{
-                      "TutorInfo.DateOfBirth" | translate
+                      "TutorProfile.DateOfBirth" | translate
                     }}</mat-label>
                     <input
                       readonly
@@ -211,7 +211,7 @@
                       placeholder="DD/MM/YYYY"
                     />
                     <mat-hint>{{
-                      "TutorInfo.DateOfBirthNotDisplay" | translate
+                      "TutorProfile.DateOfBirthNotDisplay" | translate
                     }}</mat-hint>
                     <mat-error
                       *ngIf="
@@ -244,7 +244,7 @@
         </mat-step>
         <mat-step [editable]="true" [stepControl]="tutorExperienceForm">
           <ng-template matStepLabel>{{
-            "TutorInfo.Teaching" | translate
+            "TutorProfile.Teaching" | translate
           }}</ng-template>
           <ng-template matStepContent>
             <div class="flex justify-center -mx-6 sm:px-6">
@@ -259,7 +259,7 @@
                     floatLabel="always"
                   >
                     <mat-label>{{
-                      "TutorInfo.LanguageWantToTeach" | translate
+                      "TutorProfile.LanguageWantToTeach" | translate
                     }}</mat-label>
                     <mat-select
                       formControlName="teachingLanguage"
@@ -321,7 +321,7 @@
                     floatLabel="always"
                   >
                     <mat-label>{{
-                      "TutorInfo.WhatYouTeach" | translate
+                      "TutorProfile.WhatYouTeach" | translate
                     }}</mat-label>
                     <mat-chip-list #chipTeachingJobList>
                       <mat-chip
@@ -339,7 +339,7 @@
                       </mat-chip>
                       <input
                         placeholder="{{
-                          'TutorInfo.TeachingJobDescription' | translate
+                          'TutorProfile.TeachingJobDescription' | translate
                         }}"
                         [matChipInputFor]="chipTeachingJobList"
                         [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
@@ -362,7 +362,7 @@
                   </mat-form-field>
                   <mat-form-field appearance="fill" class="w-full">
                     <mat-label>{{
-                      "TutorInfo.TeachingExperience" | translate
+                      "TutorProfile.TeachingExperience" | translate
                     }}</mat-label>
                     <mat-select
                       formControlName="teachingExperience"
@@ -386,7 +386,7 @@
                   </mat-form-field>
                   <div class="flex flex-col mb-4">
                     <div class="text-tertiary flex gap-1 items-center mb-2">
-                      {{ "TutorInfo.LanguagesYouSpeak" | translate }}
+                      {{ "TutorProfile.LanguagesYouSpeak" | translate }}
                     </div>
                     <div formArrayName="languages" class="flex flex-col gap-3">
                       <div
@@ -404,7 +404,7 @@
                             floatLabel="always"
                           >
                             <mat-label>
-                              {{ "TutorInfo.Language" | translate }}
+                              {{ "TutorProfile.Language" | translate }}
                             </mat-label>
                             <mat-select
                               placeholder="{{ 'Action.Select' | translate }}"
@@ -435,7 +435,7 @@
                             floatLabel="always"
                           >
                             <mat-label>
-                              {{ "TutorInfo.Fluency" | translate }}
+                              {{ "TutorProfile.Fluency" | translate }}
                             </mat-label>
                             <mat-select
                               placeholder="{{ 'Action.Select' | translate }}"
@@ -481,7 +481,7 @@
 
                       <div class="flex justify-end">
                         <a class="cursor-pointer" (click)="addLanguage()">
-                          {{ "TutorInfo.AddLanguage" | translate }}</a
+                          {{ "TutorProfile.AddLanguage" | translate }}</a
                         >
                       </div>
                     </div>
@@ -489,7 +489,7 @@
 
                   <div class="flex flex-col mb-4">
                     <div class="text-tertiary flex gap-1 items-center mb-2">
-                      {{ "TutorInfo.TeachingCertificates" | translate }}
+                      {{ "TutorProfile.TeachingCertificates" | translate }}
                       <span class="text-danger">*</span>
                       <span class="text-gray-400 font-normal text-sm"
                         >({{
@@ -598,17 +598,17 @@
                   </div>
                   <div class="flex flex-col gap-2">
                     <div class="text-tertiary">
-                      {{ "TutorInfo.HaveExperienceTeachingOnline" | translate }}
+                      {{ "TutorProfile.HaveExperienceTeachingOnline" | translate }}
                     </div>
                     <mat-radio-group
                       formControlName="haveExperienceTeachingOnline"
                       class="flex gap-3.5"
                     >
                       <mat-radio-button [value]="false">{{
-                        "TutorInfo.No" | translate
+                        "TutorProfile.No" | translate
                       }}</mat-radio-button>
                       <mat-radio-button [value]="true">{{
-                        "TutorInfo.Yes" | translate
+                        "TutorProfile.Yes" | translate
                       }}</mat-radio-button>
                     </mat-radio-group>
                   </div>
@@ -637,7 +637,7 @@
         </mat-step>
         <mat-step [editable]="true" [stepControl]="tutorIntroductionForm">
           <ng-template matStepLabel>{{
-            "TutorInfo.Introduction" | translate
+            "TutorProfile.Introduction" | translate
           }}</ng-template>
           <ng-template matStepContent>
             <div class="flex justify-center -mx-6 sm:px-6">
@@ -652,7 +652,7 @@
                     floatLabel="always"
                   >
                     <mat-label>{{
-                      "TutorInfo.Introduction" | translate
+                      "TutorProfile.Introduction" | translate
                     }}</mat-label>
                     <textarea
                       matInput
@@ -660,7 +660,7 @@
                       cdkAutosizeMinRows="8"
                       formControlName="introduction"
                       placeholder="{{
-                        'TutorInfo.IntroductionDescription' | translate
+                        'TutorProfile.IntroductionDescription' | translate
                       }}"
                       maxlength="1000"
                       appPreventAutoFill
@@ -685,14 +685,14 @@
 
                   <div class="mb-4">
                     <div class="text-tertiary mb-2">
-                      {{ "TutorInfo.VideoIntroduction" | translate }}
+                      {{ "TutorProfile.VideoIntroduction" | translate }}
                     </div>
                     <div
                       class="p-3 rounded bg-surface border border-solid border-base"
                     >
                       <div class="mb-3 text-gray-600">
                         {{
-                          "TutorInfo.VideoIntroductionDescription" | translate
+                          "TutorProfile.VideoIntroductionDescription" | translate
                         }}
                       </div>
                       <mat-form-field
@@ -701,7 +701,7 @@
                         floatLabel="always"
                       >
                         <mat-label>{{
-                          "TutorInfo.VideoUrl" | translate
+                          "TutorProfile.VideoUrl" | translate
                         }}</mat-label>
                         <input
                           matInput
@@ -768,7 +768,7 @@
         </mat-step>
         <mat-step [editable]="true" [stepControl]="tutorMotivationForm">
           <ng-template matStepLabel>{{
-            "TutorInfo.Motivation" | translate
+            "TutorProfile.Motivation" | translate
           }}</ng-template>
           <ng-template matStepContent>
             <div class="flex justify-center -mx-6 sm:px-6">
@@ -779,7 +779,7 @@
                 >
                   <mat-form-field appearance="fill" class="w-full">
                     <mat-label>{{
-                      "TutorInfo.ReasonHere" | translate
+                      "TutorProfile.ReasonHere" | translate
                     }}</mat-label>
                     <textarea
                       matInput

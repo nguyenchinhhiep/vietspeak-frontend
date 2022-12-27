@@ -1,57 +1,50 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatStepper } from '@angular/material/stepper';
-import { Router } from '@angular/router';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators, FormArray } from '@angular/forms';
+import { MatChipInputEvent } from '@angular/material/chips';
 import { TranslateService } from '@ngx-translate/core';
+import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { ImageCropperDialogService } from 'src/app/components/image-cropper/image-cropper.service';
 import { ToastService } from 'src/app/components/toast/toast.service';
-import { AuthService } from 'src/app/core/auth/auth.service';
+import { CustomValidators } from 'src/app/core/validators/validators';
 import {
-  Fluency,
-  FluencyOptions,
-  Language,
-  LanguageOptions,
-  TeachingExperience,
-  TeachingExperienceOptions,
   TeachingLanguageOptions,
-} from '../languages.model';
-import { HeardFrom, HeardFromOptions } from '../onboarding.model';
-import { COMMA, ENTER } from '@angular/cdk/keycodes';
-import { MatChipInputEvent } from '@angular/material/chips';
+  TeachingExperienceOptions,
+  LanguageOptions,
+  FluencyOptions,
+  TeachingExperience,
+  Language,
+  Fluency,
+} from 'src/app/modules/client/onboarding/languages.model';
+import { HeardFrom, HeardFromOptions } from 'src/app/modules/client/onboarding/onboarding.model';
 
 @Component({
-  selector: 'app-tutor-info',
-  templateUrl: './tutor-info.component.html',
-  styleUrls: ['./tutor-info.component.scss'],
+  selector: 'app-tutor-profile',
+  templateUrl: './tutor-profile.component.html',
+  styleUrls: ['./tutor-profile.component.scss'],
 })
 export class TutorProfileComponent implements OnInit {
   constructor(
-    private _router: Router,
-    private _authService: AuthService,
+    private _imageCropperDialogService: ImageCropperDialogService,
     private _fb: FormBuilder,
     private _toastService: ToastService,
     private _translateService: TranslateService,
-    private _imageCropperDialogService: ImageCropperDialogService
+    private _confirmationDialogService: ConfirmationDialogService
   ) {}
 
   teachingLanguageOptions = TeachingLanguageOptions;
-  heardFromOptions = HeardFromOptions;
   teachingExperienceOptions = TeachingExperienceOptions;
   languageOptions = LanguageOptions;
   fluencyOptions = FluencyOptions;
+  heardFromOptions = HeardFromOptions;
 
-  tutorBasicInfoForm!: FormGroup;
-  tutorExperienceForm!: FormGroup;
-  tutorMotivationForm!: FormGroup;
-  tutorIntroductionForm!: FormGroup;
+  tutorProfileForm!: FormGroup;
 
   maxDate: Date = new Date();
 
-  isOnDropFilesContainer: boolean = false;
-
   readonly separatorKeysCodes = [ENTER, COMMA] as const;
 
-  @ViewChild('stepper') stepper!: MatStepper;
+  isOnDropFilesContainer: boolean = false;
 
   ngOnInit(): void {
     this.createForm();
@@ -62,9 +55,8 @@ export class TutorProfileComponent implements OnInit {
 
     // Add our fruit
     if (value) {
-      const teachingJob =
-        this.tutorExperienceForm.get('teachingJob')?.value || [];
-      this.tutorExperienceForm
+      const teachingJob = this.tutorProfileForm.get('teachingJob')?.value || [];
+      this.tutorProfileForm
         .get('teachingJob')
         ?.setValue([...teachingJob, value]);
     }
@@ -74,100 +66,66 @@ export class TutorProfileComponent implements OnInit {
   }
 
   remove(job: string): void {
-    const teachingJob =
-      this.tutorExperienceForm.get('teachingJob')?.value || [];
+    const teachingJob = this.tutorProfileForm.get('teachingJob')?.value || [];
     const index = teachingJob.indexOf(job);
 
     if (index >= 0) {
       teachingJob.splice(index, 1);
 
-      this.tutorExperienceForm.get('teachingJob')?.setValue(teachingJob);
+      this.tutorProfileForm.get('teachingJob')?.setValue(teachingJob);
     }
-  }
-
-  submitTutorBasicInfoForm() {
-    for (let control in this.tutorBasicInfoForm.controls) {
-      this.tutorBasicInfoForm.controls[control].markAsDirty();
-      this.tutorBasicInfoForm.controls[control].markAsTouched();
-    }
-
-    if (this.tutorBasicInfoForm.invalid) {
-      return;
-    }
-
-    this.stepper.next();
-  }
-
-  submitTutorIntroductionForm() {
-    for (let control in this.tutorIntroductionForm.controls) {
-      this.tutorIntroductionForm.controls[control].markAsDirty();
-      this.tutorIntroductionForm.controls[control].markAsTouched();
-    }
-
-    if (this.tutorIntroductionForm.invalid) {
-      return;
-    }
-
-    this.stepper.next();
-  }
-
-  submitTutorExperienceForm() {
-    for (let control in this.tutorExperienceForm.controls) {
-      this.tutorExperienceForm.controls[control].markAsDirty();
-      this.tutorExperienceForm.controls[control].markAsTouched();
-    }
-
-    if (this.tutorExperienceForm.invalid) {
-      return;
-    }
-
-    this.stepper.next();
   }
 
   createForm() {
-    this.tutorBasicInfoForm = this._fb.group({
+    this.tutorProfileForm = this._fb.group({
       profilePicture: [],
       profilePictureUrl: [],
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      dob: [null, [Validators.required]],
-    });
-
-    this.tutorExperienceForm = this._fb.group({
+      firstName: ['', Validators.required],
+      lastName: ['', Validators.required],
+      email: ['', [Validators.required, CustomValidators.isEmail()]],
+      dob: ['', Validators.required],
       teachingLanguage: [this.teachingLanguageOptions[0]],
-      teachingJob: [[], Validators.required],
+      teachingJob: ['', Validators.required],
       teachingExperience: [TeachingExperience.OneToSixMonths],
       languages: this._fb.array([this.createlanguageFormGroup()]),
       haveExperienceTeachingOnline: [true],
       teachingCertificates: [null, [Validators.required]],
-    });
-
-    this.tutorIntroductionForm = this._fb.group({
       introduction: ['', [Validators.required]],
       videoIntroduction: [''],
-    });
-
-    this.tutorMotivationForm = this._fb.group({
       heardFrom: [HeardFrom.WebSearch],
       reasonHere: ['', [Validators.required]],
     });
-
-    this.tutorExperienceForm
-      .get('teachingLanguage')
-      ?.valueChanges.subscribe((option) => {
-        this.languagesFormArray.at(0).get('language')?.setValue(option?.value);
-      });
-
-    this.languagesFormArray.at(0).get('language')?.disable();
   }
 
-  logout() {
-    this._authService.logout();
+  submit() {
+    for (const control in this.tutorProfileForm.controls) {
+      this.tutorProfileForm.controls[control].markAsTouched();
+      this.tutorProfileForm.controls[control].markAsDirty();
+    }
+
+    if (this.tutorProfileForm.invalid) {
+      return;
+    }
+
+    const payload = {
+      ...this.tutorProfileForm.value,
+    };
+
+    this.tutorProfileForm.disable();
+
+    this._toastService.open({
+      message: this._translateService.instant('Toast.UpdateSuccessfully'),
+      configs: {
+        payload: {
+          type: 'success',
+        },
+      },
+    });
   }
 
   // Get language form array
   get languagesFormArray(): FormArray {
-    return this.tutorExperienceForm.get('languages') as FormArray;
+    return this.tutorProfileForm.get('languages') as FormArray;
   }
 
   // Create language form group
@@ -201,7 +159,7 @@ export class TutorProfileComponent implements OnInit {
   handleCertificatesUpload(uploadFiles: any[]) {
     const maxSize = 33554432;
     const files =
-      this.tutorExperienceForm.get('teachingCertificates')?.value || [];
+      this.tutorProfileForm.get('teachingCertificates')?.value || [];
     if (uploadFiles.length > 0) {
       for (const file of uploadFiles) {
         // Only allow .pdf file
@@ -244,7 +202,7 @@ export class TutorProfileComponent implements OnInit {
 
         files.push(file);
 
-        this.tutorExperienceForm.get('teachingCertificates')?.setValue(files);
+        this.tutorProfileForm.get('teachingCertificates')?.setValue(files);
       }
     }
   }
@@ -252,11 +210,11 @@ export class TutorProfileComponent implements OnInit {
   // On remove certificate file
   removeCertificate(index: number) {
     const files =
-      this.tutorExperienceForm.get('teachingCertificates')?.value || [];
+      this.tutorProfileForm.get('teachingCertificates')?.value || [];
 
     files.splice(index, 1);
 
-    this.tutorExperienceForm
+    this.tutorProfileForm
       .get('teachingCertificates')
       ?.setValue(files.length > 0 ? files : null);
   }
@@ -337,12 +295,6 @@ export class TutorProfileComponent implements OnInit {
     }
   }
 
-  // Remove profile picture
-  onRemoveProfilePicture() {
-    this.tutorBasicInfoForm.get('profilePictureUrl')?.setValue(null);
-    this.tutorBasicInfoForm.get('profilePicture')?.setValue(null);
-  }
-
   // Open crop image dialog
   openImageCropper(imageFile: File) {
     const dialogRef = this._imageCropperDialogService.open(imageFile, {
@@ -354,10 +306,24 @@ export class TutorProfileComponent implements OnInit {
 
     dialogRef?.afterClosed().subscribe((croppedImage) => {
       if (croppedImage != null) {
-        this.tutorBasicInfoForm
-          .get('profilePictureUrl')
-          ?.setValue(croppedImage);
-        this.tutorBasicInfoForm.get('profilePicture')?.setValue(croppedImage);
+        this.tutorProfileForm.get('profilePictureUrl')?.setValue(croppedImage);
+        this.tutorProfileForm.get('profilePicture')?.setValue(croppedImage);
+      }
+    });
+  }
+
+  // Remove profile picture
+  onRemoveProfilePicture() {
+    const dialogRef = this._confirmationDialogService.open({
+      message: this._translateService.instant('Confirmation.Message', {
+        action: this._translateService.instant('Action.Remove').toLowerCase(),
+      }),
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res === 'confirmed') {
+        this.tutorProfileForm.get('profilePictureUrl')?.setValue(null);
+        this.tutorProfileForm.get('profilePicture')?.setValue(null);
       }
     });
   }

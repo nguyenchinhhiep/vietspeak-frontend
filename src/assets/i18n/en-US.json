@@ -136,8 +136,8 @@
       "Student": "Student",
       "Tutor": "Tutor"
    },
-   "StudentInfo": {
-      "Title": "Student info",
+   "StudentProfile": {
+      "Title": "Student profile",
       "LanguageWantToLearn": "Which language do you want to learn?",
       "FirstName": "First name",
       "LastName": "Last name",
@@ -148,16 +148,17 @@
       "Basic": "Basic",
       "BasicInfo": "Basic info",
       "StudentProfile": "Student profile",
-      "Learning": "Learning"
+      "Learning": "Learning",
+      "SupplementalInfo": "Supplemental info"
    },
-   "TutorInfo": {
-      "Title": "Tutor info",
+   "TutorProfile": {
+      "Title": "Tutor profile",
       "BasicInfo": "Basic info",
       "PersonalInfo": "Personal info",
       "TeachingAndExperience": "Teaching & Experience",
       "Motivation": "Motivation",
       "Experience": "Experience",
-      "AdditionalInfo": "Additional info",
+      "SupplementalInfo": "Additional info",
       "LanguageWantToTeach": "Which language do you want to teach?",
       "ReasonHere": "Why do you want to tutor on Vietspeak?",
       "FirstName": "First name",
@@ -217,8 +218,11 @@
       "Password": "Password",
       "Settings": "Settings"
    },
-   "Users": {
-      "Title": "Users",
+   "User": {
+      "Title": "User",
+      "Titles": "Users",
+      "Profile": "Profile",
+      "Password": "Password",
       "SearchPlaceholder": "Find by name or email"
    },
    "UserProfile": {

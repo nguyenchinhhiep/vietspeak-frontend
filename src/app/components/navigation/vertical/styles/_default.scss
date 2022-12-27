@@ -17,7 +17,7 @@ vertical-navigation {
     min-width: var(--vertical-navigation-width);
     max-width: var(--vertical-navigation-width);
     border-right: 1px solid;
-    @apply border-gray-200;
+    @apply border-light;
   }
 
   /* ----------------------------------------------------------------------------------------------------- */
@@ -130,6 +130,7 @@ vertical-navigation {
 
     /* Body */
     .vertical-navigation__body {
+      padding: 4px 0;
       flex: 1 1 auto;
       overflow: hidden;
       overscroll-behavior: contain;
@@ -213,7 +214,7 @@ vertical-navigation {
         &:not(.vertical-navigation-item--disabled) {
           &:hover,
           &.vertical-navigation-item--active {
-            @apply bg-primary-100 text-current;
+            @apply bg-hover text-current;
           }
 
           &.vertical-navigation-item--active {

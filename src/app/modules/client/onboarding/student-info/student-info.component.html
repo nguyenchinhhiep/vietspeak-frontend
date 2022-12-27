@@ -28,12 +28,12 @@
 
     <div class="w-full max-w-xl sm:px-6">
       <div class="font-medium  text-2xl text-center">
-        {{ "StudentInfo.StudentProfile" | translate }}
+        {{ "StudentProfile.StudentProfile" | translate }}
       </div>
-      <form class="mt-8" [formGroup]="studentInfoForm" (ngSubmit)="submit()">
+      <form class="mt-8" [formGroup]="StudentProfileForm" (ngSubmit)="submit()">
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>{{
-            "StudentInfo.LanguageWantToLearn" | translate
+            "StudentProfile.LanguageWantToLearn" | translate
           }}</mat-label>
           <mat-select
             formControlName="learningLanguage"
@@ -45,17 +45,17 @@
                   <img
                     class="w-full object-cover"
                     [src]="
-                      this.studentInfoForm.get('learningLanguage')?.value.imgUrl
+                      this.StudentProfileForm.get('learningLanguage')?.value.imgUrl
                     "
                     [attr.alt]="
-                      this.studentInfoForm.get('learningLanguage')?.value.label
+                      this.StudentProfileForm.get('learningLanguage')?.value.label
                     "
                   />
                 </div>
 
                 <div>
                   {{
-                    this.studentInfoForm.get("learningLanguage")?.value.label
+                    this.StudentProfileForm.get("learningLanguage")?.value.label
                   }}
                 </div>
               </div>
@@ -79,13 +79,13 @@
           </mat-select>
           <mat-error
             *ngIf="
-              studentInfoForm.get('learningLanguage')?.hasError('required')
+              StudentProfileForm.get('learningLanguage')?.hasError('required')
             "
             >{{ "Error.Required" | translate }}</mat-error
           >
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
-          <mat-label>{{ "StudentInfo.Level" | translate }}</mat-label>
+          <mat-label>{{ "StudentProfile.Level" | translate }}</mat-label>
           <mat-select
             formControlName="currentLevel"
             placeholder="{{ 'Action.Select' | translate }}"
@@ -98,12 +98,12 @@
             </mat-option>
           </mat-select>
           <mat-error
-            *ngIf="studentInfoForm.get('occupation')?.hasError('required')"
+            *ngIf="StudentProfileForm.get('occupation')?.hasError('required')"
             >{{ "Error.Required" | translate }}</mat-error
           >
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
-          <mat-label>{{ "StudentInfo.FirstName" | translate }}</mat-label>
+          <mat-label>{{ "StudentProfile.FirstName" | translate }}</mat-label>
           <input
             matInput
             formControlName="firstName"
@@ -114,8 +114,8 @@
             mat-icon-button
             type="button"
             matSuffix
-            *ngIf="firstName.value != '' && !studentInfoForm.disabled"
-            (click)="studentInfoForm.get('firstName')?.setValue('')"
+            *ngIf="firstName.value != '' && !StudentProfileForm.disabled"
+            (click)="StudentProfileForm.get('firstName')?.setValue('')"
           >
             <mat-icon
               class="icon-size-5"
@@ -123,12 +123,12 @@
             ></mat-icon>
           </button>
           <mat-error
-            *ngIf="studentInfoForm.get('firstName')?.hasError('required')"
+            *ngIf="StudentProfileForm.get('firstName')?.hasError('required')"
             >{{ "Error.Required" | translate }}</mat-error
           >
         </mat-form-field>
         <mat-form-field appearance="fill" class="w-full">
-          <mat-label>{{ "StudentInfo.LastName" | translate }}</mat-label>
+          <mat-label>{{ "StudentProfile.LastName" | translate }}</mat-label>
           <input
             matInput
             formControlName="lastName"
@@ -139,8 +139,8 @@
             mat-icon-button
             type="button"
             matSuffix
-            *ngIf="lastName.value != '' && !studentInfoForm.disabled"
-            (click)="studentInfoForm.get('lastName')?.setValue('')"
+            *ngIf="lastName.value != '' && !StudentProfileForm.disabled"
+            (click)="StudentProfileForm.get('lastName')?.setValue('')"
           >
             <mat-icon
               class="icon-size-5"
@@ -148,7 +148,7 @@
             ></mat-icon>
           </button>
           <mat-error
-            *ngIf="studentInfoForm.get('lastName')?.hasError('required')"
+            *ngIf="StudentProfileForm.get('lastName')?.hasError('required')"
             >{{ "Error.Required" | translate }}</mat-error
           >
         </mat-form-field>
@@ -166,10 +166,6 @@
               {{ item.translateKey | translate }}
             </mat-option>
           </mat-select>
-          <mat-error
-            *ngIf="studentInfoForm.get('occupation')?.hasError('required')"
-            >{{ "Error.Required" | translate }}</mat-error
-          >
         </mat-form-field>
         <div class="mt-4 flex justify-center">
           <button
@@ -177,14 +173,14 @@
             class="btn--lg w-full"
             mat-flat-button
             [color]="'primary'"
-            [disabled]="studentInfoForm.disabled"
+            [disabled]="StudentProfileForm.disabled"
           >
-            <span *ngIf="!studentInfoForm.disabled">
+            <span *ngIf="!StudentProfileForm.disabled">
               {{ "Action.Continue" | translate }}
             </span>
 
             <mat-progress-spinner
-              *ngIf="studentInfoForm.disabled"
+              *ngIf="StudentProfileForm.disabled"
               [diameter]="24"
               mode="indeterminate"
             >

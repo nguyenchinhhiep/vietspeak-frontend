@@ -1,9 +1,9 @@
-<div class="flex flex-col w-full max-w-4xl mx-auto overflow-hidden">
-  <div class="flex-grow flex-wrap flex gap-8">
+<div class="flex flex-col w-full overflow-hidden max-w-5xl mx-auto">
+  <div class="flex-grow flex-wrap flex gap-10">
     <div class="flex flex-col w-60 flex-shrink-0">
-      <div class="font-medium  text-2xl mb-4">
+      <!-- <div class="font-medium  text-2xl mb-4">
         {{ "Account.Title" | translate }}
-      </div>
+      </div> -->
       <a
         class="mb-2 flex items-center gap-3 hover:no-underline px-3 py-2 rounded text-tertiary cursor-pointer hover:bg-hover"
         *ngFor="let item of navigation"
@@ -20,7 +20,9 @@
       </a>
     </div>
     <div class="flex-grow">
-      <router-outlet></router-outlet>
+      <div class="max-w-xl">
+        <router-outlet></router-outlet>
+      </div>
     </div>
   </div>
 </div>

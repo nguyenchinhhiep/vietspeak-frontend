@@ -14,6 +14,7 @@ import { PreventAutofillModule } from 'src/app/directives/prevent-autofill/preve
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
+import { MatChipsModule } from '@angular/material/chips';
 
 const routes: Routes = [
   {
@@ -40,6 +41,7 @@ const routes: Routes = [
     MatDatepickerModule,
     MatMomentDateModule,
     MatSelectModule,
+    MatChipsModule,
     RouterModule.forChild(routes),
   ]
 })
