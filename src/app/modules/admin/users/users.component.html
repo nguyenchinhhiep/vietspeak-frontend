@@ -1,49 +1,52 @@
-<div class="w-full mx-auto min-h-full flex flex-col max-w-5xl overflow-hidden">
-  <div class="flex gap-2 flex-wrap md:flex-nowrap justify-between">
-    <div class="flex flex-wrap sm:flex-nowrap gap-x-4 w-full">
-      <mat-form-field
-        class="w-full sm:w-1/2 mat-form-field--sm"
-        appearance="fill"
-        [floatLabel]="'always'"
-        [ngClass]=""
+<div class="w-full mx-auto min-h-full flex flex-col max-w-5xl">
+  <app-breadcrumb
+    class="block font-medium text-2xl w-full mb-6"
+  ></app-breadcrumb>
+  <div class="flex flex-wrap md:flex-nowrap gap-3 w-full overflow-hidden mb-4">
+    <mat-form-field
+      class="w-full flex-grow sm:w-1/2 mat-form-field--sm mb-0"
+      appearance="fill"
+      [floatLabel]="'always'"
+      [ngClass]=""
+    >
+      <input
+        matInput
+        type="text"
+        [placeholder]="'User.SearchPlaceholder' | translate"
+        name="search"
+        [formControl]="searchInput"
+        #search
+      />
+      <button matPrefix type="button">
+        <mat-icon [svgIcon]="'mat_outline:search'"> </mat-icon>
+      </button>
+      <button
+        matSuffix
+        mat-icon-button
+        type="button"
+        *ngIf="search.value !== ''"
+        (click)="searchInput.setValue('')"
       >
-        <input
-          matInput
-          type="text"
-          [placeholder]="'User.SearchPlaceholder' | translate"
-          name="search"
-          [formControl]="searchInput"
-          #search
-        />
-        <button matPrefix type="button">
-          <mat-icon [svgIcon]="'mat_outline:search'"> </mat-icon>
-        </button>
-        <button
-          matSuffix
-          mat-icon-button
-          type="button"
-          *ngIf="search.value !== ''"
-          (click)="searchInput.setValue('')"
-        >
-          <mat-icon class="icon-size-5" [svgIcon]="'mat_outline:close'">
-          </mat-icon>
-        </button>
-      </mat-form-field>
+        <mat-icon class="icon-size-5" [svgIcon]="'mat_outline:close'">
+        </mat-icon>
+      </button>
+    </mat-form-field>
+    <div class="flex gap-3 flex-grow">
       <mat-form-field
         appearance="fill"
-        class="w-40 md:w-48 mat-form-field--sm flex-shrink-0"
+        class="flex-grow w-40 md:w-48 mat-form-field--sm flex-shrink-0 mb-0"
       >
         <mat-select
           placeholder="{{ 'Filter by type' | translate }}"
-          [formControl]="userType"
+          [formControl]="userTypeControl"
         >
           <mat-select-trigger>
             <div class="flex gap-2 items-center">
               <div
                 class="w-4 h-4 rounded-full flex-shrink-0"
-                [ngClass]="userType.value?.class"
+                [ngClass]="userTypeControl.value?.class"
               ></div>
-              <div class="text-sm">{{ userType.value?.label }}</div>
+              <div class="text-sm">{{ userTypeControl.value?.label }}</div>
             </div>
           </mat-select-trigger>
           <mat-option *ngFor="let item of userTypes" [value]="item">
@@ -59,19 +62,19 @@
       </mat-form-field>
       <mat-form-field
         appearance="fill"
-        class="w-40 md:w-48 mat-form-field--sm flex-shrink-0"
+        class="flex-grow w-40 md:w-48 mat-form-field--sm flex-shrink-0 mb-0"
       >
         <mat-select
           placeholder="{{ 'Filter by status' | translate }}"
-          [formControl]="userStatus"
+          [formControl]="userStatusControl"
         >
           <mat-select-trigger>
             <div class="flex gap-2 items-center">
               <div
                 class="w-4 h-4 rounded-full flex-shrink-0"
-                [ngClass]="userStatus.value?.class"
+                [ngClass]="userStatusControl.value?.class"
               ></div>
-              <div class="text-sm">{{ userStatus.value?.label }}</div>
+              <div class="text-sm">{{ userStatusControl.value?.label }}</div>
             </div>
           </mat-select-trigger>
           <mat-option *ngFor="let item of userStatuses" [value]="item">
@@ -86,16 +89,20 @@
         </mat-select>
       </mat-form-field>
       <button mat-button class="flex-shrink-0">
-        <div class="text-sm text-danger">Clear</div>
+        <div class="text-sm text-danger">{{ "Action.Clear" | translate }}</div>
       </button>
     </div>
   </div>
-  <div class="flex-grow overflow-hidden">
-    <div
-      class="border border-solid border-light rounded overflow-hidden select-none"
-    >
-      <div class="overflow-auto w-full h-full">
-        <table mat-table [dataSource]="dataSource" class="w-full" matSort>
+
+  <div class="flex-grow">
+    <div class="border-2 border-solid border-light rounded select-none">
+      <div class="overflow-auto">
+        <table
+          mat-table
+          [dataSource]="dataSource"
+          class="w-full overflow-x-auto"
+          matSort
+        >
           <ng-container matColumnDef="no">
             <th mat-header-cell *matHeaderCellDef class="w-20">
               {{ "Table.No" | translate }}
@@ -185,14 +192,37 @@
 
               <mat-menu #actionMenu="matMenu" [xPosition]="'before'">
                 <ng-template matMenuContent>
-                  <button type="button" mat-menu-item>
+                  <button
+                    *ngIf="element.status !== userStatus.Pending"
+                    type="button"
+                    mat-menu-item
+                    mat-menu-item
+                    (click)="viewProfile(element?.id)"
+                  >
+                    <mat-icon
+                      class="text-danger"
+                      svgIcon="mat_outline:visibility"
+                    ></mat-icon>
+                    <span>{{ "Action.ViewProfile" | translate }}</span>
+                  </button>
+                  <button
+                    *ngIf="element.status === userStatus.Reviewing"
+                    type="button"
+                    mat-menu-item
+                    (click)="approve(element?.id)"
+                  >
                     <mat-icon
                       class="text-primary"
                       svgIcon="mat_outline:done"
                     ></mat-icon>
                     <span>{{ "Action.Approve" | translate }}</span>
                   </button>
-                  <button type="button" mat-menu-item>
+                  <button
+                    *ngIf="element.status === userStatus.Reviewing"
+                    type="button"
+                    mat-menu-item
+                    (click)="reject(element?.id)"
+                  >
                     <mat-icon
                       class="text-warn"
                       svgIcon="mat_outline:close"
@@ -209,8 +239,19 @@
                   <button
                     type="button"
                     mat-menu-item
+                    (click)="block(element?.id)"
+                  >
+                    <mat-icon
+                      class="text-danger"
+                      svgIcon="mat_outline:block"
+                    ></mat-icon>
+                    <span>{{ "Action.Block" | translate }}</span>
+                  </button>
+                  <button
+                    type="button"
                     mat-menu-item
-                    (click)="delete(element)"
+                    mat-menu-item
+                    (click)="delete(element?.id)"
                   >
                     <mat-icon
                       class="text-danger"

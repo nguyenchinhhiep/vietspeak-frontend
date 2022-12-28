@@ -14,7 +14,7 @@ import {
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Logger } from '../../logger/logger.service';
-import { Role } from '../../user/role.model';
+import { UserType } from '../../user/user-type.model';
 import { IUser } from '../../user/user.model';
 import { UserService } from '../../user/user.service';
 import { AuthService } from '../auth.service';
@@ -108,17 +108,17 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
           return of(false);
         }
 
-        // Check if the route is restricted by role
-        if (routeData && routeData['roles']) {
+        // Check if the route is restricted by userType
+        if (routeData && routeData['userTypes']) {
           // Get the current user value
           const currentUser: IUser | null = this._userSevice.currentUserValue;
 
-          // Check if the current user role is allowed
-          if (!routeData['roles'].includes(currentUser!.role)) {
+          // Check if the current user userType is allowed
+          if (!routeData['userTypes'].includes(currentUser!.userType)) {
             log.debug('Not authorized, redirecting...');
 
-            // Redirect based on role
-            this._authService.navigateBasedOnRole(currentUser?.role);
+            // Redirect based on userType
+            this._authService.navigateBasedOnUserType(currentUser?.userType);
 
             // Prevent the access
             return of(false);
@@ -133,5 +133,4 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
       })
     );
   }
-
 }

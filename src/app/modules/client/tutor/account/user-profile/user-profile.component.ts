@@ -91,6 +91,8 @@ export class UserProfileComponent implements OnInit {
       introduction: ['', [Validators.required]],
       videoIntroduction: [''],
     });
+
+    this.languagesFormArray.at(0).get('language')?.disable();
   }
 
   submit() {

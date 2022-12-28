@@ -1,8 +1,6 @@
 <div class="w-full">
   <form [formGroup]="profileForm" class="flex flex-col gap-4">
-    <div
-      class="bg-white rounded p-6 pb-2 border border-solid border-gray-200"
-    >
+    <div class="bg-surface rounded p-6 border-2 border-solid border-light">
       <div class="font-medium text-gray-900 text-xl mb-3">
         {{ "UserProfile.Title" | translate }}
       </div>
@@ -154,26 +152,26 @@
         >
         </mat-progress-spinner>
       </mat-form-field>
-    </div>
-    <div class="flex justify-center">
-      <button
-        type="submit"
-        class="btn--lg w-full"
-        mat-flat-button
-        [color]="'primary'"
-        [disabled]="profileForm.disabled"
-      >
-        <span *ngIf="!profileForm.disabled">
-          {{ "Action.Save" | translate }}
-        </span>
-
-        <mat-progress-spinner
-          *ngIf="profileForm.disabled"
-          [diameter]="24"
-          mode="indeterminate"
+      <div class="flex justify-center">
+        <button
+          type="submit"
+          class="btn--lg w-full"
+          mat-flat-button
+          [color]="'primary'"
+          [disabled]="profileForm.disabled"
         >
-        </mat-progress-spinner>
-      </button>
+          <span *ngIf="!profileForm.disabled">
+            {{ "Action.Save" | translate }}
+          </span>
+
+          <mat-progress-spinner
+            *ngIf="profileForm.disabled"
+            [diameter]="24"
+            mode="indeterminate"
+          >
+          </mat-progress-spinner>
+        </button>
+      </div>
     </div>
   </form>
 </div>

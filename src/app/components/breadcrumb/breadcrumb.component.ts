@@ -28,7 +28,7 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
       .pipe(
         filter((event) => event instanceof NavigationEnd),
         distinctUntilChanged(),
-        startWith(event),
+        startWith(''),
         takeUntil(this._unsubscribeAll)
       )
       .subscribe((event) => {
@@ -61,13 +61,13 @@ export class BreadcrumbComponent implements OnInit, OnDestroy {
       route.routeConfig && route.routeConfig.data ? route.routeConfig.path : '';
 
     // If the route is dynamic route such as ':id', remove it
-    // const lastRoutePart = path?.split('/').pop() || '';
-    // const isDynamicRoute = lastRoutePart?.startsWith(':');
-    // if (isDynamicRoute && !!route.snapshot) {
-    //   const paramName = lastRoutePart?.split(':')[1];
-    //   path = path?.replace(lastRoutePart, route.snapshot.params[paramName]);
-    //   label = route.snapshot.params[paramName];
-    // }
+    const lastRoutePart = path?.split('/').pop() || '';
+    const isDynamicRoute = lastRoutePart?.startsWith(':');
+    if (isDynamicRoute && !!route.snapshot) {
+      const paramName = lastRoutePart?.split(':')[1]; 
+      path = path?.replace(lastRoutePart, route.snapshot.params[paramName]);
+      // label = route.snapshot.params[paramName];
+    }
 
     //In the routeConfig the complete path is not available,
     //so we rebuild it each time

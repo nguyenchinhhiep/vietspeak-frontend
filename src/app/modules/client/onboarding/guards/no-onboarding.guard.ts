@@ -9,7 +9,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { Role } from 'src/app/core/user/role.model';
+import { UserType } from 'src/app/core/user/user-type.model';
 import { UserStatus } from 'src/app/core/user/user.model';
 import { UserService } from 'src/app/core/user/user.service';
 
@@ -68,13 +68,13 @@ export class NoOnboardingGuard implements CanActivate {
     // Get curren user
     const currentUser = this._userService.currentUserValue;
 
-    // Get current user role
-    const currentRole = currentUser?.role;
+    // Get current user UserType
+    const currentUserType = currentUser?.userType;
 
     // If user is admin
-    if (currentRole === Role.Admin) {
-      // Navigate based on current role
-      this._navigateBasedOnRole(currentRole);
+    if (currentUserType === UserType.Admin) {
+      // Navigate based on current UserType
+      this._navigateBasedOnUserType(currentUserType);
 
       // Prevent the access
       return of(false);
@@ -82,8 +82,8 @@ export class NoOnboardingGuard implements CanActivate {
 
     // If the user is not pending
     if (currentUser?.status !== UserStatus.Pending) {
-      // Navigate based on current role
-      this._navigateBasedOnRole(currentRole);
+      // Navigate based on current UserType
+      this._navigateBasedOnUserType(currentUserType);
 
       // Prevent the access
       return of(false);
@@ -95,18 +95,18 @@ export class NoOnboardingGuard implements CanActivate {
 
   /**
    *
-   * @param currentRole
+   * @param type
    */
-  private _navigateBasedOnRole(currentRole: any): void {
-    if (currentRole === Role.Admin) {
+  private _navigateBasedOnUserType(type: any): void {
+    if (type === UserType.Admin) {
       this._router.navigate(['/admin']);
     }
 
-    if (currentRole === Role.Tutor) {
+    if (type === UserType.Tutor) {
       this._router.navigate(['/tutor']);
     }
 
-    if (currentRole === Role.Student) {
+    if (type === UserType.Student) {
       this._router.navigate(['/student']);
     }
   }

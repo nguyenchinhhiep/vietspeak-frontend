@@ -11,7 +11,7 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
-import { Role } from 'src/app/core/user/role.model';
+import { UserType } from 'src/app/core/user/user-type.model';
 import { UserStatus } from 'src/app/core/user/user.model';
 import { UserService } from 'src/app/core/user/user.service';
 
@@ -31,8 +31,7 @@ export class OnboardingGuard implements CanActivate, CanActivateChild, CanLoad {
     | boolean
     | UrlTree
     | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    {
+    | Promise<boolean | UrlTree> {
     return this._check();
   }
 
@@ -46,8 +45,7 @@ export class OnboardingGuard implements CanActivate, CanActivateChild, CanLoad {
     | boolean
     | UrlTree
     | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    {
+    | Promise<boolean | UrlTree> {
     return this._check();
   }
 
@@ -66,13 +64,13 @@ export class OnboardingGuard implements CanActivate, CanActivateChild, CanLoad {
     // Get curren user
     const currentUser = this._userService.currentUserValue;
 
-    // Get current user role
-    const currentRole = currentUser?.role;
+    // Get current user UserType
+    const currentUserType = currentUser?.userType;
 
     // If the user is pending
     if (currentUser?.status === UserStatus.Pending) {
-      // Navigate based on current role
-      this._navigateBasedOnRole(currentRole);
+      // Navigate based on current UserType
+      this._navigateBasedOnUserType(currentUserType);
 
       // Prevent the access
       return of(false);
@@ -83,22 +81,22 @@ export class OnboardingGuard implements CanActivate, CanActivateChild, CanLoad {
   }
   /**
    *
-   * @param currentRole
+   * @param currentUserType
    */
-  private _navigateBasedOnRole(currentRole: any): void {
-    if (currentRole == null) {
+  private _navigateBasedOnUserType(type: any): void {
+    if (type == null) {
       this._router.navigate(['/onboarding']);
     }
 
-    if (currentRole === Role.Admin) {
+    if (type === UserType.Admin) {
       this._router.navigate(['/admin']);
     }
 
-    if (currentRole === Role.Student) {
+    if (type === UserType.Student) {
       this._router.navigate(['/onboarding/student']);
     }
 
-    if (currentRole === Role.Tutor) {
+    if (type === UserType.Tutor) {
       this._router.navigate(['/onboarding/tutor']);
     }
   }

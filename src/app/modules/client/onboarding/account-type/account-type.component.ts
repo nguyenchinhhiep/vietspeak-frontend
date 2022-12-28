@@ -3,7 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { HttpService } from 'src/app/core/http/services/http.service';
-import { Role } from 'src/app/core/user/role.model';
+import { UserType } from 'src/app/core/user/user-type.model';
 import { AccountTypeList } from '../onboarding.model';
 
 @Component({
@@ -48,11 +48,11 @@ export class AccountTypeComponent implements OnInit {
     // Return if the form is invalid
     if (this.accountTypeForm.invalid) return;
 
-    if (this.selectedAccountType.value === Role.Student) {
+    if (this.selectedAccountType.value === UserType.Student) {
       this._router.navigate(['/onboarding/student']);
     }
 
-    if (this.selectedAccountType.value === Role.Tutor) {
+    if (this.selectedAccountType.value === UserType.Tutor) {
       this._router.navigate(['/onboarding/tutor']);
     }
   }

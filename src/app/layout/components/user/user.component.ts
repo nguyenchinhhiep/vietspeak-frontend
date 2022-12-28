@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
-import { Role } from 'src/app/core/user/role.model';
+import { UserType } from 'src/app/core/user/user-type.model';
 import { IUser } from 'src/app/core/user/user.model';
 import { UserService } from 'src/app/core/user/user.service';
 
@@ -28,15 +28,15 @@ export class UserComponent implements OnInit {
   }
 
   onAccount() {
-    const role = this.currentUser?.role;
-    if (role === Role.Admin) {
+    const userType = this.currentUser?.userType;
+    if (userType === UserType.Admin) {
       this._router.navigate(['/admin/account']);
     }
-    if (role === Role.Tutor) {
+    if (userType === UserType.Tutor) {
       this._router.navigate(['/tutor/account']);
     }
 
-    if (role === Role.Student) {
+    if (userType === UserType.Student) {
       this._router.navigate(['/student/account']);
     }
   }

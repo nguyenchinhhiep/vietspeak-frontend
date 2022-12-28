@@ -6,8 +6,9 @@ import { TranslateService } from '@ngx-translate/core';
 import { debounceTime, distinctUntilChanged } from 'rxjs';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { HttpService } from 'src/app/core/http/services/http.service';
-import { Role, RoleOptions } from 'src/app/core/user/role.model';
+import { UserType, UserTypeOptions } from 'src/app/core/user/user-type.model';
 import { UserStatus, UserStatusOptions } from 'src/app/core/user/user.model';
+import { UsersService } from './users.service';
 
 @Component({
   selector: 'app-users',
@@ -20,7 +21,8 @@ export class UsersComponent implements OnInit {
     private _translateService: TranslateService,
     private _httpService: HttpService,
     private _router: Router,
-    private _activatedRoute: ActivatedRoute
+    private _activatedRoute: ActivatedRoute,
+    private _usersService: UsersService
   ) {}
 
   paginationConfig = {
@@ -37,11 +39,14 @@ export class UsersComponent implements OnInit {
   };
 
   userStatuses = UserStatusOptions;
-  userTypes = RoleOptions.filter(item => item.value !== Role.Admin);
+  userTypes = UserTypeOptions.filter((item) => item.value !== UserType.Admin);
+
+  userStatus = UserStatus;
+  userType = UserType;
 
   searchInput: FormControl = new FormControl();
-  userType: FormControl = new FormControl();
-  userStatus: FormControl = new FormControl();
+  userTypeControl: FormControl = new FormControl();
+  userStatusControl: FormControl = new FormControl();
 
   displayedColumns: string[] = [
     'no',
@@ -78,13 +83,18 @@ export class UsersComponent implements OnInit {
 
   // Delete
   delete(id: string) {
-    const dialogRef = this._confirmationDialogService.open();
-
-    dialogRef.afterClosed().subscribe((res) => {
-      if (res === 'confirmed') {
-      }
-    });
+    this._usersService.delete(id);
   }
+
+  viewProfile(id: string) {
+    this._usersService.viewProfile(id);
+  }
+
+  approve(id: string) {}
+
+  reject(id: string) {}
+
+  block(id: string) {}
 
   // Get status
   getStatus(status: UserStatus) {
@@ -97,10 +107,10 @@ export class UsersComponent implements OnInit {
     );
   }
 
-  // Get role
-  getRole(role: Role) {
+  // Get user type
+  getUserType(type: UserType) {
     return (
-      RoleOptions.find((item) => item.value === role) || {
+      UserTypeOptions.find((item) => item.value === type) || {
         label: '',
         translateKey: '',
         class: '',

@@ -1,5 +1,8 @@
-<div class="w-full mx-auto max-w-5xl relative">
-  <div class="flex gap-4 justify-between items-center mb-4">
+<div class="w-full mx-auto max-w-3xl relative">
+  <app-breadcrumb
+    class="block font-medium text-2xl w-full mb-6"
+  ></app-breadcrumb>
+  <div class="flex gap-4 items-center mb-4 w-full">
     <div class="flex gap-4 items-center">
       <div
         class="w-16 h-16 rounded-full overflow-hidden flex justify-center items-center font-medium bg-accent text-white uppercase text-2xl"
@@ -11,6 +14,16 @@
         <div class="text-tertiary text-sm font-medium">Tutor</div>
       </div>
     </div>
+    <button
+      *ngIf="userDetail.status !== userStatus.Pending"
+      type="button"
+      mat-button
+      class="!ml-auto bg-hover"
+      (click)="viewProfile()"
+    >
+      <mat-icon class="mr-2" [svgIcon]="'mat_outline:visibility'"></mat-icon>
+      <div class="text-sm">{{ "Action.ViewProfile" | translate }}</div>
+    </button>
     <button mat-icon-button [matMenuTriggerFor]="actionMenu">
       <mat-icon [svgIcon]="'mat_outline:more_vert'"></mat-icon>
     </button>
@@ -18,20 +31,28 @@
     <mat-menu #actionMenu="matMenu" [xPosition]="'before'">
       <ng-template matMenuContent>
         <button
+          *ngIf="userDetail.status === userStatus.Reviewing"
           type="button"
           mat-menu-item
-          *ngIf="userDetail?.status === userStatus.Pending"
+          type="button"
+          mat-menu-item
+          (click)="approve()"
         >
           <mat-icon class="text-primary" svgIcon="mat_outline:done"></mat-icon>
           <span>{{ "Action.Approve" | translate }}</span>
         </button>
         <button
+          *ngIf="userDetail.status === userStatus.Reviewing"
           type="button"
           mat-menu-item
-          *ngIf="userDetail?.status === userStatus.Pending"
+          (click)="reject()"
         >
           <mat-icon class="text-warn" svgIcon="mat_outline:close"></mat-icon>
           <span>{{ "Action.Reject" | translate }}</span>
+        </button>
+        <button type="button" mat-menu-item (click)="block()">
+          <mat-icon class="text-danger" svgIcon="mat_outline:block"></mat-icon>
+          <span>{{ "Action.Block" | translate }}</span>
         </button>
         <button type="button" mat-menu-item mat-menu-item (click)="delete()">
           <mat-icon class="text-danger" svgIcon="mat_outline:delete"></mat-icon>
@@ -41,23 +62,19 @@
     </mat-menu>
   </div>
 
-  <div class="flex-grow flex-wrap flex gap-4 md:gap-10">
-    <div class="flex md:flex-col md:w-60 w-full">
+  <div class="flex-grow flex-col flex-wrap flex gap-4">
+    <!-- Tab Navigation -->
+    <nav mat-tab-nav-bar [disableRipple]="true" [color]="'primary'" class="">
       <a
-        class="mb-2 flex items-center gap-3 hover:no-underline px-3 py-2 rounded text-tertiary cursor-pointer hover:bg-hover"
-        *ngFor="let item of navigation"
-        [routerLink]="item.routerLink"
-        routerLinkActive="bg-hover"
+        mat-tab-link
+        [routerLink]="link.routerLink"
+        [queryParamsHandling]="'merge'"
+        *ngFor="let link of navigation"
+        [active]="activeLink == link"
       >
-        <mat-icon
-          routerLinkActive="!text-primary font-medium"
-          [svgIcon]="item.icon"
-        ></mat-icon>
-        <div routerLinkActive="text-primary font-medium">
-          {{ item.translateKey | translate }}
-        </div>
+        {{ link.label }}
       </a>
-    </div>
+    </nav>
     <div class="flex-grow flex-shrink-0">
       <div class="w-full">
         <router-outlet></router-outlet>

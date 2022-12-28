@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Role } from 'src/app/core/user/role.model';
+import { UserType } from 'src/app/core/user/user-type.model';
 
 @Component({
   selector: 'app-user-profile',
@@ -9,8 +9,10 @@ import { Role } from 'src/app/core/user/role.model';
 export class UserProfileComponent implements OnInit {
   constructor() {}
 
-  role = Role;
-  userType: Role = Role.Tutor;
+  userType = UserType;
+  userProfile = {
+    userType: UserType.Tutor,
+  };
 
   ngOnInit(): void {}
 }

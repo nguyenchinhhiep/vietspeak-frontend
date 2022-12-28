@@ -1,23 +1,23 @@
-export enum Role {
+export enum UserType {
   Admin = 'Admin',
   Tutor = 'Tutor',
   Student = 'Student',
 }
 
-export const RoleOptions = [
+export const UserTypeOptions = [
   {
     label: 'Admin',
     class: 'bg-purple-500',
-    value: Role.Admin,
+    value: UserType.Admin,
   },
   {
     label: 'Tutor',
     class: 'bg-accent-500',
-    value: Role.Tutor,
+    value: UserType.Tutor,
   },
   {
     label: 'Student',
     class: 'bg-primary-500',
-    value: Role.Student,
+    value: UserType.Student,
   },
 ];

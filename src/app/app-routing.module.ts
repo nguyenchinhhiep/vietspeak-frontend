@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './core/auth/guards/auth.guard';
 import { NoAuthGuard } from './core/auth/guards/no-auth.guard';
-import { Role } from './core/user/role.model';
+import { UserType } from './core/user/user-type.model';
 import { LayoutComponent } from './layout/layout.component';
 import { NoUnderReviewGuard } from './modules/under-review/guards/no-under-review.guard';
 import { UnderReviewGuard } from './modules/under-review/guards/under-review.guard';
@@ -78,7 +78,7 @@ const routes: Routes = [
         canActivate: [NoUnderReviewGuard],
         canActivateChild: [NoUnderReviewGuard],
         data: {
-          roles: [Role.Admin],
+          userTypes: [UserType.Admin],
         },
         loadChildren: () =>
           import('./modules/admin/admin.module').then((m) => m.AdminModule),

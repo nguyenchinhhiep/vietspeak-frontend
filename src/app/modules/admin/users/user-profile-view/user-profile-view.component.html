@@ -1,0 +1,35 @@
+<div class="dialog">
+  <div class="dialog__close">
+    <button mat-icon-button [matDialogClose]="undefined">
+      <mat-icon
+        class="text-secondary"
+        [svgIcon]="'mat_outline:close'"
+      ></mat-icon>
+    </button>
+  </div>
+  <!-- Header -->
+  <div class="dialog__header">
+    <h4 class="font-medium text-2xl">
+      {{ "User.UserProfile" | translate }}
+    </h4>
+  </div>
+
+  <!-- Body -->
+  <div class="dialog__body">
+    <div class="flex flex-col"></div>
+  </div>
+
+  <!-- Footer -->
+  <div class="dialog__footer">
+    <div class="flex gap-4 justify-end">
+      <button
+        mat-button
+        [matDialogClose]="undefined"
+        [color]="'primary'"
+        tabindex="0"
+      >
+        {{ "Action.Cancel" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

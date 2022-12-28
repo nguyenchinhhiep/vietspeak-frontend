@@ -1,10 +1,11 @@
-import { Role } from './role.model';
+import { UserType } from './user-type.model';
 
 export enum UserStatus {
   Active = 'Active',
   Inactive = 'Inactive',
   Pending = 'Pending',
   Reviewing = 'Reviewing',
+  Blocked = 'Blocked',
 }
 
 export const UserStatusOptions = [
@@ -32,12 +33,18 @@ export const UserStatusOptions = [
     class: 'bg-info-500',
     value: UserStatus.Reviewing,
   },
+  {
+    label: 'Blocked',
+    translateKey: 'Status.Blocked',
+    class: 'bg-gray-400',
+    value: UserStatus.Blocked,
+  },
 ];
 
 export interface IUser {
   id: string;
   email: string;
-  role?: Role;
+  userType?: UserType;
   status: UserStatus;
   firstName?: string;
   lastName?: string;

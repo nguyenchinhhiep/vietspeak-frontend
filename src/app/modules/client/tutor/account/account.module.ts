@@ -4,6 +4,7 @@ import { AccountComponent } from './account.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
+import { MatTabsModule } from '@angular/material/tabs';
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
     CommonModule,
     TranslateModule,
     MatIconModule,
+    MatTabsModule,
     RouterModule.forChild(routes),
   ],
 })

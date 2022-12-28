@@ -56,6 +56,13 @@
     }
   }
 
+  /* No margin bottom */
+  &.mb-0 {
+    .mat-form-field-wrapper {
+      margin-bottom: 0;
+    }
+  }
+
   /* Default style tweaks and enhancements */
   .mat-form-field-wrapper {
     margin-bottom: 16px;
@@ -68,8 +75,8 @@
       min-height: 50px;
       border-radius: 4px;
       padding: 0 16px;
-      border-width: 1px;
-      @apply bg-white border-gray-300 dark:bg-black dark:bg-opacity-5 dark:border-gray-500 #{'!important'};
+      border-width: 2px;
+      @apply bg-white border-gray-200 dark:bg-black dark:bg-opacity-5 dark:border-gray-500 #{'!important'};
 
       .mat-form-field-prefix {
         > .mat-icon {
@@ -874,4 +881,5 @@ mat-stepper {
   font-weight: 500;
   @apply text-secondary #{!important};
   @apply bg-hover #{!important};
+  @apply border border-solid border-light #{!important};
 }

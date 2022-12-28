@@ -4,6 +4,7 @@ import { AccountComponent } from './account.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
+import { BreadcrumbModule } from 'src/app/components/breadcrumb/breadcrumb.module';
 
 const routes: Routes = [
   {
@@ -39,6 +40,7 @@ const routes: Routes = [
     CommonModule,
     TranslateModule,
     MatIconModule,
+    BreadcrumbModule,
     RouterModule.forChild(routes),
   ],
 })

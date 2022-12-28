@@ -26,6 +26,7 @@
       "Select": "Select",
       "Continue": "Continue",
       "Back": "Back",
+      "Block": "Block",
       "Close": "Close",
       "Login": "Login",
       "Register": "Register",
@@ -40,8 +41,11 @@
       "Remove": "Remove",
       "Approve": "Approve",
       "Reject": "Reject",
+      "Clear": "Clear",
       "GetStarted": "Get started",
-      "PressEnterToAdd": "Press Enter to add"
+      "PressEnterToAdd": "Press Enter to add",
+      "ChangePassword": "Change password",
+      "ViewProfile": "View profile"
    },
    "Toast": {
       "CreateSuccessfully": "Create successfully",
@@ -222,6 +226,7 @@
       "Title": "User",
       "Titles": "Users",
       "Profile": "Profile",
+      "UserProfile": "User profile",
       "Password": "Password",
       "SearchPlaceholder": "Find by name or email"
    },

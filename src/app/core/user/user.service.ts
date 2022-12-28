@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Role } from './role.model';
+import { UserType } from './user-type.model';
 import { IUser, UserStatus } from './user.model';
 
 @Injectable()
@@ -9,8 +9,8 @@ export class UserService {
     new BehaviorSubject<IUser | null>({
       id: '1',
       email: 'nguyenchinhhiep95@gmail.com',
-      role: Role.Admin,
-      status: UserStatus.Pending,
+      userType: UserType.Student,
+      status: UserStatus.Active,
       fullName: 'Hiep Nguyen',
     });
 

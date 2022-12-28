@@ -13,7 +13,7 @@ import {
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Logger } from '../../logger/logger.service';
-import { Role } from '../../user/role.model';
+import { UserType } from '../../user/user-type.model';
 import { IUser } from '../../user/user.model';
 import { UserService } from '../../user/user.service';
 import { AuthService } from '../auth.service';
@@ -90,7 +90,7 @@ export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad {
           const currentUser: IUser | null = this._userService.currentUserValue;
 
           // Redirect to the root
-          this._authService.navigateBasedOnRole(currentUser?.role);
+          this._authService.navigateBasedOnUserType(currentUser?.userType);
 
           // Prevent the access
           return of(false);

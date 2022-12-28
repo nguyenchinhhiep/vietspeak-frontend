@@ -1,6 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { Role } from 'src/app/core/user/role.model';
-import { UserStatus } from 'src/app/core/user/user.model';
 import { UserService } from 'src/app/core/user/user.service';
 
 @Component({

@@ -24,6 +24,10 @@ import { TutorProfileComponent } from './user-profile/tutor-profile/tutor-profil
 import { StudentProfileComponent } from './user-profile/student-profile/student-profile.component';
 import { MatChipsModule } from '@angular/material/chips';
 import { UserChangePasswordComponent } from './user-change-password/user-change-password.component';
+import { UsersService } from './users.service';
+import { UserProfileViewComponent } from './user-profile-view/user-profile-view.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { AutoFocusModule } from 'src/app/directives/auto-focus/auto-focus.module';
 
 const routes: Routes = [
   {
@@ -41,6 +45,11 @@ const routes: Routes = [
       {
         path: ':id',
         component: UserDetailComponent,
+        data: {
+          breadcrumb: {
+            label: '',
+          },
+        },
         children: [
           {
             path: '',
@@ -79,6 +88,7 @@ const routes: Routes = [
     TutorProfileComponent,
     StudentProfileComponent,
     UserChangePasswordComponent,
+    UserProfileViewComponent,
   ],
   imports: [
     CommonModule,
@@ -100,7 +110,10 @@ const routes: Routes = [
     MatTabsModule,
     BreadcrumbModule,
     MatChipsModule,
+    MatDialogModule,
+    AutoFocusModule,
     RouterModule.forChild(routes),
   ],
+  providers: [UsersService],
 })
 export class UsersModule {}

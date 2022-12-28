@@ -1,4 +1,4 @@
-import { Role } from "src/app/core/user/role.model";
+import { UserType } from 'src/app/core/user/user-type.model';
 
 export enum HeardFrom {
   WebSearch = 'Web Search',
@@ -34,13 +34,13 @@ export const AccountTypeList = [
   {
     label: 'Student',
     translateKey: 'SelectAccountType.Student',
-    value: Role.Student,
+    value: UserType.Student,
     icon: 'custom:student',
   },
   {
     label: 'Tutor',
     translateKey: 'SelectAccountType.Tutor',
-    value: Role.Tutor,
+    value: UserType.Tutor,
     icon: 'custom:tutor',
   },
 ];

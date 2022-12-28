@@ -17,11 +17,8 @@
       </vertical-navigation>
     </div>
     <!-- Main -->
-    <div class="flex-grow">
+    <div class="flex-grow overflow-hidden">
       <div class="h-full p-4 md:p-6 overflow-auto" scrollReset>
-        <div class="font-medium text-2xl w-full mb-6 max-w-5xl mx-auto">
-          <app-breadcrumb></app-breadcrumb>
-        </div>
         <router-outlet *ngIf="true"></router-outlet>
       </div>
     </div>

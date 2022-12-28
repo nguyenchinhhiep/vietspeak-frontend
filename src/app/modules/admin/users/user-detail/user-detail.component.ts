@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationEnd, Router } from '@angular/router';
 import { Subject } from 'rxjs';
+import { filter, startWith, takeUntil } from 'rxjs/operators';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { UserStatus } from 'src/app/core/user/user.model';
+import { UsersService } from '../users.service';
 
 @Component({
   selector: 'app-user-detail',
@@ -12,8 +14,14 @@ import { UserStatus } from 'src/app/core/user/user.model';
 export class UserDetailComponent implements OnInit {
   constructor(
     private _router: Router,
-    private _confirmationDialogService: ConfirmationDialogService
+    private _confirmationDialogService: ConfirmationDialogService,
+    private _usersService: UsersService
   ) {}
+
+  navigation: any = [];
+  userDetail: any = {};
+  userStatus = UserStatus;
+  activeLink: any = null;
 
   ngOnInit(): void {
     this.navigation = [
@@ -30,10 +38,19 @@ export class UserDetailComponent implements OnInit {
         routerLink: `password`,
       },
     ];
+
+    this.activeLink = this.navigation[0];
+
+    this._router.events
+      .pipe(
+        filter((event) => event instanceof NavigationEnd),
+        startWith(this._router),
+        takeUntil(this._unsubscribeAll)
+      )
+      .subscribe((_) => {
+        this.activeLink = this.getActiveLink(this._router.url);
+      });
   }
-  navigation: any = [];
-  userDetail: any = {};
-  userStatus = UserStatus;
 
   private _unsubscribeAll: Subject<any> = new Subject();
 
@@ -43,13 +60,34 @@ export class UserDetailComponent implements OnInit {
     this._unsubscribeAll.complete();
   }
 
+  getActiveLink(url: string) {
+    return this.navigation.find(
+      (link: any) => url.indexOf(link.routerLink) > -1
+    );
+  }
+
   // Delete
   delete() {
-    const dialogRef = this._confirmationDialogService.open();
+    this._usersService.delete(this.userDetail.id);
+  }
+  // Block
+  block() {
+    this._usersService.block(this.userDetail.id);
+  }
 
-    dialogRef.afterClosed().subscribe((res) => {
-      if (res === 'confirmed') {
-      }
-    });
+  // Approve
+  approve() {
+    this._usersService.approve(this.userDetail.id);
+  }
+
+  // Reject
+  reject() {
+    this._usersService.reject(this.userDetail.id);
+  }
+
+  // Change Password
+  // View profile
+  viewProfile() {
+    this._usersService.viewProfile(this.userDetail.id);
   }
 }
