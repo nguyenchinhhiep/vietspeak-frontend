@@ -46,7 +46,8 @@
       "GetStarted": "Get started",
       "PressEnterToAdd": "Press Enter to add",
       "ChangePassword": "Change password",
-      "ViewProfile": "View profile"
+      "ViewProfile": "View profile",
+      "Reset": "Reset"
    },
    "Toast": {
       "CreateSuccessfully": "Create successfully",
