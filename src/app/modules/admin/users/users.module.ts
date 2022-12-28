@@ -28,6 +28,7 @@ import { UsersService } from './users.service';
 import { UserProfileViewComponent } from './user-profile-view/user-profile-view.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { AutoFocusModule } from 'src/app/directives/auto-focus/auto-focus.module';
+import { OverlayScrollbarModule } from 'src/app/directives/overlay-scrollbar/overlay-scrollbar.module';
 
 const routes: Routes = [
   {
@@ -112,6 +113,7 @@ const routes: Routes = [
     MatChipsModule,
     MatDialogModule,
     AutoFocusModule,
+    OverlayScrollbarModule,
     RouterModule.forChild(routes),
   ],
   providers: [UsersService],

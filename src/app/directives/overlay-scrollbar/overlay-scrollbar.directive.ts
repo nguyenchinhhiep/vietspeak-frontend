@@ -2,6 +2,7 @@ import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { Platform } from '@angular/cdk/platform';
 import { Directive, ElementRef, Input, SimpleChanges } from '@angular/core';
 import { NavigationEnd, Router } from '@angular/router';
+import OverlayScrollbars from 'overlayscrollbars';
 import {
   debounceTime,
   filter,
@@ -10,8 +11,6 @@ import {
   Subscription,
   takeUntil,
 } from 'rxjs';
-
-import OverlayScrollbars from 'overlayscrollbars';
 
 @Directive({
   selector: '[overlayScrollbar]',
@@ -22,7 +21,11 @@ export class OverlayScrollbarDirective {
   @Input() overlayScrollbarOptions!: OverlayScrollbars.Options;
   @Input() scrollReset: boolean = false;
 
-  private _options!: OverlayScrollbars.Options;
+  private _options: OverlayScrollbars.Options = {
+    scrollbars: {
+      autoHide: 'leave',
+    },
+  };
   private _os!: OverlayScrollbars | null;
   private _scrollResetSubscription!: Subscription;
   private _unsubscribeAll: Subject<any> = new Subject<any>();

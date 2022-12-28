@@ -154,6 +154,7 @@
       "BasicInfo": "Basic info",
       "StudentProfile": "Student profile",
       "Learning": "Learning",
+      "LearningLanguage": "Learning language",
       "SupplementalInfo": "Supplemental info"
    },
    "TutorProfile": {
@@ -184,6 +185,7 @@
       "AddLanguage": "Add language",
       "HaveExperienceTeachingOnline": "Do you have experience teaching online?",
       "TeachingCertificates": "Teaching certificates",
+      "Certification": "Certification",
       "ProfilePicture": "Profile picture",
       "AboutMe": "About me",
       "IntroductionDescription": "Say hello and introduce yourself to students! This will be the first thing students read about you when looking at their tutor profile",
@@ -198,7 +200,10 @@
       "Introduction": "Introduction",
       "VideoIntroduction": "Video introduction",
       "VideoIntroductionDescription": "An introduction video is the quickest way to help students get to know about you, so they can confidently decide to book lessons with you. Upload it on Youtube and paste the video URL here. You can do it later on your profile page.",
-      "VideoUrl": "Video URL"
+      "VideoUrl": "Video URL",
+      "LanguagesITeach": "Languages I teach",
+      "LanguagesIKnow": "Languages I know"
+
    },
    "Home": {
       "Welcome": "Welcome, {{name}}!"
