@@ -8,28 +8,130 @@
     </button>
   </div>
   <!-- Header -->
-  <div class="dialog__header">
-    <h4 class="font-medium text-2xl">
-      {{ "User.UserProfile" | translate }}
-    </h4>
-  </div>
+  <div class="dialog__header"></div>
 
   <!-- Body -->
   <div class="dialog__body">
-    <div class="flex flex-col"></div>
+    <div class="flex flex-col gap-4">
+      <div class="flex items-center gap-4 items-center mb-3">
+        <div
+          class="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center font-medium bg-accent text-white uppercase text-2xl"
+        >
+          {{ "H" }}
+        </div>
+        <div class="flex flex-col">
+          <div class="text-lg font-medium text-primary">Hiep Nguyen</div>
+          <div class="text-tertiary font-medium">Tutor</div>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="font-medium">Email:</div>
+        <div class="text-tertiary">nguyenchinhhiep@gmail.com</div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="font-medium">Date of birth:</div>
+        <div class="text-tertiary">10/03/1995</div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="font-medium">Languages I teach:</div>
+        <div class="flex flex-wrap gap-3">
+          <div
+            class="border border-rounded border-light rounded-full px-4 py-1 text-primary bg-hover"
+          >
+            English
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="font-medium">Languages I know:</div>
+        <div class="flex flex-wrap gap-3">
+          <div
+            class="border border-rounded border-light rounded-full px-4 py-1 text-primary bg-hover"
+          >
+            English - C1
+          </div>
+          <div
+            class="border border-rounded border-light rounded-full px-4 py-1 text-primary bg-hover"
+          >
+            Vietnamese - Native
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="font-medium">I teach:</div>
+        <div class="flex flex-wrap gap-3">
+          <div
+            class="border border-rounded border-light rounded-full px-4 py-1 text-primary bg-hover"
+          >
+            IELTS
+          </div>
+          <div
+            class="border border-rounded border-light rounded-full px-4 py-1 text-primary bg-hover"
+          >
+            TOEIC
+          </div>
+          <div
+            class="border border-rounded border-light rounded-full px-4 py-1 text-primary bg-hover"
+          >
+            Interview
+          </div>
+          <div
+            class="border border-rounded border-light rounded-full px-4 py-1 text-primary bg-hover"
+          >
+            Speaking
+          </div>
+        </div>
+      </div>
+      <div class="flex items-center gap-4">
+        <div class="font-medium">Experience:</div>
+        <div class="text-tertiary">More than 2 years</div>
+      </div>
+      <div class="border-0 border-t border-solid border-light my-3"></div>
+      <div class="flex flex-col gap-2">
+        <div class="font-medium text-lg">Introduction</div>
+        <p class="text-tertiary leading-relaxed">
+          Hello, I've been teaching English since 2006, in Peru, Kazakhstan,
+          China, Ireland and Cambodia. I've taught all ages and all levels but
+          prefer teaching higher level adults. I like and am able to teach
+          grammar and I enjoy it when students ask me questions which make me
+          think ! My particular love with teaching is helping students go beyond
+          the daily communication, to learn more advanced topics and to help
+          people express more complex and deeper ideas and feelings. I enjoy
+          travelling and learning different cultures and languages. I also love
+          reading, walking and spending time in nature. I love working for
+          Lingoda because I meet all sorts of interesting and motivated students
+          from around the world and I love hearing everyone's experiences. I
+          look forward to meeting you and helping you with your language
+          learning goals.
+        </p>
+      </div>
+      <div class="border-0 border-t border-solid border-light my-3"></div>
+      <div class="flex flex-col gap-2">
+        <div class="font-medium text-lg">Certification</div>
+      </div>
+      <div class="border-0 border-t border-solid border-light my-3"></div>
+      <div class="flex flex-col gap-3">
+        <div class="font-medium text-lg">Motivation</div>
+        <div class="flex flex-col gap-1">
+          <div class="text-primary">Why do you want to tutor on Vietspeak?</div>
+          <p class="text-tertiary leading-relaxed">
+            Hello, I've been teaching English since 2006, in Peru, Kazakhstan,
+            China, Ireland and Cambodia. I've taught all ages and all levels but
+            prefer teaching higher level adults. I like and am able to teach
+            grammar and I enjoy it when students ask me questions which make me
+            think ! My particular love with teaching is helping students go
+            beyond the daily communication, to learn more advanced topics and to
+            help people express more complex and deeper ideas and feelings.
+          </p>
+        </div>
+        <div class="flex flex-col gap-1">
+          <div class="text-primary">Where did you hear about Vietspeak?</div>
+          <p class="text-tertiary leading-relaxed">Web Search</p>
+        </div>
+      </div>
+    </div>
   </div>
 
   <!-- Footer -->
-  <div class="dialog__footer">
-    <div class="flex gap-4 justify-end">
-      <button
-        mat-button
-        [matDialogClose]="undefined"
-        [color]="'primary'"
-        tabindex="0"
-      >
-        {{ "Action.Cancel" | translate }}
-      </button>
-    </div>
-  </div>
+  <div class="dialog__footer"></div>
 </div>

@@ -9,7 +9,7 @@ export class UserService {
     new BehaviorSubject<IUser | null>({
       id: '1',
       email: 'nguyenchinhhiep95@gmail.com',
-      userType: UserType.Student,
+      userType: UserType.Admin,
       status: UserStatus.Active,
       fullName: 'Hiep Nguyen',
     });

@@ -1,5 +1,6 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { UserType } from 'src/app/core/user/user-type.model';
 
 @Component({
   selector: 'app-user-profile-view',
@@ -14,6 +15,9 @@ export class UserProfileViewComponent implements OnInit {
     },
     public matDialogRef: MatDialogRef<UserProfileViewComponent>
   ) {}
+
+  userType = UserType;
+  userDetail: any = {};
 
   ngOnInit(): void {}
 }

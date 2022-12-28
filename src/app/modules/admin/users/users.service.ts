@@ -72,6 +72,8 @@ export class UsersService {
 
   viewProfile(id: string): MatDialogRef<UserProfileViewComponent> {
     return this._matDialog.open(UserProfileViewComponent, {
+      minWidth: 600,
+      maxWidth: 800,
       autoFocus: false,
       data: {
         id: id,
