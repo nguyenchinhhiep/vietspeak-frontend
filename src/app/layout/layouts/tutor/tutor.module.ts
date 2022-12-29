@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TutorLayoutComponent } from './tutor.component';
 import { RouterModule } from '@angular/router';
 import { TutorHeaderModule } from './components/header/header.module';
-import { UserModule } from '../../components/user/user.module';
+import { UserModule } from '../../../components/user/user.module';
 
 @NgModule({
   declarations: [TutorLayoutComponent],

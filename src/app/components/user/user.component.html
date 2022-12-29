@@ -43,6 +43,10 @@
       <span>{{ "Account.Title" | translate }}</span>
     </button>
     <mat-divider></mat-divider>
+    <button type="button" mat-menu-item (click)="$event.stopPropagation()">
+      <app-switch-scheme class="block -ml-1"></app-switch-scheme>
+    </button>
+    <mat-divider></mat-divider>
     <button type="button" mat-menu-item (click)="logout()">
       <mat-icon svgIcon="mat_outline:logout" class="text-icon"></mat-icon>
       <span>{{ "Action.Logout" | translate }}</span>

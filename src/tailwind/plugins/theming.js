@@ -218,11 +218,15 @@ const theming = plugin.withOptions(
         customProps: {
           background: {
             light: {
+              "bg-default": colors.gray[100],
+              "bg-dark": colors.gray[300],
               "bg-surface": colors.white,
               "bg-hover": chroma(colors.gray[400]).alpha(0.12).css(),
             },
             dark: {
-              "bg-surface": colors.gray[600],
+              "bg-default": "#111828",
+              "bg-dark": "#323949",
+              "bg-surface": '#323949',
               "bg-hover": "rgba(255,255,255,0.2)",
             },
           },
@@ -241,7 +245,7 @@ const theming = plugin.withOptions(
             },
             dark: {
               "text-default": "#FFFFFF",
-              "text-secondary": colors.gray[400],
+              "text-secondary": colors.gray[200],
               "text-tertiary": colors.gray[500],
               "text-hint": colors.gray[600],
               "text-disabled": colors.gray[600],

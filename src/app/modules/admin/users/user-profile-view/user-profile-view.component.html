@@ -9,24 +9,32 @@
   </div>
   <!-- Header -->
   <div class="dialog__header">
-    <div class="text-2xl font-medium">{{ "User.UserProfile" | translate }}</div>
+    <div class="text-xl font-medium">{{ "User.UserProfile" | translate }}</div>
   </div>
 
   <!-- Body -->
   <div class="dialog__body">
     <ng-container *ngIf="userDetail.userType !== userType.Tutor">
       <div class="flex flex-col gap-4">
-        <div class="flex items-center gap-4 items-center mb-3">
-          <div
-            class="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center font-medium bg-accent text-white uppercase text-2xl"
-          >
-            {{ "H" }}
+        <div class="flex justify-between gap-4 items-center">
+          <div class="flex items-center gap-4 items-center">
+            <div
+              class="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center font-medium bg-accent text-white uppercase text-2xl"
+            >
+              {{ "H" }}
+            </div>
+            <div class="flex flex-col">
+              <div class="text-lg font-medium">Hiep Nguyen</div>
+              <div class="text-tertiary">Tutor</div>
+            </div>
           </div>
-          <div class="flex flex-col">
-            <div class="text-lg font-medium">Hiep Nguyen</div>
-            <div class="text-tertiary">Tutor</div>
+          <div class="flex items-center gap-2">
+            <a class="cursor-default flex" matTooltip="Send email" matTooltipPosition="left">
+              <mat-icon class="icon" [svgIcon]="'mat_outline:email'"></mat-icon>
+            </a>
           </div>
         </div>
+
         <div class="flex items-center gap-4">
           <div class="font-medium">Email:</div>
           <div class="text-tertiary">nguyenchinhhiep@gmail.com</div>
@@ -131,6 +139,14 @@
           <div class="font-medium text-lg">
             {{ "TutorProfile.Certification" | translate }}
           </div>
+          <div class="flex flex-col gap-2">
+            <a class="text-accent cursor-default"
+              >Teaching-certification-documents-1.pdf</a
+            >
+            <a class="text-accent cursor-default"
+              >Teaching-certification-documents-2.pdf</a
+            >
+          </div>
         </div>
         <div class="border-0 border-t border-solid border-light my-3"></div>
         <div class="flex flex-col gap-3">
@@ -163,15 +179,22 @@
     </ng-container>
     <ng-container *ngIf="userDetail.userType === userType.Student">
       <div class="flex flex-col gap-4 w-full">
-        <div class="flex items-center gap-4 items-center mb-3">
-          <div
-            class="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center font-medium bg-primary text-white uppercase text-2xl"
-          >
-            {{ "H" }}
+        <div class="flex justify-between gap-4 items-center">
+          <div class="flex items-center gap-4 items-center">
+            <div
+              class="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center font-medium bg-primary text-white uppercase text-2xl"
+            >
+              {{ "H" }}
+            </div>
+            <div class="flex flex-col">
+              <div class="text-lg font-medium">Hiep Nguyen</div>
+              <div class="text-tertiary">Student</div>
+            </div>
           </div>
-          <div class="flex flex-col">
-            <div class="text-lg font-medium">Hiep Nguyen</div>
-            <div class="text-tertiary">Student</div>
+          <div class="flex items-center gap-2">
+            <a class="cursor-default flex" matTooltip="Send email" matTooltipPosition="left">
+              <mat-icon class="icon" [svgIcon]="'mat_outline:email'"></mat-icon>
+            </a>
           </div>
         </div>
         <div class="flex items-center gap-4">
@@ -229,6 +252,7 @@
         type="button"
         mat-flat-button
         color="primary"
+        [autoFocus]="true"
         [matDialogClose]="undefined"
       >
         {{ "Action.Close" | translate }}

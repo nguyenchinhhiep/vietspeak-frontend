@@ -1,4 +1,4 @@
-<div class="w-full mx-auto max-w-3xl relative">
+<div class="w-full mx-auto max-w-2xl relative">
   <app-breadcrumb
     class="block font-medium text-2xl w-full mb-6"
   ></app-breadcrumb>
@@ -21,7 +21,7 @@
       class="!ml-auto bg-hover"
       (click)="viewProfile()"
     >
-      <mat-icon class="mr-2" [svgIcon]="'mat_outline:visibility'"></mat-icon>
+      <mat-icon class="mr-2 icon" [svgIcon]="'mat_outline:visibility'"></mat-icon>
       <div class="text-sm">{{ "Action.ViewProfile" | translate }}</div>
     </button>
     <button mat-icon-button [matMenuTriggerFor]="actionMenu">

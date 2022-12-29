@@ -7,6 +7,7 @@ import {MatDividerModule} from '@angular/material/divider';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
+import { SwitchSchemeModule } from '../switch-scheme/switch-scheme.module';
 
 
 
@@ -21,7 +22,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatMenuModule,
     MatTooltipModule,
     MatDividerModule,
-    MatButtonModule
+    MatButtonModule,
+    SwitchSchemeModule,
   ],
   exports: [
     UserComponent

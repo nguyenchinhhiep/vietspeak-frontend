@@ -51,6 +51,12 @@ const utils = plugin(({ addComponents }) => {
       color: "var(--divider) !important",
     },
 
+    ".bg-default": {
+      "--tw-bg-opacity": "1 !important",
+      backgroundColor:
+        "rgba(var(--bg-default-rgb), var(--tw-bg-opacity)) !important",
+    },
+
     ".bg-surface": {
       backgroundColor: "var(--bg-surface) !important",
     },
