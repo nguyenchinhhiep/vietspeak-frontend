@@ -1,7 +1,7 @@
 <div class="w-full">
   <form [formGroup]="studentProfileForm" class="flex flex-col gap-4">
     <div
-      class="w-full flex flex-col bg-surface rounded p-6 border-2 border-solid border-light"
+      class="w-full flex flex-col bg-surface rounded p-6 border border-solid border-light"
     >
       <div class="font-medium text-xl mb-3">
         {{ "StudentProfile.Basic" | translate }}
@@ -26,9 +26,9 @@
             <!-- Change image -->
             <button
               type="button"
-              mat-flat-button
+              mat-button
               [color]="'primary'"
-              class="btn--sm"
+              class="btn--sm !border-primary !border !border-solid"
               (click)="uploadProfilePictureFile.click()"
             >
               {{
@@ -42,11 +42,12 @@
               *ngIf="studentProfileForm.get('profilePictureUrl')?.value"
               type="button"
               mat-button
-              [color]="'primary'"
               class="btn--sm"
               (click)="onRemoveProfilePicture()"
             >
-              {{ "Action.Remove" | translate }}
+              <div class="text-danger">
+                {{ "Action.Remove" | translate }}
+              </div>
             </button>
           </div>
         </div>
@@ -161,7 +162,7 @@
       </mat-form-field>
     </div>
     <div
-      class="w-full flex flex-col bg-surface rounded p-6 border-2 border-solid border-light"
+      class="w-full flex flex-col bg-surface rounded p-6 border border-solid border-light"
     >
       <div class="font-medium text-xl mb-3">
         {{ "StudentProfile.Learning" | translate }}
@@ -236,7 +237,7 @@
       </mat-form-field>
     </div>
     <div
-      class="w-full flex flex-col bg-surface rounded p-6 pb-2 border-2 border-solid border-light"
+      class="w-full flex flex-col bg-surface rounded p-6 pb-2 border border-solid border-light"
     >
       <div class="font-medium text-xl mb-3">
         {{ "StudentProfile.SupplementalInfo" | translate }}

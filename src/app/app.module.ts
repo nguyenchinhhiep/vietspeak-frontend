@@ -18,6 +18,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ToastComponent } from './components/toast/toast.component';
 import { ToastModule } from './components/toast/toast.module';
 import { ConfirmationDialogModule } from './components/confirmation-dialog/confirmation-dialog.module';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
 
 @NgModule({
   declarations: [AppComponent],
@@ -44,6 +45,21 @@ import { ConfirmationDialogModule } from './components/confirmation-dialog/confi
     {
       provide: MAT_RADIO_DEFAULT_OPTIONS,
       useValue: { color: 'primary' } as MatRadioDefaultOptions,
+    },
+    {
+      provide: MAT_DATE_FORMATS,
+      useValue: {
+        parse: {
+          dateInput: 'YYYY-MM-DD',
+        },
+        display: {
+          dateInput: 'DD/MM/YYYY',
+          monthLabel: 'MMM',
+          monthYearLabel: 'MMM YYYY',
+          dateA11yLabel: 'LL',
+          monthYearA11yLabel: 'MMMM YYYY',
+        },
+      },
     },
   ],
   bootstrap: [AppComponent],

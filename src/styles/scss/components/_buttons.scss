@@ -49,23 +49,23 @@ button {
    }
  }
  
- .btn--secondary {
-   @apply bg-secondary text-on-secondary border-secondary;
+//  .btn--secondary {
+//    @apply bg-secondary text-on-secondary border-secondary;
  
-   &:not(:disabled):hover,
-   &:not(:disabled):active,
-   &:not(:disabled):focus {
-     @apply bg-secondary-600 text-on-secondary-600 border-secondary-600 ring-secondary;
-   }
- }
+//    &:not(:disabled):hover,
+//    &:not(:disabled):active,
+//    &:not(:disabled):focus {
+//      @apply bg-secondary-600 text-on-secondary-600 border-secondary-600 ring-secondary;
+//    }
+//  }
  
- .btn--outline-secondary {
-   @apply border-secondary-300 text-secondary;
+//  .btn--outline-secondary {
+//    @apply border-secondary-300 text-secondary;
  
-   &:not(:disabled):hover,
-   &:not(:disabled):active,
-   &:not(:disabled):focus {
-     @apply border-secondary ring-secondary bg-transparent;
-   }
- }
+//    &:not(:disabled):hover,
+//    &:not(:disabled):active,
+//    &:not(:disabled):focus {
+//      @apply border-secondary ring-secondary bg-transparent;
+//    }
+//  }
  

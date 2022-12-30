@@ -1,7 +1,7 @@
 <div class="w-full">
   <form [formGroup]="profileForm" class="flex flex-col gap-4">
-    <div class="bg-surface rounded p-6 pb-2 border-2 border-solid border-light">
-      <div class="font-medium text-gray-900 text-xl mb-3">
+    <div class="bg-surface rounded p-6 pb-2 border border-solid border-light">
+      <div class="font-medium text-xl mb-3">
         {{ "UserProfile.Title" | translate }}
       </div>
       <div class="mb-4">
@@ -23,9 +23,9 @@
             <!-- Change image -->
             <button
               type="button"
-              mat-flat-button
+              mat-button
               [color]="'primary'"
-              class="btn--sm"
+              class="btn--sm !border-primary !border !border-solid"
               (click)="uploadProfilePictureFile.click()"
             >
               {{
@@ -39,11 +39,12 @@
               *ngIf="profileForm.get('profilePictureUrl')?.value"
               type="button"
               mat-button
-              [color]="'primary'"
               class="btn--sm"
               (click)="onRemoveProfilePicture()"
             >
-              {{ "Action.Remove" | translate }}
+              <div class="text-danger">
+                {{ "Action.Remove" | translate }}
+              </div>
             </button>
           </div>
         </div>

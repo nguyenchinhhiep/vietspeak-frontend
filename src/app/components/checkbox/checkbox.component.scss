@@ -9,7 +9,7 @@
   }
 
   &__box {
-    @apply w-5 h-5 flex-shrink-0 rounded border-2 border-solid border-gray-400 flex justify-center items-center;
+    @apply w-5 h-5 flex-shrink-0 rounded border border-solid border-gray-400 flex justify-center items-center;
   }
 
   &__label {

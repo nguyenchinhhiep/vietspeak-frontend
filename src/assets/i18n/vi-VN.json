@@ -19,7 +19,8 @@
       "Title": "Status",
       "Active": "Active",
       "Inactive": "Inactive",
-      "Pending": "Pending"
+      "Pending": "Pending",
+      "Blocked": "Blocked"
    },
    "Action": {
       "Title": "Action",
@@ -47,7 +48,9 @@
       "ChangePassword": "Change password",
       "ViewProfile": "View profile",
       "Reset": "Reset",
-      "ResetFilters": "Reset filters"
+      "ResetFilters": "Reset filters",
+      "EditProfile": "Edit profile"
+
    },
    "Toast": {
       "CreateSuccessfully": "Create successfully",
@@ -105,14 +108,18 @@
       "Title": "Login",
       "Password": "Password",
       "ForgotPassword": "Forgot password",
-      "DontHaveAccount": "Don't have an account yet"
+      "DontHaveAccount": "Don't have an account yet",
+      "Or": "or",
+      "ContinueWithGoogle": "Continue with Google"
    },
    "Register": {
       "Title": "Register",
       "Password": "Password",
       "ConfirmPassword": "Confirm password",
       "Agreement": "By creating an account, you agree to the <a>Terms of Service</a> and <a>Privacy Policy</a>",
-      "AlreadyHaveAccount": "Already have an account"
+      "AlreadyHaveAccount": "Already have an account",
+      "Or": "or",
+      "ContinueWithGoogle": "Continue with Google"
    },
    "ForgotPassword": {
       "Title": "Forgot password",

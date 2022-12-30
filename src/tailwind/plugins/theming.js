@@ -219,21 +219,19 @@ const theming = plugin.withOptions(
           background: {
             light: {
               "bg-default": colors.gray[100],
-              "bg-dark": colors.gray[300],
               "bg-surface": colors.white,
               "bg-hover": chroma(colors.gray[400]).alpha(0.12).css(),
             },
             dark: {
-              "bg-default": "#111828",
-              "bg-dark": "#323949",
-              "bg-surface": '#323949',
-              "bg-hover": "rgba(255,255,255,0.2)",
+              "bg-default": colors.gray[900],
+              "bg-surface": chroma(colors.gray[800]).alpha(0.5).css(),
+              "bg-hover": "rgba(255,255,255,0.1)",
             },
           },
           foreground: {
             light: {
               "text-default": colors.gray[900],
-              "text-secondary": colors.gray[600],
+              "text-secondary": colors.gray[700],
               "text-tertiary": colors.gray[500],
               "text-hint": colors.gray[400],
               "text-disabled": colors.gray[400],
@@ -244,13 +242,13 @@ const theming = plugin.withOptions(
               icon: colors.gray[500],
             },
             dark: {
-              "text-default": "#FFFFFF",
+              "text-default": colors.gray[50],
               "text-secondary": colors.gray[200],
               "text-tertiary": colors.gray[500],
               "text-hint": colors.gray[600],
               "text-disabled": colors.gray[600],
-              "border-light": chroma(colors.gray[100]).alpha(0.12).css(),
-              "border-base": chroma(colors.gray[200]).alpha(0.12).css(),
+              "border-light": chroma(colors.gray[700]).alpha(0.5).css(),
+              "border-base": chroma(colors.gray[600]).css(),
               "border-dark": chroma(colors.gray[300]).alpha(0.12).css(),
               divider: chroma(colors.gray[100]).alpha(0.12).css(),
               icon: colors.gray[400],

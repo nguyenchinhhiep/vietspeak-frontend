@@ -10,7 +10,7 @@ export class UserService {
       id: '1',
       email: 'nguyenchinhhiep95@gmail.com',
       userType: UserType.Admin,
-      status: UserStatus.Active,
+      status: UserStatus.Reviewing,
       fullName: 'Hiep Nguyen',
     });
 

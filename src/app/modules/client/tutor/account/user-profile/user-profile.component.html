@@ -1,7 +1,7 @@
 <div class="w-full">
   <form [formGroup]="tutorProfileForm" class="flex flex-col gap-4">
     <div
-      class="w-full flex flex-col bg-surface rounded p-6 border-2 border-solid border-light"
+      class="w-full flex flex-col bg-surface rounded p-6 border border-solid border-light"
     >
       <div class="font-medium text-xl mb-3">
         {{ "TutorProfile.Basic" | translate }}
@@ -26,9 +26,9 @@
             <!-- Change image -->
             <button
               type="button"
-              mat-flat-button
+              mat-button
               [color]="'primary'"
-              class="btn--sm"
+              class="btn--sm !border-primary !border !border-solid"
               (click)="uploadProfilePictureFile.click()"
             >
               {{
@@ -42,11 +42,12 @@
               *ngIf="tutorProfileForm.get('profilePictureUrl')?.value"
               type="button"
               mat-button
-              [color]="'primary'"
               class="btn--sm"
               (click)="onRemoveProfilePicture()"
             >
-              {{ "Action.Remove" | translate }}
+              <div class="text-danger">
+                {{ "Action.Remove" | translate }}
+              </div>
             </button>
           </div>
         </div>
@@ -186,7 +187,7 @@
       </mat-form-field>
     </div>
     <div
-      class="w-full flex flex-col bg-surface rounded p-6 pb-2 border-2 border-solid border-light"
+      class="w-full flex flex-col bg-surface rounded p-6 pb-2 border border-solid border-light"
     >
       <div class="font-medium text-xl mb-3">
         {{ "TutorProfile.Introduction" | translate }}
@@ -239,13 +240,15 @@
       </mat-form-field>
     </div>
     <div
-      class="w-full flex flex-col bg-surface rounded p-6 pb-2 border-2 border-solid border-light"
+      class="w-full flex flex-col bg-surface rounded p-6 pb-2 border border-solid border-light"
     >
       <div class="font-medium text-xl mb-3">
         {{ "TutorProfile.Teaching" | translate }}
       </div>
       <mat-form-field appearance="fill" class="w-full" floatLabel="always">
-        <mat-label>{{ "TutorProfile.LanguageWantToTeach" | translate }}</mat-label>
+        <mat-label>{{
+          "TutorProfile.LanguageWantToTeach" | translate
+        }}</mat-label>
         <mat-select
           formControlName="teachingLanguage"
           placeholder="{{ 'Action.Select' | translate }}"
@@ -309,7 +312,9 @@
             </button>
           </mat-chip>
           <input
-            placeholder="{{ 'TutorProfile.TeachingJobDescription' | translate }}"
+            placeholder="{{
+              'TutorProfile.TeachingJobDescription' | translate
+            }}"
             [matChipInputFor]="chipTeachingJobList"
             [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
             (matChipInputTokenEnd)="add($event)"
@@ -325,13 +330,15 @@
       </mat-form-field>
     </div>
     <div
-      class="w-full flex flex-col bg-surface rounded p-6 pb-2 border-2 border-solid border-light"
+      class="w-full flex flex-col bg-surface rounded p-6 pb-2 border border-solid border-light"
     >
       <div class="font-medium text-xl mb-3">
         {{ "TutorProfile.Experience" | translate }}
       </div>
       <mat-form-field appearance="fill" class="w-full">
-        <mat-label>{{ "TutorProfile.TeachingExperience" | translate }}</mat-label>
+        <mat-label>{{
+          "TutorProfile.TeachingExperience" | translate
+        }}</mat-label>
         <mat-select
           formControlName="teachingExperience"
           placeholder="{{ 'Action.Select' | translate }}"
@@ -351,13 +358,13 @@
         >
       </mat-form-field>
       <div class="flex flex-col mb-4">
-        <div class="text-tertiary flex gap-1 items-center mb-2">
+        <div class="text-secondary flex gap-1 items-center mb-2">
           {{ "TutorProfile.LanguagesYouSpeak" | translate }}
         </div>
         <div formArrayName="languages" class="flex flex-col gap-3">
           <div
             *ngFor="let language of languagesFormArray.controls; let i = index"
-            class="flex items-center flex-wrap md:flex-nowrap gap-x-3 rounded border-2 border-light border-solid px-3 py-2 relative"
+            class="flex items-center flex-wrap md:flex-nowrap gap-x-3 rounded border border-light border-solid px-3 py-2 relative"
             [formGroupName]="i"
           >
             <div class="flex-grow">
@@ -445,7 +452,7 @@
       </div>
 
       <div class="flex flex-col mb-4">
-        <div class="text-tertiary flex gap-1 items-center mb-2">
+        <div class="text-secondary flex gap-1 items-center mb-2">
           {{ "TutorProfile.TeachingCertificates" | translate }}
           <span class="text-danger">*</span>
           <span class="text-gray-400 font-normal text-sm"
@@ -457,7 +464,7 @@
         </div>
         <div class="flex flex-col">
           <div
-            class="rounded border-2 border-solid bg-surface border-light p-4 flex flex-col gap-2 items-center justify-center relative"
+            class="rounded border border-solid bg-surface border-light p-4 flex flex-col gap-2 items-center justify-center relative"
             [ngClass]="
               isOnDropFilesContainer ? '!border-primary !bg-gray-50' : ''
             "
@@ -499,7 +506,7 @@
             *ngIf="this.tutorProfileForm.get('teachingCertificates')?.value"
           >
             <div
-              class="bg-surface rounded flex gap-4 items-center px-3 py-2 border-2 border-solid border-light"
+              class="bg-surface rounded flex gap-4 items-center px-3 py-2 border border-solid border-light"
               *ngFor="
                 let file of this.tutorProfileForm.get('teachingCertificates')
                   ?.value || [];

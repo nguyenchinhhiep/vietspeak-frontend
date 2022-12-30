@@ -2,6 +2,8 @@ import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
   CanActivate,
+  CanActivateChild,
+  CanLoad,
   Route,
   Router,
   RouterStateSnapshot,
@@ -14,7 +16,9 @@ import { UserStatus } from 'src/app/core/user/user.model';
 import { UserService } from 'src/app/core/user/user.service';
 
 @Injectable()
-export class NoOnboardingGuard implements CanActivate {
+export class NoOnboardingGuard
+  implements CanActivate, CanActivateChild, CanLoad
+{
   constructor(private _userService: UserService, private _router: Router) {}
 
   /**
@@ -30,9 +34,7 @@ export class NoOnboardingGuard implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    // Get current url
-    const currentUrl = state.url;
-    return this._check(currentUrl);
+    return this._check();
   }
 
   /**
@@ -46,9 +48,7 @@ export class NoOnboardingGuard implements CanActivate {
     | UrlTree
     | Observable<boolean | UrlTree>
     | Promise<boolean | UrlTree> {
-    // Get current url
-    const currentUrl = segments[0].path;
-    return this._check(currentUrl);
+    return this._check();
   }
 
   canActivate(
@@ -59,29 +59,18 @@ export class NoOnboardingGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-    // Get current url
-    const currentUrl = state.url;
-    return this._check(currentUrl);
+    return this._check();
   }
 
-  private _check(currentUrl: string): Observable<boolean> {
+  private _check(): Observable<boolean> {
     // Get curren user
     const currentUser = this._userService.currentUserValue;
 
     // Get current user UserType
     const currentUserType = currentUser?.userType;
 
-    // If user is admin
-    if (currentUserType === UserType.Admin) {
-      // Navigate based on current UserType
-      this._navigateBasedOnUserType(currentUserType);
-
-      // Prevent the access
-      return of(false);
-    }
-
-    // If the user is not pending
-    if (currentUser?.status !== UserStatus.Pending) {
+    // If the user is pending
+    if (currentUser?.status === UserStatus.Pending) {
       // Navigate based on current UserType
       this._navigateBasedOnUserType(currentUserType);
 
@@ -92,22 +81,25 @@ export class NoOnboardingGuard implements CanActivate {
     // Allow the access
     return of(true);
   }
-
   /**
    *
-   * @param type
+   * @param currentUserType
    */
   private _navigateBasedOnUserType(type: any): void {
+    if (type == null) {
+      this._router.navigate(['/onboarding']);
+    }
+
     if (type === UserType.Admin) {
       this._router.navigate(['/admin']);
     }
 
-    if (type === UserType.Tutor) {
-      this._router.navigate(['/tutor']);
+    if (type === UserType.Student) {
+      this._router.navigate(['/onboarding/student']);
     }
 
-    if (type === UserType.Student) {
-      this._router.navigate(['/student']);
+    if (type === UserType.Tutor) {
+      this._router.navigate(['/onboarding/tutor']);
     }
   }
 }

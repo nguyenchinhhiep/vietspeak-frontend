@@ -75,8 +75,8 @@
       min-height: 50px;
       border-radius: 4px;
       padding: 0 16px;
-      border-width: 2px;
-      @apply bg-white border-gray-200 dark:bg-black dark:bg-opacity-5 dark:border-gray-500 #{'!important'};
+      border-width: 1px;
+      @apply bg-white border-base dark:bg-surface  #{'!important'};
 
       .mat-form-field-prefix {
         > .mat-icon {
@@ -141,7 +141,7 @@
         display: inline-flex;
         align-items: center;
         justify-content: center;
-        @apply text-hint #{'!important'};
+        @apply text-tertiary #{'!important'};
 
         .mat-icon-button {
           width: 40px !important;
@@ -153,7 +153,7 @@
         .mat-icon,
         .mat-icon-button:not(.mat-button-disabled),
         .mat-select-value {
-          @apply text-secondary;
+          @apply text-tertiary;
         }
 
         /* Remove the margins from the mat-icon if it's inside a button */
@@ -308,7 +308,7 @@
             backface-visibility: hidden;
             transition: none;
             font-weight: 400;
-            @apply text-secondary #{'!important'};
+            @apply text-secondary;
           }
         }
       }
@@ -817,9 +817,9 @@ mat-stepper {
 .mat-table {
   // Header cell
   .mat-header-cell {
-    @apply border-gray-200 #{!important};
+    @apply border-light #{!important};
     @apply whitespace-nowrap text-sm font-medium;
-    @apply text-gray-700 #{'!important'};
+    @apply text-default #{'!important'};
   }
 
   th.mat-header-cell:first-of-type,
@@ -835,7 +835,7 @@ mat-stepper {
 
   // Cell
   .mat-cell {
-    @apply border-gray-200 text-gray-700 #{!important};
+    @apply border-light text-secondary #{!important};
     @apply py-2;
   }
 
@@ -850,7 +850,7 @@ mat-stepper {
 
   // Footer cell
   .mat-footer-cell {
-    @apply border-gray-200 #{!important};
+    @apply border-light #{!important};
   }
 
   th.mat-header-cell,

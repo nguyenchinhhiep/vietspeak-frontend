@@ -42,7 +42,7 @@
             <mat-icon
               class="icon-size-18"
               [ngClass]="
-                selectedAccountType === type ? 'text-primary' : 'text-tertiary '
+                selectedAccountType === type ? 'text-primary' : 'text-hint '
               "
               [svgIcon]="type.icon"
             ></mat-icon>
@@ -51,7 +51,7 @@
           <div
             class="text-sm font-medium uppercase"
             [ngClass]="
-              selectedAccountType === type ? 'text-primary' : 'text-tertiary'
+              selectedAccountType === type ? 'text-primary' : 'text-hint'
             "
           >
             {{ type.translateKey | translate }}

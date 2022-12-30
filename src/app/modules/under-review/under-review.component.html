@@ -4,9 +4,7 @@
   <div class="w-full max-w-7xl flex flex-col gap-6 items-center justify-start">
     <div class="flex justify-between items-center gap-4 w-full py-4 h-16">
       <div class="flex items-center gap-2">
-        <div class="font-semibold  text-xl cursor-pointer">
-          Vietspeak
-        </div>
+        <div class="font-semibold text-xl cursor-pointer">Vietspeak</div>
         <languages></languages>
       </div>
 
@@ -16,15 +14,11 @@
     </div>
 
     <div
-      class="w-full max-w-md sm:bg-surface p-8 py-10 sm:rounded sm:sm:border-2 border-solid border-light"
+      class="w-full max-w-md sm:bg-surface p-8 py-10 sm:rounded sm:sm:border border-solid border-light"
     >
       <div
-        class="font-medium  text-2xl text-center mb-4 flex flex-col gap-3 items-center justify-center"
+        class="font-medium text-2xl text-center mb-4 flex flex-col gap-3 items-center justify-center"
       >
-        <mat-icon
-          class="text-gray-300 icon-size-24"
-          svgIcon="mat_outline:person_search"
-        ></mat-icon>
         {{ "UnderReview.Title" | translate }}
       </div>
 
@@ -33,13 +27,13 @@
       </div>
       <div class="mt-8 flex justify-center">
         <button
-          type="submit"
+          type="button"
           class="btn--lg w-full"
           mat-flat-button
           [color]="'primary'"
-          (click)="logout()"
+          (click)="onEditProfile()"
         >
-          {{ "Action.Logout" | translate }}
+          {{ "Action.EditProfile" | translate }}
         </button>
       </div>
     </div>

@@ -95,7 +95,7 @@
   </div>
 
   <div class="flex-grow">
-    <div class="border-2 border-solid border-light rounded select-none">
+    <div class="border border-solid border-light rounded select-none">
       <div class="overflow-auto">
         <table
           mat-table
@@ -130,7 +130,7 @@
                 />
                 <div
                   *ngIf="!element?.avatarUrl"
-                  class="w-9 h-9 rounded-full overflow-hidden flex justify-center items-center font-medium bg-gray-300 text-tertiary uppercase"
+                  class="w-9 h-9 rounded-full overflow-hidden flex justify-center items-center font-medium bg-hover text-tertiary uppercase"
                 >
                   {{ element?.firstName?.charAt(0) || "H" }}
                 </div>

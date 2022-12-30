@@ -11,11 +11,12 @@ import {
   UrlTree,
 } from '@angular/router';
 import { Observable, of } from 'rxjs';
+import { UserType } from 'src/app/core/user/user-type.model';
 import { UserStatus } from 'src/app/core/user/user.model';
 import { UserService } from 'src/app/core/user/user.service';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class UnderReviewGuard
   implements CanActivate, CanActivateChild, CanLoad
@@ -58,6 +59,15 @@ export class UnderReviewGuard
 
     // Get current user stutus
     const currentStatus = currentUser?.status;
+
+    // If user is admin
+    if (currentUser?.userType === UserType.Admin) {
+      // Navigate to the root url
+      this._router.navigate(['/']);
+
+      // Prevent the access
+      return of(false);
+    }
 
     // If the user is not under review
     if (currentStatus !== UserStatus.Reviewing) {

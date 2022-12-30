@@ -16,6 +16,7 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canLoad: [NoAuthGuard],
     canActivate: [NoAuthGuard],
     canActivateChild: [NoAuthGuard],
     data: {
@@ -74,21 +75,14 @@ const routes: Routes = [
       },
       {
         path: 'admin',
-        canLoad: [NoUnderReviewGuard],
-        canActivate: [NoUnderReviewGuard],
-        canActivateChild: [NoUnderReviewGuard],
         data: {
           userTypes: [UserType.Admin],
         },
         loadChildren: () =>
           import('./modules/admin/admin.module').then((m) => m.AdminModule),
       },
-
       {
         path: '',
-        canLoad: [NoUnderReviewGuard],
-        canActivate: [NoUnderReviewGuard],
-        canActivateChild: [NoUnderReviewGuard],
         loadChildren: () =>
           import('./modules/client/client.module').then((m) => m.ClientModule),
       },

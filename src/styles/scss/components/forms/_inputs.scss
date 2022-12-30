@@ -1,5 +1,5 @@
 .form__input {
-   @apply w-full text-base px-3 py-2 border-2 border-solid border-gray-200 rounded text-gray-700 bg-white appearance-none outline-none  font-normal overflow-hidden overflow-ellipsis caret-primary;
+   @apply w-full text-base px-3 py-2 border border-solid border-gray-200 rounded text-gray-700 bg-white appearance-none outline-none  font-normal overflow-hidden overflow-ellipsis caret-primary;
    min-height: 48px;
  
    &:focus {
@@ -23,7 +23,7 @@
  
  // Input group
  .input-group {
-   @apply relative flex w-full border-2 border-solid border-gray-200 rounded overflow-hidden;
+   @apply relative flex w-full border border-solid border-gray-200 rounded overflow-hidden;
  
    > .form__input {  
      @apply flex-grow min-w-0 border-0 rounded-none;

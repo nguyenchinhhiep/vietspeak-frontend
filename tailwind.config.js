@@ -28,9 +28,6 @@ const themes = {
     accent: {
       ...colors.rose,
     },
-    secondary: {
-      ...colors.gray,
-    },
     success: {
       ...colors.green,
     },
