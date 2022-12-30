@@ -65,7 +65,7 @@
         </button>
       </div>
 
-      <div class="uppercase my-6 text-sm text-hint flex items-center gap-4">
+      <div class="uppercase my-5 text-sm text-hint flex items-center gap-4">
         <div
           class="border-0 border-t border-solid border-light flex-grow"
         ></div>
@@ -76,7 +76,6 @@
       </div>
 
       <form
-        class="mt-8"
         [formGroup]="registerForm"
         (ngSubmit)="submit()"
         #registerNgForm="ngForm"
@@ -112,10 +111,14 @@
               [svgIcon]="'mat_outline:close'"
             ></mat-icon>
           </button>
-          <div class="ml-2" matSuffix *ngIf="registerForm.get('email')?.valid">
+          <div
+            class="ml-2 flex justify-center items-center"
+            matSuffix
+            *ngIf="registerForm.get('email')?.valid"
+          >
             <mat-icon
-              class="!text-success"
-              [svgIcon]="'mat_outline:check_circle'"
+              class="icon-size-5"
+              [svgIcon]="'mat_outline:check'"
             ></mat-icon>
           </div>
           <mat-progress-spinner

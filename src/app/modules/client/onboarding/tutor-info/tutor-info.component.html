@@ -178,9 +178,7 @@
                       type="button"
                       matSuffix
                       *ngIf="lastName.value != ''"
-                      (click)="
-                        tutorBasicInfoForm.get('firstName')?.setValue('')
-                      "
+                      (click)="tutorBasicInfoForm.get('lastName')?.setValue('')"
                     >
                       <mat-icon
                         class="icon-size-5"

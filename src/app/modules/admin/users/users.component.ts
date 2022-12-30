@@ -90,11 +90,17 @@ export class UsersComponent implements OnInit {
     this._usersService.viewProfile(id);
   }
 
-  approve(id: string) {}
+  approve(id: string) {
+    this._usersService.approve(id);
+  }
 
-  reject(id: string) {}
+  reject(id: string) {
+    this._usersService.reject(id);
+  }
 
-  block(id: string) {}
+  block(id: string) {
+    this._usersService.block(id);
+  }
 
   // Get status
   getStatus(status: UserStatus) {

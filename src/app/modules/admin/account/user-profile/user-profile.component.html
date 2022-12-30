@@ -139,10 +139,14 @@
             [svgIcon]="'mat_outline:close'"
           ></mat-icon>
         </button>
-        <div class="ml-2" matSuffix *ngIf="profileForm.get('email')?.valid">
+        <div
+          class="ml-2 flex items-center justify-center"
+          matSuffix
+          *ngIf="profileForm.get('email')?.valid"
+        >
           <mat-icon
-            class="!text-success"
-            [svgIcon]="'mat_outline:check_circle'"
+            class="icon-size-5"
+            [svgIcon]="'mat_outline:check'"
           ></mat-icon>
         </div>
         <mat-progress-spinner

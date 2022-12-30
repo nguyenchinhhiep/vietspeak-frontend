@@ -11,7 +11,7 @@ export class UserProfileComponent implements OnInit {
 
   userType = UserType;
   userProfile = {
-    userType: UserType.Tutor,
+    userType: UserType.Student,
   };
 
   ngOnInit(): void {}

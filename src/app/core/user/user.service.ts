@@ -6,13 +6,7 @@ import { IUser, UserStatus } from './user.model';
 @Injectable()
 export class UserService {
   private _currentUser: BehaviorSubject<IUser | null> =
-    new BehaviorSubject<IUser | null>({
-      id: '1',
-      email: 'nguyenchinhhiep95@gmail.com',
-      userType: UserType.Admin,
-      status: UserStatus.Reviewing,
-      fullName: 'Hiep Nguyen',
-    });
+    new BehaviorSubject<IUser | null>(null);
 
   /**
    * Setter & getter for user

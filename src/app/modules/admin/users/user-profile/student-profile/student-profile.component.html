@@ -100,7 +100,7 @@
           type="button"
           matSuffix
           *ngIf="lastName.value != ''"
-          (click)="studentProfileForm.get('firstName')?.setValue('')"
+          (click)="studentProfileForm.get('lastName')?.setValue('')"
         >
           <mat-icon
             class="icon-size-5"
@@ -150,7 +150,10 @@
           matSuffix
           *ngIf="studentProfileForm.get('email')?.valid"
         >
-          <mat-icon [svgIcon]="'mat_outline:check'"></mat-icon>
+          <mat-icon
+            class="icon-size-5"
+            [svgIcon]="'mat_outline:check'"
+          ></mat-icon>
         </div>
         <mat-progress-spinner
           [diameter]="24"
