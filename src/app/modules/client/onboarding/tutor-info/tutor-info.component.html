@@ -326,7 +326,7 @@
                       <mat-chip
                         [disableRipple]="true"
                         *ngFor="
-                          let job of this.tutorExperienceForm.get('teachingJob')
+                          let job of this.tutorExperienceForm.get('teachingJobs')
                             ?.value || []
                         "
                         (removed)="remove(job)"
@@ -353,7 +353,7 @@
                     <mat-error
                       *ngIf="
                         tutorExperienceForm
-                          .get('teachingJob')
+                          .get('teachingJobs')
                           ?.hasError('required')
                       "
                       >{{ "Error.Required" | translate }}</mat-error

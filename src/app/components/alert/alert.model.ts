@@ -1,4 +1,4 @@
-export type AlertAppearance = 'border' | 'fill' | 'outline' | 'soft';
+export type AlertAppearance = 'border' | 'fill' | 'outline' | 'soft' | 'dark';
 
 export type AlertType =
   | undefined

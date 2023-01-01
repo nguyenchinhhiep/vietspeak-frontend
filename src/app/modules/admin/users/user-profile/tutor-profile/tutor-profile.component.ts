@@ -55,10 +55,10 @@ export class TutorProfileComponent implements OnInit {
 
     // Add our fruit
     if (value) {
-      const teachingJob = this.tutorProfileForm.get('teachingJob')?.value || [];
+      const teachingJobs = this.tutorProfileForm.get('teachingJobs')?.value || [];
       this.tutorProfileForm
-        .get('teachingJob')
-        ?.setValue([...teachingJob, value]);
+        .get('teachingJobs')
+        ?.setValue([...teachingJobs, value]);
     }
 
     // Clear the input value
@@ -66,13 +66,13 @@ export class TutorProfileComponent implements OnInit {
   }
 
   remove(job: string): void {
-    const teachingJob = this.tutorProfileForm.get('teachingJob')?.value || [];
-    const index = teachingJob.indexOf(job);
+    const teachingJobs = this.tutorProfileForm.get('teachingJobs')?.value || [];
+    const index = teachingJobs.indexOf(job);
 
     if (index >= 0) {
-      teachingJob.splice(index, 1);
+      teachingJobs.splice(index, 1);
 
-      this.tutorProfileForm.get('teachingJob')?.setValue(teachingJob);
+      this.tutorProfileForm.get('teachingJobs')?.setValue(teachingJobs);
     }
   }
 
@@ -85,7 +85,7 @@ export class TutorProfileComponent implements OnInit {
       email: ['', [Validators.required, CustomValidators.isEmail()]],
       dob: ['', Validators.required],
       teachingLanguage: [this.teachingLanguageOptions[0]],
-      teachingJob: ['', Validators.required],
+      teachingJobs: ['', Validators.required],
       teachingExperience: [TeachingExperience.OneToSixMonths],
       languages: this._fb.array([this.createlanguageFormGroup()]),
       haveExperienceTeachingOnline: [true],

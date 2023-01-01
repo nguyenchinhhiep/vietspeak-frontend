@@ -42,13 +42,10 @@ export const UserStatusOptions = [
 ];
 
 export interface IUser {
-  id: string;
   email: string;
   userType?: UserType;
   status: UserStatus;
-  firstName?: string;
-  lastName?: string;
-  fullName?: string;
-  avatarUrl?: string;
+  name?: string;
+  avatar?: string;
   claims?: any[];
 }

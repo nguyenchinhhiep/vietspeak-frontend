@@ -302,7 +302,7 @@
           <mat-chip
             [disableRipple]="true"
             *ngFor="
-              let job of this.tutorProfileForm.get('teachingJob')?.value || []
+              let job of this.tutorProfileForm.get('teachingJobs')?.value || []
             "
             (removed)="remove(job)"
           >
@@ -324,7 +324,7 @@
         </mat-chip-list>
         <mat-hint>{{ "Action.PressEnterToAdd" | translate }}</mat-hint>
         <mat-error
-          *ngIf="tutorProfileForm.get('teachingJob')?.hasError('required')"
+          *ngIf="tutorProfileForm.get('teachingJobs')?.hasError('required')"
           >{{ "Error.Required" | translate }}</mat-error
         >
       </mat-form-field>

@@ -26,12 +26,12 @@ export class ToastComponent extends Toast implements OnInit {
     this.payload = this.options.payload;
     if (this.payload == null) {
       this.type = 'primary';
-      this.appearance = 'fill';
+      this.appearance = 'dark';
       this.dismissable = false;
       this.showIcon = true;
     } else {
-      this.type = this.payload.type || 'primary';
-      this.appearance = this.payload.appearance || 'fill';
+      this.type = this.payload.type || 'info';
+      this.appearance = this.payload.appearance || 'dark';
       this.dismissable = !!this.payload.dismissable;
       this.showIcon =
         this.payload.showIcon == null ? true : !!this.payload.showIcon;

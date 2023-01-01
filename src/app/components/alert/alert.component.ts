@@ -55,6 +55,7 @@ export class AlertComponent implements OnInit, OnDestroy {
       'alert--appearance-fill': this.appearance === 'fill',
       'alert--appearance-outline': this.appearance === 'outline',
       'alert--appearance-soft': this.appearance === 'soft',
+      'alert--appearance-dark': this.appearance === 'dark',
       'alert--dismissed': this.dismissed,
       'alert--dismissible': this.dismissible,
       'alert--show-icon': this.showIcon,

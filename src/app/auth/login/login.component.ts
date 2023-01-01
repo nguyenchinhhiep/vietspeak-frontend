@@ -72,8 +72,8 @@ export class LoginComponent implements OnInit {
         // Reset the form
         this.loginNgForm.resetForm();
 
-        // Navigate to onboarding
-        this._router.navigate(['/onboarding']);
+        // Navigate to the root
+        this._router.navigate(['/']);
       },
       error: (e) => {
         // Re-enable the form

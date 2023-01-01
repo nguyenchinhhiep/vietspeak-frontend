@@ -6,23 +6,23 @@
 >
   <div class="flex flex-col">
     <img
-      *ngIf="currentUser?.avatarUrl"
+      *ngIf="currentUser?.avatar"
       class="w-8 h-8 rounded-full overflow-hidden"
-      [src]="currentUser?.avatarUrl"
+      [src]="currentUser?.avatar"
       alt=""
     />
     <div
-      *ngIf="!currentUser?.avatarUrl"
+      *ngIf="!currentUser?.avatar"
       class="w-8 h-8 rounded-full overflow-hidden flex justify-center items-center font-medium bg-primary text-white uppercase"
     >
-      {{ currentUser?.fullName?.charAt(0) || "H" }}
+      {{ currentUser?.name?.charAt(0) || "H" }}
     </div>
   </div>
   <div
-    *ngIf="currentUser?.fullName"
+    *ngIf="currentUser?.name"
     class="ml-2 font-medium text-sm max-w text-current"
   >
-    {{ currentUser?.fullName }}
+    {{ currentUser?.name }}
   </div>
   <div class="ml-2 flex items-center">
     <mat-icon
