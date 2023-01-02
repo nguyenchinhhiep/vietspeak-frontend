@@ -14,7 +14,6 @@ import {
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Logger } from '../../logger/logger.service';
-import { UserType } from '../../user/user-type.model';
 import { IUser } from '../../user/user.model';
 import { UserService } from '../../user/user.service';
 import { AuthService } from '../auth.service';
@@ -114,7 +113,7 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
           const currentUser: IUser | null = this._userSevice.currentUserValue;
 
           // Check if the current user userType is allowed
-          if (!routeData['userTypes'].includes(currentUser!.userType)) {
+          if (!routeData['userTypes'].includes(currentUser?.userType)) {
             log.debug('Not authorized, redirecting...');
 
             // Redirect based on userType

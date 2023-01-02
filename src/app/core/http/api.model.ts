@@ -12,7 +12,8 @@ export enum ApiEndpoint {
   ForgotPassword = 'forgot-password',
   PasswordReset = 'password-reset',
   RefreshToken = 'refresh-token',
-  checkExistingEmail = 'check-existing-email',
+  CheckExistingEmail = 'check-existing-email',
+  Profile = 'profile',
 }
 
 export interface IApiResponse<DataType = any> {

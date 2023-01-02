@@ -75,8 +75,8 @@ export class RegisterComponent implements OnInit {
       // Reset the form
       this.registerNgForm.resetForm();
 
-      // Navigate to the root
-      this._router.navigate(['/']);
+      // Navigate to the onboarding
+      this._router.navigate(['/onboarding']);
     });
   }
 

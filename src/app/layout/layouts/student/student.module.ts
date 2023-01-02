@@ -10,4 +10,4 @@ import { UserModule } from '../../../components/user/user.module';
   imports: [CommonModule, StudentHeaderModule,UserModule, RouterModule],
   exports: [StudentLayoutComponent],
 })
-export class StudentModule {}
+export class StudentLayoutModule {}

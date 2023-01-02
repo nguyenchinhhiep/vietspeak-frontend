@@ -78,17 +78,19 @@ export class AuthService {
       })
       .pipe(
         switchMap((res: IApiResponse) => {
-          // Set authenticated flag to true
-          this._isAuthenticated = true;
+          if (res.status === 'success') {
+            // Set authenticated flag to true
+            this._isAuthenticated = true;
 
-          // Store access token in the local storage
-          this.accessToken = res.data.accessToken;
+            // Store access token in the local storage
+            this.accessToken = res.data.accessToken;
 
-          // Store refresh token in the local storage
-          this.refreshToken = res.data.refreshToken;
+            // Store refresh token in the local storage
+            this.refreshToken = res.data.refreshToken;
 
-          // Store the use on the user service
-          this._userService.currentUser = res.data;
+            // Store the use on the user service
+            this._userService.currentUser = res.data;
+          }
 
           return of(res);
         })
@@ -246,7 +248,7 @@ export class AuthService {
   checkExistingEmail(email: string): Observable<boolean> {
     return this._httpService
       .request({
-        apiUrl: ApiEndpoint.checkExistingEmail,
+        apiUrl: ApiEndpoint.CheckExistingEmail,
         method: ApiMethod.Post,
         body: {
           email: email,

@@ -6,19 +6,19 @@ import { MatIconModule } from '@angular/material/icon';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { MatButtonModule } from '@angular/material/button';
-import { StudentProfileComponent } from './student-info/student-info.component';
+import { StudentProfileComponent } from './student-profile/student-profile.component';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatMomentDateModule } from '@angular/material-moment-adapter';
-import { TutorProfileComponent } from './tutor-info/tutor-info.component';
+import { TutorProfileComponent } from './tutor-profile/tutor-profile.component';
 import { LanguagesModule } from 'src/app/components/languages/languages.module';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { ToastModule } from 'src/app/components/toast/toast.module';
-import {MatChipsModule} from '@angular/material/chips';
+import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CongratulationsComponent } from './congratulations/congratulations.component';
 import { PreventAutofillModule } from 'src/app/directives/prevent-autofill/prevent-autofill.module';
@@ -97,11 +97,9 @@ const routes: Routes = [
     PreventAutofillModule,
     MatChipsModule,
     ImageCropperDialogModule,
-    
+
     RouterModule.forChild(routes),
   ],
-  providers: [
-
-  ],
+  providers: [],
 })
 export class OnboardingModule {}

@@ -12,11 +12,11 @@
         <languages></languages>
       </div>
       <div class="flex items-center gap-2">
-        <div class="text-hint hidden md:inline-block">
+        <div class="text-hint hidden sm:inline-block">
           {{ "Register.AlreadyHaveAccount" | translate }}?
         </div>
         <button
-          class="flex-shrink-0"
+          class="flex-shrink-0 btn--sm"
           mat-flat-button
           [color]="'primary'"
           routerLink="/login"
@@ -33,7 +33,7 @@
       </div>
 
       <div class="flex flex-col gap-3 mt-5">
-        <button mat-stroked-button class="w-full btn--lg relative">
+        <button mat-stroked-button class="w-full btn--lg relative bg-surface">
           <div class="flex items-center gap-4">
             <div class="absolute left-4 top-1/2 -mt-3">
               <svg
@@ -110,7 +110,6 @@
             (click)="registerForm.get('email')?.setValue('')"
           >
             <mat-icon
-              class="icon-size-5"
               [svgIcon]="'mat_outline:close'"
             ></mat-icon>
           </button>
@@ -120,7 +119,6 @@
             *ngIf="registerForm.get('email')?.valid"
           >
             <mat-icon
-              class="icon-size-5"
               [svgIcon]="'mat_outline:check'"
             ></mat-icon>
           </div>
@@ -151,12 +149,12 @@
             matSuffix
           >
             <mat-icon
-              class="icon-size-5"
+              
               *ngIf="passwordField.type === 'password'"
               [svgIcon]="'mat_outline:visibility'"
             ></mat-icon>
             <mat-icon
-              class="icon-size-5"
+              
               *ngIf="passwordField.type === 'text'"
               [svgIcon]="'mat_outline:visibility_off'"
             ></mat-icon>
@@ -193,12 +191,12 @@
             matSuffix
           >
             <mat-icon
-              class="icon-size-5"
+              
               *ngIf="confirmPasswordField.type === 'password'"
               [svgIcon]="'mat_outline:visibility'"
             ></mat-icon>
             <mat-icon
-              class="icon-size-5"
+              
               *ngIf="confirmPasswordField.type === 'text'"
               [svgIcon]="'mat_outline:visibility_off'"
             ></mat-icon>
@@ -244,7 +242,7 @@
       </form>
     </div>
   </div>
-  <div class="mt-auto text-hint text-sm text-center py-4">
+  <div class="mt-auto text-hint text-sm text-center pb-4">
     &copy; 2022 Vietspeak. All rights reserved.
   </div>
 </div>

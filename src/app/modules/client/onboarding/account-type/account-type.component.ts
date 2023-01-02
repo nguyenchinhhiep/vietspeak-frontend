@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { HttpService } from 'src/app/core/http/services/http.service';
 import { UserType } from 'src/app/core/user/user-type.model';
+import { UserService } from 'src/app/core/user/user.service';
 import { AccountTypeList } from '../onboarding.model';
 
 @Component({
@@ -17,6 +18,7 @@ export class AccountTypeComponent implements OnInit {
     private _authService: AuthService,
     private _httpService: HttpService,
     private _fb: FormBuilder,
+    private _userService: UserService
   ) {}
 
   accountTypeForm!: FormGroup;
@@ -26,17 +28,26 @@ export class AccountTypeComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    const userType = this._userService.currentUserValue?.userType;
+    if (userType != null) {
+      const selectedUserType = this.accountTypeList.find(
+        (item) => item.value === userType
+      );
+      if (selectedUserType != null) {
+        this.onSelectAccountType(selectedUserType);
+      }
+    }
   }
 
   createForm() {
     this.accountTypeForm = this._fb.group({
-      role: ['', Validators.required],
+      userType: ['', Validators.required],
     });
   }
 
   onSelectAccountType(type: any) {
     this.selectedAccountType = type;
-    this.accountTypeForm.get('role')?.setValue(type.value);
+    this.accountTypeForm.get('userType')?.setValue(type.value);
   }
 
   continue() {

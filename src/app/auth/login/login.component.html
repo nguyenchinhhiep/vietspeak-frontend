@@ -13,11 +13,11 @@
       </div>
 
       <div class="flex items-center gap-2">
-        <div class="text-hint hidden md:inline-block">
+        <div class="text-hint hidden sm:inline-block">
           {{ "Login.DontHaveAccount" | translate }}?
         </div>
         <button
-          class="flex-shrink-0"
+          class="flex-shrink-0 btn--sm"
           mat-flat-button
           [color]="'primary'"
           routerLink="/register"
@@ -33,8 +33,100 @@
         {{ "Login.Title" | translate }}
       </div>
 
-      <div class="flex flex-col gap-3 mt-5">
-        <button mat-stroked-button class="w-full btn--lg relative">
+      <form
+        class="mt-5"
+        [formGroup]="loginForm"
+        (ngSubmit)="submit()"
+        #loginNgForm="ngForm"
+      >
+        <!-- Alert message -->
+        <alert
+          *ngIf="alert.message"
+          [appearance]="'outline'"
+          [type]="'error'"
+          class="mb-4"
+          >{{ alert.message }}</alert
+        >
+
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>Email</mat-label>
+          <input matInput name="email" formControlName="email" />
+          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">{{
+            "Error.Required" | translate
+          }}</mat-error>
+          <mat-error *ngIf="loginForm.get('email')?.hasError('email')">{{
+            "Error.Email" | translate
+          }}</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="w-full">
+          <mat-label>{{ "Login.Password" | translate }}</mat-label>
+          <input
+            id="password"
+            matInput
+            type="password"
+            formControlName="password"
+            #passwordField
+          />
+          <button
+            mat-icon-button
+            type="button"
+            (click)="
+              passwordField.type === 'password'
+                ? (passwordField.type = 'text')
+                : (passwordField.type = 'password')
+            "
+            matSuffix
+          >
+            <mat-icon
+              
+              *ngIf="passwordField.type === 'password'"
+              [svgIcon]="'mat_outline:visibility'"
+            ></mat-icon>
+            <mat-icon
+              
+              *ngIf="passwordField.type === 'text'"
+              [svgIcon]="'mat_outline:visibility_off'"
+            ></mat-icon>
+          </button>
+          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
+            {{ "Error.Required" | translate }}
+          </mat-error>
+        </mat-form-field>
+        <div class="text-right">
+          <a routerLink="/forgot-password"
+            >{{ "Login.ForgotPassword" | translate }}?</a
+          >
+        </div>
+        <button
+          type="submit"
+          class="w-full !mt-6 btn--lg"
+          mat-flat-button
+          [color]="'primary'"
+          [disabled]="loginForm.disabled"
+        >
+          <span *ngIf="!loginForm.disabled">
+            {{ "Action.Continue" | translate }}
+          </span>
+          <mat-progress-spinner
+            *ngIf="loginForm.disabled"
+            [diameter]="24"
+            mode="indeterminate"
+          >
+          </mat-progress-spinner>
+        </button>
+      </form>
+      <div class="uppercase my-5 text-sm text-hint flex items-center gap-4">
+        <div
+          class="border-0 border-t border-solid border-light flex-grow"
+        ></div>
+        <div class="">{{ "Login.Or" | translate }}</div>
+        <div
+          class="border-0 border-t border-solid border-light flex-grow"
+        ></div>
+      </div>
+      <div class="flex flex-col gap-3">
+        <button mat-stroked-button class="w-full btn--lg relative bg-surface">
           <div class="flex items-center gap-4">
             <div class="absolute left-4 top-1/2 -mt-3">
               <svg
@@ -68,94 +160,9 @@
           </div>
         </button>
       </div>
-
-      <div class="uppercase my-5 text-sm text-hint flex items-center gap-4">
-        <div
-          class="border-0 border-t border-solid border-light flex-grow"
-        ></div>
-        <div class="">{{ "Login.Or" | translate }}</div>
-        <div
-          class="border-0 border-t border-solid border-light flex-grow"
-        ></div>
-      </div>
-
-      <form [formGroup]="loginForm" (ngSubmit)="submit()" #loginNgForm="ngForm">
-        <!-- Alert message -->
-        <alert *ngIf="alert.message" [type]="'error'" class="mb-4">{{
-          alert.message
-        }}</alert>
-
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-label>Email</mat-label>
-          <input matInput name="email" formControlName="email" />
-          <mat-error *ngIf="loginForm.get('email')?.hasError('required')">{{
-            "Error.Required" | translate
-          }}</mat-error>
-          <mat-error *ngIf="loginForm.get('email')?.hasError('email')">{{
-            "Error.Email" | translate
-          }}</mat-error>
-        </mat-form-field>
-
-        <mat-form-field appearance="fill" class="w-full">
-          <mat-label>{{ "Login.Password" | translate }}</mat-label>
-          <input
-            id="password"
-            matInput
-            type="password"
-            formControlName="password"
-            #passwordField
-          />
-          <button
-            mat-icon-button
-            type="button"
-            (click)="
-              passwordField.type === 'password'
-                ? (passwordField.type = 'text')
-                : (passwordField.type = 'password')
-            "
-            matSuffix
-          >
-            <mat-icon
-              class="icon-size-5"
-              *ngIf="passwordField.type === 'password'"
-              [svgIcon]="'mat_outline:visibility'"
-            ></mat-icon>
-            <mat-icon
-              class="icon-size-5"
-              *ngIf="passwordField.type === 'text'"
-              [svgIcon]="'mat_outline:visibility_off'"
-            ></mat-icon>
-          </button>
-          <mat-error *ngIf="loginForm.get('password')?.hasError('required')">
-            {{ "Error.Required" | translate }}
-          </mat-error>
-        </mat-form-field>
-        <div class="text-right">
-          <a routerLink="/forgot-password"
-            >{{ "Login.ForgotPassword" | translate }}?</a
-          >
-        </div>
-        <button
-          type="submit"
-          class="w-full !mt-6 btn--lg"
-          mat-flat-button
-          [color]="'primary'"
-          [disabled]="loginForm.disabled"
-        >
-          <span *ngIf="!loginForm.disabled">
-            {{ "Action.Continue" | translate }}
-          </span>
-          <mat-progress-spinner
-            *ngIf="loginForm.disabled"
-            [diameter]="24"
-            mode="indeterminate"
-          >
-          </mat-progress-spinner>
-        </button>
-      </form>
     </div>
   </div>
-  <div class="mt-auto text-hint text-sm text-center py-4">
+  <div class="mt-auto text-hint text-sm text-center pb-4">
     &copy; 2022 Vietspeak. All rights reserved.
   </div>
 </div>

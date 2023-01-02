@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertType } from 'src/app/components/alert/alert.model';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { IApiResponse } from 'src/app/core/http/api.model';
 import { CustomValidators } from 'src/app/core/validators/validators';
 
 @Component({
@@ -65,27 +66,32 @@ export class LoginComponent implements OnInit {
     };
 
     this._authService.login(payload).subscribe({
-      next: (res) => {
+      next: (res: IApiResponse) => {
         // Re-enable the form
         this.loginForm.enable();
 
-        // Reset the form
-        this.loginNgForm.resetForm();
+        //  If error
+        if (res.status == 'error') {
+          // Set the alert
+          this.alert = {
+            type: 'error',
+            message: this._translateService.instant(
+              'Error.InvalidEmailOrPassword'
+            ),
+          };
+        }
 
-        // Navigate to the root
-        this._router.navigate(['/']);
+        if (res.status === 'success') {
+          // Reset the form
+          this.loginNgForm.resetForm();
+
+          // Navigate to the onboarding
+          this._router.navigate(['/onboarding']);
+        }
       },
       error: (e) => {
         // Re-enable the form
         this.loginForm.enable();
-
-        // Set the alert
-        this.alert = {
-          type: 'error',
-          message: this._translateService.instant(
-            'Error.InvalidEmailOrPassword'
-          ),
-        };
       },
     });
   }

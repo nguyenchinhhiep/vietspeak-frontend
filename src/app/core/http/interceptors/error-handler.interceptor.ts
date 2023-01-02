@@ -11,6 +11,7 @@ import { catchError } from 'rxjs/operators';
 
 import { Logger } from '../../logger/logger.service';
 import { AuthService } from '../../auth/auth.service';
+import { ToastService } from 'src/app/components/toast/toast.service';
 
 const log = new Logger('ErrorHandlerInterceptor');
 
@@ -19,7 +20,10 @@ const log = new Logger('ErrorHandlerInterceptor');
  */
 @Injectable()
 export class ErrorHandlerInterceptor implements HttpInterceptor {
-  constructor(private _authService: AuthService) {}
+  constructor(
+    private _authService: AuthService,
+    private _toastService: ToastService
+  ) {}
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -44,6 +48,16 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
       // Do something with the error
       log.error('Request error', error);
     }
+
+    // Display toast
+    this._toastService.open({
+      message: error.message || 'Something went wrong!',
+      configs: {
+        payload: {
+          type: 'error',
+        },
+      },
+    });
 
     // Return an observable with a user-facing error message.
     return throwError(() => ({

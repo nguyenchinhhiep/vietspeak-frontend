@@ -4,6 +4,8 @@ import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { ApiEndpoint, ApiMethod } from 'src/app/core/http/api.model';
+import { HttpService } from 'src/app/core/http/services/http.service';
 import {
   LanguageLevel,
   LanguageLevelOptions,
@@ -12,9 +14,9 @@ import {
 import { HeardFrom, HeardFromOptions } from '../onboarding.model';
 
 @Component({
-  selector: 'app-student-info',
-  templateUrl: './student-info.component.html',
-  styleUrls: ['./student-info.component.scss'],
+  selector: 'app-onboarding-student-profile',
+  templateUrl: './student-profile.component.html',
+  styleUrls: ['./student-profile.component.scss'],
 })
 export class StudentProfileComponent implements OnInit {
   constructor(
@@ -22,7 +24,8 @@ export class StudentProfileComponent implements OnInit {
     private _authService: AuthService,
     private _fb: FormBuilder,
     private _confirmationDialogService: ConfirmationDialogService,
-    private _translateService: TranslateService
+    private _translateService: TranslateService,
+    private _httpService: HttpService
   ) {}
   StudentProfileForm!: FormGroup;
 
@@ -45,6 +48,17 @@ export class StudentProfileComponent implements OnInit {
 
     // Disable the form
     this.StudentProfileForm.disable();
+  }
+
+  getStudentProfile() {
+    this._httpService
+      .request({
+        apiUrl: ApiEndpoint.Profile,
+        method: ApiMethod.Get,
+      })
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 
   createForm() {

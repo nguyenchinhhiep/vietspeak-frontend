@@ -54,6 +54,7 @@ const routes: Routes = [
   {
     path: '',
     component: LayoutComponent,
+    canLoad: [AuthGuard],
     canActivate: [AuthGuard],
     canActivateChild: [AuthGuard],
     data: {

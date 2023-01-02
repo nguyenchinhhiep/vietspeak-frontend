@@ -82,6 +82,7 @@ export class OnboardingGuard implements CanActivate {
 
     // If the user is not pending
     if (
+      currentUser?.status &&
       currentUser?.status !== UserStatus.Pending &&
       currentUser?.status !== UserStatus.Reviewing
     ) {

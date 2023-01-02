@@ -18,11 +18,13 @@ import {
 import { HeardFrom, HeardFromOptions } from '../onboarding.model';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
+import { HttpService } from 'src/app/core/http/services/http.service';
+import { ApiEndpoint, ApiMethod } from 'src/app/core/http/api.model';
 
 @Component({
-  selector: 'app-tutor-info',
-  templateUrl: './tutor-info.component.html',
-  styleUrls: ['./tutor-info.component.scss'],
+  selector: 'app-onboarding-tutor-profile',
+  templateUrl: './tutor-profile.component.html',
+  styleUrls: ['./tutor-profile.component.scss'],
 })
 export class TutorProfileComponent implements OnInit {
   constructor(
@@ -31,7 +33,8 @@ export class TutorProfileComponent implements OnInit {
     private _fb: FormBuilder,
     private _toastService: ToastService,
     private _translateService: TranslateService,
-    private _imageCropperDialogService: ImageCropperDialogService
+    private _imageCropperDialogService: ImageCropperDialogService,
+    private _httpService: HttpService
   ) {}
 
   teachingLanguageOptions = TeachingLanguageOptions;
@@ -83,6 +86,17 @@ export class TutorProfileComponent implements OnInit {
 
       this.tutorExperienceForm.get('teachingJobs')?.setValue(teachingJobs);
     }
+  }
+
+  getTutorProfile() {
+    this._httpService
+      .request({
+        apiUrl: ApiEndpoint.Profile,
+        method: ApiMethod.Get,
+      })
+      .subscribe((res) => {
+        console.log(res);
+      });
   }
 
   submitTutorBasicInfoForm() {

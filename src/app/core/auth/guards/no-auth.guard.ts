@@ -24,7 +24,6 @@ const log = new Logger('NoAuthGuard');
 export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad {
   constructor(
     private _authService: AuthService,
-    private _router: Router,
     private _userService: UserService
   ) {}
 

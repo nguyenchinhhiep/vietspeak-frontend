@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { AdminLayoutModule } from '../admin/admin.module';
 import { BlankLayoutModule } from '../blank/blank.module';
 import { TutorLayoutModule } from '../tutor/tutor.module';
-import { StudentModule } from '../student/student.module';
+import { StudentLayoutModule } from '../student/student.module';
 
 import { AuthenticatedLayoutComponent } from './authenticated.component';
 
@@ -14,7 +14,7 @@ import { AuthenticatedLayoutComponent } from './authenticated.component';
     AdminLayoutModule,
     BlankLayoutModule,
     TutorLayoutModule,
-    StudentModule,
+    StudentLayoutModule,
   ],
   exports: [AuthenticatedLayoutComponent],
 })
