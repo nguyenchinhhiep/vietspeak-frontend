@@ -1,5 +1,4 @@
 import { NgModule, Optional, SkipSelf } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { EnsureModuleLoadedOnce } from './ensure-module-loaded-once';
 import { HttpModule } from './http/http.module';
 import { AuthModule } from './auth/auth.module';
@@ -16,7 +15,6 @@ import { IconsModule } from './icons/icons.module';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
     HttpModule,
     AuthModule,
     TranslationModule,

@@ -30,7 +30,7 @@
       <div class="font-medium  text-2xl text-center">
         {{ "StudentProfile.StudentProfile" | translate }}
       </div>
-      <form class="mt-8" [formGroup]="StudentProfileForm" (ngSubmit)="submit()">
+      <form class="mt-8" [formGroup]="studentProfileForm" (ngSubmit)="submit()">
         <mat-form-field appearance="fill" class="w-full">
           <mat-label>{{
             "StudentProfile.LanguageWantToLearn" | translate
@@ -45,17 +45,17 @@
                   <img
                     class="w-full object-cover"
                     [src]="
-                      this.StudentProfileForm.get('learningLanguage')?.value.imgUrl
+                      this.studentProfileForm.get('learningLanguage')?.value.imgUrl
                     "
                     [attr.alt]="
-                      this.StudentProfileForm.get('learningLanguage')?.value.label
+                      this.studentProfileForm.get('learningLanguage')?.value.label
                     "
                   />
                 </div>
 
                 <div>
                   {{
-                    this.StudentProfileForm.get("learningLanguage")?.value.label
+                    this.studentProfileForm.get("learningLanguage")?.value.label
                   }}
                 </div>
               </div>
@@ -79,7 +79,7 @@
           </mat-select>
           <mat-error
             *ngIf="
-              StudentProfileForm.get('learningLanguage')?.hasError('required')
+              studentProfileForm.get('learningLanguage')?.hasError('required')
             "
             >{{ "Error.Required" | translate }}</mat-error
           >
@@ -98,7 +98,7 @@
             </mat-option>
           </mat-select>
           <mat-error
-            *ngIf="StudentProfileForm.get('occupation')?.hasError('required')"
+            *ngIf="studentProfileForm.get('occupation')?.hasError('required')"
             >{{ "Error.Required" | translate }}</mat-error
           >
         </mat-form-field>
@@ -114,8 +114,8 @@
             mat-icon-button
             type="button"
             matSuffix
-            *ngIf="firstName.value != '' && !StudentProfileForm.disabled"
-            (click)="StudentProfileForm.get('firstName')?.setValue('')"
+            *ngIf="firstName.value != '' && !studentProfileForm.disabled"
+            (click)="studentProfileForm.get('firstName')?.setValue('')"
           >
             <mat-icon
               
@@ -123,7 +123,7 @@
             ></mat-icon>
           </button>
           <mat-error
-            *ngIf="StudentProfileForm.get('firstName')?.hasError('required')"
+            *ngIf="studentProfileForm.get('firstName')?.hasError('required')"
             >{{ "Error.Required" | translate }}</mat-error
           >
         </mat-form-field>
@@ -139,8 +139,8 @@
             mat-icon-button
             type="button"
             matSuffix
-            *ngIf="lastName.value != '' && !StudentProfileForm.disabled"
-            (click)="StudentProfileForm.get('lastName')?.setValue('')"
+            *ngIf="lastName.value != '' && !studentProfileForm.disabled"
+            (click)="studentProfileForm.get('lastName')?.setValue('')"
           >
             <mat-icon
               
@@ -148,7 +148,7 @@
             ></mat-icon>
           </button>
           <mat-error
-            *ngIf="StudentProfileForm.get('lastName')?.hasError('required')"
+            *ngIf="studentProfileForm.get('lastName')?.hasError('required')"
             >{{ "Error.Required" | translate }}</mat-error
           >
         </mat-form-field>
@@ -173,14 +173,14 @@
             class="btn--lg w-full"
             mat-flat-button
             [color]="'primary'"
-            [disabled]="StudentProfileForm.disabled"
+            [disabled]="studentProfileForm.disabled"
           >
-            <span *ngIf="!StudentProfileForm.disabled">
+            <span *ngIf="!studentProfileForm.disabled">
               {{ "Action.Continue" | translate }}
             </span>
 
             <mat-progress-spinner
-              *ngIf="StudentProfileForm.disabled"
+              *ngIf="studentProfileForm.disabled"
               [diameter]="24"
               mode="indeterminate"
             >

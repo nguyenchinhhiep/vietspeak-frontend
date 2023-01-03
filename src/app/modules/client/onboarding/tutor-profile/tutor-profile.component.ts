@@ -213,7 +213,7 @@ export class TutorProfileComponent implements OnInit {
 
   // Handle certificate files
   handleCertificatesUpload(uploadFiles: any[]) {
-    const maxSize = 33554432;
+    const maxSize = 32 * 1024 * 1024;
     const files =
       this.tutorExperienceForm.get('teachingCertificates')?.value || [];
     if (uploadFiles.length > 0) {
