@@ -42,9 +42,9 @@ export const UserStatusOptions = [
 ];
 
 export interface IUser {
-  email: string;
+  email?: string;
   userType?: UserType;
-  status: UserStatus;
+  status?: UserStatus;
   name?: string;
   avatar?: string;
   claims?: any[];

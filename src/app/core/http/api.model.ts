@@ -14,8 +14,8 @@ export enum ApiEndpoint {
   RefreshToken = 'refresh-token',
   CheckExistingEmail = 'check-existing-email',
   Profile = 'profile',
-  UploadAvatar = 'upload-avatar',
-  UploadCertificates = 'upload-certificates',
+  Avatar = 'avatar',
+  UploadCertificates = 'certificates',
 }
 
 export interface IApiResponse<DataType = any> {

@@ -49,11 +49,11 @@ export class ErrorHandlerInterceptor implements HttpInterceptor {
       log.error('Request error', error);
     }
 
-    console.log(error)
+    console.log(error);
 
     // Display toast
     this._toastService.open({
-      message: error.message || 'Something went wrong!',
+      message: error.error.message || error.message || 'Something went wrong!',
       configs: {
         payload: {
           type: 'error',

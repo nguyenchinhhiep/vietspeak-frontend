@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { ApiEndpoint } from '../http/api.model';
@@ -41,7 +41,7 @@ export class UserService {
 
     formData.append('avatar', avatar);
 
-    return this._httpClient.post(ApiEndpoint.UploadAvatar, formData);
+    return this._httpClient.post(ApiEndpoint.Avatar, formData);
   }
 
   /**

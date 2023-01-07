@@ -10,13 +10,13 @@
       <div class="mb-4">
         <div class="flex gap-5 items-center">
           <img
-            *ngIf="studentProfileForm.get('profilePictureUrl')?.value"
+            *ngIf="studentProfileForm.get('avatar')?.value"
             class="w-20 h-20 rounded-full overflow-hidden"
-            [src]="studentProfileForm.get('profilePictureUrl')?.value"
+            [src]="studentProfileForm.get('avatar')?.value"
             alt=""
           />
           <div
-            *ngIf="!studentProfileForm.get('profilePictureUrl')?.value"
+            *ngIf="!studentProfileForm.get('avatar')?.value"
             class="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center font-medium bg-primary text-white uppercase text-2xl"
           >
             {{ studentProfileForm.get("firstName")?.value?.charAt(0) || "H" }}
@@ -32,14 +32,14 @@
               (click)="uploadProfilePictureFile.click()"
             >
               {{
-                studentProfileForm.get("profilePictureUrl")?.value
+                studentProfileForm.get("avatar")?.value
                   ? ("FileUpload.Change" | translate)
                   : ("FileUpload.AddAPhoto" | translate)
               }}
             </button>
             <!-- Remove image -->
             <button
-              *ngIf="studentProfileForm.get('profilePictureUrl')?.value"
+              *ngIf="studentProfileForm.get('avatar')?.value"
               type="button"
               mat-button
               class="btn--sm"

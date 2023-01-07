@@ -7,16 +7,16 @@
       <div class="mb-4">
         <div class="flex gap-5 items-center">
           <img
-            *ngIf="profileForm.get('profilePictureUrl')?.value"
+            *ngIf="profileForm.get('avatar')?.value"
             class="w-20 h-20 rounded-full overflow-hidden"
-            [src]="profileForm.get('profilePictureUrl')?.value"
+            [src]="profileForm.get('avatar')?.value"
             alt=""
           />
           <div
-            *ngIf="!profileForm.get('profilePictureUrl')?.value"
+            *ngIf="!profileForm.get('avatar')?.value"
             class="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center font-medium bg-primary text-white uppercase text-2xl"
           >
-            {{ profileForm.get("firstName")?.value?.charAt(0) || "H" }}
+            {{ userService.currentUserValue?.name?.charAt(0) || "" }}
           </div>
 
           <div class="flex gap-2 justify-center">
@@ -29,14 +29,14 @@
               (click)="uploadProfilePictureFile.click()"
             >
               {{
-                profileForm.get("profilePictureUrl")?.value
+                profileForm.get("avatar")?.value
                   ? ("FileUpload.Change" | translate)
                   : ("FileUpload.AddAPhoto" | translate)
               }}
             </button>
             <!-- Remove image -->
             <button
-              *ngIf="profileForm.get('profilePictureUrl')?.value"
+              *ngIf="profileForm.get('avatar')?.value"
               type="button"
               mat-button
               class="btn--sm"
@@ -75,10 +75,7 @@
           *ngIf="firstName.value != '' && !profileForm.disabled"
           (click)="profileForm.get('firstName')?.setValue('')"
         >
-          <mat-icon
-            
-            [svgIcon]="'mat_outline:close'"
-          ></mat-icon>
+          <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
         </button>
         <mat-error *ngIf="profileForm.get('firstName')?.hasError('required')">{{
           "Error.Required" | translate
@@ -99,10 +96,7 @@
           *ngIf="lastName.value != '' && !profileForm.disabled"
           (click)="profileForm.get('lastName')?.setValue('')"
         >
-          <mat-icon
-            
-            [svgIcon]="'mat_outline:close'"
-          ></mat-icon>
+          <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
         </button>
         <mat-error *ngIf="profileForm.get('lastName')?.hasError('required')">{{
           "Error.Required" | translate
@@ -134,20 +128,14 @@
           "
           (click)="profileForm.get('email')?.setValue('')"
         >
-          <mat-icon
-            
-            [svgIcon]="'mat_outline:close'"
-          ></mat-icon>
+          <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
         </button>
         <div
           class="ml-2 flex items-center justify-center"
           matSuffix
           *ngIf="profileForm.get('email')?.valid"
         >
-          <mat-icon
-            
-            [svgIcon]="'mat_outline:check'"
-          ></mat-icon>
+          <mat-icon [svgIcon]="'mat_outline:check'"></mat-icon>
         </div>
         <mat-progress-spinner
           [diameter]="24"

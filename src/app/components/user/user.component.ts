@@ -14,13 +14,11 @@ export class UserComponent implements OnInit {
   constructor(
     private _router: Router,
     private _authService: AuthService,
-    private _userService: UserService
+    public userService: UserService
   ) {}
 
-  currentUser: IUser | null = null;
 
   ngOnInit(): void {
-    this.currentUser = this._userService.currentUserValue;
   }
 
   logout() {
@@ -28,7 +26,7 @@ export class UserComponent implements OnInit {
   }
 
   onAccount() {
-    const userType = this.currentUser?.userType;
+    const userType = this.userService.currentUserValue?.userType;
     if (userType === UserType.Admin) {
       this._router.navigate(['/admin/account']);
     }

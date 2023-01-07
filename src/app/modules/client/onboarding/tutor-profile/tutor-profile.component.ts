@@ -360,10 +360,10 @@ export class TutorProfileComponent implements OnInit {
   // Open crop image dialog
   openImageCropper(imageFile: File) {
     const dialogRef = this._imageCropperDialogService.open(imageFile, {
-      cropperMaxWidth: 200,
-      cropperMaxHeight: 200,
-      cropperMinWidth: 150,
-      cropperMinHeight: 150,
+      cropperMaxWidth: 300,
+      cropperMaxHeight: 300,
+      cropperMinWidth: 200,
+      cropperMinHeight: 200,
     });
 
     dialogRef?.afterClosed().subscribe((croppedImage) => {

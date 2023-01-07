@@ -1,9 +1,25 @@
 import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable, of } from 'rxjs';
+import { delay, switchMap, map } from 'rxjs/operators';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { ImageCropperDialogService } from 'src/app/components/image-cropper/image-cropper.service';
 import { ToastService } from 'src/app/components/toast/toast.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
+import {
+  ApiEndpoint,
+  ApiMethod,
+  IApiResponse,
+} from 'src/app/core/http/api.model';
+import { HttpService } from 'src/app/core/http/services/http.service';
+import { UserService } from 'src/app/core/user/user.service';
 import { CustomValidators } from 'src/app/core/validators/validators';
 
 @Component({
@@ -17,7 +33,10 @@ export class UserProfileComponent implements OnInit {
     private _fb: FormBuilder,
     private _toastService: ToastService,
     private _translateService: TranslateService,
-    private _confirmationDialogService: ConfirmationDialogService
+    private _confirmationDialogService: ConfirmationDialogService,
+    public userService: UserService,
+    private _authService: AuthService,
+    private _httpService: HttpService
   ) {}
 
   profileForm!: FormGroup;
@@ -28,11 +47,14 @@ export class UserProfileComponent implements OnInit {
 
   createForm() {
     this.profileForm = this._fb.group({
-      profilePicture: [],
-      profilePictureUrl: [],
+      avatar: [],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required, CustomValidators.isEmail()]],
+      email: [
+        '',
+        [Validators.required, CustomValidators.isEmail()],
+        this._validateExistingEmail(this._authService, this.userService),
+      ],
     });
   }
 
@@ -109,10 +131,10 @@ export class UserProfileComponent implements OnInit {
   // Open crop image dialog
   openImageCropper(imageFile: File) {
     const dialogRef = this._imageCropperDialogService.open(imageFile, {
-      cropperMaxWidth: 200,
-      cropperMaxHeight: 200,
-      cropperMinWidth: 150,
-      cropperMinHeight: 150,
+      cropperMaxWidth: 300,
+      cropperMaxHeight: 300,
+      cropperMinWidth: 200,
+      cropperMinHeight: 200,
     });
 
     dialogRef?.afterClosed().subscribe((croppedImage) => {
@@ -133,9 +155,57 @@ export class UserProfileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res === 'confirmed') {
-        this.profileForm.get('profilePictureUrl')?.setValue(null);
-        this.profileForm.get('profilePicture')?.setValue(null);
+        this._httpService
+          .request({
+            apiUrl: ApiEndpoint.Avatar,
+            method: ApiMethod.Delete,
+          })
+          .subscribe((res: IApiResponse) => {
+            this._toastService.open({
+              message: this._translateService.instant(
+                'Toast.UpdateSuccessfully'
+              ),
+              configs: {
+                payload: {
+                  type: 'success',
+                },
+              },
+            });
+            this.profileForm.get('avatar')?.setValue(null);
+          });
       }
     });
+  }
+
+  // Validate existing email
+  private _validateExistingEmail(
+    authService: AuthService,
+    userService: UserService
+  ) {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (control.hasError('required') || control.hasError('isEmail')) {
+        return of(null);
+      }
+
+      if (userService.currentUserValue?.email == control.value) {
+        return of(null);
+      }
+      return of(control.value).pipe(
+        delay(500),
+        switchMap((email) => {
+          return authService.checkExistingEmail(email).pipe(
+            map((isExisting: boolean) => {
+              if (!isExisting) {
+                return null;
+              }
+
+              return {
+                existingEmail: true,
+              };
+            })
+          );
+        })
+      );
+    };
   }
 }

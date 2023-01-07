@@ -244,9 +244,9 @@ const theming = plugin.withOptions(
             dark: {
               "text-default": colors.gray[50],
               "text-secondary": colors.gray[200],
-              "text-tertiary": colors.gray[500],
-              "text-hint": colors.gray[600],
-              "text-disabled": colors.gray[600],
+              "text-tertiary": colors.gray[400],
+              "text-hint": colors.gray[500],
+              "text-disabled": colors.gray[500],
               "border-light": chroma(colors.gray[700]).alpha(0.5).css(),
               "border-base": chroma(colors.gray[600]).css(),
               "border-dark": chroma(colors.gray[300]).alpha(0.12).css(),

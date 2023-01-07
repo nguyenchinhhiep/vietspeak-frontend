@@ -1,11 +1,22 @@
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { Component, OnInit } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import {
+  AbstractControl,
+  FormArray,
+  FormBuilder,
+  FormGroup,
+  ValidationErrors,
+  Validators,
+} from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable, of } from 'rxjs';
+import { delay, map, switchMap } from 'rxjs/operators';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { ImageCropperDialogService } from 'src/app/components/image-cropper/image-cropper.service';
 import { ToastService } from 'src/app/components/toast/toast.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
+import { UserService } from 'src/app/core/user/user.service';
 import { CustomValidators } from 'src/app/core/validators/validators';
 import {
   TeachingLanguageOptions,
@@ -28,7 +39,9 @@ export class UserProfileComponent implements OnInit {
     private _fb: FormBuilder,
     private _toastService: ToastService,
     private _translateService: TranslateService,
-    private _confirmationDialogService: ConfirmationDialogService
+    private _confirmationDialogService: ConfirmationDialogService,
+    public userService: UserService,
+    private _authService: AuthService
   ) {}
 
   teachingLanguageOptions = TeachingLanguageOptions;
@@ -53,7 +66,8 @@ export class UserProfileComponent implements OnInit {
 
     // Add our fruit
     if (value) {
-      const teachingJobs = this.tutorProfileForm.get('teachingJobs')?.value || [];
+      const teachingJobs =
+        this.tutorProfileForm.get('teachingJobs')?.value || [];
       this.tutorProfileForm
         .get('teachingJobs')
         ?.setValue([...teachingJobs, value]);
@@ -76,11 +90,14 @@ export class UserProfileComponent implements OnInit {
 
   createForm() {
     this.tutorProfileForm = this._fb.group({
-      profilePicture: [],
-      profilePictureUrl: [],
+      avatar: [],
       firstName: ['', Validators.required],
       lastName: ['', Validators.required],
-      email: ['', [Validators.required, CustomValidators.isEmail()]],
+      email: [
+        '',
+        [Validators.required, CustomValidators.isEmail()],
+        this._validateExistingEmail(this._authService, this.userService),
+      ],
       dob: ['', Validators.required],
       teachingLanguage: [this.teachingLanguageOptions[0]],
       teachingJobs: ['', Validators.required],
@@ -251,7 +268,7 @@ export class UserProfileComponent implements OnInit {
 
   // Upload profile picture
   onProfilePictureFileSelected(event: any, profilePictureInput: any) {
-    const maxSize = 2097152;
+    const maxSize = 1024 * 1024 * 1;
     const file = event.target.files[0];
     if (file) {
       if (!file.type.includes('image')) {
@@ -272,11 +289,11 @@ export class UserProfileComponent implements OnInit {
         return;
       }
 
-      // Limit file size to 2mb
+      // Limit file size to 1mb
       if (file.size > maxSize) {
         this._toastService.open({
           message: this._translateService.instant('FileUpload.FileTooLarge', {
-            maxUploadSize: '2mb',
+            maxUploadSize: '1mb',
           }),
           configs: {
             payload: {
@@ -296,10 +313,10 @@ export class UserProfileComponent implements OnInit {
   // Open crop image dialog
   openImageCropper(imageFile: File) {
     const dialogRef = this._imageCropperDialogService.open(imageFile, {
-      cropperMaxWidth: 200,
-      cropperMaxHeight: 200,
-      cropperMinWidth: 150,
-      cropperMinHeight: 150,
+      cropperMaxWidth: 300,
+      cropperMaxHeight: 300,
+      cropperMinWidth: 200,
+      cropperMinHeight: 200,
     });
 
     dialogRef?.afterClosed().subscribe((croppedImage) => {
@@ -320,9 +337,40 @@ export class UserProfileComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe((res) => {
       if (res === 'confirmed') {
-        this.tutorProfileForm.get('profilePictureUrl')?.setValue(null);
-        this.tutorProfileForm.get('profilePicture')?.setValue(null);
+        this.tutorProfileForm.get('avatar')?.setValue(null);
       }
     });
+  }
+
+  // Validate existing email
+  private _validateExistingEmail(
+    authService: AuthService,
+    userService: UserService
+  ) {
+    return (control: AbstractControl): Observable<ValidationErrors | null> => {
+      if (control.hasError('required') || control.hasError('isEmail')) {
+        return of(null);
+      }
+
+      if (userService.currentUserValue?.email == control.value) {
+        return of(null);
+      }
+      return of(control.value).pipe(
+        delay(500),
+        switchMap((email) => {
+          return authService.checkExistingEmail(email).pipe(
+            map((isExisting: boolean) => {
+              if (!isExisting) {
+                return null;
+              }
+
+              return {
+                existingEmail: true,
+              };
+            })
+          );
+        })
+      );
+    };
   }
 }

@@ -54,7 +54,8 @@
    "Toast": {
       "CreateSuccessfully": "Create successfully",
       "UpdateSuccessfully": "Update successfully",
-      "DeleteSuccessfully": "Delete successfully"
+      "DeleteSuccessfully": "Delete successfully",
+      "RemoveSuccessfully": "Remove successfully"
    },
    "Confirmation": {
       "Title": "Confirmation",

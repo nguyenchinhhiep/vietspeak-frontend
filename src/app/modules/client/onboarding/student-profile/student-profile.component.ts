@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { finalize } from 'rxjs';
+import { catchError, finalize, throwError } from 'rxjs';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { ToastService } from 'src/app/components/toast/toast.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
@@ -74,6 +74,7 @@ export class StudentProfileComponent implements OnInit {
         body: payload,
       })
       .pipe(
+        catchError((err) => throwError(() => err)),
         finalize(() => {
           // Re-enable the form
           this.studentProfileForm.enable();
