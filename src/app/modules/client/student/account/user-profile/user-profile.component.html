@@ -1,5 +1,5 @@
 <div class="w-full">
-  <form [formGroup]="studentProfileForm" class="flex flex-col gap-4">
+  <form [formGroup]="studentProfileForm" (ngSubmit)="submit()" class="flex flex-col gap-4">
     <div
       class="w-full flex flex-col bg-surface rounded p-6 pb-2 border border-solid border-light"
     >

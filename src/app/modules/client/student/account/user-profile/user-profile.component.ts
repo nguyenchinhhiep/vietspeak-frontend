@@ -81,7 +81,11 @@ export class UserProfileComponent implements OnInit {
     }
 
     // Return if the form is invalid
-    if (this.studentProfileForm.invalid) return;
+    if (
+      this.studentProfileForm.invalid ||
+      this.studentProfileForm.status === 'PENDING'
+    )
+      return;
 
     // Disable the form
     this.studentProfileForm.disable();
@@ -119,6 +123,16 @@ export class UserProfileComponent implements OnInit {
               },
             },
           });
+
+          this.userService.currentUser = {
+            ...this.userService.currentUserValue,
+            email: this.studentProfileForm.value.email,
+            avatar: this.studentProfileForm.value?.avatar,
+            name:
+              this.studentProfileForm.value?.firstName +
+              ' ' +
+              this.studentProfileForm.value?.lastName,
+          };
         }
       });
   }
