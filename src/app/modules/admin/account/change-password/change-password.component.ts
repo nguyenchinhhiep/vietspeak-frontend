@@ -1,7 +1,14 @@
-import { Component, OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
+import { throwError } from 'rxjs';
+import { catchError, finalize } from 'rxjs/operators';
 import { ToastService } from 'src/app/components/toast/toast.service';
+import {
+  ApiEndpoint,
+  ApiMethod,
+  IApiResponse,
+} from 'src/app/core/http/api.model';
 import { HttpService } from 'src/app/core/http/services/http.service';
 import { CustomValidators } from 'src/app/core/validators/validators';
 
@@ -19,6 +26,8 @@ export class ChangePasswordComponent implements OnInit {
   ) {}
 
   changePasswordForm!: FormGroup;
+
+  @ViewChild('changePasswordNgForm') changePasswordNgForm!: NgForm;
 
   ngOnInit(): void {
     this.createForm();
@@ -51,18 +60,38 @@ export class ChangePasswordComponent implements OnInit {
     }
 
     const payload = {
-      ...this.changePasswordForm.value,
+      currentPassword: this.changePasswordForm.get('currentPassword')?.value,
+      newPassword: this.changePasswordForm.get('newPassword')?.value,
     };
 
     this.changePasswordForm.disable();
 
-    this._toastService.open({
-      message: this._translateService.instant('Toast.UpdateSuccessfully'),
-      configs: {
-        payload: {
-          type: 'success',
-        },
-      },
-    });
+    this._httpService
+      .request({
+        apiUrl: ApiEndpoint.ChangePassword,
+        method: ApiMethod.Post,
+        body: payload,
+      })
+      .pipe(
+        catchError((err) => throwError(() => err)),
+        finalize(() => {
+          // Re-enable the form
+          this.changePasswordForm.enable();
+        })
+      )
+      .subscribe((res: IApiResponse) => {
+        // Display toast
+        this._toastService.open({
+          message: this._translateService.instant('Toast.UpdatedSuccessfully'),
+          configs: {
+            payload: {
+              type: 'success',
+            },
+          },
+        });
+
+        // Reset the form
+        this.changePasswordNgForm.resetForm();
+      });
   }
 }

@@ -91,7 +91,6 @@ export class UserProfileComponent implements OnInit {
     this.studentProfileForm.disable();
 
     const payload = {
-      userType: UserType.Student,
       studentProfile: {
         ...this.studentProfileForm.value,
         learningLanguage:
@@ -116,7 +115,9 @@ export class UserProfileComponent implements OnInit {
         if (res.status === 'success') {
           // Display toast
           this._toastService.open({
-            message: this._translateService.instant('Toast.UpdateSuccessfully'),
+            message: this._translateService.instant(
+              'Toast.UpdatedSuccessfully'
+            ),
             configs: {
               payload: {
                 type: 'success',
@@ -124,6 +125,7 @@ export class UserProfileComponent implements OnInit {
             },
           });
 
+          // Update current user
           this.userService.currentUser = {
             ...this.userService.currentUserValue,
             email: this.studentProfileForm.value.email,
@@ -133,6 +135,9 @@ export class UserProfileComponent implements OnInit {
               ' ' +
               this.studentProfileForm.value?.lastName,
           };
+
+          // Update user email
+          this._authService.email = this.studentProfileForm.value.email;
         }
       });
   }
@@ -214,7 +219,7 @@ export class UserProfileComponent implements OnInit {
           .subscribe((res: IApiResponse) => {
             this._toastService.open({
               message: this._translateService.instant(
-                'Toast.RemoveSuccessfully'
+                'Toast.RemovedSuccessfully'
               ),
               configs: {
                 payload: {
@@ -248,7 +253,7 @@ export class UserProfileComponent implements OnInit {
           .subscribe((res: IApiResponse) => {
             this._toastService.open({
               message: this._translateService.instant(
-                'Toast.UpdateSuccessfully'
+                'Toast.UpdatedSuccessfully'
               ),
               configs: {
                 payload: {

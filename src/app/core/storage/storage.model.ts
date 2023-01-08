@@ -9,6 +9,7 @@ export enum StorageKey {
   AccessToken = 'accessToken',
   RefreshToken = 'refreshToken',
   User = 'user',
+  Email = 'email',
   CachePersistence = 'httpCache',
 }
 

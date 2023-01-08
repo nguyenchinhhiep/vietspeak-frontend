@@ -143,7 +143,7 @@ export class TutorProfileComponent implements OnInit {
     this.tutorProfileForm.disable();
 
     this._toastService.open({
-      message: this._translateService.instant('Toast.UpdateSuccessfully'),
+      message: this._translateService.instant('Toast.UpdatedSuccessfully'),
       configs: {
         payload: {
           type: 'success',
@@ -359,7 +359,7 @@ export class TutorProfileComponent implements OnInit {
           .subscribe((res: IApiResponse) => {
             this._toastService.open({
               message: this._translateService.instant(
-                'Toast.UpdateSuccessfully'
+                'Toast.UpdatedSuccessfully'
               ),
               configs: {
                 payload: {

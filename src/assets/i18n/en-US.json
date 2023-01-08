@@ -52,10 +52,10 @@
       "EditProfile": "Edit profile"
    },
    "Toast": {
-      "CreateSuccessfully": "Create successfully",
-      "UpdateSuccessfully": "Update successfully",
-      "DeleteSuccessfully": "Delete successfully",
-      "RemoveSuccessfully": "Remove successfully"
+      "CreatedSuccessfully": "Created successfully",
+      "UpdatedSuccessfully": "Updated successfully",
+      "DeletedSuccessfully": "Deleted successfully",
+      "RemovedSuccessfully": "Removed successfully"
    },
    "Confirmation": {
       "Title": "Confirmation",

@@ -129,7 +129,7 @@ export class UserProfileComponent implements OnInit {
     this.tutorProfileForm.disable();
 
     this._toastService.open({
-      message: this._translateService.instant('Toast.UpdateSuccessfully'),
+      message: this._translateService.instant('Toast.UpdatedSuccessfully'),
       configs: {
         payload: {
           type: 'success',

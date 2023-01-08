@@ -152,7 +152,7 @@ export class StudentProfileComponent implements OnInit {
           .subscribe((res: IApiResponse) => {
             this._toastService.open({
               message: this._translateService.instant(
-                'Toast.UpdateSuccessfully'
+                'Toast.UpdatedSuccessfully'
               ),
               configs: {
                 payload: {

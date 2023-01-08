@@ -7,8 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, of } from 'rxjs';
-import { delay, switchMap, map } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { delay, switchMap, map, catchError, finalize } from 'rxjs/operators';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { ImageCropperDialogService } from 'src/app/components/image-cropper/image-cropper.service';
 import { ToastService } from 'src/app/components/toast/toast.service';
@@ -43,6 +43,19 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    this.getProfile();
+  }
+
+  getProfile() {
+    this._httpService
+      .request({
+        apiUrl: ApiEndpoint.Profile,
+        method: ApiMethod.Get,
+      })
+      .subscribe((res: IApiResponse) => {
+        const profile = res.data || {};
+        this.profileForm.patchValue(profile);
+      });
   }
 
   createForm() {
@@ -72,21 +85,50 @@ export class UserProfileComponent implements OnInit {
       ...this.profileForm.value,
     };
 
-    this.profileForm.disable();
+    this._httpService
+      .request({
+        apiUrl: ApiEndpoint.Profile,
+        method: ApiMethod.Put,
+        body: payload,
+      })
+      .pipe(
+        catchError((err) => throwError(() => err)),
+        finalize(() => {
+          // Re-enable the form
+          this.profileForm.enable();
+        })
+      )
+      .subscribe((res: IApiResponse) => {
+        if (res.status === 'success') {
+          // Display toast
+          this._toastService.open({
+            message: this._translateService.instant(
+              'Toast.UpdatedSuccessfully'
+            ),
+            configs: {
+              payload: {
+                type: 'success',
+              },
+            },
+          });
 
-    this._toastService.open({
-      message: this._translateService.instant('Toast.UpdateSuccessfully'),
-      configs: {
-        payload: {
-          type: 'success',
-        },
-      },
-    });
+          this.userService.currentUser = {
+            ...this.userService.currentUserValue,
+            email: this.profileForm.value.email,
+            avatar: this.profileForm.value?.avatar,
+            name:
+              this.profileForm.value?.firstName +
+              ' ' +
+              this.profileForm.value?.lastName,
+          };
+        }
+      });
   }
 
   // Upload profile picture
   onProfilePictureFileSelected(event: any, profilePictureInput: any) {
-    const maxSize = 2097152;
+    const maxSize = 1 * 1024 * 1024;
+
     const file = event.target.files[0];
     if (file) {
       if (!file.type.includes('image')) {
@@ -107,11 +149,11 @@ export class UserProfileComponent implements OnInit {
         return;
       }
 
-      // Limit file size to 2mb
+      // Limit file size to 1mb
       if (file.size > maxSize) {
         this._toastService.open({
           message: this._translateService.instant('FileUpload.FileTooLarge', {
-            maxUploadSize: '2mb',
+            maxUploadSize: '1mb',
           }),
           configs: {
             payload: {
@@ -163,7 +205,7 @@ export class UserProfileComponent implements OnInit {
           .subscribe((res: IApiResponse) => {
             this._toastService.open({
               message: this._translateService.instant(
-                'Toast.UpdateSuccessfully'
+                'Toast.RemovedSuccessfully'
               ),
               configs: {
                 payload: {

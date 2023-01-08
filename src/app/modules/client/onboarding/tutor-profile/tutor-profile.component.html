@@ -69,7 +69,7 @@
                               !tutorBasicInfoForm.get('profilePictureUrl')
                                 ?.value
                             "
-                            class="icon-size-24 text-hint"
+                            class="icon-size-24 text-gray-300"
                             svgIcon="mat_outline:account_circle"
                           ></mat-icon>
                           <img
@@ -149,10 +149,7 @@
                         tutorBasicInfoForm.get('firstName')?.setValue('')
                       "
                     >
-                      <mat-icon
-                        
-                        [svgIcon]="'mat_outline:close'"
-                      ></mat-icon>
+                      <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
                     </button>
                     <mat-error
                       *ngIf="
@@ -180,10 +177,7 @@
                       *ngIf="lastName.value != ''"
                       (click)="tutorBasicInfoForm.get('lastName')?.setValue('')"
                     >
-                      <mat-icon
-                        
-                        [svgIcon]="'mat_outline:close'"
-                      ></mat-icon>
+                      <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
                     </button>
                     <mat-error
                       *ngIf="
@@ -326,8 +320,9 @@
                       <mat-chip
                         [disableRipple]="true"
                         *ngFor="
-                          let job of this.tutorExperienceForm.get('teachingJobs')
-                            ?.value || []
+                          let job of this.tutorExperienceForm.get(
+                            'teachingJobs'
+                          )?.value || []
                         "
                         (removed)="remove(job)"
                       >
@@ -493,7 +488,7 @@
                       <span class="text-gray-400 font-normal text-sm"
                         >({{
                           "FileUpload.OnlyFileTypeAndMaxSize"
-                            | translate : { fileType: ".pdf", maxSize: "32MB" }
+                            | translate : { fileType: ".pdf", maxSize: "5MB" }
                         }})</span
                       >
                     </div>
@@ -726,10 +721,7 @@
                               ?.setValue('')
                           "
                         >
-                          <mat-icon
-                            
-                            [svgIcon]="'mat_outline:close'"
-                          ></mat-icon>
+                          <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
                         </button>
                       </mat-form-field>
                     </div>

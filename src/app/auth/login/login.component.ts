@@ -5,8 +5,9 @@ import {
   UntypedFormGroup,
   Validators,
 } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Params, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs';
 import { AlertType } from 'src/app/components/alert/alert.model';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { IApiResponse } from 'src/app/core/http/api.model';
@@ -22,7 +23,8 @@ export class LoginComponent implements OnInit {
     private _router: Router,
     private _fb: UntypedFormBuilder,
     private _translateService: TranslateService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _activatedRoute: ActivatedRoute
   ) {}
   @ViewChild('loginNgForm') loginNgForm!: NgForm;
 
@@ -33,8 +35,13 @@ export class LoginComponent implements OnInit {
 
   loading: boolean = false;
   loginForm!: UntypedFormGroup;
+  queryParams$: Observable<Params> = this._activatedRoute.queryParams;
+  redirectUrl: string = '';
 
   ngOnInit(): void {
+    this.queryParams$.subscribe((params: Params) => {
+      this.redirectUrl = params['redirectUrl'];
+    });
     this.createForm();
   }
 
@@ -84,6 +91,12 @@ export class LoginComponent implements OnInit {
         if (res.status === 'success') {
           // Reset the form
           this.loginNgForm.resetForm();
+
+          // Navigate to the redirect route
+          if (this.redirectUrl) {
+            this._router.navigate([this.redirectUrl]);
+            return;
+          }
 
           // Navigate to the onboarding
           this._router.navigate(['/onboarding']);

@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, delay, Observable, of, switchMap, throwError } from 'rxjs';
+import {
+  catchError,
+  delay,
+  Observable,
+  of,
+  shareReplay,
+  switchMap,
+  throwError,
+} from 'rxjs';
 import { ApiEndpoint, ApiMethod, IApiResponse } from '../http/api.model';
 import { HttpService } from '../http/services/http.service';
 import { StorageKey, StorageType } from '../storage/storage.model';
@@ -60,6 +68,20 @@ export class AuthService {
   }
 
   /**
+   * Setter & getter for user email
+   */
+
+  set email(email: string) {
+    this._storageService.setItem(StorageType.Local, StorageKey.Email, email);
+  }
+
+  get email(): string {
+    return (
+      this._storageService.getItem(StorageType.Local, StorageKey.Email) || ''
+    );
+  }
+
+  /**
    * Sign in
    *
    * @param credentials
@@ -88,12 +110,16 @@ export class AuthService {
             // Store refresh token in the local storage
             this.refreshToken = res.data.refreshToken;
 
+            // Store user email in the local storage
+            this.email = res.data.email;
+
             // Store the use on the user service
             this._userService.currentUser = res.data;
           }
 
           return of(res);
-        })
+        }),
+        shareReplay()
       );
   }
 
@@ -120,11 +146,15 @@ export class AuthService {
           // Store refresh token in the local storage
           this.refreshToken = res.data.refreshToken;
 
+          // Store user email in the local storage
+          this.email = res.data.email;
+
           // Store the use on the user service
           this._userService.currentUser = res.data;
 
           return of(res);
-        })
+        }),
+        shareReplay()
       );
   }
 
@@ -146,7 +176,8 @@ export class AuthService {
       .pipe(
         switchMap((res: IApiResponse) => {
           return of(res);
-        })
+        }),
+        shareReplay()
       );
   }
 
@@ -170,7 +201,8 @@ export class AuthService {
       .pipe(
         switchMap((res: IApiResponse) => {
           return of(res);
-        })
+        }),
+        shareReplay()
       );
   }
 
@@ -185,6 +217,12 @@ export class AuthService {
 
     // Remove the access token from the local storage
     this._storageService.removeItem(StorageType.Local, StorageKey.AccessToken);
+
+    // Remove the refresh token from the local storage
+    this._storageService.removeItem(StorageType.Local, StorageKey.RefreshToken);
+
+    // Remove the user email from the local storage
+    this._storageService.removeItem(StorageType.Local, StorageKey.Email);
 
     // Navigation to login page
     this._router.navigate(['/login']);
@@ -202,21 +240,31 @@ export class AuthService {
         apiUrl: ApiEndpoint.RefreshToken,
         method: ApiMethod.Post,
         body: {
-          email: this._userService.currentUser.email,
+          email: this.email,
           refreshToken: this.refreshToken,
         },
       })
       .pipe(
-        switchMap((res: any) => {
+        switchMap((res: IApiResponse) => {
           // Set authenticated flag to true
           this._isAuthenticated = true;
 
           // Store access token in the local storage
-          this.accessToken = res.accessToken;
+          this.accessToken = res.data.accessToken;
+
+          // Store refresh token in the local storage
+          this.refreshToken = res.data.refreshToken;
+
+          // Store user email in the local storage
+          this.email = res.data.email;
+
+          // Store the use on the user service
+          this._userService.currentUser = res.data;
 
           return of(true);
         }),
-        catchError((_) => of(false))
+        catchError((_) => of(false)),
+        shareReplay()
       );
   }
 
@@ -236,13 +284,36 @@ export class AuthService {
 
     // Check if the access token is expired
     if (!AuthUtils.isTokenExpired(this.accessToken)) {
+      if (this._userService.currentUserValue == null) {
+        return this.getProfile();
+      }
       return of(true);
     }
 
     // Get new access token
-    // return this.getNewAccessToken();
+    return this.getNewAccessToken();
+  }
 
-    return of(false);
+  /**
+   * Get user profile
+   */
+  getProfile(): Observable<boolean> {
+    return this._httpService
+      .request({
+        apiUrl: ApiEndpoint.Profile,
+        method: ApiMethod.Get,
+      })
+      .pipe(
+        switchMap((res: IApiResponse) => {
+          // Store the use on the user service
+          this._userService.currentUser = res.data;
+
+          // Return
+          return of(true);
+        }),
+        catchError((_) => of(false)),
+        shareReplay()
+      );
   }
 
   checkExistingEmail(email: string): Observable<boolean> {

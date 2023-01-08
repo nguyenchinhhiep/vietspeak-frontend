@@ -19,7 +19,11 @@ import { HeardFrom, HeardFromOptions } from '../onboarding.model';
 import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { HttpService } from 'src/app/core/http/services/http.service';
-import { ApiEndpoint, ApiMethod } from 'src/app/core/http/api.model';
+import {
+  ApiEndpoint,
+  ApiMethod,
+  IApiResponse,
+} from 'src/app/core/http/api.model';
 
 @Component({
   selector: 'app-onboarding-tutor-profile',
@@ -58,6 +62,7 @@ export class TutorProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    this.getTutorProfile();
   }
 
   add(event: MatChipInputEvent): void {
@@ -94,7 +99,8 @@ export class TutorProfileComponent implements OnInit {
         apiUrl: ApiEndpoint.Profile,
         method: ApiMethod.Get,
       })
-      .subscribe((res) => {
+      .subscribe((res: IApiResponse) => {
+        const tutorProfile = res.data?.tutorProfile || {};
         console.log(res);
       });
   }
@@ -236,11 +242,11 @@ export class TutorProfileComponent implements OnInit {
           continue;
         }
 
-        // Limit file size to 32mb
+        // Limit file size to 5mb
         if (file.size > maxSize) {
           this._toastService.open({
             message: this._translateService.instant('FileUpload.FileTooLarge', {
-              maxUploadSize: '32mb',
+              maxUploadSize: '5mb',
             }),
             configs: {
               payload: {

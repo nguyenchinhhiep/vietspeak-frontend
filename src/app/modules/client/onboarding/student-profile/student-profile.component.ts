@@ -84,7 +84,7 @@ export class StudentProfileComponent implements OnInit {
         if (res.status === 'success') {
           // Display toast
           this._toastService.open({
-            message: this._translateService.instant('Toast.UpdateSuccessfully'),
+            message: this._translateService.instant('Toast.UpdatedSuccessfully'),
             configs: {
               payload: {
                 type: 'success',
