@@ -24,6 +24,11 @@ import {
   ApiMethod,
   IApiResponse,
 } from 'src/app/core/http/api.model';
+import { catchError, finalize, map } from 'rxjs/operators';
+import { combineLatest, throwError } from 'rxjs';
+import { UserService } from 'src/app/core/user/user.service';
+import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
+import { UserType } from 'src/app/core/user/user-type.model';
 
 @Component({
   selector: 'app-onboarding-tutor-profile',
@@ -38,7 +43,9 @@ export class TutorProfileComponent implements OnInit {
     private _toastService: ToastService,
     private _translateService: TranslateService,
     private _imageCropperDialogService: ImageCropperDialogService,
-    private _httpService: HttpService
+    private _httpService: HttpService,
+    public userService: UserService,
+    private _confirmationDialogService: ConfirmationDialogService
   ) {}
 
   teachingLanguageOptions = TeachingLanguageOptions;
@@ -101,7 +108,32 @@ export class TutorProfileComponent implements OnInit {
       })
       .subscribe((res: IApiResponse) => {
         const tutorProfile = res.data?.tutorProfile || {};
-        console.log(res);
+
+        this.tutorBasicInfoForm.patchValue({
+          ...tutorProfile,
+          avatar: res.data?.avatar,
+        });
+
+        this.tutorExperienceForm.patchValue({
+          ...tutorProfile,
+        });
+
+        const teachingLanguage = this.teachingLanguageOptions.find(
+          (item) => item.value === tutorProfile.teachingLanguage
+        );
+        if (teachingLanguage) {
+          this.tutorExperienceForm
+            .get('teachingLanguage')
+            ?.setValue(teachingLanguage);
+        }
+
+        this.tutorIntroductionForm.patchValue({
+          ...tutorProfile,
+        });
+
+        this.tutorMotivationForm.patchValue({
+          ...tutorProfile,
+        });
       });
   }
 
@@ -115,7 +147,48 @@ export class TutorProfileComponent implements OnInit {
       return;
     }
 
-    this.stepper.next();
+    const payload = {
+      userType: UserType.Tutor,
+      tutorProfile: {
+        firstName: this.tutorBasicInfoForm.get('firstName')?.value,
+        lastName: this.tutorBasicInfoForm.get('lastName')?.value,
+        dob: this.tutorBasicInfoForm.get('dob')?.value,
+      },
+    };
+
+    // Disable the form
+    this.tutorBasicInfoForm.disable();
+
+    this._httpService
+      .request({
+        apiUrl: ApiEndpoint.Profile,
+        method: ApiMethod.Put,
+        body: payload,
+      })
+      .pipe(
+        catchError((err) => throwError(() => err)),
+        finalize(() => {
+          // Re-enable the form
+          this.tutorBasicInfoForm.enable();
+        })
+      )
+      .subscribe((res: IApiResponse) => {
+        if (res.status === 'success') {
+          // Display toast
+          this._toastService.open({
+            message: this._translateService.instant(
+              'Toast.UpdatedSuccessfully'
+            ),
+            configs: {
+              payload: {
+                type: 'success',
+              },
+            },
+          });
+
+          this.stepper.next();
+        }
+      });
   }
 
   submitTutorIntroductionForm() {
@@ -128,7 +201,43 @@ export class TutorProfileComponent implements OnInit {
       return;
     }
 
-    this.stepper.next();
+    const payload = {
+      ...this.tutorIntroductionForm.value,
+    };
+
+    // Disable the form
+    this.tutorIntroductionForm.disable();
+
+    this._httpService
+      .request({
+        apiUrl: ApiEndpoint.Profile,
+        method: ApiMethod.Put,
+        body: payload,
+      })
+      .pipe(
+        catchError((err) => throwError(() => err)),
+        finalize(() => {
+          // Re-enable the form
+          this.tutorIntroductionForm.enable();
+        })
+      )
+      .subscribe((res: IApiResponse) => {
+        if (res.status === 'success') {
+          // Display toast
+          this._toastService.open({
+            message: this._translateService.instant(
+              'Toast.UpdatedSuccessfully'
+            ),
+            configs: {
+              payload: {
+                type: 'success',
+              },
+            },
+          });
+
+          this.stepper.next();
+        }
+      });
   }
 
   submitTutorExperienceForm() {
@@ -141,13 +250,64 @@ export class TutorProfileComponent implements OnInit {
       return;
     }
 
-    this.stepper.next();
+    const payload = {
+      tutorProfile: {
+        ...this.tutorExperienceForm.value,
+        languages: this.tutorExperienceForm.get('languages')?.value,
+        teachingLanguage:
+          this.tutorExperienceForm.get('teachingLanguage')?.value?.value,
+      },
+    };
+
+    // Delete unnecessary keys
+    delete payload['tutorProfile']['teachingCertificates'];
+
+    // Disable the form
+    this.tutorExperienceForm.disable();
+
+    // Certificates
+    const certificates = this.tutorExperienceForm.get(
+      'teachingCertificates'
+    )?.value;
+
+    combineLatest([
+      this.userService.uploadCertificates(certificates),
+      this._httpService.request({
+        apiUrl: ApiEndpoint.Profile,
+        method: ApiMethod.Put,
+        body: payload,
+      }),
+    ])
+      .pipe(
+        catchError((err) => throwError(() => err)),
+        finalize(() => {
+          // Re-enable the form
+          this.tutorExperienceForm.enable();
+        }),
+        map((res) => res[1])
+      )
+      .subscribe((res: IApiResponse) => {
+        if (res.status === 'success') {
+          // Display toast
+          this._toastService.open({
+            message: this._translateService.instant(
+              'Toast.UpdatedSuccessfully'
+            ),
+            configs: {
+              payload: {
+                type: 'success',
+              },
+            },
+          });
+
+          this.stepper.next();
+        }
+      });
   }
 
   createForm() {
     this.tutorBasicInfoForm = this._fb.group({
-      profilePicture: [],
-      profilePictureUrl: [],
+      avatar: [],
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       dob: [null, [Validators.required]],
@@ -155,7 +315,7 @@ export class TutorProfileComponent implements OnInit {
 
     this.tutorExperienceForm = this._fb.group({
       teachingLanguage: [this.teachingLanguageOptions[0]],
-      teachingJobs: [[], Validators.required],
+      teachingJobs: ['', Validators.required],
       teachingExperience: [TeachingExperience.OneToSixMonths],
       languages: this._fb.array([this.createlanguageFormGroup()]),
       haveExperienceTeachingOnline: [true],
@@ -177,8 +337,6 @@ export class TutorProfileComponent implements OnInit {
       ?.valueChanges.subscribe((option) => {
         this.languagesFormArray.at(0).get('language')?.setValue(option?.value);
       });
-
-    this.languagesFormArray.at(0).get('language')?.disable();
   }
 
   logout() {
@@ -219,7 +377,7 @@ export class TutorProfileComponent implements OnInit {
 
   // Handle certificate files
   handleCertificatesUpload(uploadFiles: any[]) {
-    const maxSize = 32 * 1024 * 1024;
+    const maxSize = 5 * 1024 * 1024;
     const files =
       this.tutorExperienceForm.get('teachingCertificates')?.value || [];
     if (uploadFiles.length > 0) {
@@ -315,7 +473,7 @@ export class TutorProfileComponent implements OnInit {
 
   // Upload profile picture
   onProfilePictureFileSelected(event: any, profilePictureInput: any) {
-    const maxSize = 2097152;
+    const maxSize = 1 * 1024 * 1024;
     const file = event.target.files[0];
     if (file) {
       if (!file.type.includes('image')) {
@@ -336,11 +494,11 @@ export class TutorProfileComponent implements OnInit {
         return;
       }
 
-      // Limit file size to 2mb
+      // Limit file size to 1mb
       if (file.size > maxSize) {
         this._toastService.open({
           message: this._translateService.instant('FileUpload.FileTooLarge', {
-            maxUploadSize: '2mb',
+            maxUploadSize: '1mb',
           }),
           configs: {
             payload: {
@@ -359,8 +517,34 @@ export class TutorProfileComponent implements OnInit {
 
   // Remove profile picture
   onRemoveProfilePicture() {
-    this.tutorBasicInfoForm.get('profilePictureUrl')?.setValue(null);
-    this.tutorBasicInfoForm.get('profilePicture')?.setValue(null);
+    const dialogRef = this._confirmationDialogService.open({
+      message: this._translateService.instant('Confirmation.Message', {
+        action: this._translateService.instant('Action.Remove').toLowerCase(),
+      }),
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res === 'confirmed') {
+        this._httpService
+          .request({
+            apiUrl: ApiEndpoint.Avatar,
+            method: ApiMethod.Delete,
+          })
+          .subscribe((res: IApiResponse) => {
+            this._toastService.open({
+              message: this._translateService.instant(
+                'Toast.RemovedSuccessfully'
+              ),
+              configs: {
+                payload: {
+                  type: 'success',
+                },
+              },
+            });
+            this.tutorBasicInfoForm.get('avatar')?.setValue(null);
+          });
+      }
+    });
   }
 
   // Open crop image dialog
@@ -374,10 +558,22 @@ export class TutorProfileComponent implements OnInit {
 
     dialogRef?.afterClosed().subscribe((croppedImage) => {
       if (croppedImage != null) {
-        this.tutorBasicInfoForm
-          .get('profilePictureUrl')
-          ?.setValue(croppedImage);
-        this.tutorBasicInfoForm.get('profilePicture')?.setValue(croppedImage);
+        this.userService
+          .uploadAvatar(croppedImage)
+          .subscribe((res: IApiResponse) => {
+            this._toastService.open({
+              message: this._translateService.instant(
+                'Toast.UpdatedSuccessfully'
+              ),
+              configs: {
+                payload: {
+                  type: 'success',
+                },
+              },
+            });
+
+            this.tutorBasicInfoForm.get('avatar')?.setValue(croppedImage);
+          });
       }
     });
   }

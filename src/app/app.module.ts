@@ -19,6 +19,7 @@ import { ToastComponent } from './components/toast/toast.component';
 import { ToastModule } from './components/toast/toast.module';
 import { ConfirmationDialogModule } from './components/confirmation-dialog/confirmation-dialog.module';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { MatMomentDateModule } from '@angular/material-moment-adapter';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,6 +35,7 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
       toastClass: 'custom-toast',
       positionClass: 'toast-bottom-left',
     }),
+    MatMomentDateModule,
     ConfirmationDialogModule,
     AppRoutingModule,
   ],

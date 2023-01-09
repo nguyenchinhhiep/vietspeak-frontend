@@ -61,25 +61,18 @@
                       class="rounded border border-solid bg-surface border-light p-4 flex flex-col"
                     >
                       <div
-                        class="flex flex-col items-center gap-3 items-center"
+                        class="flex flex-col items-center gap-4 items-center"
                       >
                         <div class="w-24 h-24 relative">
                           <mat-icon
-                            *ngIf="
-                              !tutorBasicInfoForm.get('profilePictureUrl')
-                                ?.value
-                            "
+                            *ngIf="!tutorBasicInfoForm.get('avatar')?.value"
                             class="icon-size-24 text-gray-300"
                             svgIcon="mat_outline:account_circle"
                           ></mat-icon>
                           <img
                             class="w-full h-full rounded-full overflow-hidden object-cover"
-                            *ngIf="
-                              tutorBasicInfoForm.get('profilePictureUrl')?.value
-                            "
-                            [src]="
-                              tutorBasicInfoForm.get('profilePictureUrl')?.value
-                            "
+                            *ngIf="tutorBasicInfoForm.get('avatar')?.value"
+                            [src]="tutorBasicInfoForm.get('avatar')?.value"
                             alt="Profile picture"
                           />
                         </div>
@@ -93,16 +86,14 @@
                             (click)="uploadProfilePictureFile.click()"
                           >
                             {{
-                              tutorBasicInfoForm.get("profilePictureUrl")?.value
+                              tutorBasicInfoForm.get("avatar")?.value
                                 ? ("FileUpload.Change" | translate)
                                 : ("FileUpload.AddAPhoto" | translate)
                             }}
                           </button>
                           <!-- Remove image -->
                           <button
-                            *ngIf="
-                              tutorBasicInfoForm.get('profilePictureUrl')?.value
-                            "
+                            *ngIf="tutorBasicInfoForm.get('avatar')?.value"
                             type="button"
                             mat-button
                             class="btn--sm"
@@ -145,6 +136,7 @@
                       type="button"
                       matSuffix
                       *ngIf="firstName.value != ''"
+                      [disabled]="tutorBasicInfoForm.disabled"
                       (click)="
                         tutorBasicInfoForm.get('firstName')?.setValue('')
                       "
@@ -175,6 +167,7 @@
                       type="button"
                       matSuffix
                       *ngIf="lastName.value != ''"
+                      [disabled]="tutorBasicInfoForm.disabled"
                       (click)="tutorBasicInfoForm.get('lastName')?.setValue('')"
                     >
                       <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
@@ -226,8 +219,18 @@
                       mat-flat-button
                       [color]="'primary'"
                       (click)="submitTutorBasicInfoForm()"
+                      [disabled]="tutorBasicInfoForm.disabled"
                     >
-                      {{ "Action.Continue" | translate }}
+                      <span *ngIf="!tutorBasicInfoForm.disabled">
+                        {{ "Action.Continue" | translate }}
+                      </span>
+
+                      <mat-progress-spinner
+                        *ngIf="tutorBasicInfoForm.disabled"
+                        [diameter]="24"
+                        mode="indeterminate"
+                      >
+                      </mat-progress-spinner>
                     </button>
                   </div>
                 </form>
@@ -327,7 +330,10 @@
                         (removed)="remove(job)"
                       >
                         {{ job }}
-                        <button matChipRemove>
+                        <button
+                          matChipRemove
+                          [disabled]="this.tutorExperienceForm.disabled"
+                        >
                           <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
                         </button>
                       </mat-chip>
@@ -537,7 +543,9 @@
                         class="flex flex-col gap-2 mt-4"
                         *ngIf="
                           this.tutorExperienceForm.get('teachingCertificates')
-                            ?.value
+                            ?.value &&
+                          this.tutorExperienceForm.get('teachingCertificates')
+                            ?.value.length > 0
                         "
                       >
                         <div
@@ -564,6 +572,7 @@
                             <button
                               mat-icon-button
                               type="button"
+                              [disabled]="this.tutorExperienceForm.disabled"
                               (click)="removeCertificate(i)"
                             >
                               <mat-icon
@@ -611,6 +620,7 @@
                   <div class="mt-6 flex justify-between gap-4">
                     <button
                       class="btn--lg !px-6"
+                      [disabled]="this.tutorExperienceForm.disabled"
                       mat-stroked-button
                       matStepperPrevious
                     >
@@ -622,8 +632,18 @@
                       mat-flat-button
                       [color]="'primary'"
                       (click)="submitTutorExperienceForm()"
+                      [disabled]="tutorExperienceForm.disabled"
                     >
-                      {{ "Action.Continue" | translate }}
+                      <span *ngIf="!tutorExperienceForm.disabled">
+                        {{ "Action.Continue" | translate }}
+                      </span>
+
+                      <mat-progress-spinner
+                        *ngIf="tutorExperienceForm.disabled"
+                        [diameter]="24"
+                        mode="indeterminate"
+                      >
+                      </mat-progress-spinner>
                     </button>
                   </div>
                 </form>
@@ -715,6 +735,7 @@
                           type="button"
                           matSuffix
                           *ngIf="videoIntroduction.value != ''"
+                          [disabled]="tutorIntroductionForm.disabled"
                           (click)="
                             tutorIntroductionForm
                               .get('videoIntroduction')

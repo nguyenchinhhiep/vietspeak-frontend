@@ -12,12 +12,10 @@ import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { TutorProfileComponent } from './tutor-profile/tutor-profile.component';
 import { LanguagesModule } from 'src/app/components/languages/languages.module';
 import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
-import { ToastModule } from 'src/app/components/toast/toast.module';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { CongratulationsComponent } from './congratulations/congratulations.component';
@@ -87,19 +85,18 @@ const routes: Routes = [
     MatRadioModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDatepickerModule,
-    MatMomentDateModule,
     LanguagesModule,
     MatStepperModule,
     MatCheckboxModule,
-    ToastModule,
     MatProgressSpinnerModule,
     PreventAutofillModule,
     MatChipsModule,
+    MatDatepickerModule,
     ImageCropperDialogModule,
-
     RouterModule.forChild(routes),
   ],
-  providers: [],
+  providers: [
+  
+  ],
 })
 export class OnboardingModule {}
