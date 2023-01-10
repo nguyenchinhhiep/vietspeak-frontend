@@ -30,11 +30,12 @@
       <mat-stepper
         #stepper
         orientation="horizontal"
-        class="!bg-inherit"
+        class="!bg-inherit stepperTop"
         [disableRipple]="true"
         labelPosition="bottom"
         [linear]="true"
         animationDuration="0"
+        (selectionChange)="onStepChanged($event)"
       >
         <ng-template matStepperIcon="edit">
           <mat-icon class="text-white" svgIcon="mat_outline:check"></mat-icon>
@@ -319,7 +320,10 @@
                     <mat-label>{{
                       "TutorProfile.WhatYouTeach" | translate
                     }}</mat-label>
-                    <mat-chip-list #chipTeachingJobList>
+                    <mat-chip-list
+                      #chipTeachingJobList
+                      formControlName="teachingJobs"
+                    >
                       <mat-chip
                         [disableRipple]="true"
                         *ngFor="
@@ -385,7 +389,12 @@
                     >
                   </mat-form-field>
                   <div class="flex flex-col mb-4">
-                    <div class="text-secondary flex gap-1 items-center mb-2">
+                    <div
+                      class="text-secondary flex gap-1 items-center mb-2"
+                      [ngClass]="
+                        tutorExperienceForm.disabled ? 'opacity-70' : ''
+                      "
+                    >
                       {{ "TutorProfile.LanguagesYouSpeak" | translate }}
                     </div>
                     <div formArrayName="languages" class="flex flex-col gap-3">
@@ -470,6 +479,7 @@
                             mat-icon-button
                             type="button"
                             (click)="removeLanguage(i)"
+                            [disabled]="this.tutorExperienceForm.disabled"
                           >
                             <mat-icon
                               class="text-danger"
@@ -479,7 +489,10 @@
                         </div>
                       </div>
 
-                      <div class="flex justify-end">
+                      <div
+                        class="flex justify-end"
+                        *ngIf="!tutorExperienceForm.disabled"
+                      >
                         <a class="cursor-pointer" (click)="addLanguage()">
                           {{ "TutorProfile.AddLanguage" | translate }}</a
                         >
@@ -488,7 +501,12 @@
                   </div>
 
                   <div class="flex flex-col mb-4">
-                    <div class="text-secondary flex gap-1 items-center mb-2">
+                    <div
+                      class="text-secondary flex gap-1 items-center mb-2"
+                      [ngClass]="
+                        tutorExperienceForm.disabled ? 'opacity-70' : ''
+                      "
+                    >
                       {{ "TutorProfile.TeachingCertificates" | translate }}
                       <span class="text-danger">*</span>
                       <span class="text-gray-400 font-normal text-sm"
@@ -527,6 +545,7 @@
                           [color]="'primary'"
                           class="btn--sm"
                           (click)="uploadFile.click()"
+                          [disabled]="tutorExperienceForm.disabled"
                         >
                           {{ "FileUpload.BrowseFiles" | translate }}
                         </button>
@@ -561,7 +580,14 @@
                             <div
                               class="text-gray-600 overflow-hidden text-ellipsis whitespace-nowrap"
                             >
-                              {{ file.name }}
+                              <a
+                                [href]="file.url"
+                                target="_blank"
+                                class="text-inherit"
+                                t
+                              >
+                                {{ file.originalname }}
+                              </a>
                             </div>
                             <div class="text-gray-400 text-sm">
                               {{ file.size / 1024 | number : "1.2" }} KB
@@ -570,9 +596,9 @@
 
                           <div class="flex-shrink-0 ml-auto">
                             <button
-                              mat-icon-button
                               type="button"
-                              [disabled]="this.tutorExperienceForm.disabled"
+                              mat-icon-button
+                              [disabled]="tutorExperienceForm.disabled"
                               (click)="removeCertificate(i)"
                             >
                               <mat-icon
@@ -600,7 +626,12 @@
                     </div>
                   </div>
                   <div class="flex flex-col gap-2">
-                    <div class="text-secondary">
+                    <div
+                      class="text-secondary"
+                      [ngClass]="
+                        tutorExperienceForm.disabled ? 'opacity-70' : ''
+                      "
+                    >
                       {{
                         "TutorProfile.HaveExperienceTeachingOnline" | translate
                       }}
@@ -619,15 +650,16 @@
                   </div>
                   <div class="mt-6 flex justify-between gap-4">
                     <button
+                      type="button"
                       class="btn--lg !px-6"
-                      [disabled]="this.tutorExperienceForm.disabled"
+                      [disabled]="tutorExperienceForm.disabled"
                       mat-stroked-button
                       matStepperPrevious
                     >
                       {{ "Action.Back" | translate }}
                     </button>
                     <button
-                      type="submit"
+                      type="button"
                       class="btn--lg !px-6"
                       mat-flat-button
                       [color]="'primary'"
@@ -700,13 +732,23 @@
                   </mat-form-field>
 
                   <div class="mb-4">
-                    <div class="text-secondary mb-2">
+                    <div
+                      class="text-secondary mb-2"
+                      [ngClass]="
+                        tutorIntroductionForm.disabled ? 'opacity-70' : ''
+                      "
+                    >
                       {{ "TutorProfile.VideoIntroduction" | translate }}
                     </div>
                     <div
                       class="p-3 rounded bg-surface border border-solid border-light"
                     >
-                      <div class="mb-3 text-tertiary">
+                      <div
+                        class="mb-3 text-tertiary"
+                        [ngClass]="
+                          tutorIntroductionForm.disabled ? 'opacity-70' : ''
+                        "
+                      >
                         {{
                           "TutorProfile.VideoIntroductionDescription"
                             | translate
@@ -860,6 +902,7 @@
                       class="btn--lg !px-6"
                       mat-flat-button
                       [color]="'primary'"
+                      (click)="submitTutorMotivationForm()"
                       [disabled]="tutorMotivationForm.disabled"
                     >
                       <span *ngIf="!tutorMotivationForm.disabled">

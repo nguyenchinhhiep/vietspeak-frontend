@@ -283,7 +283,7 @@
       </mat-form-field>
       <mat-form-field appearance="fill" class="w-full" floatLabel="always">
         <mat-label>{{ "TutorProfile.WhatYouTeach" | translate }}</mat-label>
-        <mat-chip-list #chipTeachingJobList>
+        <mat-chip-list #chipTeachingJobList formControlName="teachingJobs">
           <mat-chip
             [disableRipple]="true"
             *ngFor="
@@ -292,7 +292,7 @@
             (removed)="remove(job)"
           >
             {{ job }}
-            <button matChipRemove>
+            <button matChipRemove [disabled]="tutorProfileForm.disabled">
               <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
             </button>
           </mat-chip>
@@ -343,7 +343,10 @@
         >
       </mat-form-field>
       <div class="flex flex-col mb-4">
-        <div class="text-secondary flex gap-1 items-center mb-2">
+        <div
+          class="text-secondary flex gap-1 items-center mb-2"
+          [ngClass]="tutorProfileForm.disabled ? 'opacity-70' : ''"
+        >
           {{ "TutorProfile.LanguagesYouSpeak" | translate }}
         </div>
         <div formArrayName="languages" class="flex flex-col gap-3">
@@ -419,7 +422,12 @@
               class="mt-3"
               *ngIf="languagesFormArray.controls.length > 1 && i > 0"
             >
-              <button mat-icon-button type="button" (click)="removeLanguage(i)">
+              <button
+                mat-icon-button
+                type="button"
+                (click)="removeLanguage(i)"
+                [disabled]="tutorProfileForm.disabled"
+              >
                 <mat-icon
                   class="text-danger"
                   svgIcon="mat_outline:clear"
@@ -428,7 +436,7 @@
             </div>
           </div>
 
-          <div class="flex justify-end">
+          <div class="flex justify-end" *ngIf="!tutorProfileForm.disabled">
             <a class="cursor-pointer" (click)="addLanguage()">
               {{ "TutorProfile.AddLanguage" | translate }}</a
             >
@@ -437,13 +445,16 @@
       </div>
 
       <div class="flex flex-col mb-4">
-        <div class="text-secondary flex gap-1 items-center mb-2">
+        <div
+          class="text-secondary flex gap-1 items-center mb-2"
+          [ngClass]="tutorProfileForm.disabled ? 'opacity-70' : ''"
+        >
           {{ "TutorProfile.TeachingCertificates" | translate }}
           <span class="text-danger">*</span>
           <span class="text-gray-400 font-normal text-sm"
             >({{
               "FileUpload.OnlyFileTypeAndMaxSize"
-                | translate : { fileType: ".pdf", maxSize: "32MB" }
+                | translate : { fileType: ".pdf", maxSize: "5MB" }
             }})</span
           >
         </div>
@@ -473,6 +484,7 @@
               mat-flat-button
               class="btn--sm"
               [color]="'primary'"
+              [disabled]="tutorProfileForm.disabled"
               (click)="uploadFile.click()"
             >
               {{ "FileUpload.BrowseFiles" | translate }}
@@ -502,7 +514,9 @@
                 <div
                   class="text-gray-600 overflow-hidden text-ellipsis whitespace-nowrap"
                 >
-                  {{ file.name }}
+                  <a [href]="file.url" target="_blank" class="text-inherit">
+                    {{ file.originalname }}
+                  </a>
                 </div>
                 <div class="text-gray-400 text-sm">
                   {{ file.size / 1024 | number : "1.2" }} KB
@@ -513,6 +527,7 @@
                 <button
                   mat-icon-button
                   type="button"
+                  [disabled]="tutorProfileForm.disabled"
                   (click)="removeCertificate(i)"
                 >
                   <mat-icon
@@ -546,8 +561,18 @@
         mat-flat-button
         [color]="'primary'"
         (click)="submit()"
+        [disabled]="tutorProfileForm.disabled"
       >
-        {{ "Action.Save" | translate }}
+        <span *ngIf="!tutorProfileForm.disabled">
+          {{ "Action.Save" | translate }}
+        </span>
+
+        <mat-progress-spinner
+          *ngIf="tutorProfileForm.disabled"
+          [diameter]="24"
+          mode="indeterminate"
+        >
+        </mat-progress-spinner>
       </button>
     </div>
   </form>

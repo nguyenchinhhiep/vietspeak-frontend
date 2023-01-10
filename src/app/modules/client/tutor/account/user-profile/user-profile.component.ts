@@ -10,12 +10,18 @@ import {
 } from '@angular/forms';
 import { MatChipInputEvent } from '@angular/material/chips';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, of } from 'rxjs';
-import { delay, map, switchMap } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, delay, finalize, map, switchMap } from 'rxjs/operators';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { ImageCropperDialogService } from 'src/app/components/image-cropper/image-cropper.service';
 import { ToastService } from 'src/app/components/toast/toast.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import {
+  ApiEndpoint,
+  ApiMethod,
+  IApiResponse,
+} from 'src/app/core/http/api.model';
+import { HttpService } from 'src/app/core/http/services/http.service';
 import { UserService } from 'src/app/core/user/user.service';
 import { CustomValidators } from 'src/app/core/validators/validators';
 import {
@@ -41,7 +47,8 @@ export class UserProfileComponent implements OnInit {
     private _translateService: TranslateService,
     private _confirmationDialogService: ConfirmationDialogService,
     public userService: UserService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _httpService: HttpService
   ) {}
 
   teachingLanguageOptions = TeachingLanguageOptions;
@@ -59,12 +66,13 @@ export class UserProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+    this.getTutorProfile();
   }
 
+  // Add teaching job
   add(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
 
-    // Add our fruit
     if (value) {
       const teachingJobs =
         this.tutorProfileForm.get('teachingJobs')?.value || [];
@@ -77,6 +85,7 @@ export class UserProfileComponent implements OnInit {
     event.chipInput!.clear();
   }
 
+  // Remove teaching job
   remove(job: string): void {
     const teachingJobs = this.tutorProfileForm.get('teachingJobs')?.value || [];
     const index = teachingJobs.indexOf(job);
@@ -88,6 +97,7 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  // Create form
   createForm() {
     this.tutorProfileForm = this._fb.group({
       avatar: [],
@@ -104,14 +114,51 @@ export class UserProfileComponent implements OnInit {
       teachingExperience: [TeachingExperience.OneToSixMonths],
       languages: this._fb.array([this.createlanguageFormGroup()]),
       haveExperienceTeachingOnline: [true],
-      teachingCertificates: [null, [Validators.required]],
+      teachingCertificates: [null],
       introduction: ['', [Validators.required]],
       videoIntroduction: [''],
     });
-
-    this.languagesFormArray.at(0).get('language')?.disable();
   }
 
+  // Get tutor profile
+  getTutorProfile() {
+    this._httpService
+      .request({
+        apiUrl: ApiEndpoint.Profile,
+        method: ApiMethod.Get,
+      })
+      .subscribe((res: IApiResponse) => {
+        const tutorProfile = res.data?.tutorProfile || {};
+
+        // Patch profile value to forms
+        this.tutorProfileForm.patchValue({
+          ...tutorProfile,
+          ...res.data,
+        });
+
+        // Update languages to form
+        const languages = tutorProfile.languages || [];
+        this.languagesFormArray.clear();
+        languages.forEach((language: any) => {
+          const languageFormGroup = this.createlanguageFormGroup(
+            language.language,
+            language.fluency
+          );
+          this.languagesFormArray.push(languageFormGroup);
+        });
+
+        const teachingLanguage = this.teachingLanguageOptions.find(
+          (item) => item.value === tutorProfile.teachingLanguage
+        );
+        if (teachingLanguage) {
+          this.tutorProfileForm
+            .get('teachingLanguage')
+            ?.setValue(teachingLanguage);
+        }
+      });
+  }
+
+  // Form submit
   submit() {
     for (const control in this.tutorProfileForm.controls) {
       this.tutorProfileForm.controls[control].markAsTouched();
@@ -123,19 +170,48 @@ export class UserProfileComponent implements OnInit {
     }
 
     const payload = {
-      ...this.tutorProfileForm.value,
+      tutorProfile: {
+        ...this.tutorProfileForm.value,
+        teachingLanguage:
+          this.tutorProfileForm.get('teachingLanguage')?.value?.value,
+      },
     };
 
-    this.tutorProfileForm.disable();
+    // Delete unnecessary keys
+    delete payload['tutorProfile']['teachingCertificates'];
 
-    this._toastService.open({
-      message: this._translateService.instant('Toast.UpdatedSuccessfully'),
-      configs: {
-        payload: {
-          type: 'success',
-        },
-      },
-    });
+    // Disable the form
+    this.tutorProfileForm.disable();
+    this.tutorProfileForm.updateValueAndValidity();
+
+    this._httpService
+      .request({
+        apiUrl: ApiEndpoint.Profile,
+        method: ApiMethod.Put,
+        body: payload,
+      })
+      .pipe(
+        catchError((err) => throwError(() => err)),
+        finalize(() => {
+          // Re-enable the form
+          this.tutorProfileForm.enable();
+        })
+      )
+      .subscribe((res: IApiResponse) => {
+        if (res.status === 'success') {
+          // Display toast
+          this._toastService.open({
+            message: this._translateService.instant(
+              'Toast.UpdatedSuccessfully'
+            ),
+            configs: {
+              payload: {
+                type: 'success',
+              },
+            },
+          });
+        }
+      });
   }
 
   // Get language form array
@@ -144,15 +220,17 @@ export class UserProfileComponent implements OnInit {
   }
 
   // Create language form group
-  createlanguageFormGroup(): FormGroup {
+  createlanguageFormGroup(
+    language = Language.English,
+    fluency = Fluency.A1
+  ): FormGroup {
     const fg = this._fb.group({
-      language: [Language.English],
-      fluency: [Fluency.A1],
+      language: [language],
+      fluency: [fluency],
     });
 
     return fg;
   }
-
   // Add language
   addLanguage() {
     this.languagesFormArray.push(this.createlanguageFormGroup());
@@ -172,9 +250,10 @@ export class UserProfileComponent implements OnInit {
 
   // Handle certificate files
   handleCertificatesUpload(uploadFiles: any[]) {
-    const maxSize = 33554432;
+    const maxSize = 5 * 1024 * 1024;
     const files =
       this.tutorProfileForm.get('teachingCertificates')?.value || [];
+    const uploadDocuments: any[] = [];
     if (uploadFiles.length > 0) {
       for (const file of uploadFiles) {
         // Only allow .pdf file
@@ -195,11 +274,11 @@ export class UserProfileComponent implements OnInit {
           continue;
         }
 
-        // Limit file size to 32mb
+        // Limit file size to 5mb
         if (file.size > maxSize) {
           this._toastService.open({
             message: this._translateService.instant('FileUpload.FileTooLarge', {
-              maxUploadSize: '32mb',
+              maxUploadSize: '5mb',
             }),
             configs: {
               payload: {
@@ -215,23 +294,60 @@ export class UserProfileComponent implements OnInit {
           continue;
         }
 
-        files.push(file);
-
-        this.tutorProfileForm.get('teachingCertificates')?.setValue(files);
+        uploadDocuments.push(file);
       }
     }
+
+    // Disable the form
+    this.tutorProfileForm.disable();
+    this.tutorProfileForm.updateValueAndValidity();
+
+    this.userService
+      .uploadCertificates(uploadDocuments)
+      .subscribe((res: IApiResponse) => {
+        if (res.status === 'success') {
+          const teachingCertificates = res.data || [];
+          files.push(...teachingCertificates);
+
+          this.tutorProfileForm.get('teachingCertificates')?.setValue(files);
+        }
+
+        // Re-enable the form
+        this.tutorProfileForm.enable();
+      });
   }
 
   // On remove certificate file
   removeCertificate(index: number) {
-    const files =
-      this.tutorProfileForm.get('teachingCertificates')?.value || [];
+    const dialogRef = this._confirmationDialogService.open({
+      message: this._translateService.instant('Confirmation.Message', {
+        action: this._translateService.instant('Action.Remove').toLowerCase(),
+      }),
+    });
 
-    files.splice(index, 1);
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res === 'confirmed') {
+        const files =
+          this.tutorProfileForm.get('teachingCertificates')?.value || [];
 
-    this.tutorProfileForm
-      .get('teachingCertificates')
-      ?.setValue(files.length > 0 ? files : null);
+        const deleteFile = files[index];
+
+        this._httpService
+          .request({
+            apiUrl: ApiEndpoint.UploadCertificates + '/' + deleteFile?._id,
+            method: ApiMethod.Delete,
+          })
+          .subscribe((res: IApiResponse) => {
+            if (res.status === 'success') {
+              files.splice(index, 1);
+
+              this.tutorProfileForm
+                .get('teachingCertificates')
+                ?.setValue(files.length > 0 ? files : null);
+            }
+          });
+      }
+    });
   }
 
   // On drag enter
@@ -310,6 +426,43 @@ export class UserProfileComponent implements OnInit {
     }
   }
 
+  // Remove profile picture
+  onRemoveProfilePicture() {
+    const dialogRef = this._confirmationDialogService.open({
+      message: this._translateService.instant('Confirmation.Message', {
+        action: this._translateService.instant('Action.Remove').toLowerCase(),
+      }),
+    });
+
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res === 'confirmed') {
+        this._httpService
+          .request({
+            apiUrl: ApiEndpoint.Avatar,
+            method: ApiMethod.Delete,
+          })
+          .subscribe((res: IApiResponse) => {
+            this._toastService.open({
+              message: this._translateService.instant(
+                'Toast.RemovedSuccessfully'
+              ),
+              configs: {
+                payload: {
+                  type: 'success',
+                },
+              },
+            });
+            this.tutorProfileForm.get('avatar')?.setValue(null);
+            // Update current user
+            this.userService.currentUser = {
+              ...this.userService.currentUserValue,
+              avatar: '',
+            };
+          });
+      }
+    });
+  }
+
   // Open crop image dialog
   openImageCropper(imageFile: File) {
     const dialogRef = this._imageCropperDialogService.open(imageFile, {
@@ -321,23 +474,22 @@ export class UserProfileComponent implements OnInit {
 
     dialogRef?.afterClosed().subscribe((croppedImage) => {
       if (croppedImage != null) {
-        this.tutorProfileForm.get('profilePictureUrl')?.setValue(croppedImage);
-        this.tutorProfileForm.get('profilePicture')?.setValue(croppedImage);
-      }
-    });
-  }
+        this.userService
+          .uploadAvatar(croppedImage)
+          .subscribe((res: IApiResponse) => {
+            this._toastService.open({
+              message: this._translateService.instant(
+                'Toast.UpdatedSuccessfully'
+              ),
+              configs: {
+                payload: {
+                  type: 'success',
+                },
+              },
+            });
 
-  // Remove profile picture
-  onRemoveProfilePicture() {
-    const dialogRef = this._confirmationDialogService.open({
-      message: this._translateService.instant('Confirmation.Message', {
-        action: this._translateService.instant('Action.Remove').toLowerCase(),
-      }),
-    });
-
-    dialogRef.afterClosed().subscribe((res) => {
-      if (res === 'confirmed') {
-        this.tutorProfileForm.get('avatar')?.setValue(null);
+            this.tutorProfileForm.get('avatar')?.setValue(croppedImage);
+          });
       }
     });
   }

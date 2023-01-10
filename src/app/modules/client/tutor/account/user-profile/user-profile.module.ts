@@ -11,7 +11,6 @@ import { RouterModule, Routes } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
 import { ImageCropperDialogModule } from 'src/app/components/image-cropper/image-cropper.module';
 import { PreventAutofillModule } from 'src/app/directives/prevent-autofill/prevent-autofill.module';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatSelectModule } from '@angular/material/select';
 import { MatChipsModule } from '@angular/material/chips';
@@ -39,7 +38,6 @@ const routes: Routes = [
     MatButtonModule,
     MatProgressSpinnerModule,
     MatDatepickerModule,
-    MatMomentDateModule,
     MatSelectModule,
     MatChipsModule,
     RouterModule.forChild(routes),

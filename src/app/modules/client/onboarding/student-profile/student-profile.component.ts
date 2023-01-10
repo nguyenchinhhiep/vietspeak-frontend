@@ -13,6 +13,7 @@ import {
 } from 'src/app/core/http/api.model';
 import { HttpService } from 'src/app/core/http/services/http.service';
 import { UserType } from 'src/app/core/user/user-type.model';
+import { UserService } from 'src/app/core/user/user.service';
 import {
   LanguageLevel,
   LanguageLevelOptions,
@@ -33,7 +34,8 @@ export class StudentProfileComponent implements OnInit {
     private _confirmationDialogService: ConfirmationDialogService,
     private _translateService: TranslateService,
     private _httpService: HttpService,
-    private _toastService: ToastService
+    private _toastService: ToastService,
+    public userService: UserService
   ) {}
   studentProfileForm!: FormGroup;
 
@@ -84,13 +86,22 @@ export class StudentProfileComponent implements OnInit {
         if (res.status === 'success') {
           // Display toast
           this._toastService.open({
-            message: this._translateService.instant('Toast.UpdatedSuccessfully'),
+            message: this._translateService.instant(
+              'Toast.UpdatedSuccessfully'
+            ),
             configs: {
               payload: {
                 type: 'success',
               },
             },
           });
+
+          this.userService.currentUser = {
+            ...this.userService.currentUserValue,
+            ...res.data,
+          };
+
+          this._router.navigate(['/student/account/profile']);
         }
       });
   }

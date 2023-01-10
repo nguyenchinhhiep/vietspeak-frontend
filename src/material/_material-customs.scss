@@ -794,6 +794,10 @@
 /*  @ Stepper
 /* ----------------------------------------------------------------------------------------------------- */
 mat-stepper {
+  // Step header
+  .mat-step-header {
+    pointer-events: none !important;
+  }
   // Step label
   .mat-step-label {
     &.mat-step-label-selected {
