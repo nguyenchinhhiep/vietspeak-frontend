@@ -153,6 +153,7 @@
         mat-flat-button
         [color]="'primary'"
         [disabled]="profileForm.disabled"
+        (click)="submit()"
       >
         <span *ngIf="!profileForm.disabled">
           {{ "Action.Save" | translate }}

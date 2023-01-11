@@ -3,8 +3,13 @@ import { FormControl } from '@angular/forms';
 import { MatTableDataSource } from '@angular/material/table';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
-import { debounceTime, distinctUntilChanged } from 'rxjs';
+import { debounceTime, distinctUntilChanged, startWith } from 'rxjs';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
+import {
+  ApiEndpoint,
+  ApiMethod,
+  IApiResponse,
+} from 'src/app/core/http/api.model';
 import { HttpService } from 'src/app/core/http/services/http.service';
 import { UserType, UserTypeOptions } from 'src/app/core/user/user-type.model';
 import { UserStatus, UserStatusOptions } from 'src/app/core/user/user.model';
@@ -33,8 +38,8 @@ export class UsersComponent implements OnInit {
 
   params = {
     pageNumber: 1,
-    pageSize: 10,
-    isActive: '',
+    userStatus: '',
+    userType: '',
     filter: '',
   };
 
@@ -58,22 +63,64 @@ export class UsersComponent implements OnInit {
     'action',
   ];
 
-  dataSource = new MatTableDataSource([
-    1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14,
-  ]);
+  dataSource = new MatTableDataSource([]);
 
   ngOnInit(): void {
     // Subscribe to search input change
     this.searchInput.valueChanges
-      .pipe(debounceTime(500), distinctUntilChanged())
+      .pipe(debounceTime(500), distinctUntilChanged(), startWith(''))
       .subscribe((input: string) => {
+        if (input == null) {
+          return;
+        }
         this.params.filter = input;
+        this.params.pageNumber = 1;
+        this.getList();
+      });
+
+    //  Subscribe to type input change
+    this.userTypeControl.valueChanges
+      .pipe(debounceTime(500), distinctUntilChanged())
+      .subscribe((type: any) => {
+        if (type == null) {
+          return;
+        }
+        this.params.userType = type?.value;
+        this.params.pageNumber = 1;
+        this.getList();
+      });
+
+    //  Subscribe to status input change
+    this.userStatusControl.valueChanges
+      .pipe(debounceTime(500), distinctUntilChanged())
+      .subscribe((status: any) => {
+        if (status == null) {
+          return;
+        }
+        this.params.userStatus = status?.value;
         this.params.pageNumber = 1;
         this.getList();
       });
   }
 
-  getList() {}
+  getList() {
+    this._httpService
+      .request({
+        apiUrl: ApiEndpoint.Users,
+        method: ApiMethod.Get,
+        params: this.params,
+      })
+      .subscribe((res: IApiResponse) => {
+        if (res.status === 'success') {
+          const users = res.data.users || [];
+          this.dataSource.data = users;
+          const { currentPage, totalItems } = res.data;
+
+          this.paginationConfig.currentPage = currentPage;
+          this.paginationConfig.totalItems = totalItems;
+        }
+      });
+  }
 
   onDetail() {
     this._router.navigate(['1'], {
@@ -128,14 +175,32 @@ export class UsersComponent implements OnInit {
   onPageSizeChanged(pageSize: number) {
     // Reset page number
     this.params.pageNumber = 1;
-
-    this.params.pageSize = pageSize;
+    // this.params.pageSize = pageSize;
     this.getList();
   }
 
   // On page number change
   onPageChanged(pageNumber: number) {
     this.params.pageNumber = pageNumber;
+    this.getList();
+  }
+
+  // Reset filter
+  resetFilter() {
+    // Reset filter controls
+    this.searchInput.setValue(null);
+    this.userTypeControl.setValue(null);
+    this.userStatusControl.setValue(null);
+
+    // Reset params
+    this.params = {
+      pageNumber: 1,
+      userStatus: '',
+      userType: '',
+      filter: '',
+    };
+
+    // Get list
     this.getList();
   }
 }

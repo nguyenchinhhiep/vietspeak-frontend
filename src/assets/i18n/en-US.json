@@ -20,7 +20,8 @@
       "Active": "Active",
       "Inactive": "Inactive",
       "Pending": "Pending",
-      "Blocked": "Blocked"
+      "Blocked": "Blocked",
+      "Reviewing": "Reviewing"
    },
    "Action": {
       "Title": "Action",

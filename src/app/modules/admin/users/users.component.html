@@ -27,8 +27,7 @@
         *ngIf="search.value !== ''"
         (click)="searchInput.setValue('')"
       >
-        <mat-icon  [svgIcon]="'mat_outline:close'">
-        </mat-icon>
+        <mat-icon [svgIcon]="'mat_outline:close'"> </mat-icon>
       </button>
     </mat-form-field>
     <div class="flex gap-3 flex-grow">
@@ -88,7 +87,7 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button mat-button class="flex-shrink-0">
+      <button mat-button class="flex-shrink-0" type="button" (click)="resetFilter()">
         <div class="text-sm text-danger">{{ "Action.Reset" | translate }}</div>
       </button>
     </div>
@@ -123,16 +122,16 @@
             <td mat-cell *matCellDef="let element; let i = index">
               <div>
                 <img
-                  *ngIf="element?.avatarUrl"
+                  *ngIf="element?.avatar"
                   class="w-9 h-9 rounded-full overflow-hidden"
-                  [src]="element?.avatarUrl"
+                  [src]="element?.avatar"
                   alt=""
                 />
                 <div
-                  *ngIf="!element?.avatarUrl"
+                  *ngIf="!element?.avatar"
                   class="w-9 h-9 rounded-full overflow-hidden flex justify-center items-center font-medium bg-hover text-tertiary uppercase"
                 >
-                  {{ element?.firstName?.charAt(0) || "H" }}
+                  {{ element?.firstName?.charAt(0) || "" }}
                 </div>
               </div>
             </td>
@@ -143,14 +142,20 @@
               {{ "Table.Name" | translate }}
             </th>
             <td mat-cell *matCellDef="let element; let i = index">
-              <div class="whitespace-nowrap">{{ "Hiep Nguyen" }}</div>
+              <div class="whitespace-nowrap">
+                {{
+                  element.firstName
+                    ? element.firstName + " " + element.lastName
+                    : ""
+                }}
+              </div>
             </td>
           </ng-container>
 
           <ng-container matColumnDef="email">
             <th mat-header-cell *matHeaderCellDef>Email</th>
             <td mat-cell *matCellDef="let element; let i = index">
-              {{ "nguyenchinhhiep95@gmail.com" }}
+              {{ element.email }}
             </td>
           </ng-container>
 
@@ -160,8 +165,11 @@
             </th>
             <td mat-cell *matCellDef="let element; let i = index">
               <div class="flex gap-2 items-center">
-                <div class="w-4 h-4 rounded-full bg-accent"></div>
-                <div>Tutor</div>
+                <div
+                  class="w-4 h-4 rounded-full"
+                  [ngClass]="getUserType(element.userType).class"
+                ></div>
+                <div>{{ getUserType(element.userType).label }}</div>
               </div>
             </td>
           </ng-container>
@@ -171,12 +179,14 @@
               {{ "Table.Status" | translate }}
             </th>
             <td mat-cell *matCellDef="let element; let i = index">
-              <!-- <div class="tag" [ngClass]="getStatus(element).class">
-                {{ getStatus(element).translateKey | translate }}
-              </div> -->
               <div class="flex gap-2 items-center">
-                <div class="w-4 h-4 rounded-full bg-warn-400"></div>
-                <div>Pending</div>
+                <div
+                  class="w-4 h-4 rounded-full"
+                  [ngClass]="getStatus(element.status).class"
+                ></div>
+                <div>
+                  {{ getStatus(element.status).translateKey | translate }}
+                </div>
               </div>
             </td>
           </ng-container>
@@ -288,10 +298,12 @@
   <ng-container
     *ngFor="let item of dataSource.data | paginate : paginationConfig"
   ></ng-container>
-  <div class="mt-6 flex gap-4 items-center justify-between">
+  <div class="mt-6 flex gap-4 items-end justify-between">
     <div class="text-tertiary text-sm">
-      {{ "1" }} {{ "Table.To" | translate }} {{ "11" }}
-      {{ "Table.Of" | translate }} {{ "65" }} {{ "Table.Records" | translate }}
+      {{ "1" }} {{ "Table.To" | translate }}
+      {{ paginationConfig.currentPage * paginationConfig.itemsPerPage }}
+      {{ "Table.Of" | translate }} {{ paginationConfig.totalItems }}
+      {{ "Table.Records" | translate }}
     </div>
     <pagination-controls
       (pageChange)="onPageChanged($event)"

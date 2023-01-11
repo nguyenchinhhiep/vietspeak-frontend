@@ -170,6 +170,7 @@ export class UserProfileComponent implements OnInit {
     }
 
     const payload = {
+      email: this.tutorProfileForm.get('email')?.value,
       tutorProfile: {
         ...this.tutorProfileForm.value,
         teachingLanguage:

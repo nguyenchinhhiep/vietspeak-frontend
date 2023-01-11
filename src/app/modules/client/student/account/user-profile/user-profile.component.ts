@@ -91,6 +91,7 @@ export class UserProfileComponent implements OnInit {
     this.studentProfileForm.disable();
 
     const payload = {
+      email: this.studentProfileForm.get('email')?.value,
       studentProfile: {
         ...this.studentProfileForm.value,
         learningLanguage:

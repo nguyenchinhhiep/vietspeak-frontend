@@ -17,6 +17,7 @@ export enum ApiEndpoint {
   Profile = 'profile',
   Avatar = 'avatar',
   UploadCertificates = 'certificates',
+  Users = 'users',
 }
 
 export interface IApiResponse<DataType = any> {

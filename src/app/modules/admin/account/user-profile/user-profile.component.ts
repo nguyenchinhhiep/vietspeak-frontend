@@ -77,13 +77,18 @@ export class UserProfileComponent implements OnInit {
       this.profileForm.controls[control].markAsDirty();
     }
 
-    if (this.profileForm.invalid) {
+    if (this.profileForm.invalid || this.profileForm.status === 'PENDING') {
       return;
     }
 
     const payload = {
-      ...this.profileForm.value,
+      email: this.profileForm.get('email')?.value,
+      firstName: this.profileForm.get('firstName')?.value,
+      lastName: this.profileForm.get('lastName')?.value,
     };
+
+    // Disable the form
+    this.profileForm.disable();
 
     this._httpService
       .request({
@@ -128,7 +133,6 @@ export class UserProfileComponent implements OnInit {
   // Upload profile picture
   onProfilePictureFileSelected(event: any, profilePictureInput: any) {
     const maxSize = 1 * 1024 * 1024;
-
     const file = event.target.files[0];
     if (file) {
       if (!file.type.includes('image')) {
@@ -149,7 +153,7 @@ export class UserProfileComponent implements OnInit {
         return;
       }
 
-      // Limit file size to 1mb
+      // Limit file size to 2mb
       if (file.size > maxSize) {
         this._toastService.open({
           message: this._translateService.instant('FileUpload.FileTooLarge', {
@@ -168,23 +172,6 @@ export class UserProfileComponent implements OnInit {
 
       this.openImageCropper(file);
     }
-  }
-
-  // Open crop image dialog
-  openImageCropper(imageFile: File) {
-    const dialogRef = this._imageCropperDialogService.open(imageFile, {
-      cropperMaxWidth: 300,
-      cropperMaxHeight: 300,
-      cropperMinWidth: 200,
-      cropperMinHeight: 200,
-    });
-
-    dialogRef?.afterClosed().subscribe((croppedImage) => {
-      if (croppedImage != null) {
-        this.profileForm.get('profilePictureUrl')?.setValue(croppedImage);
-        this.profileForm.get('profilePicture')?.setValue(croppedImage);
-      }
-    });
   }
 
   // Remove profile picture
@@ -214,6 +201,46 @@ export class UserProfileComponent implements OnInit {
               },
             });
             this.profileForm.get('avatar')?.setValue(null);
+            this.userService.currentUser = {
+              ...this.userService.currentUserValue,
+              avatar: '',
+            };
+          });
+      }
+    });
+  }
+
+  // Open crop image dialog
+  openImageCropper(imageFile: File) {
+    const dialogRef = this._imageCropperDialogService.open(imageFile, {
+      cropperMaxWidth: 300,
+      cropperMaxHeight: 300,
+      cropperMinWidth: 200,
+      cropperMinHeight: 200,
+    });
+
+    dialogRef?.afterClosed().subscribe((croppedImage) => {
+      if (croppedImage != null) {
+        this.userService
+          .uploadAvatar(croppedImage)
+          .subscribe((res: IApiResponse) => {
+            this._toastService.open({
+              message: this._translateService.instant(
+                'Toast.UpdatedSuccessfully'
+              ),
+              configs: {
+                payload: {
+                  type: 'success',
+                },
+              },
+            });
+
+            this.profileForm.get('avatar')?.setValue(croppedImage);
+
+            this.userService.currentUser = {
+              ...this.userService.currentUserValue,
+              avatar: croppedImage,
+            };
           });
       }
     });

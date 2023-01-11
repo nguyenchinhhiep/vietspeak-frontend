@@ -2,7 +2,6 @@ import { UserType } from './user-type.model';
 
 export enum UserStatus {
   Active = 'Active',
-  Inactive = 'Inactive',
   Pending = 'Pending',
   Reviewing = 'Reviewing',
   Blocked = 'Blocked',
@@ -16,20 +15,14 @@ export const UserStatusOptions = [
     value: UserStatus.Active,
   },
   {
-    label: 'Inactive',
-    translateKey: 'Status.Inactive',
-    class: 'bg-danger-500',
-    value: UserStatus.Active,
-  },
-  {
     label: 'Pending',
     translateKey: 'Status.Pending',
     class: 'bg-warn-400',
-    value: UserStatus.Active,
+    value: UserStatus.Pending,
   },
   {
     label: 'Reviewing',
-    translateKey: 'Status.UnderReview',
+    translateKey: 'Status.Reviewing',
     class: 'bg-info-500',
     value: UserStatus.Reviewing,
   },
