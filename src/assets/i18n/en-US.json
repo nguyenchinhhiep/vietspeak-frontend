@@ -29,6 +29,7 @@
       "Continue": "Continue",
       "Back": "Back",
       "Block": "Block",
+      "Unblock": "Unblock",
       "Close": "Close",
       "Login": "Login",
       "Register": "Register",
@@ -50,13 +51,18 @@
       "ViewProfile": "View profile",
       "Reset": "Reset",
       "ResetFilters": "Reset filters",
-      "EditProfile": "Edit profile"
+      "EditProfile": "Edit profile",
+      "SendEmail": "Send email"
    },
    "Toast": {
       "CreatedSuccessfully": "Created successfully",
       "UpdatedSuccessfully": "Updated successfully",
       "DeletedSuccessfully": "Deleted successfully",
-      "RemovedSuccessfully": "Removed successfully"
+      "RemovedSuccessfully": "Removed successfully",
+      "BlockedSuccessfully": "Blocked successfully",
+      "ApprovedSuccessfully": "Approved successfully",
+      "RejectedSuccessfully": "Rejected successfully",
+      "UnblockedSuccessfully": "Unblocked successfully"
    },
    "Confirmation": {
       "Title": "Confirmation",
@@ -194,7 +200,7 @@
       "AddLanguage": "Add language",
       "HaveExperienceTeachingOnline": "Do you have experience teaching online?",
       "TeachingCertificates": "Teaching certificates",
-      "Certificate": "Certificate",
+      "Certificates": "Certificates",
       "ProfilePicture": "Profile picture",
       "AboutMe": "About me",
       "IntroductionDescription": "Say hello and introduce yourself to students! This will be the first thing students read about you when looking at their tutor profile",

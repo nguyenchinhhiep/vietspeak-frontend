@@ -98,10 +98,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
         if (!authenticated) {
           log.debug('Not authenticated, redirecting...');
 
-          // Redirect to sign in page
-          this._router.navigate(['/', 'login'], {
-            queryParams: { redirectUrl: redirectUrl },
-          });
+          // Logout
+          this._authService.logout();
 
           // Prevent the access
           return of(false);

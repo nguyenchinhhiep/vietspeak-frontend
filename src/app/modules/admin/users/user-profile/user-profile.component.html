@@ -1,8 +1,10 @@
 <div class="w-full">
   <app-tutor-profile
-    *ngIf="userProfile.userType === userType.Tutor"
+    *ngIf="userProfile?.userType === userType.Tutor"
+    [userProfile]="userProfile"
   ></app-tutor-profile>
   <app-student-profile
-    *ngIf="userProfile.userType === userType.Student"
+    *ngIf="userProfile?.userType === userType.Student"
+    [userProfile]="userProfile"
   ></app-student-profile>
 </div>

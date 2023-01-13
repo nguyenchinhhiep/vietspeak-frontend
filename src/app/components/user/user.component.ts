@@ -22,7 +22,7 @@ export class UserComponent implements OnInit {
   }
 
   logout() {
-    this._authService.logout().subscribe();
+    this._authService.logout();
   }
 
   onAccount() {

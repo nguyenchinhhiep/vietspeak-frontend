@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -48,6 +48,8 @@ export class StudentProfileComponent implements OnInit {
     private _authService: AuthService
   ) {}
 
+  @Input() userProfile: any = null;
+
   languageLevelOptions = LanguageLevelOptions;
   learningLanguageOptions = learningLanguageOptions;
   heardFromOptions = HeardFromOptions;
@@ -58,6 +60,22 @@ export class StudentProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.createForm();
+
+    if (this.userProfile) {
+      this.studentProfileForm.patchValue({
+        ...this.userProfile,
+        ...this.userProfile?.studentProfile,
+      });
+      const learningLanguage = this.learningLanguageOptions.find(
+        (item) =>
+          item.value === this.userProfile?.studentProfile.learningLanguage
+      );
+      if (learningLanguage) {
+        this.studentProfileForm
+          .get('learningLanguage')
+          ?.setValue(learningLanguage);
+      }
+    }
   }
 
   submit() {

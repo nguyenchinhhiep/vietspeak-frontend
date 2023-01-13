@@ -1,6 +1,14 @@
 import { Injectable } from '@angular/core';
+import {
+  NavigationCancel,
+  NavigationEnd,
+  NavigationError,
+  NavigationStart,
+  Router,
+} from '@angular/router';
 
 import { BehaviorSubject, Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
@@ -20,7 +28,37 @@ export class LoadingBarService {
   /**
    * Constructor
    */
-  constructor() {}
+  constructor(private _router: Router) {
+    // Initialize the service
+    this._init();
+  }
+
+  /**
+   * Initialize
+   *
+   * @private
+   */
+  private _init(): void {
+    // Subscribe to the router events to show/hide the loading bar
+    this._router.events
+      .pipe(filter((event) => event instanceof NavigationStart))
+      .subscribe(() => {
+        this.show();
+      });
+
+    this._router.events
+      .pipe(
+        filter(
+          (event) =>
+            event instanceof NavigationEnd ||
+            event instanceof NavigationError ||
+            event instanceof NavigationCancel
+        )
+      )
+      .subscribe(() => {
+        this.hide();
+      });
+  }
 
   // -----------------------------------------------------------------------------------------------------
   // @ Accessors

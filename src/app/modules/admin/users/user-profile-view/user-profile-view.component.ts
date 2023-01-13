@@ -1,5 +1,11 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {
+  ApiEndpoint,
+  ApiMethod,
+  IApiResponse,
+} from 'src/app/core/http/api.model';
+import { HttpService } from 'src/app/core/http/services/http.service';
 import { UserType } from 'src/app/core/user/user-type.model';
 
 @Component({
@@ -13,11 +19,25 @@ export class UserProfileViewComponent implements OnInit {
     public data: {
       id: string;
     },
-    public matDialogRef: MatDialogRef<UserProfileViewComponent>
+    public matDialogRef: MatDialogRef<UserProfileViewComponent>,
+    private _httpService: HttpService
   ) {}
 
   userType = UserType;
-  userDetail: any = {};
+  userProfile: any = null;
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getUserProfile();
+  }
+
+  getUserProfile() {
+    this._httpService
+      .request({
+        apiUrl: ApiEndpoint.Users + '/' + this.data.id,
+        method: ApiMethod.Get,
+      })
+      .subscribe((res: IApiResponse) => {
+        this.userProfile = res.data || {};
+      });
+  }
 }

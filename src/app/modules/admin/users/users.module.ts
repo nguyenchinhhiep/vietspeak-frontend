@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { UsersComponent } from './users.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatMomentDateModule } from '@angular/material-moment-adapter';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatIconModule } from '@angular/material/icon';
@@ -29,6 +28,8 @@ import { UserProfileViewComponent } from './user-profile-view/user-profile-view.
 import { MatDialogModule } from '@angular/material/dialog';
 import { AutoFocusModule } from 'src/app/directives/auto-focus/auto-focus.module';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { SafeModule } from 'src/app/pipes/safe/safe.module';
+import { PreventAutofillModule } from 'src/app/directives/prevent-autofill/prevent-autofill.module';
 
 const routes: Routes = [
   {
@@ -106,7 +107,6 @@ const routes: Routes = [
     ImageCropperDialogModule,
     MatMenuModule,
     MatDatepickerModule,
-    MatMomentDateModule,
     MatRadioModule,
     MatTabsModule,
     BreadcrumbModule,
@@ -114,6 +114,8 @@ const routes: Routes = [
     MatDialogModule,
     AutoFocusModule,
     MatTooltipModule,
+    SafeModule,
+    PreventAutofillModule,
     RouterModule.forChild(routes),
   ],
   providers: [UsersService],

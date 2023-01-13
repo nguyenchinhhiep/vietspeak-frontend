@@ -7,51 +7,48 @@
         {{ "StudentProfile.Basic" | translate }}
       </div>
 
-      <div class="mb-4">
-        <div class="flex gap-5 items-center">
-          <img
-            *ngIf="studentProfileForm.get('avatar')?.value"
-            class="w-20 h-20 rounded-full overflow-hidden"
-            [src]="studentProfileForm.get('avatar')?.value"
-            alt=""
-          />
-          <div
-            *ngIf="!studentProfileForm.get('avatar')?.value"
-            class="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center font-medium bg-primary text-white uppercase text-2xl"
-          >
-            {{ studentProfileForm.get("firstName")?.value?.charAt(0) || "H" }}
-          </div>
-
-          <div class="flex gap-2 justify-center">
-            <!-- Change image -->
-            <button
-              type="button"
-              mat-button
-              [color]="'primary'"
-              class="btn--sm !border-primary !border !border-solid"
-              (click)="uploadProfilePictureFile.click()"
-            >
-              {{
-                studentProfileForm.get("avatar")?.value
-                  ? ("FileUpload.Change" | translate)
-                  : ("FileUpload.AddAPhoto" | translate)
-              }}
-            </button>
-            <!-- Remove image -->
-            <button
-              *ngIf="studentProfileForm.get('avatar')?.value"
-              type="button"
-              mat-button
-              class="btn--sm"
-              (click)="onRemoveProfilePicture()"
-            >
-              <div class="text-danger">
-                {{ "Action.Remove" | translate }}
-              </div>
-            </button>
-          </div>
+      <div class="flex gap-5 items-center">
+        <img
+          *ngIf="studentProfileForm.get('avatar')?.value"
+          class="w-20 h-20 rounded-full overflow-hidden"
+          [src]="studentProfileForm.get('avatar')?.value"
+          alt=""
+        />
+        <div
+          *ngIf="!studentProfileForm.get('avatar')?.value"
+          class="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center font-medium bg-primary text-white uppercase text-2xl"
+        >
+          {{ userProfile?.firstName?.charAt(0) || "" }}
         </div>
 
+        <div class="flex gap-2 justify-center">
+          <!-- Change image -->
+          <button
+            type="button"
+            mat-button
+            [color]="'primary'"
+            class="btn--sm !border-primary !border !border-solid"
+            (click)="uploadProfilePictureFile.click()"
+          >
+            {{
+              studentProfileForm.get("avatar")?.value
+                ? ("FileUpload.Change" | translate)
+                : ("FileUpload.AddAPhoto" | translate)
+            }}
+          </button>
+          <!-- Remove image -->
+          <button
+            *ngIf="studentProfileForm.get('avatar')?.value"
+            type="button"
+            mat-button
+            class="btn--sm"
+            (click)="onRemoveProfilePicture()"
+          >
+            <div class="text-danger">
+              {{ "Action.Remove" | translate }}
+            </div>
+          </button>
+        </div>
         <input
           hidden
           type="file"
@@ -74,13 +71,10 @@
           mat-icon-button
           type="button"
           matSuffix
-          *ngIf="firstName.value != ''"
+          *ngIf="firstName.value != '' && !studentProfileForm.disabled"
           (click)="studentProfileForm.get('firstName')?.setValue('')"
         >
-          <mat-icon
-            
-            [svgIcon]="'mat_outline:close'"
-          ></mat-icon>
+          <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
         </button>
         <mat-error
           *ngIf="studentProfileForm.get('firstName')?.hasError('required')"
@@ -99,13 +93,10 @@
           mat-icon-button
           type="button"
           matSuffix
-          *ngIf="lastName.value != ''"
+          *ngIf="lastName.value != '' && !studentProfileForm.disabled"
           (click)="studentProfileForm.get('lastName')?.setValue('')"
         >
-          <mat-icon
-            
-            [svgIcon]="'mat_outline:close'"
-          ></mat-icon>
+          <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
         </button>
         <mat-error
           *ngIf="studentProfileForm.get('lastName')?.hasError('required')"
@@ -140,20 +131,14 @@
           "
           (click)="studentProfileForm.get('email')?.setValue('')"
         >
-          <mat-icon
-            
-            [svgIcon]="'mat_outline:close'"
-          ></mat-icon>
+          <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
         </button>
         <div
           class="ml-2 flex justify-center items-center"
           matSuffix
           *ngIf="studentProfileForm.get('email')?.valid"
         >
-          <mat-icon
-            
-            [svgIcon]="'mat_outline:check'"
-          ></mat-icon>
+          <mat-icon [svgIcon]="'mat_outline:check'"></mat-icon>
         </div>
         <mat-progress-spinner
           [diameter]="24"

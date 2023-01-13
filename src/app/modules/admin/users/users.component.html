@@ -87,7 +87,12 @@
           </mat-option>
         </mat-select>
       </mat-form-field>
-      <button mat-button class="flex-shrink-0" type="button" (click)="resetFilter()">
+      <button
+        mat-button
+        class="flex-shrink-0"
+        type="button"
+        (click)="resetFilter()"
+      >
         <div class="text-sm text-danger">{{ "Action.Reset" | translate }}</div>
       </button>
     </div>
@@ -127,12 +132,6 @@
                   [src]="element?.avatar"
                   alt=""
                 />
-                <div
-                  *ngIf="!element?.avatar"
-                  class="w-9 h-9 rounded-full overflow-hidden flex justify-center items-center font-medium bg-hover text-tertiary uppercase"
-                >
-                  {{ element?.firstName?.charAt(0) || "" }}
-                </div>
               </div>
             </td>
           </ng-container>
@@ -169,7 +168,7 @@
                   class="w-4 h-4 rounded-full"
                   [ngClass]="getUserType(element.userType).class"
                 ></div>
-                <div>{{ getUserType(element.userType).label }}</div>
+                <div>{{ getUserType(element.userType).label || "" }}</div>
               </div>
             </td>
           </ng-container>
@@ -207,7 +206,7 @@
                     type="button"
                     mat-menu-item
                     mat-menu-item
-                    (click)="viewProfile(element?.id)"
+                    (click)="viewProfile(element?._id)"
                   >
                     <mat-icon
                       class="text-danger"
@@ -219,7 +218,7 @@
                     *ngIf="element.status === userStatus.Reviewing"
                     type="button"
                     mat-menu-item
-                    (click)="approve(element?.id)"
+                    (click)="approve(element?._id)"
                   >
                     <mat-icon
                       class="text-primary"
@@ -231,7 +230,7 @@
                     *ngIf="element.status === userStatus.Reviewing"
                     type="button"
                     mat-menu-item
-                    (click)="reject(element?.id)"
+                    (click)="reject(element?._id)"
                   >
                     <mat-icon
                       class="text-warn"
@@ -239,7 +238,12 @@
                     ></mat-icon>
                     <span>{{ "Action.Reject" | translate }}</span>
                   </button>
-                  <button type="button" mat-menu-item routerLink="1">
+                  <button
+                    type="button"
+                    mat-menu-item
+                    *ngIf="element?.status !== userStatus.Pending"
+                    [routerLink]="element?._id"
+                  >
                     <mat-icon
                       class="text-danger"
                       svgIcon="mat_outline:edit"
@@ -247,21 +251,33 @@
                     <span>{{ "Action.Update" | translate }}</span>
                   </button>
                   <button
+                    *ngIf="
+                      element.status === userStatus.Active ||
+                      element.status === userStatus.Blocked
+                    "
                     type="button"
                     mat-menu-item
-                    (click)="block(element?.id)"
+                    (click)="block(element)"
                   >
                     <mat-icon
                       class="text-danger"
-                      svgIcon="mat_outline:block"
+                      [svgIcon]="
+                        element.status === userStatus.Active
+                          ? 'mat_outline:lock'
+                          : 'mat_outline:lock_open'
+                      "
                     ></mat-icon>
-                    <span>{{ "Action.Block" | translate }}</span>
+                    <span>{{
+                      element.status === userStatus.Active
+                        ? ("Action.Block" | translate)
+                        : ("Action.Unblock" | translate)
+                    }}</span>
                   </button>
                   <button
                     type="button"
                     mat-menu-item
                     mat-menu-item
-                    (click)="delete(element?.id)"
+                    (click)="delete(element?._id)"
                   >
                     <mat-icon
                       class="text-danger"
@@ -278,11 +294,7 @@
             mat-header-row
             *matHeaderRowDef="displayedColumns; sticky: false"
           ></tr>
-          <tr
-            (dblclick)="onDetail()"
-            mat-row
-            *matRowDef="let row; columns: displayedColumns"
-          ></tr>
+          <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
           <tr class="mat-row" *matNoDataRow>
             <td
               class="mat-cell text-center"
@@ -300,8 +312,19 @@
   ></ng-container>
   <div class="mt-6 flex gap-4 items-end justify-between">
     <div class="text-tertiary text-sm">
-      {{ "1" }} {{ "Table.To" | translate }}
-      {{ paginationConfig.currentPage * paginationConfig.itemsPerPage }}
+      {{
+        paginationConfig.totalItems > 0
+          ? (paginationConfig.currentPage - 1) * paginationConfig.itemsPerPage +
+            1
+          : 0
+      }}
+      {{ "Table.To" | translate }}
+      {{
+        paginationConfig.currentPage * paginationConfig.itemsPerPage >
+        paginationConfig.totalItems
+          ? paginationConfig.totalItems
+          : paginationConfig.currentPage * paginationConfig.itemsPerPage
+      }}
       {{ "Table.Of" | translate }} {{ paginationConfig.totalItems }}
       {{ "Table.Records" | translate }}
     </div>

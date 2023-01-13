@@ -1,29 +1,35 @@
-<div class="w-full mx-auto max-w-2xl relative">
+<div class="w-full mx-auto max-w-2xl relative" *ngIf="userProfile">
   <app-breadcrumb
     class="block font-medium text-2xl w-full mb-6"
   ></app-breadcrumb>
   <div class="flex gap-4 items-center mb-4 w-full">
-    <div class="flex gap-4 items-center">
+    <div class="flex gap-4 items-center mr-auto">
+      <img
+        *ngIf="userProfile?.avatar"
+        class="w-24 h-24 rounded-full overflow-hidden"
+        [src]="userProfile?.avatar"
+        alt=""
+      />
       <div
-        class="w-16 h-16 rounded-full overflow-hidden flex justify-center items-center font-medium bg-accent text-white uppercase text-2xl"
+        *ngIf="!userProfile?.avatar"
+        class="w-24 h-24 rounded-full overflow-hidden flex justify-center items-center font-medium bg-accent text-white uppercase text-2xl"
       >
-        {{ "H" }}
+        {{ userProfile?.firstName?.charAt(0) || "" }}
       </div>
       <div class="flex flex-col gap-1">
-        <div class="font-medium text-primary">Hiep Nguyen</div>
-        <div class="text-tertiary text-sm font-medium">Tutor</div>
+        <div class="font-medium text-primary">
+          {{
+            userProfile?.firstName
+              ? userProfile?.firstName + " " + userProfile?.lastName
+              : ""
+          }}
+        </div>
+        <div class="text-tertiary text-sm font-medium">
+          {{ userProfile?.userType }}
+        </div>
       </div>
     </div>
-    <button
-      *ngIf="userDetail.status !== userStatus.Pending"
-      type="button"
-      mat-button
-      class="!ml-auto bg-hover"
-      (click)="viewProfile()"
-    >
-      <mat-icon class="mr-2 icon" [svgIcon]="'mat_outline:visibility'"></mat-icon>
-      <div class="text-sm">{{ "Action.ViewProfile" | translate }}</div>
-    </button>
+
     <button mat-icon-button [matMenuTriggerFor]="actionMenu">
       <mat-icon [svgIcon]="'mat_outline:more_vert'"></mat-icon>
     </button>
@@ -31,9 +37,20 @@
     <mat-menu #actionMenu="matMenu" [xPosition]="'before'">
       <ng-template matMenuContent>
         <button
-          *ngIf="userDetail.status === userStatus.Reviewing"
+          *ngIf="userProfile?.status !== userStatus.Pending"
           type="button"
           mat-menu-item
+          mat-menu-item
+          (click)="viewProfile()"
+        >
+          <mat-icon
+            class="text-danger"
+            svgIcon="mat_outline:visibility"
+          ></mat-icon>
+          <span>{{ "Action.ViewProfile" | translate }}</span>
+        </button>
+        <button
+          *ngIf="userProfile?.status === userStatus.Reviewing"
           type="button"
           mat-menu-item
           (click)="approve()"
@@ -42,7 +59,7 @@
           <span>{{ "Action.Approve" | translate }}</span>
         </button>
         <button
-          *ngIf="userDetail.status === userStatus.Reviewing"
+          *ngIf="userProfile?.status === userStatus.Reviewing"
           type="button"
           mat-menu-item
           (click)="reject()"
@@ -50,9 +67,28 @@
           <mat-icon class="text-warn" svgIcon="mat_outline:close"></mat-icon>
           <span>{{ "Action.Reject" | translate }}</span>
         </button>
-        <button type="button" mat-menu-item (click)="block()">
-          <mat-icon class="text-danger" svgIcon="mat_outline:block"></mat-icon>
-          <span>{{ "Action.Block" | translate }}</span>
+        <button
+          *ngIf="
+            userProfile?.status === userStatus.Active ||
+            userProfile?.status === userStatus.Blocked
+          "
+          type="button"
+          mat-menu-item
+          (click)="block()"
+        >
+          <mat-icon
+            class="text-danger"
+            [svgIcon]="
+              userProfile?.status === userStatus.Active
+                ? 'mat_outline:lock'
+                : 'mat_outline:lock_open'
+            "
+          ></mat-icon>
+          <span>{{
+            userProfile?.status === userStatus.Active
+              ? ("Action.Block" | translate)
+              : ("Action.Unblock" | translate)
+          }}</span>
         </button>
         <button type="button" mat-menu-item mat-menu-item (click)="delete()">
           <mat-icon class="text-danger" svgIcon="mat_outline:delete"></mat-icon>
@@ -81,4 +117,8 @@
       </div>
     </div>
   </div>
+</div>
+<div class="flex justify-center items-center p-6" *ngIf="!userProfile">
+  <mat-progress-spinner [diameter]="36" mode="indeterminate">
+  </mat-progress-spinner>
 </div>

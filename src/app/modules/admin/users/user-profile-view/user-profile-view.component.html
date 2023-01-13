@@ -14,22 +14,40 @@
 
   <!-- Body -->
   <div class="dialog__body">
-    <ng-container *ngIf="userDetail.userType !== userType.Tutor">
+    <ng-container *ngIf="userProfile?.userType === userType.Tutor">
       <div class="flex flex-col gap-4">
         <div class="flex justify-between gap-4 items-center">
           <div class="flex items-center gap-4 items-center">
+            <img
+              *ngIf="userProfile?.avatar"
+              class="w-20 h-20 rounded-full overflow-hidden"
+              [src]="userProfile?.avatar"
+              alt=""
+            />
             <div
+              *ngIf="!userProfile?.avatar"
               class="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center font-medium bg-accent text-white uppercase text-2xl"
             >
-              {{ "H" }}
+              {{ userProfile?.firstName?.charAt(0) || "" }}
             </div>
             <div class="flex flex-col">
-              <div class="text-lg font-medium">Hiep Nguyen</div>
-              <div class="text-tertiary">Tutor</div>
+              <div class="text-lg font-medium">
+                {{
+                  userProfile?.firstName
+                    ? userProfile?.firstName + " " + userProfile?.lastName
+                    : ""
+                }}
+              </div>
+              <div class="text-tertiary">{{ userProfile?.userType }}</div>
             </div>
           </div>
           <div class="flex items-center gap-2">
-            <a class="cursor-default flex" matTooltip="Send email" matTooltipPosition="left">
+            <a
+              class="cursor-default flex"
+              [matTooltip]="'Action.SendEmail' | translate"
+              matTooltipPosition="left"
+              href="mailto:{{userProfile?.email}}"
+            >
               <mat-icon class="icon" [svgIcon]="'mat_outline:email'"></mat-icon>
             </a>
           </div>
@@ -37,13 +55,15 @@
 
         <div class="flex items-center gap-4">
           <div class="font-medium">Email:</div>
-          <div class="text-tertiary">nguyenchinhhiep@gmail.com</div>
+          <div class="text-tertiary">{{ userProfile?.email }}</div>
         </div>
         <div class="flex items-center gap-4">
           <div class="font-medium">
             {{ "TutorProfile.DateOfBirth" | translate }}:
           </div>
-          <div class="text-tertiary">10/03/1995</div>
+          <div class="text-tertiary">
+            {{ userProfile?.tutorProfile?.dob | date : "dd/MM/YYYY" }}
+          </div>
         </div>
         <div class="flex items-center gap-4">
           <div class="font-medium">
@@ -53,7 +73,7 @@
             <div
               class="border border-rounded border-light rounded-full px-4 py-1 text-accent bg-hover"
             >
-              English
+              {{ userProfile?.tutorProfile?.teachingLanguage }}
             </div>
           </div>
         </div>
@@ -63,14 +83,10 @@
           </div>
           <div class="flex flex-wrap gap-3">
             <div
+              *ngFor="let item of userProfile?.tutorProfile?.languages"
               class="border border-rounded border-light rounded-full px-4 py-1 text-accent bg-hover"
             >
-              English - C1
-            </div>
-            <div
-              class="border border-rounded border-light rounded-full px-4 py-1 text-accent bg-hover"
-            >
-              Vietnamese - Native
+              {{ item?.language }} - {{ item?.fluency }}
             </div>
           </div>
         </div>
@@ -80,24 +96,10 @@
           </div>
           <div class="flex flex-wrap gap-3">
             <div
+              *ngFor="let item of userProfile?.tutorProfile?.teachingJobs"
               class="border border-rounded border-light rounded-full px-4 py-1 text-accent bg-hover"
             >
-              IELTS
-            </div>
-            <div
-              class="border border-rounded border-light rounded-full px-4 py-1 text-accent bg-hover"
-            >
-              TOEIC
-            </div>
-            <div
-              class="border border-rounded border-light rounded-full px-4 py-1 text-accent bg-hover"
-            >
-              Interview
-            </div>
-            <div
-              class="border border-rounded border-light rounded-full px-4 py-1 text-accent bg-hover"
-            >
-              Speaking
+              {{ item }}
             </div>
           </div>
         </div>
@@ -105,7 +107,9 @@
           <div class="font-medium">
             {{ "TutorProfile.Experience" | translate }}:
           </div>
-          <div class="text-tertiary">More than 2 years</div>
+          <div class="text-tertiary">
+            {{ userProfile?.tutorProfile?.teachingExperience }}
+          </div>
         </div>
         <div class="border-0 border-t border-solid border-light my-3"></div>
         <div class="flex flex-col gap-2">
@@ -113,38 +117,34 @@
             {{ "TutorProfile.Introduction" | translate }}
           </div>
           <p class="text-secondary leading-loose">
-            Hello, I've been teaching English since 2006, in Peru, Kazakhstan,
-            China, Ireland and Cambodia. I've taught all ages and all levels but
-            prefer teaching higher level adults. I like and am able to teach
-            grammar and I enjoy it when students ask me questions which make me
-            think ! My particular love with teaching is helping students go
-            beyond the daily communication, to learn more advanced topics and to
-            help people express more complex and deeper ideas and feelings. I
-            enjoy travelling and learning different cultures and languages. I
-            also love reading, walking and spending time in nature. I love
-            working for Lingoda because I meet all sorts of interesting and
-            motivated students from around the world and I love hearing
-            everyone's experiences. I look forward to meeting you and helping
-            you with your language learning goals.
+            {{ userProfile?.tutorProfile?.introduction }}
           </p>
           <iframe
+            *ngIf="userProfile?.tutorProfile?.videoIntroduction"
             class="mt-4 w-full"
             height="350"
-            src="https://www.youtube.com/embed/tgbNymZ7vqY"
+            [src]="
+              userProfile?.tutorProfile?.videoIntroduction.replace(
+                'watch?v=',
+                'embed/'
+              ) | safe : 'resourceUrl'
+            "
           >
           </iframe>
         </div>
         <div class="border-0 border-t border-solid border-light my-3"></div>
         <div class="flex flex-col gap-2">
           <div class="font-medium text-lg">
-            {{ "TutorProfile.Certificate" | translate }}
+            {{ "TutorProfile.Certificates" | translate }}
           </div>
           <div class="flex flex-col gap-2">
-            <a class="text-accent cursor-default"
-              >Teaching-Certificate-documents-1.pdf</a
-            >
-            <a class="text-accent cursor-default"
-              >Teaching-Certificate-documents-2.pdf</a
+            <a
+              *ngFor="
+                let item of userProfile?.tutorProfile?.teachingCertificates
+              "
+              class="text-accent cursor-default"
+              [href]="item.url" target="_blank"
+              >{{ item.originalname }}</a
             >
           </div>
         </div>
@@ -158,48 +158,61 @@
               {{ "TutorProfile.ReasonHere" | translate }}
             </div>
             <p class="text-secondary leading-loose">
-              Hello, I've been teaching English since 2006, in Peru, Kazakhstan,
-              China, Ireland and Cambodia. I've taught all ages and all levels
-              but prefer teaching higher level adults. I like and am able to
-              teach grammar and I enjoy it when students ask me questions which
-              make me think ! My particular love with teaching is helping
-              students go beyond the daily communication, to learn more advanced
-              topics and to help people express more complex and deeper ideas
-              and feelings.
+              {{ userProfile?.tutorProfile?.reasonHere }}
             </p>
           </div>
           <div class="flex flex-col gap-1">
             <div class="text-accent">
               {{ "OnBoarding.WhereHeardFrom" | translate }}
             </div>
-            <p class="text-secondary leading-relaxed">Web Search</p>
+            <p class="text-secondary leading-relaxed">
+              {{ userProfile?.tutorProfile?.heardFrom }}
+            </p>
           </div>
         </div>
       </div>
     </ng-container>
-    <ng-container *ngIf="userDetail.userType === userType.Student">
+    <ng-container *ngIf="userProfile?.userType === userType.Student">
       <div class="flex flex-col gap-4 w-full">
         <div class="flex justify-between gap-4 items-center">
           <div class="flex items-center gap-4 items-center">
+            <img
+              *ngIf="userProfile?.avatar"
+              class="w-20 h-20 rounded-full overflow-hidden"
+              [src]="userProfile?.avatar"
+              alt=""
+            />
             <div
+              *ngIf="!userProfile?.avatar"
               class="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center font-medium bg-primary text-white uppercase text-2xl"
             >
-              {{ "H" }}
+              {{ userProfile?.firstName?.charAt(0) || "" }}
             </div>
             <div class="flex flex-col">
-              <div class="text-lg font-medium">Hiep Nguyen</div>
-              <div class="text-tertiary">Student</div>
+              <div class="text-lg font-medium">
+                {{
+                  userProfile?.firstName
+                    ? userProfile?.firstName + " " + userProfile?.lastName
+                    : ""
+                }}
+              </div>
+              <div class="text-tertiary">{{ userProfile?.userType }}</div>
             </div>
           </div>
           <div class="flex items-center gap-2">
-            <a class="cursor-default flex" matTooltip="Send email" matTooltipPosition="left">
+            <a
+              class="cursor-default flex"
+              [matTooltip]="'Action.SendEmail' | translate"
+              matTooltipPosition="left"
+              href="mailto:{{userProfile?.email}}"
+            >
               <mat-icon class="icon" [svgIcon]="'mat_outline:email'"></mat-icon>
             </a>
           </div>
         </div>
         <div class="flex items-center gap-4">
           <div class="font-medium">Email:</div>
-          <div class="text-tertiary">nguyenchinhhiep@gmail.com</div>
+          <div class="text-tertiary">{{ userProfile?.email }}</div>
         </div>
 
         <div class="flex items-center gap-4">
@@ -210,7 +223,7 @@
             <div
               class="border border-rounded border-light rounded-full px-4 py-1 text-primary bg-hover"
             >
-              English
+              {{ userProfile?.studentProfile?.learningLanguage }}
             </div>
           </div>
         </div>
@@ -223,7 +236,7 @@
             <div
               class="border border-rounded border-light rounded-full px-4 py-1 text-primary bg-hover"
             >
-              Beginner
+              {{ userProfile?.studentProfile?.currentLevel }}
             </div>
           </div>
         </div>
@@ -238,11 +251,18 @@
             <div class="text-primary">
               {{ "OnBoarding.WhereHeardFrom" | translate }}
             </div>
-            <p class="text-secondary leading-relaxed">Web Search</p>
+            <p class="text-secondary leading-relaxed">
+              {{ userProfile?.studentProfile?.heardFrom }}
+            </p>
           </div>
         </div>
       </div>
     </ng-container>
+
+    <div class="flex justify-center items-center p-6" *ngIf="!userProfile">
+      <mat-progress-spinner [diameter]="36" mode="indeterminate">
+      </mat-progress-spinner>
+    </div>
   </div>
 
   <!-- Footer -->

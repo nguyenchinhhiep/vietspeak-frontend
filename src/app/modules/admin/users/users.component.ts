@@ -80,7 +80,7 @@ export class UsersComponent implements OnInit {
 
     //  Subscribe to type input change
     this.userTypeControl.valueChanges
-      .pipe(debounceTime(500), distinctUntilChanged())
+      .pipe(distinctUntilChanged())
       .subscribe((type: any) => {
         if (type == null) {
           return;
@@ -92,7 +92,7 @@ export class UsersComponent implements OnInit {
 
     //  Subscribe to status input change
     this.userStatusControl.valueChanges
-      .pipe(debounceTime(500), distinctUntilChanged())
+      .pipe(distinctUntilChanged())
       .subscribe((status: any) => {
         if (status == null) {
           return;
@@ -122,15 +122,19 @@ export class UsersComponent implements OnInit {
       });
   }
 
-  onDetail() {
-    this._router.navigate(['1'], {
+  onDetail(id: string) {
+    this._router.navigate([id], {
       relativeTo: this._activatedRoute,
     });
   }
 
   // Delete
   delete(id: string) {
-    this._usersService.delete(id);
+    this._usersService.delete(id).subscribe((res) => {
+      if (res === true) {
+        this.getList();
+      }
+    });
   }
 
   viewProfile(id: string) {
@@ -138,15 +142,37 @@ export class UsersComponent implements OnInit {
   }
 
   approve(id: string) {
-    this._usersService.approve(id);
+    this._usersService.approve(id).subscribe((res) => {
+      if (res === true) {
+        this.getList();
+      }
+    });
   }
 
   reject(id: string) {
-    this._usersService.reject(id);
+    this._usersService.reject(id).subscribe((res) => {
+      if (res === true) {
+        this.getList();
+      }
+    });
   }
 
-  block(id: string) {
-    this._usersService.block(id);
+  block(element: any) {
+    if (element.status === this.userStatus.Active) {
+      this._usersService.block(element?._id).subscribe((res) => {
+        if (res === true) {
+          this.getList();
+        }
+      });
+    }
+
+    if (element.status === this.userStatus.Blocked) {
+      this._usersService.unblock(element?._id).subscribe((res) => {
+        if (res === true) {
+          this.getList();
+        }
+      });
+    }
   }
 
   // Get status

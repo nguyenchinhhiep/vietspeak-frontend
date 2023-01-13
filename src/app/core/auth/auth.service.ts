@@ -211,7 +211,7 @@ export class AuthService {
    *
    * @returns
    */
-  logout(): Observable<any> {
+  logout(): void {
     // Set authenticated flag to true
     this._isAuthenticated = false;
 
@@ -226,9 +226,6 @@ export class AuthService {
 
     // Navigation to login page
     this._router.navigate(['/login']);
-
-    // Return the observable
-    return of(true);
   }
 
   /**
@@ -263,7 +260,10 @@ export class AuthService {
 
           return of(true);
         }),
-        catchError((_) => of(false)),
+        catchError((_) => {
+          // Return
+          return of(false);
+        }),
         shareReplay()
       );
   }

@@ -74,7 +74,7 @@
           mat-icon-button
           type="button"
           matSuffix
-          *ngIf="firstName.value != ''"
+          *ngIf="firstName.value != '' && !tutorProfileForm.disabled"
           (click)="tutorProfileForm.get('firstName')?.setValue('')"
         >
           <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
@@ -96,7 +96,7 @@
           mat-icon-button
           type="button"
           matSuffix
-          *ngIf="lastName.value != ''"
+          *ngIf="lastName.value != '' && !tutorProfileForm.disabled"
           (click)="tutorProfileForm.get('lastName')?.setValue('')"
         >
           <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
@@ -217,7 +217,7 @@
           mat-icon-button
           type="button"
           matSuffix
-          *ngIf="videoIntroduction.value != ''"
+          *ngIf="videoIntroduction.value != '' && !tutorProfileForm.disabled"
           (click)="tutorProfileForm.get('videoIntroduction')?.setValue('')"
         >
           <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>

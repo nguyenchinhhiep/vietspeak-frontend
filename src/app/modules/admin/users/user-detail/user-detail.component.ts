@@ -1,8 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { NavigationEnd, Router } from '@angular/router';
-import { Subject } from 'rxjs';
+import { ActivatedRoute, NavigationEnd, Params, Router } from '@angular/router';
+import { Observable, Subject } from 'rxjs';
 import { filter, startWith, takeUntil } from 'rxjs/operators';
-import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
+import {
+  ApiEndpoint,
+  ApiMethod,
+  IApiResponse,
+} from 'src/app/core/http/api.model';
+import { HttpService } from 'src/app/core/http/services/http.service';
 import { UserStatus } from 'src/app/core/user/user.model';
 import { UsersService } from '../users.service';
 
@@ -14,14 +19,17 @@ import { UsersService } from '../users.service';
 export class UserDetailComponent implements OnInit {
   constructor(
     private _router: Router,
-    private _confirmationDialogService: ConfirmationDialogService,
-    private _usersService: UsersService
+    private _usersService: UsersService,
+    private _httpService: HttpService,
+    private _activatedRoute: ActivatedRoute
   ) {}
 
   navigation: any = [];
-  userDetail: any = {};
+  userProfile: any = null;
+  userId: string = '';
   userStatus = UserStatus;
   activeLink: any = null;
+  params$: Observable<Params> = this._activatedRoute.params;
 
   ngOnInit(): void {
     this.navigation = [
@@ -50,6 +58,14 @@ export class UserDetailComponent implements OnInit {
       .subscribe((_) => {
         this.activeLink = this.getActiveLink(this._router.url);
       });
+
+    this.params$.subscribe((params: Params) => {
+      const id = params['id'];
+      if (id) {
+        this.userId = params['id'];
+        this.getUserProfile(id);
+      }
+    });
   }
 
   private _unsubscribeAll: Subject<any> = new Subject();
@@ -66,28 +82,75 @@ export class UserDetailComponent implements OnInit {
     );
   }
 
+  getUserProfile(id: string) {
+    this._httpService
+      .request({
+        apiUrl: ApiEndpoint.Users + '/' + id,
+        method: ApiMethod.Get,
+      })
+      .subscribe(
+        (res: IApiResponse) => {
+          this.userProfile = res.data;
+          // Update user profile observable
+          this._usersService.userProfile = this.userProfile;
+        },
+        (err) => {
+          this._router.navigate(['admin/users']);
+        }
+      );
+  }
+
+  onDetail() {
+    this._router.navigate(['1'], {
+      relativeTo: this._activatedRoute,
+    });
+  }
+
   // Delete
   delete() {
-    this._usersService.delete(this.userDetail.id);
-  }
-  // Block
-  block() {
-    this._usersService.block(this.userDetail.id);
+    this._usersService.delete(this.userProfile?._id).subscribe((res) => {
+      if (res === true) {
+        this.getUserProfile(this.userProfile?._id);
+      }
+    });
   }
 
-  // Approve
   approve() {
-    this._usersService.approve(this.userDetail.id);
+    this._usersService.approve(this.userProfile?._id).subscribe((res) => {
+      if (res === true) {
+        this.getUserProfile(this.userProfile?._id);
+      }
+    });
   }
 
-  // Reject
   reject() {
-    this._usersService.reject(this.userDetail.id);
+    this._usersService.reject(this.userProfile?._id).subscribe((res) => {
+      if (res === true) {
+        this.getUserProfile(this.userProfile?._id);
+      }
+    });
   }
 
-  // Change Password
+  block() {
+    if (this.userProfile?.status === this.userStatus.Active) {
+      this._usersService.block(this.userProfile?._id).subscribe((res) => {
+        if (res === true) {
+          this.getUserProfile(this.userProfile?._id);
+        }
+      });
+    }
+
+    if (this.userProfile?.status === this.userStatus.Blocked) {
+      this._usersService.unblock(this.userProfile?._id).subscribe((res) => {
+        if (res === true) {
+          this.getUserProfile(this.userProfile?._id);
+        }
+      });
+    }
+  }
+
   // View profile
   viewProfile() {
-    this._usersService.viewProfile(this.userDetail.id);
+    this._usersService.viewProfile(this.userProfile?._id);
   }
 }
