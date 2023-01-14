@@ -5,6 +5,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
 import { MatTabsModule } from '@angular/material/tabs';
+import { TutorService } from '../tutor.service';
 
 const routes: Routes = [
   {
@@ -43,5 +44,6 @@ const routes: Routes = [
     MatTabsModule,
     RouterModule.forChild(routes),
   ],
+  providers: [TutorService],
 })
 export class AccountModule {}

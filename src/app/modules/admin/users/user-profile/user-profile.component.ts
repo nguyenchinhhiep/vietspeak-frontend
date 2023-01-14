@@ -1,12 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute, Params } from '@angular/router';
-import { Observable } from 'rxjs';
-import {
-  ApiEndpoint,
-  ApiMethod,
-  IApiResponse,
-} from 'src/app/core/http/api.model';
-import { HttpService } from 'src/app/core/http/services/http.service';
+import { Subject } from 'rxjs';
+import { takeUntil } from 'rxjs/operators';
 import { UserType } from 'src/app/core/user/user-type.model';
 import { UsersService } from '../users.service';
 
@@ -19,10 +13,22 @@ export class UserProfileComponent implements OnInit {
   constructor(private _usersService: UsersService) {}
   userType = UserType;
   userProfile: any = null;
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   ngOnInit(): void {
-    this._usersService.userProfile$.subscribe((val: any) => {
-      this.userProfile = val;
-    });
+    this._usersService.userProfile$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((val: any) => {
+        this.userProfile = val;
+      });
+  }
+
+  /**
+   * On destroy
+   */
+  ngOnDestroy(): void {
+    // Unsubscribe from all subscriptions
+    this._unsubscribeAll.next(null);
+    this._unsubscribeAll.complete();
   }
 }

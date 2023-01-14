@@ -22,6 +22,7 @@ import { CongratulationsComponent } from './congratulations/congratulations.comp
 import { PreventAutofillModule } from 'src/app/directives/prevent-autofill/prevent-autofill.module';
 import { ImageCropperDialogModule } from 'src/app/components/image-cropper/image-cropper.module';
 import { WelcomeComponent } from './welcome/welcome.component';
+import { TutorService } from '../tutor/tutor.service';
 
 const routes: Routes = [
   {
@@ -95,8 +96,6 @@ const routes: Routes = [
     ImageCropperDialogModule,
     RouterModule.forChild(routes),
   ],
-  providers: [
-  
-  ],
+  providers: [TutorService],
 })
 export class OnboardingModule {}

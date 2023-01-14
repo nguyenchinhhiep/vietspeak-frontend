@@ -16,8 +16,11 @@ export enum ApiEndpoint {
   CheckExistingEmail = 'check-existing-email',
   Profile = 'profile',
   Avatar = 'avatar',
-  UploadCertificates = 'certificates',
+  Certificates = 'certificates',
   Users = 'users',
+  UserAvatar = 'users/avatar',
+  UserCertificates = 'users/certificates',
+  ChangePasswordUser = 'users/change-password',
   BlockUser = 'users/block',
   ApproveUser = 'users/approve',
   RejectUser = 'users/reject',
@@ -27,4 +30,5 @@ export interface IApiResponse<DataType = any> {
   status: 'success' | 'error' | 'fail';
   message?: string;
   data?: DataType;
+  code?: number;
 }

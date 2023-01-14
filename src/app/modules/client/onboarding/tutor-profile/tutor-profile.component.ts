@@ -30,6 +30,7 @@ import { UserService } from 'src/app/core/user/user.service';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { UserType } from 'src/app/core/user/user-type.model';
 import { StepperSelectionEvent } from '@angular/cdk/stepper';
+import { TutorService } from '../../tutor/tutor.service';
 
 @Component({
   selector: 'app-onboarding-tutor-profile',
@@ -46,7 +47,8 @@ export class TutorProfileComponent implements OnInit {
     private _imageCropperDialogService: ImageCropperDialogService,
     private _httpService: HttpService,
     public userService: UserService,
-    private _confirmationDialogService: ConfirmationDialogService
+    private _confirmationDialogService: ConfirmationDialogService,
+    private _tutorService: TutorService
   ) {}
 
   teachingLanguageOptions = TeachingLanguageOptions;
@@ -508,7 +510,7 @@ export class TutorProfileComponent implements OnInit {
     this.tutorExperienceForm.disable();
     this.tutorExperienceForm.updateValueAndValidity();
 
-    this.userService
+    this._tutorService
       .uploadCertificates(uploadDocuments)
       .subscribe((res: IApiResponse) => {
         if (res.status === 'success') {
@@ -540,7 +542,7 @@ export class TutorProfileComponent implements OnInit {
 
         this._httpService
           .request({
-            apiUrl: ApiEndpoint.UploadCertificates + '/' + deleteFile?._id,
+            apiUrl: ApiEndpoint.Certificates + '/' + deleteFile?._id,
             method: ApiMethod.Delete,
           })
           .subscribe((res: IApiResponse) => {

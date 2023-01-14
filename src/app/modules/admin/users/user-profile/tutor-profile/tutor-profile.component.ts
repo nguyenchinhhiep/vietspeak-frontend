@@ -37,6 +37,7 @@ import {
   HeardFrom,
   HeardFromOptions,
 } from 'src/app/modules/client/onboarding/onboarding.model';
+import { UsersService } from '../../users.service';
 
 @Component({
   selector: 'app-tutor-profile',
@@ -52,6 +53,7 @@ export class TutorProfileComponent implements OnInit {
     private _confirmationDialogService: ConfirmationDialogService,
     private _httpService: HttpService,
     public userService: UserService,
+    private _usersService: UsersService,
     private _authService: AuthService
   ) {}
 
@@ -140,7 +142,7 @@ export class TutorProfileComponent implements OnInit {
       email: [
         '',
         [Validators.required, CustomValidators.isEmail()],
-        this._validateExistingEmail(this._authService, this.userService),
+        this._validateExistingEmail(this._authService, this.userProfile),
       ],
       dob: ['', Validators.required],
       teachingLanguage: [this.teachingLanguageOptions[0]],
@@ -178,6 +180,8 @@ export class TutorProfileComponent implements OnInit {
 
     // Delete unnecessary keys
     delete payload['tutorProfile']['teachingCertificates'];
+    delete payload['tutorProfile']['email'];
+    delete payload['tutorProfile']['avatar'];
 
     // Disable the form
     this.tutorProfileForm.disable();
@@ -185,7 +189,7 @@ export class TutorProfileComponent implements OnInit {
 
     this._httpService
       .request({
-        apiUrl: ApiEndpoint.Profile,
+        apiUrl: ApiEndpoint.Users + '/' + this.userProfile?._id,
         method: ApiMethod.Put,
         body: payload,
       })
@@ -209,6 +213,7 @@ export class TutorProfileComponent implements OnInit {
               },
             },
           });
+          this._usersService.getUserProfile$.next(true);
         }
       });
   }
@@ -301,8 +306,8 @@ export class TutorProfileComponent implements OnInit {
     this.tutorProfileForm.disable();
     this.tutorProfileForm.updateValueAndValidity();
 
-    this.userService
-      .uploadCertificates(uploadDocuments)
+    this._usersService
+      .uploadUserCertificates(uploadDocuments, this.userProfile?._id)
       .subscribe((res: IApiResponse) => {
         if (res.status === 'success') {
           const teachingCertificates = res.data || [];
@@ -333,7 +338,12 @@ export class TutorProfileComponent implements OnInit {
 
         this._httpService
           .request({
-            apiUrl: ApiEndpoint.UploadCertificates + '/' + deleteFile?._id,
+            apiUrl:
+              ApiEndpoint.UserCertificates +
+              '/' +
+              this.userProfile?._id +
+              '/' +
+              deleteFile?._id,
             method: ApiMethod.Delete,
           })
           .subscribe((res: IApiResponse) => {
@@ -437,7 +447,7 @@ export class TutorProfileComponent implements OnInit {
       if (res === 'confirmed') {
         this._httpService
           .request({
-            apiUrl: ApiEndpoint.Avatar,
+            apiUrl: ApiEndpoint.UserAvatar + '/' + this.userProfile?._id,
             method: ApiMethod.Delete,
           })
           .subscribe((res: IApiResponse) => {
@@ -452,11 +462,7 @@ export class TutorProfileComponent implements OnInit {
               },
             });
             this.tutorProfileForm.get('avatar')?.setValue(null);
-            // Update current user
-            this.userService.currentUser = {
-              ...this.userService.currentUserValue,
-              avatar: '',
-            };
+            this._usersService.getUserProfile$.next(true);
           });
       }
     });
@@ -473,8 +479,8 @@ export class TutorProfileComponent implements OnInit {
 
     dialogRef?.afterClosed().subscribe((croppedImage) => {
       if (croppedImage != null) {
-        this.userService
-          .uploadAvatar(croppedImage)
+        this._usersService
+          .uploadUserAvatar(croppedImage, this.userProfile?._id)
           .subscribe((res: IApiResponse) => {
             this._toastService.open({
               message: this._translateService.instant(
@@ -488,6 +494,7 @@ export class TutorProfileComponent implements OnInit {
             });
 
             this.tutorProfileForm.get('avatar')?.setValue(croppedImage);
+            this._usersService.getUserProfile$.next(true);
           });
       }
     });
@@ -496,14 +503,16 @@ export class TutorProfileComponent implements OnInit {
   // Validate existing email
   private _validateExistingEmail(
     authService: AuthService,
-    userService: UserService
+    userProfile: {
+      email: string;
+    }
   ) {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       if (control.hasError('required') || control.hasError('isEmail')) {
         return of(null);
       }
 
-      if (userService.currentUserValue?.email == control.value) {
+      if (userProfile?.email == control.value) {
         return of(null);
       }
       return of(control.value).pipe(

@@ -8,7 +8,8 @@ import {
   IApiResponse,
 } from 'src/app/core/http/api.model';
 import { HttpService } from 'src/app/core/http/services/http.service';
-import { UserStatus } from 'src/app/core/user/user.model';
+import { UserType } from 'src/app/core/user/user-type.model';
+import { UserStatus, UserStatusOptions } from 'src/app/core/user/user.model';
 import { UsersService } from '../users.service';
 
 @Component({
@@ -28,8 +29,10 @@ export class UserDetailComponent implements OnInit {
   userProfile: any = null;
   userId: string = '';
   userStatus = UserStatus;
+  userType = UserType;
   activeLink: any = null;
   params$: Observable<Params> = this._activatedRoute.params;
+  private _unsubscribeAll: Subject<any> = new Subject<any>();
 
   ngOnInit(): void {
     this.navigation = [
@@ -66,9 +69,13 @@ export class UserDetailComponent implements OnInit {
         this.getUserProfile(id);
       }
     });
-  }
 
-  private _unsubscribeAll: Subject<any> = new Subject();
+    this._usersService.getUserProfile$
+      .pipe(takeUntil(this._unsubscribeAll))
+      .subscribe((val: any) => {
+        this.getUserProfile(this.userId);
+      });
+  }
 
   ngOnDestroy() {
     // Unsubscribe from all subscriptions
@@ -98,12 +105,6 @@ export class UserDetailComponent implements OnInit {
           this._router.navigate(['admin/users']);
         }
       );
-  }
-
-  onDetail() {
-    this._router.navigate(['1'], {
-      relativeTo: this._activatedRoute,
-    });
   }
 
   // Delete
@@ -152,5 +153,16 @@ export class UserDetailComponent implements OnInit {
   // View profile
   viewProfile() {
     this._usersService.viewProfile(this.userProfile?._id);
+  }
+
+  // Get status
+  getStatus(status: UserStatus) {
+    return (
+      UserStatusOptions.find((item) => item.value === status) || {
+        label: '',
+        translateKey: '',
+        class: '',
+      }
+    );
   }
 }

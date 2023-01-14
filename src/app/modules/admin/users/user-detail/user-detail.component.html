@@ -4,26 +4,39 @@
   ></app-breadcrumb>
   <div class="flex gap-4 items-center mb-4 w-full">
     <div class="flex gap-4 items-center mr-auto">
-      <img
-        *ngIf="userProfile?.avatar"
-        class="w-24 h-24 rounded-full overflow-hidden"
-        [src]="userProfile?.avatar"
-        alt=""
-      />
-      <div
-        *ngIf="!userProfile?.avatar"
-        class="w-24 h-24 rounded-full overflow-hidden flex justify-center items-center font-medium bg-accent text-white uppercase text-2xl"
-      >
-        {{ userProfile?.firstName?.charAt(0) || "" }}
-      </div>
-      <div class="flex flex-col gap-1">
-        <div class="font-medium text-primary">
-          {{
-            userProfile?.firstName
-              ? userProfile?.firstName + " " + userProfile?.lastName
-              : ""
-          }}
+      <div class="relative flex flex-col items-center">
+        <img
+          *ngIf="userProfile?.avatar"
+          class="w-24 h-24 rounded-full overflow-hidden"
+          [src]="userProfile?.avatar"
+          alt=""
+        />
+        <div
+          *ngIf="!userProfile?.avatar"
+          class="w-24 h-24 rounded-full overflow-hidden flex justify-center items-center font-medium text-white uppercase text-2xl"
+          [ngClass]="userProfile.userType === userType.Tutor ? 'bg-accent' : 'bg-primary'"
+        >
+          {{ userProfile?.firstName?.charAt(0) || "" }}
         </div>
+      </div>
+
+      <div class="flex flex-col gap-1">
+        <div class="flex items-center gap-2">
+          <div class="font-medium text-primary">
+            {{
+              userProfile?.firstName
+                ? userProfile?.firstName + " " + userProfile?.lastName
+                : ""
+            }}
+          </div>
+          <div
+            class="rounded px-2 py-1 text-sm font-medium text-white"
+            [ngClass]="getStatus(userProfile.status).class"
+          >
+            {{ getStatus(userProfile.status).label }}
+          </div>
+        </div>
+
         <div class="text-tertiary text-sm font-medium">
           {{ userProfile?.userType }}
         </div>
@@ -31,7 +44,7 @@
     </div>
 
     <button mat-icon-button [matMenuTriggerFor]="actionMenu">
-      <mat-icon [svgIcon]="'mat_outline:more_vert'"></mat-icon>
+      <mat-icon class="icon" [svgIcon]="'mat_outline:more_vert'"></mat-icon>
     </button>
 
     <mat-menu #actionMenu="matMenu" [xPosition]="'before'">

@@ -33,6 +33,7 @@ import {
   Language,
   Fluency,
 } from '../../../onboarding/languages.model';
+import { TutorService } from '../../tutor.service';
 
 @Component({
   selector: 'app-user-profile',
@@ -48,7 +49,8 @@ export class UserProfileComponent implements OnInit {
     private _confirmationDialogService: ConfirmationDialogService,
     public userService: UserService,
     private _authService: AuthService,
-    private _httpService: HttpService
+    private _httpService: HttpService,
+    private _tutorService: TutorService
   ) {}
 
   teachingLanguageOptions = TeachingLanguageOptions;
@@ -180,6 +182,8 @@ export class UserProfileComponent implements OnInit {
 
     // Delete unnecessary keys
     delete payload['tutorProfile']['teachingCertificates'];
+    delete payload['tutorProfile']['email'];
+    delete payload['tutorProfile']['avatar'];
 
     // Disable the form
     this.tutorProfileForm.disable();
@@ -303,7 +307,7 @@ export class UserProfileComponent implements OnInit {
     this.tutorProfileForm.disable();
     this.tutorProfileForm.updateValueAndValidity();
 
-    this.userService
+    this._tutorService
       .uploadCertificates(uploadDocuments)
       .subscribe((res: IApiResponse) => {
         if (res.status === 'success') {
@@ -335,7 +339,7 @@ export class UserProfileComponent implements OnInit {
 
         this._httpService
           .request({
-            apiUrl: ApiEndpoint.UploadCertificates + '/' + deleteFile?._id,
+            apiUrl: ApiEndpoint.Certificates + '/' + deleteFile?._id,
             method: ApiMethod.Delete,
           })
           .subscribe((res: IApiResponse) => {

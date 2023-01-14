@@ -43,19 +43,4 @@ export class UserService {
 
     return this._httpClient.post(ApiEndpoint.Avatar, formData);
   }
-
-  /**
-   * Upload certificates
-   *
-   * @param certificates
-   */
-  uploadCertificates(certificates: any[]): Observable<any> {
-    const formData = new FormData();
-
-    for (let item of certificates) {
-      formData.append('certificates', item);
-    }
-
-    return this._httpClient.post(ApiEndpoint.UploadCertificates, formData);
-  }
 }

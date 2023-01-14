@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TranslateService } from '@ngx-translate/core';
@@ -20,10 +21,14 @@ export class UsersService {
     private _translateService: TranslateService,
     private _httpService: HttpService,
     private _matDialog: MatDialog,
-    private _toastService: ToastService
+    private _toastService: ToastService,
+    private _httpClient: HttpClient
   ) {}
 
+  getUserProfile$: Subject<any> = new Subject();
+  
   private _userProfile: Subject<any> = new BehaviorSubject(null);
+  
 
   set userProfile(val: any) {
     this._userProfile.next(val);
@@ -257,5 +262,40 @@ export class UsersService {
         id: id,
       },
     });
+  }
+
+  /**
+   * Upload user avatar
+   * @param avatar
+   * @access  Private/Admin
+   */
+
+  uploadUserAvatar(avatar: any, userId: string): Observable<any> {
+    const formData = new FormData();
+
+    formData.append('avatar', avatar);
+
+    return this._httpClient.post(
+      ApiEndpoint.UserAvatar + '/' + userId,
+      formData
+    );
+  }
+
+  /**
+   * Upload user certificates
+   * @param certificates
+   * @access  Private/Admin
+   */
+  uploadUserCertificates(certificates: any[], userId: string): Observable<any> {
+    const formData = new FormData();
+
+    for (let item of certificates) {
+      formData.append('certificates', item);
+    }
+
+    return this._httpClient.post(
+      ApiEndpoint.UserCertificates + '/' + userId,
+      formData
+    );
   }
 }

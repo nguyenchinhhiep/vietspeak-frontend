@@ -79,13 +79,23 @@ export class LoginComponent implements OnInit {
 
         //  If error
         if (res.status == 'error') {
-          // Set the alert
-          this.alert = {
-            type: 'error',
-            message: this._translateService.instant(
-              'Error.InvalidEmailOrPassword'
-            ),
-          };
+          if (res.code === 401) {
+            // Set the alert
+            this.alert = {
+              type: 'error',
+              message: this._translateService.instant(
+                'Error.InvalidEmailOrPassword'
+              ),
+            };
+          }
+
+          if (res.code === 403) {
+            // Set the alert
+            this.alert = {
+              type: 'error',
+              message: this._translateService.instant('Error.AccountBlocked'),
+            };
+          }
         }
 
         if (res.status === 'success') {
@@ -98,11 +108,11 @@ export class LoginComponent implements OnInit {
             return;
           }
 
-          // Navigate to the onboarding
-          this._router.navigate(['/onboarding']);
+          // Navigate
+          this._router.navigate(['/student']);
         }
       },
-      error: (e) => {
+      error: (err) => {
         // Re-enable the form
         this.loginForm.enable();
       },

@@ -7,7 +7,7 @@
         {{ "StudentProfile.Basic" | translate }}
       </div>
 
-      <div class="flex gap-5 items-center">
+      <div class="flex gap-5 items-center mb-4">
         <img
           *ngIf="studentProfileForm.get('avatar')?.value"
           class="w-20 h-20 rounded-full overflow-hidden"
@@ -257,8 +257,16 @@
         mat-flat-button
         [color]="'primary'"
         (click)="submit()"
+        [disabled]="studentProfileForm.disabled"
       >
-        {{ "Action.Save" | translate }}
+        <span *ngIf="!studentProfileForm.disabled">
+          {{ "Action.Save" | translate }}
+        </span>
+        <mat-progress-spinner
+          [diameter]="24"
+          *ngIf="studentProfileForm.disabled"
+          mode="indeterminate"
+        ></mat-progress-spinner>
       </button>
     </div>
   </form>

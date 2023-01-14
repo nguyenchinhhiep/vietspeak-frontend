@@ -7,8 +7,8 @@ import {
   Validators,
 } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-import { Observable, of } from 'rxjs';
-import { delay, map, switchMap } from 'rxjs/operators';
+import { Observable, of, throwError } from 'rxjs';
+import { catchError, delay, finalize, map, switchMap } from 'rxjs/operators';
 import { ConfirmationDialogService } from 'src/app/components/confirmation-dialog/confirmation-dialog.service';
 import { ImageCropperDialogService } from 'src/app/components/image-cropper/image-cropper.service';
 import { ToastService } from 'src/app/components/toast/toast.service';
@@ -30,6 +30,7 @@ import {
   HeardFrom,
   HeardFromOptions,
 } from 'src/app/modules/client/onboarding/onboarding.model';
+import { UsersService } from '../../users.service';
 
 @Component({
   selector: 'app-student-profile',
@@ -45,7 +46,8 @@ export class StudentProfileComponent implements OnInit {
     private _confirmationDialogService: ConfirmationDialogService,
     private _httpService: HttpService,
     public userService: UserService,
-    private _authService: AuthService
+    private _authService: AuthService,
+    private _usersService: UsersService
   ) {}
 
   @Input() userProfile: any = null;
@@ -78,19 +80,6 @@ export class StudentProfileComponent implements OnInit {
     }
   }
 
-  submit() {
-    for (let control in this.studentProfileForm.controls) {
-      this.studentProfileForm.controls[control].markAsDirty();
-      this.studentProfileForm.controls[control].markAsTouched();
-    }
-
-    // Return if the form is invalid
-    if (this.studentProfileForm.invalid) return;
-
-    // Disable the form
-    this.studentProfileForm.disable();
-  }
-
   createForm() {
     this.studentProfileForm = this._fb.group({
       avatar: [''],
@@ -99,7 +88,7 @@ export class StudentProfileComponent implements OnInit {
       email: [
         '',
         [Validators.required, CustomValidators.isEmail()],
-        this._validateExistingEmail(this._authService, this.userService),
+        this._validateExistingEmail(this._authService, this.userProfile),
       ],
       learningLanguage: [learningLanguageOptions[0]],
       currentLevel: [LanguageLevel.Beginner],
@@ -107,9 +96,66 @@ export class StudentProfileComponent implements OnInit {
     });
   }
 
+  submit() {
+    for (let control in this.studentProfileForm.controls) {
+      this.studentProfileForm.controls[control].markAsDirty();
+      this.studentProfileForm.controls[control].markAsTouched();
+    }
+
+    // Return if the form is invalid
+    if (
+      this.studentProfileForm.invalid ||
+      this.studentProfileForm.status === 'PENDING'
+    )
+      return;
+
+    // Disable the form
+    this.studentProfileForm.disable();
+
+    const payload = {
+      email: this.studentProfileForm.get('email')?.value,
+      studentProfile: {
+        ...this.studentProfileForm.value,
+        learningLanguage:
+          this.studentProfileForm.get('learningLanguage')?.value?.value,
+      },
+    };
+
+    this._httpService
+      .request({
+        apiUrl: ApiEndpoint.Users + '/' + this.userProfile?._id,
+        method: ApiMethod.Put,
+        body: payload,
+      })
+      .pipe(
+        catchError((err) => throwError(() => err)),
+        finalize(() => {
+          // Re-enable the form
+          this.studentProfileForm.enable();
+        })
+      )
+      .subscribe((res: IApiResponse) => {
+        if (res.status === 'success') {
+          // Display toast
+          this._toastService.open({
+            message: this._translateService.instant(
+              'Toast.UpdatedSuccessfully'
+            ),
+            configs: {
+              payload: {
+                type: 'success',
+              },
+            },
+          });
+
+          this._usersService.getUserProfile$.next(true)
+        }
+      });
+  }
+
   // Upload profile picture
   onProfilePictureFileSelected(event: any, profilePictureInput: any) {
-    const maxSize = 2097152;
+    const maxSize = 1 * 1024 * 1024;
     const file = event.target.files[0];
     if (file) {
       if (!file.type.includes('image')) {
@@ -134,7 +180,7 @@ export class StudentProfileComponent implements OnInit {
       if (file.size > maxSize) {
         this._toastService.open({
           message: this._translateService.instant('FileUpload.FileTooLarge', {
-            maxUploadSize: '2mb',
+            maxUploadSize: '1mb',
           }),
           configs: {
             payload: {
@@ -152,7 +198,6 @@ export class StudentProfileComponent implements OnInit {
   }
 
   // Remove profile picture
-  // Remove profile picture
   onRemoveProfilePicture() {
     const dialogRef = this._confirmationDialogService.open({
       message: this._translateService.instant('Confirmation.Message', {
@@ -164,13 +209,13 @@ export class StudentProfileComponent implements OnInit {
       if (res === 'confirmed') {
         this._httpService
           .request({
-            apiUrl: ApiEndpoint.Avatar,
+            apiUrl: ApiEndpoint.UserAvatar + '/' + this.userProfile?._id,
             method: ApiMethod.Delete,
           })
           .subscribe((res: IApiResponse) => {
             this._toastService.open({
               message: this._translateService.instant(
-                'Toast.UpdatedSuccessfully'
+                'Toast.RemovedSuccessfully'
               ),
               configs: {
                 payload: {
@@ -179,6 +224,8 @@ export class StudentProfileComponent implements OnInit {
               },
             });
             this.studentProfileForm.get('avatar')?.setValue(null);
+
+            this._usersService.getUserProfile$.next(true)
           });
       }
     });
@@ -195,10 +242,24 @@ export class StudentProfileComponent implements OnInit {
 
     dialogRef?.afterClosed().subscribe((croppedImage) => {
       if (croppedImage != null) {
-        this.studentProfileForm
-          .get('profilePictureUrl')
-          ?.setValue(croppedImage);
-        this.studentProfileForm.get('profilePicture')?.setValue(croppedImage);
+        this._usersService
+          .uploadUserAvatar(croppedImage, this.userProfile?._id)
+          .subscribe((res: IApiResponse) => {
+            this._toastService.open({
+              message: this._translateService.instant(
+                'Toast.UpdatedSuccessfully'
+              ),
+              configs: {
+                payload: {
+                  type: 'success',
+                },
+              },
+            });
+
+            this.studentProfileForm.get('avatar')?.setValue(croppedImage);
+
+            this._usersService.getUserProfile$.next(true)
+          });
       }
     });
   }
@@ -206,14 +267,14 @@ export class StudentProfileComponent implements OnInit {
   // Validate existing email
   private _validateExistingEmail(
     authService: AuthService,
-    userService: UserService
+    userProfile: { email: string }
   ) {
     return (control: AbstractControl): Observable<ValidationErrors | null> => {
       if (control.hasError('required') || control.hasError('isEmail')) {
         return of(null);
       }
 
-      if (userService.currentUserValue?.email == control.value) {
+      if (userProfile?.email == control.value) {
         return of(null);
       }
       return of(control.value).pipe(

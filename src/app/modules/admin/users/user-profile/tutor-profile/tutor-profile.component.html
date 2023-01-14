@@ -17,7 +17,7 @@
           />
           <div
             *ngIf="!tutorProfileForm.get('avatar')?.value"
-            class="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center font-medium bg-primary text-white uppercase text-2xl"
+            class="w-20 h-20 rounded-full overflow-hidden flex justify-center items-center font-medium bg-accent text-white uppercase text-2xl"
           >
             {{ userProfile?.firstName?.charAt(0) || "" }}
           </div>
@@ -607,8 +607,17 @@
         mat-flat-button
         [color]="'primary'"
         (click)="submit()"
+        [disabled]="tutorProfileForm.disabled"
       >
-        {{ "Action.Save" | translate }}
+        <span *ngIf="!tutorProfileForm.disabled">
+          {{ "Action.Save" | translate }}
+        </span>
+        <mat-progress-spinner
+          [diameter]="24"
+          *ngIf="tutorProfileForm.disabled"
+          mode="indeterminate"
+        >
+        </mat-progress-spinner>
       </button>
     </div>
   </form>

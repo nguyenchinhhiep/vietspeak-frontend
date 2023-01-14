@@ -7,6 +7,7 @@ import {
 } from 'src/app/core/http/api.model';
 import { HttpService } from 'src/app/core/http/services/http.service';
 import { UserType } from 'src/app/core/user/user-type.model';
+import { UserStatus, UserStatusOptions } from 'src/app/core/user/user.model';
 
 @Component({
   selector: 'app-user-profile-view',
@@ -40,4 +41,15 @@ export class UserProfileViewComponent implements OnInit {
         this.userProfile = res.data || {};
       });
   }
+
+    // Get status
+    getStatus(status: UserStatus) {
+      return (
+        UserStatusOptions.find((item) => item.value === status) || {
+          label: '',
+          translateKey: '',
+          class: '',
+        }
+      );
+    }
 }

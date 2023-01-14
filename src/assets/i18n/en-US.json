@@ -6,6 +6,7 @@
       "ExistingEmail": "Email already exists",
       "NotFoundEmail": "Email not found",
       "InvalidEmailOrPassword": "Invalid email or password",
+      "AccountBlocked": "Your account has been blocked",
       "MustMatch": "{{control}} and {{matchingControl}} must match",
       "MinLength": "{{control}} must be at least {{length}} characters",
       "File": "Please upload a document",
@@ -62,7 +63,8 @@
       "BlockedSuccessfully": "Blocked successfully",
       "ApprovedSuccessfully": "Approved successfully",
       "RejectedSuccessfully": "Rejected successfully",
-      "UnblockedSuccessfully": "Unblocked successfully"
+      "UnblockedSuccessfully": "Unblocked successfully",
+      "ChangedSuccessfully": "Changed successfully"
    },
    "Confirmation": {
       "Title": "Confirmation",
