@@ -202,11 +202,11 @@
         >
       </mat-form-field>
       <mat-form-field appearance="fill" class="w-full" floatLabel="always">
-        <mat-label>{{ "TutorProfile.VideoUrl" | translate }}</mat-label>
+        <mat-label>{{ "TutorProfile.YoutubeVideoUrl" | translate }}</mat-label>
         <input
           matInput
           formControlName="videoIntroduction"
-          placeholder="https://www.youtube.com/your-video-url"
+          placeholder="https://www.youtube.com/embed/DBXH9jJRaDk"
           appPreventAutoFill
           #videoIntroduction
         />
@@ -222,6 +222,11 @@
         >
           <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
         </button>
+        <mat-error
+          *ngIf="tutorProfileForm.get('videoIntroduction')?.hasError('pattern')"
+        >
+          {{ "Error.InvalidYoutubeUrl" | translate }}
+        </mat-error>
       </mat-form-field>
     </div>
     <div

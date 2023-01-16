@@ -18,7 +18,6 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { CongratulationsComponent } from './congratulations/congratulations.component';
 import { PreventAutofillModule } from 'src/app/directives/prevent-autofill/prevent-autofill.module';
 import { ImageCropperDialogModule } from 'src/app/components/image-cropper/image-cropper.module';
 import { WelcomeComponent } from './welcome/welcome.component';
@@ -35,6 +34,7 @@ const routes: Routes = [
     component: WelcomeComponent,
     data: {
       authLayout: 'blank',
+      title: 'PageTitle.Welcome',
     },
   },
   {
@@ -42,6 +42,7 @@ const routes: Routes = [
     component: AccountTypeComponent,
     data: {
       authLayout: 'blank',
+      title: 'PageTitle.AccountType',
     },
   },
   {
@@ -49,6 +50,7 @@ const routes: Routes = [
     component: StudentProfileComponent,
     data: {
       authLayout: 'blank',
+      title: 'PageTitle.StudentProfile',
     },
   },
   {
@@ -56,13 +58,7 @@ const routes: Routes = [
     component: TutorProfileComponent,
     data: {
       authLayout: 'blank',
-    },
-  },
-  {
-    path: 'congratulations',
-    component: CongratulationsComponent,
-    data: {
-      authLayout: 'blank',
+      title: 'PageTitle.TutorProfile',
     },
   },
 ];
@@ -72,7 +68,6 @@ const routes: Routes = [
     AccountTypeComponent,
     StudentProfileComponent,
     TutorProfileComponent,
-    CongratulationsComponent,
     WelcomeComponent,
   ],
   imports: [

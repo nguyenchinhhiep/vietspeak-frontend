@@ -60,8 +60,10 @@ const routes: Routes = [
           },
           {
             path: 'profile',
+
             component: UserProfileComponent,
             data: {
+              title: 'PageTitle.Profile',
               breadcrumb: {
                 label: 'User.Profile',
               },
@@ -69,8 +71,10 @@ const routes: Routes = [
           },
           {
             path: 'password',
+
             component: UserChangePasswordComponent,
             data: {
+              title: 'PageTitle.ChangePassword',
               breadcrumb: {
                 label: 'User.Password',
               },

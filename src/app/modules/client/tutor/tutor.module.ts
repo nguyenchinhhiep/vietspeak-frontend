@@ -11,6 +11,7 @@ const routes: Routes = [
     path: 'home',
     data: {
       authLayout: 'tutor',
+      title: "PageTitle.Home",
     },
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },

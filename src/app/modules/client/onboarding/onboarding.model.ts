@@ -33,13 +33,13 @@ export const HeardFromOptions = [
 export const AccountTypeList = [
   {
     label: 'Student',
-    translateKey: 'SelectAccountType.Student',
+    translateKey: 'AccountType.Student',
     value: UserType.Student,
     icon: 'custom:student',
   },
   {
     label: 'Tutor',
-    translateKey: 'SelectAccountType.Tutor',
+    translateKey: 'AccountType.Tutor',
     value: UserType.Tutor,
     icon: 'custom:tutor',
   },

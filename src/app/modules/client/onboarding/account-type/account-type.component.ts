@@ -34,7 +34,7 @@ export class AccountTypeComponent implements OnInit {
         (item) => item.value === userType
       );
       if (selectedUserType != null) {
-        this.onSelectAccountType(selectedUserType);
+        this.onAccountType(selectedUserType);
       }
     }
   }
@@ -45,7 +45,7 @@ export class AccountTypeComponent implements OnInit {
     });
   }
 
-  onSelectAccountType(type: any) {
+  onAccountType(type: any) {
     this.selectedAccountType = type;
     this.accountTypeForm.get('userType')?.setValue(type.value);
   }

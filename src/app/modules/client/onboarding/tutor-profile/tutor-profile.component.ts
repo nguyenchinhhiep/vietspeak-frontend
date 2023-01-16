@@ -401,7 +401,14 @@ export class TutorProfileComponent implements OnInit {
 
     this.tutorIntroductionForm = this._fb.group({
       introduction: ['', [Validators.required]],
-      videoIntroduction: [''],
+      videoIntroduction: [
+        '',
+        [
+          Validators.pattern(
+            /(https:\/\/)?(www.)?(youtube.com\/embed\/|youtube.com\/watch\?v=(.+){1}?)/
+          ),
+        ],
+      ],
     });
 
     this.tutorMotivationForm = this._fb.group({

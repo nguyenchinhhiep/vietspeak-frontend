@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 import { AlertType } from 'src/app/components/alert/alert.model';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { IApiResponse } from 'src/app/core/http/api.model';
+import { UserStatus } from 'src/app/core/user/user.model';
 import { CustomValidators } from 'src/app/core/validators/validators';
 
 @Component({
@@ -108,8 +109,12 @@ export class LoginComponent implements OnInit {
             return;
           }
 
-          // Navigate
-          this._router.navigate(['/student']);
+          if (res.data?.status === UserStatus.Reviewing) {
+            this._router.navigate(['/under-review']);
+            return;
+          }
+
+          this._router.navigate(['/onboarding']);
         }
       },
       error: (err) => {

@@ -22,14 +22,14 @@
 
     <div class="w-full max-w-md">
       <div class="font-medium  text-2xl text-center mb-10">
-        {{ "SelectAccountType.Title" | translate }}
+        {{ "AccountType.Title" | translate }}
       </div>
 
       <div class="flex gap-6 justify-between">
         <div
           class="flex flex-col items-center gap-4 cursor-pointer"
           *ngFor="let type of accountTypeList"
-          (click)="onSelectAccountType(type)"
+          (click)="onAccountType(type)"
         >
           <div
             class="rounded w-48 h-48 flex justify-center items-center bg-surface border-solid"

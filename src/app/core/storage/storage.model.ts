@@ -11,6 +11,7 @@ export enum StorageKey {
   User = 'user',
   Email = 'email',
   CachePersistence = 'httpCache',
+  Scheme = 'scheme',
 }
 
 export const getStorageKeyWithPrefix = (key: StorageKey) => {

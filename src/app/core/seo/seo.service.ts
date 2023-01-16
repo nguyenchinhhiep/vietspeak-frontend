@@ -68,7 +68,7 @@ export class SeoService {
   private _setTitle(rootTitle: string, title: string): void {
     if (title) {
       this._title.setTitle(
-        `${rootTitle} - ${this._translateService.instant(title)}`
+        `${this._translateService.instant(title)} - ${rootTitle} `
       );
     }
   }

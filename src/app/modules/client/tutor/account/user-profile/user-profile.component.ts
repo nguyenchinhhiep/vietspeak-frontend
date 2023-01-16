@@ -118,7 +118,14 @@ export class UserProfileComponent implements OnInit {
       haveExperienceTeachingOnline: [true],
       teachingCertificates: [null],
       introduction: ['', [Validators.required]],
-      videoIntroduction: [''],
+      videoIntroduction: [
+        '',
+        [
+          Validators.pattern(
+            /(https:\/\/)?(www.)?(youtube.com\/embed\/|youtube.com\/watch\?v=(.+){1}?)/
+          ),
+        ],
+      ],
     });
   }
 

@@ -1,4 +1,20 @@
 {
+   "PageTitle": {
+      "Login": "Login",
+      "Register": "Register",
+      "ForgotPassword": "Forgot Password",
+      "PasswordReset": "Password Reset",
+      "Home": "Home",
+      "Account": "Account",
+      "Profile": "Profile",
+      "ChangePassword": "Change Password",
+      "AccountType": "Account Type",
+      "StudentProfile": "Student Profile",
+      "TutorProfile": "Tutor Profile",
+      "Welcome": "Welcome",
+      "UnderReview": "Under Review",
+      "Users": "Users"
+   },
    "Error": {
       "Title": "Error",
       "Required": "This field is required",
@@ -10,7 +26,8 @@
       "MustMatch": "{{control}} and {{matchingControl}} must match",
       "MinLength": "{{control}} must be at least {{length}} characters",
       "File": "Please upload a document",
-      "InvalidRequest": "Invalid request"
+      "InvalidRequest": "Invalid request",
+      "InvalidYoutubeUrl": "Please enter a valid Youtube video URL"
    },
    "Hint": {
       "Title": "Hint",
@@ -153,7 +170,7 @@
       "FriendFamily": "Friend / Family",
       "Other": "Other"
    },
-   "SelectAccountType": {
+   "AccountType": {
       "Title": "Choose account type",
       "Student": "Student",
       "Tutor": "Tutor"
@@ -217,7 +234,7 @@
       "Introduction": "Introduction",
       "VideoIntroduction": "Video introduction",
       "VideoIntroductionDescription": "An introduction video is the quickest way to help students get to know about you, so they can confidently decide to book lessons with you. Upload it on Youtube and paste the video URL here. You can do it later on your profile page.",
-      "VideoUrl": "Video URL",
+      "YoutubeVideoUrl": "Youtube video URL",
       "LanguagesITeach": "Languages I teach",
       "LanguagesIKnow": "Languages I know"
    },

@@ -11,6 +11,7 @@ const routes: Routes = [
     path: 'home',
     data: {
       authLayout: 'admin',
+      title: 'PageTitle.Home',
     },
     loadChildren: () => import('./home/home.module').then((m) => m.HomeModule),
   },
@@ -18,6 +19,7 @@ const routes: Routes = [
     path: 'users',
     data: {
       authLayout: 'admin',
+      title: 'PageTitle.Users',
     },
     loadChildren: () =>
       import('./users/users.module').then((m) => m.UsersModule),

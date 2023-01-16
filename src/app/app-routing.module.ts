@@ -25,11 +25,17 @@ const routes: Routes = [
     children: [
       {
         path: 'login',
+        data: {
+          title: 'PageTitle.Login',
+        },
         loadChildren: () =>
           import('./auth/login/login.module').then((m) => m.LoginModule),
       },
       {
         path: 'register',
+        data: {
+          title: 'PageTitle.Register',
+        },
         loadChildren: () =>
           import('./auth/register/register.module').then(
             (m) => m.RegisterModule
@@ -37,6 +43,9 @@ const routes: Routes = [
       },
       {
         path: 'forgot-password',
+        data: {
+          title: 'PageTitle.ForgotPassword',
+        },
         loadChildren: () =>
           import('./auth/forgot-password/forgot-password.module').then(
             (m) => m.ForgotPasswordModule
@@ -44,6 +53,9 @@ const routes: Routes = [
       },
       {
         path: 'password-reset',
+        data: {
+          title: 'PageTitle.PasswordReset',
+        },
         loadChildren: () =>
           import('./auth/password-reset/password-reset.module').then(
             (m) => m.PasswordResetModule

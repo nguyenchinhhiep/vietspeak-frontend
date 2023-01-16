@@ -18,6 +18,9 @@ const routes: Routes = [
       },
       {
         path: 'profile',
+        data: {
+          title: 'PageTitle.Profile',
+        },
         loadChildren: () =>
           import('./user-profile/user-profile.module').then(
             (m) => m.UserProfileModule
@@ -25,6 +28,9 @@ const routes: Routes = [
       },
       {
         path: 'password',
+        data: {
+          title: 'PageTitle.ChangePassword',
+        },
         loadChildren: () =>
           import('./change-password/change-password.module').then(
             (m) => m.ChangePasswordModule
