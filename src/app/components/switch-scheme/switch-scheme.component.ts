@@ -47,6 +47,13 @@ export class SwitchSchemeComponent implements OnInit, OnDestroy {
       this.appConfig.scheme = this.scheme;
       this._configService.config = this.appConfig;
 
+      // Save scheme to local storage
+      this._storageService.setItem(
+        StorageType.Local,
+        StorageKey.Scheme,
+        this.scheme
+      );
+
       // Update scheme
       this._updateScheme();
     });
