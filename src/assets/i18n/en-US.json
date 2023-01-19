@@ -27,7 +27,7 @@
       "MinLength": "{{control}} must be at least {{length}} characters",
       "File": "Please upload a document",
       "InvalidRequest": "Invalid request",
-      "InvalidYoutubeUrl": "Please enter a valid Youtube video URL"
+      "InvalidYoutubeUrl": "Please enter a valid Youtube Video URL"
    },
    "Hint": {
       "Title": "Hint",
@@ -116,7 +116,6 @@
       "Of": "of",
       "Records": "records",
       "No": "No",
-      "Photo": "Photo",
       "Name": "Name",
       "Type": "Type",
       "Status": "Status",
@@ -230,7 +229,7 @@
       "Introduction": "Introduction",
       "VideoIntroduction": "Video introduction",
       "VideoIntroductionDescription": "An introduction video is the quickest way to help students get to know about you, so they can confidently decide to book lessons with you. Upload it on Youtube and paste the video URL here. You can do it later on your profile page.",
-      "YoutubeVideoUrl": "Youtube video URL",
+      "YoutubeVideoUrl": "Youtube Video URL",
       "LanguagesITeach": "Languages I teach",
       "LanguagesIKnow": "Languages I know"
    },
@@ -283,5 +282,10 @@
    "Student": {
       "Title": "Student",
       "Titles": "Students"
-   }
+   },
+   "Filter": {
+      "FilterByType": "Filter by type",
+      "FilterByStatus": "Filter by status"
+   },
+   "DarkMode": "Dark mode"
 }

@@ -1,13 +1,12 @@
 import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
-
 import { SwitchSchemeComponent } from './switch-scheme.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [SwitchSchemeComponent],
-  imports: [CommonModule, MatSlideToggleModule, ReactiveFormsModule],
+  imports: [TranslateModule, MatSlideToggleModule, ReactiveFormsModule],
   exports: [SwitchSchemeComponent],
 })
 export class SwitchSchemeModule {}

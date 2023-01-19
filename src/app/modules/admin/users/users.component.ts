@@ -22,8 +22,6 @@ import { UsersService } from './users.service';
 })
 export class UsersComponent implements OnInit {
   constructor(
-    private _confirmationDialogService: ConfirmationDialogService,
-    private _translateService: TranslateService,
     private _httpService: HttpService,
     private _router: Router,
     private _activatedRoute: ActivatedRoute,
@@ -55,7 +53,7 @@ export class UsersComponent implements OnInit {
 
   displayedColumns: string[] = [
     'no',
-    'photo',
+    'avatar',
     'name',
     'email',
     'type',

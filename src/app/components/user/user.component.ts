@@ -17,12 +17,12 @@ export class UserComponent implements OnInit {
     public userService: UserService
   ) {}
 
-
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   logout() {
-    this._authService.logout();
+    this._authService.logout().subscribe((res: boolean) => {
+      this._router.navigate(['/login']);
+    });
   }
 
   onAccount() {

@@ -94,8 +94,13 @@ export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad {
           // Prevent the access
           return of(false);
         }
-        // Allow the access
-        return of(true);
+
+        // Logout
+        return this._authService.logout().pipe(
+          switchMap((res: boolean) => {
+            return of(true);
+          })
+        );
       })
     );
   }

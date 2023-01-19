@@ -8,6 +8,8 @@ import {
 import { HttpService } from 'src/app/core/http/services/http.service';
 import { UserType } from 'src/app/core/user/user-type.model';
 import { UserStatus, UserStatusOptions } from 'src/app/core/user/user.model';
+import { TeachingExperienceOptions } from 'src/app/modules/client/onboarding/languages.model';
+import { HeardFromOptions } from 'src/app/modules/client/onboarding/onboarding.model';
 
 @Component({
   selector: 'app-user-profile-view',
@@ -42,14 +44,25 @@ export class UserProfileViewComponent implements OnInit {
       });
   }
 
-    // Get status
-    getStatus(status: UserStatus) {
-      return (
-        UserStatusOptions.find((item) => item.value === status) || {
-          label: '',
-          translateKey: '',
-          class: '',
-        }
-      );
-    }
+  // Get status
+  getStatus(status: UserStatus) {
+    return (
+      UserStatusOptions.find((item) => item.value === status) || {
+        label: '',
+        translateKey: '',
+        class: '',
+      }
+    );
+  }
+
+  // Get teaching experience label
+  getTeachingExperienceLabel(val: string) {
+    return TeachingExperienceOptions.find((item) => item.value == val)
+      ?.translateKey;
+  }
+
+  // Get teaching experience label
+  getHeardFromLabel(val: string) {
+    return HeardFromOptions.find((item) => item.value == val)?.translateKey;
+  }
 }

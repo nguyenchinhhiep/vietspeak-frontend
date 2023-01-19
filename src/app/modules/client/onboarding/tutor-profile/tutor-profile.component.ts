@@ -425,7 +425,9 @@ export class TutorProfileComponent implements OnInit {
 
   // Logout
   logout() {
-    this._authService.logout();
+    this._authService.logout().subscribe((res: boolean) => {
+      this._router.navigate(['/login']);
+    });
   }
 
   // Get language form array

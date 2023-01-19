@@ -1,3 +1,9 @@
 <div class="flex">
-  <mat-slide-toggle class="mat-slide-toggle--sm" color="primary" [formControl]="schemeControl"> Dark mode </mat-slide-toggle>
+  <mat-slide-toggle
+    class="mat-slide-toggle--sm"
+    color="primary"
+    [formControl]="schemeControl"
+  >
+    <div class="ml-1">{{ "DarkMode" | translate }}</div>
+  </mat-slide-toggle>
 </div>

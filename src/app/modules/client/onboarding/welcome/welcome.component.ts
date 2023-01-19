@@ -17,6 +17,8 @@ export class WelcomeComponent implements OnInit {
   }
 
   logout() {
-    this._authService.logout();
+    this._authService.logout().subscribe((res: boolean) => {
+      this._router.navigate(['/login']);
+    });
   }
 }

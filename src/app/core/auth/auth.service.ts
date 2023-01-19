@@ -211,7 +211,7 @@ export class AuthService {
    *
    * @returns
    */
-  logout(): void {
+  logout(): Observable<boolean> {
     // Set authenticated flag to true
     this._isAuthenticated = false;
 
@@ -224,8 +224,8 @@ export class AuthService {
     // Remove the user email from the local storage
     this._storageService.removeItem(StorageType.Local, StorageKey.Email);
 
-    // Navigation to login page
-    this._router.navigate(['/login']);
+    // Return
+    return of(true);
   }
 
   /**

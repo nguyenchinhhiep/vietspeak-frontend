@@ -116,7 +116,11 @@
             {{ "TutorProfile.Experience" | translate }}:
           </div>
           <div class="text-tertiary">
-            {{ userProfile?.tutorProfile?.teachingExperience }}
+            {{
+              getTeachingExperienceLabel(
+                userProfile?.tutorProfile?.teachingExperience
+              ) || "" | translate
+            }}
           </div>
         </div>
         <div class="border-0 border-t border-solid border-light my-3"></div>
@@ -175,7 +179,10 @@
               {{ "OnBoarding.WhereHeardFrom" | translate }}
             </div>
             <p class="text-secondary leading-relaxed">
-              {{ userProfile?.tutorProfile?.heardFrom }}
+              {{
+                getHeardFromLabel(userProfile?.tutorProfile?.heardFrom) || ""
+                  | translate
+              }}
             </p>
           </div>
         </div>
@@ -234,7 +241,7 @@
 
         <div class="flex items-center gap-4">
           <div class="font-medium">
-            {{ "StudentProfile.Learning" | translate }}:
+            {{ "StudentProfile.LearningLanguage" | translate }}:
           </div>
           <div class="flex flex-wrap gap-3">
             <div
@@ -269,7 +276,10 @@
               {{ "OnBoarding.WhereHeardFrom" | translate }}
             </div>
             <p class="text-secondary leading-relaxed">
-              {{ userProfile?.studentProfile?.heardFrom }}
+              {{
+                getHeardFromLabel(userProfile?.studentProfile?.heardFrom) || ""
+                  | translate
+              }}
             </p>
           </div>
         </div>

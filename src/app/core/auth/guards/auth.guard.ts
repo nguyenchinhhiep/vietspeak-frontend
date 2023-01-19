@@ -99,10 +99,11 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
           log.debug('Not authenticated, redirecting...');
 
           // Logout
-          this._authService.logout();
-
-          // Prevent the access
-          return of(false);
+          return this._authService.logout().pipe(
+            switchMap((res: boolean) => {
+              return of(false);
+            })
+          );
         }
 
         // Check if the route is restricted by userType

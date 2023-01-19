@@ -14,7 +14,9 @@
         <div
           *ngIf="!userProfile?.avatar"
           class="w-24 h-24 rounded-full overflow-hidden flex justify-center items-center font-medium text-white uppercase text-2xl"
-          [ngClass]="userProfile.userType === userType.Tutor ? 'bg-accent' : 'bg-primary'"
+          [ngClass]="
+            userProfile.userType === userType.Tutor ? 'bg-accent' : 'bg-primary'
+          "
         >
           {{ userProfile?.firstName?.charAt(0) || "" }}
         </div>
@@ -121,7 +123,7 @@
         *ngFor="let link of navigation"
         [active]="activeLink == link"
       >
-        {{ link.label }}
+        {{ link.translateKey | translate }}
       </a>
     </nav>
     <div class="flex-grow flex-shrink-0">

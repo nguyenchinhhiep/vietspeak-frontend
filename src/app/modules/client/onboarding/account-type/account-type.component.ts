@@ -69,6 +69,8 @@ export class AccountTypeComponent implements OnInit {
   }
 
   logout() {
-    this._authService.logout();
+    this._authService.logout().subscribe((res: boolean) => {
+      this._router.navigate(['/login']);
+    });
   }
 }

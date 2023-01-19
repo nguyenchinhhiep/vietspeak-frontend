@@ -35,10 +35,10 @@
    },
    "Status": {
       "Title": "Trạng thái",
-      "Active": "Đang hoạt động",
-      "Pending": "Đang chờ",
-      "Blocked": "Đang bị khóa",
-      "Reviewing": "Đang xem xét"
+      "Active": "Active",
+      "Pending": "Pending",
+      "Blocked": "Blocked",
+      "Reviewing": "Reviewing"
    },
    "Action": {
       "Title": "Hành động",
@@ -63,7 +63,7 @@
       "Reject": "Từ chối",
       "Clear": "Xóa",
       "GetStarted": "Bắt đầu",
-      "PressEnterToAdd": "Ấn enter để thêm",
+      "PressEnterToAdd": "Ấn Enter để thêm",
       "ChangePassword": "Thay đổi mật khẩu",
       "ViewProfile": "Xem hồ sơ",
       "Reset": "Đặt lại",
@@ -115,7 +115,6 @@
       "Of": "của",
       "Records": "bản ghi",
       "No": "No",
-      "Photo": "Hình ảnh",
       "Name": "Tên",
       "Type": "Loại",
       "Status": "Trạng thái",
@@ -133,7 +132,7 @@
       "Title": "Đăng nhập",
       "Password": "Mật khẩu",
       "ForgotPassword": "Quên mật khẩu",
-      "DontHaveAccount": "Chưa có tài khoản",
+      "DontHaveAccount": "Bạn chưa có tài khoản",
       "Or": "hoặc",
       "ContinueWithGoogle": "Tiếp tục với Google"
    },
@@ -142,14 +141,14 @@
       "Password": "Mật khẩu",
       "ConfirmPassword": "Xác nhận mật khẩu",
       "Agreement": "Khi tạo tài khoản, bạn đã đồng ý với <a>Điều khoản dịch vụ</a> và <a>Chính sách bảo mật</a> của chúng tôi",
-      "AlreadyHaveAccount": "Đã có tài khoản",
+      "AlreadyHaveAccount": "Bạn đã có tài khoản",
       "Or": "hoặc",
       "ContinueWithGoogle": "Tiếp tục với Google"
    },
    "ForgotPassword": {
       "Title": "Quên mật khẩu",
       "SubTitle": "Vui lòng nhập email và chúng tôi sẽ gửi hướng dẫn đặt lại mật khẩu đến email của bạn",
-      "AlreadyHaveAccount": "Đã có tài khoản",
+      "AlreadyHaveAccount": "Bạn đã có tài khoản",
       "SentEmailSuccess": "Chúng tôi đã gửi một email kèm đường link cùng hướng dẫn đặt lại mật khẩu đến email của bạn",
       "BackTo": "Quay lại"
    },
@@ -176,7 +175,7 @@
    },
    "StudentProfile": {
       "Title": "Hồ sơ học viên",
-      "LanguageWantToLearn": "Bạn muốn học ngôn ngữ nào",
+      "LanguageWantToLearn": "Bạn muốn học ngôn ngữ nào?",
       "FirstName": "Tên",
       "LastName": "Họ",
       "Level": "Trình độ hiện tại",
@@ -211,7 +210,7 @@
       "LanguagesYouSpeak": "Ngôn ngữ bạn biết",
       "Languages": "Ngôn ngữ",
       "Language": "Ngôn ngữ",
-      "Fluency": "Sự trôi chảy",
+      "Fluency": "Trình độ",
       "AddLanguage": "Thêm ngôn ngữ",
       "HaveExperienceTeachingOnline": "Bạn có kinh nghiệm giảng dạy trực tuyến?",
       "TeachingCertificates": "Chứng chỉ giảng dạy",
@@ -227,8 +226,8 @@
       "TeachingJobDescription": "Ví dụ: Speaking, Writing,...",
       "Introduction": "Giới thiệu",
       "VideoIntroduction": "Video giới thiệu",
-      "VideoIntroductionDescription": "Video giới thiệu bản thân là cách nhanh nhất để học viên biết thêm thông tin về bạn, sau đó học viên có thể tự tin đặt lịch học với bạn. Tải video của bạn lên Youtube và dán Youtube video URL tại đây. Bạn có thể cập nhật sau ở trang hồ sơ",
-      "YoutubeVideoUrl": "Youtube video URL",
+      "VideoIntroductionDescription": "Video giới thiệu bản thân là cách nhanh nhất để học viên biết thêm thông tin về bạn, sau đó học viên có thể tự tin đặt lịch học với bạn. Tải video của bạn lên Youtube và dán Youtube Video URL tại đây. Bạn có thể cập nhật sau ở trang hồ sơ",
+      "YoutubeVideoUrl": "Youtube Video URL",
       "LanguagesITeach": "Ngôn ngữ tôi dạy",
       "LanguagesIKnow": "Ngôn ngữ tôi biết"
    },
@@ -281,5 +280,10 @@
    "Student": {
       "Title": "Học viên",
       "Titles": "Học viên"
-   }
+   },
+   "Filter": {
+      "FilterByType": "Lọc theo loại",
+      "FilterByStatus": "Lọc theo trạng thái"
+   },
+   "DarkMode": "Chế độ tối"
 }

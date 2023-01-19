@@ -36,7 +36,7 @@
         class="flex-grow w-40 md:w-48 mat-form-field--sm flex-shrink-0 mb-0"
       >
         <mat-select
-          placeholder="{{ 'Filter by type' | translate }}"
+          placeholder="{{ 'Filter.FilterByType' | translate }}"
           [formControl]="userTypeControl"
         >
           <mat-select-trigger>
@@ -64,7 +64,7 @@
         class="flex-grow w-40 md:w-48 mat-form-field--sm flex-shrink-0 mb-0"
       >
         <mat-select
-          placeholder="{{ 'Filter by status' | translate }}"
+          placeholder="{{ 'Filter.FilterByStatus' | translate }}"
           [formControl]="userStatusControl"
         >
           <mat-select-trigger>
@@ -120,9 +120,9 @@
               }}
             </td>
           </ng-container>
-          <ng-container matColumnDef="photo">
+          <ng-container matColumnDef="avatar">
             <th mat-header-cell *matHeaderCellDef>
-              {{ "Table.Photo" | translate }}
+              {{ "Avatar" | translate }}
             </th>
             <td mat-cell *matCellDef="let element; let i = index">
               <div>
