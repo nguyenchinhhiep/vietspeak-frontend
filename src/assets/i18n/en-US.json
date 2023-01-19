@@ -185,8 +185,6 @@
       "Intermediate": "Intermediate",
       "Advanced": "Advanced",
       "Basic": "Basic",
-      "BasicInfo": "Basic info",
-      "StudentProfile": "Student profile",
       "Learning": "Learning",
       "LearningLanguage": "Learning language",
       "SupplementalInfo": "Supplemental info"
@@ -194,7 +192,6 @@
    "TutorProfile": {
       "Title": "Tutor profile",
       "BasicInfo": "Basic info",
-      "PersonalInfo": "Personal info",
       "TeachingAndExperience": "Teaching & Experience",
       "Motivation": "Motivation",
       "Experience": "Experience",
@@ -223,7 +220,6 @@
       "ProfilePicture": "Profile picture",
       "AboutMe": "About me",
       "IntroductionDescription": "Say hello and introduce yourself to students! This will be the first thing students read about you when looking at their tutor profile",
-      "TutorProfile": "Tutor profile",
       "Basic": "Basic",
       "Additional": "Additional",
       "Teaching": "Teaching",
