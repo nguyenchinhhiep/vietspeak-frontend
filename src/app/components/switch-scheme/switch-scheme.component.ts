@@ -37,7 +37,7 @@ export class SwitchSchemeComponent implements OnInit, OnDestroy {
       });
 
     // Set value to scheme control
-    this.schemeControl.setValue(this.scheme === 'light' ? false : true);
+    this.schemeControl.setValue(this.scheme === 'dark' ? true : false);
 
     // Subscribe to scheme changes
     this.schemeControl.valueChanges.subscribe((val: boolean) => {
