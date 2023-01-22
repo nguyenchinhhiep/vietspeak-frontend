@@ -101,6 +101,8 @@ export class AuthGuard implements CanActivate, CanActivateChild, CanLoad {
           // Logout
           return this._authService.logout().pipe(
             switchMap((res: boolean) => {
+              // Navigate to the login page
+              this._router.navigate(['/login']);
               return of(false);
             })
           );

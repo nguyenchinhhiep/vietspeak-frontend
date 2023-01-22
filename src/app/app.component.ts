@@ -54,7 +54,7 @@ export class AppComponent {
       StorageType.Local,
       StorageKey.Scheme
     );
-    this._updateScheme(localScheme === 'dark' ? 'dark' : 'light');
+    this._updateScheme(localScheme == 'dark' ? 'dark' : 'light');
   }
 
   /**

@@ -22,7 +22,7 @@ export class ConfigService {
     );
 
     // Update to config object
-    config.scheme = storageScheme === 'light' ? 'light' : 'dark';
+    config.scheme = storageScheme == 'dark' ? 'dark' : 'light';
 
     // Initialize the config value
     this._config = new BehaviorSubject(config);

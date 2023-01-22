@@ -243,22 +243,26 @@ export class AuthService {
       })
       .pipe(
         switchMap((res: IApiResponse) => {
-          // Set authenticated flag to true
-          this._isAuthenticated = true;
+          if (res.status === 'success') {
+            // Set authenticated flag to true
+            this._isAuthenticated = true;
 
-          // Store access token in the local storage
-          this.accessToken = res.data.accessToken;
+            // Store access token in the local storage
+            this.accessToken = res.data.accessToken;
 
-          // Store refresh token in the local storage
-          this.refreshToken = res.data.refreshToken;
+            // Store refresh token in the local storage
+            this.refreshToken = res.data.refreshToken;
 
-          // Store user email in the local storage
-          this.email = res.data.email;
+            // Store user email in the local storage
+            this.email = res.data.email;
 
-          // Store the use on the user service
-          this._userService.currentUser = res.data;
+            // Store the use on the user service
+            this._userService.currentUser = res.data;
 
-          return of(true);
+            return of(true);
+          }
+
+          return of(false);
         }),
         catchError((_) => {
           // Return
