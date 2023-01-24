@@ -263,8 +263,7 @@ export class UserProfileComponent implements OnInit {
   // Handle certificate files
   handleCertificatesUpload(uploadFiles: any[]) {
     const maxSize = 5 * 1024 * 1024;
-    const files =
-      this.tutorProfileForm.get('teachingCertificates')?.value || [];
+    let files = this.tutorProfileForm.get('teachingCertificates')?.value || [];
     const uploadDocuments: any[] = [];
     if (uploadFiles.length > 0) {
       for (const file of uploadFiles) {
@@ -314,19 +313,23 @@ export class UserProfileComponent implements OnInit {
     this.tutorProfileForm.disable();
     this.tutorProfileForm.updateValueAndValidity();
 
-    this._tutorService
-      .uploadCertificates(uploadDocuments)
-      .subscribe((res: IApiResponse) => {
+    this._tutorService.uploadCertificates(uploadDocuments).subscribe(
+      (res: IApiResponse) => {
         if (res.status === 'success') {
           const teachingCertificates = res.data || [];
-          files.push(...teachingCertificates);
+          files = [...teachingCertificates];
 
           this.tutorProfileForm.get('teachingCertificates')?.setValue(files);
         }
 
         // Re-enable the form
         this.tutorProfileForm.enable();
-      });
+      },
+      (err) => {
+        // Re-enable the form
+        this.tutorProfileForm.enable();
+      }
+    );
   }
 
   // On remove certificate file
@@ -346,8 +349,11 @@ export class UserProfileComponent implements OnInit {
 
         this._httpService
           .request({
-            apiUrl: ApiEndpoint.Certificates + '/' + deleteFile?._id,
+            apiUrl: ApiEndpoint.Certificates,
             method: ApiMethod.Delete,
+            params: {
+              publicId: deleteFile?.publicId,
+            },
           })
           .subscribe((res: IApiResponse) => {
             if (res.status === 'success') {

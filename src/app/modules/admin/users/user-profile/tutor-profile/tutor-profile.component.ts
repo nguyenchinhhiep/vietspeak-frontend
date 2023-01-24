@@ -262,8 +262,7 @@ export class TutorProfileComponent implements OnInit {
   // Handle certificate files
   handleCertificatesUpload(uploadFiles: any[]) {
     const maxSize = 5 * 1024 * 1024;
-    const files =
-      this.tutorProfileForm.get('teachingCertificates')?.value || [];
+    let files = this.tutorProfileForm.get('teachingCertificates')?.value || [];
     const uploadDocuments: any[] = [];
     if (uploadFiles.length > 0) {
       for (const file of uploadFiles) {
@@ -315,17 +314,23 @@ export class TutorProfileComponent implements OnInit {
 
     this._usersService
       .uploadUserCertificates(uploadDocuments, this.userProfile?._id)
-      .subscribe((res: IApiResponse) => {
-        if (res.status === 'success') {
-          const teachingCertificates = res.data || [];
-          files.push(...teachingCertificates);
+      .subscribe(
+        (res: IApiResponse) => {
+          if (res.status === 'success') {
+            const teachingCertificates = res.data || [];
+            files = [...teachingCertificates];
 
-          this.tutorProfileForm.get('teachingCertificates')?.setValue(files);
+            this.tutorProfileForm.get('teachingCertificates')?.setValue(files);
+          }
+
+          // Re-enable the form
+          this.tutorProfileForm.enable();
+        },
+        (err) => {
+          // Re-enable the form
+          this.tutorProfileForm.enable();
         }
-
-        // Re-enable the form
-        this.tutorProfileForm.enable();
-      });
+      );
   }
 
   // On remove certificate file
@@ -345,13 +350,11 @@ export class TutorProfileComponent implements OnInit {
 
         this._httpService
           .request({
-            apiUrl:
-              ApiEndpoint.UserCertificates +
-              '/' +
-              this.userProfile?._id +
-              '/' +
-              deleteFile?._id,
+            apiUrl: ApiEndpoint.UserCertificates + '/' + this.userProfile?._id,
             method: ApiMethod.Delete,
+            params: {
+              publicId: deleteFile?.publicId,
+            },
           })
           .subscribe((res: IApiResponse) => {
             if (res.status === 'success') {
