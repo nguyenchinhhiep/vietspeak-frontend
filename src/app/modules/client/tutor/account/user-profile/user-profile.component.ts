@@ -256,6 +256,29 @@ export class UserProfileComponent implements OnInit {
   // On file input change event
   onCertificatesSelected(event: any, fileInput: any) {
     const uploadFiles = event.target.files || [];
+    // Get tutor certificates
+    let files = this.tutorProfileForm.get('teachingCertificates')?.value || [];
+
+    // Limit 2 files upload
+    if (uploadFiles.length > 2 || files.length + uploadFiles.length > 2) {
+      this._toastService.open({
+        message: this._translateService.instant(
+          'FileUpload.OnlyAllowedFileQuantity',
+          {
+            quantity: '2',
+          }
+        ),
+        configs: {
+          payload: {
+            type: 'error',
+          },
+        },
+      });
+
+      fileInput.value = null;
+      return;
+    }
+
     this.handleCertificatesUpload(uploadFiles);
     fileInput.value = null;
   }
