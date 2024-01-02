@@ -1,20 +1,12 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  Route,
-  Router,
-  RouterStateSnapshot,
-  UrlSegment,
-  UrlTree,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { UserType } from 'src/app/core/user/user-type.model';
 import { UserStatus } from 'src/app/core/user/user.model';
 import { UserService } from 'src/app/core/user/user.service';
 
 @Injectable()
-export class OnboardingGuard implements CanActivate {
+export class OnboardingGuard  {
   constructor(private _userService: UserService, private _router: Router) {}
 
   /**

@@ -1,15 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  CanActivateChild,
-  CanLoad,
-  Route,
-  Router,
-  RouterStateSnapshot,
-  UrlSegment,
-  UrlTree,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { UserStatus } from 'src/app/core/user/user.model';
 import { UserService } from 'src/app/core/user/user.service';
@@ -18,7 +8,7 @@ import { UserService } from 'src/app/core/user/user.service';
   providedIn: 'root',
 })
 export class NoUnderReviewGuard
-  implements CanActivate, CanActivateChild, CanLoad
+  
 {
   constructor(private _router: Router, private _userService: UserService) {}
 

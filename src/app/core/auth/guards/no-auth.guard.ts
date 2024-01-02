@@ -1,15 +1,5 @@
 import { Injectable } from '@angular/core';
-import {
-  ActivatedRouteSnapshot,
-  CanActivate,
-  CanActivateChild,
-  CanLoad,
-  Route,
-  Router,
-  RouterStateSnapshot,
-  UrlSegment,
-  UrlTree,
-} from '@angular/router';
+import { ActivatedRouteSnapshot, Route, Router, RouterStateSnapshot, UrlSegment, UrlTree } from '@angular/router';
 import { Observable, of } from 'rxjs';
 import { switchMap } from 'rxjs/operators';
 import { Logger } from '../../logger/logger.service';
@@ -21,7 +11,7 @@ import { AuthService } from '../auth.service';
 const log = new Logger('NoAuthGuard');
 
 @Injectable()
-export class NoAuthGuard implements CanActivate, CanActivateChild, CanLoad {
+export class NoAuthGuard  {
   constructor(
     private _authService: AuthService,
     private _userService: UserService
