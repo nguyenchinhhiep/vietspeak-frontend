@@ -73,10 +73,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "vietspeak-frontend:build:production"
+              "buildTarget": "vietspeak-frontend:build:production"
             },
             "development": {
-              "browserTarget": "vietspeak-frontend:build:development"
+              "buildTarget": "vietspeak-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -84,7 +84,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "vietspeak-frontend:build"
+            "buildTarget": "vietspeak-frontend:build"
           }
         },
         "test": {
