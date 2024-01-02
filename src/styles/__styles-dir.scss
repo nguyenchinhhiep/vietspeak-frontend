@@ -1,2 +1,23 @@
-@import './overrides/_overrides-dir';
-@import './scss/_scss-dir';
+//Abstracts
+@import "abstracts/__abstracts-dir";
+
+//Base Styles
+@import "base/__base-dir";
+
+//Vendor
+@import "vendors/__vendors-dir";
+
+//Components
+@import "components/__components-dir";
+
+//Layouts
+@import "layouts/__layouts-dir";
+
+// Pages
+@import "pages/__pages-dir";
+
+// Themes
+@import "themes/__themes-dir";
+
+// Overrides
+@import "overrides/__overrides-dir";
