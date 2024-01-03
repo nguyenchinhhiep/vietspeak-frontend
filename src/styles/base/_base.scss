@@ -6,10 +6,6 @@ body {
   @apply w-full h-full text-base font-sans text-default;
 }
 
-a {
-  @apply text-primary hover:underline;
-}
-
 
 @layer base {
 

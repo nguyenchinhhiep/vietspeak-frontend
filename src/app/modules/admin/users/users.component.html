@@ -13,13 +13,12 @@
         matInput
         type="text"
         [placeholder]="'User.SearchPlaceholder' | translate"
-        name="search"
         [formControl]="searchInput"
         #search
       />
-      <button matPrefix type="button">
-        <mat-icon [svgIcon]="'mat_outline:search'"> </mat-icon>
-      </button>
+
+      <mat-icon matPrefix [svgIcon]="'mat_outline:search'"> </mat-icon>
+
       <button
         matSuffix
         mat-icon-button
