@@ -46,7 +46,7 @@ const normalizeTheme = (theme) => {
 };
 
 // -----------------------------------------------------------------------------------------------------
-// @ FUSE TailwindCSS Main Plugin
+// @ TailwindCSS Main Plugin
 // -----------------------------------------------------------------------------------------------------
 const theming = plugin.withOptions(
   (options) =>
@@ -193,8 +193,8 @@ const theming = plugin.withOptions(
        */
       const schemeCustomProps = _.map(["light", "dark"], (colorScheme) => {
         const isDark = colorScheme === "dark";
-        const background = theme(`fuse.customProps.background.${colorScheme}`);
-        const foreground = theme(`fuse.customProps.foreground.${colorScheme}`);
+        const background = theme(`customProps.background.${colorScheme}`);
+        const foreground = theme(`customProps.foreground.${colorScheme}`);
         const lightSchemeSelectors = "body.light, .light, .dark .light";
         const darkSchemeSelectors = "body.dark, .dark, .light .dark";
 
@@ -282,20 +282,20 @@ const theming = plugin.withOptions(
             light: {
               "bg-app-bar": "#FFFFFF",
               "bg-card": "#FFFFFF",
-              "bg-default": colors.slate[100],
+              "bg-default": colors.gray[100],
               "bg-dialog": "#FFFFFF",
-              "bg-hover": chroma(colors.slate[400]).alpha(0.12).css(),
-              "bg-surface": chroma(colors.slate[400]).alpha(0.12).css(),
-              "bg-status-bar": colors.slate[300],
+              "bg-hover": chroma(colors.gray[400]).alpha(0.12).css(),
+              "bg-surface": '#FFFFFF',
+              "bg-status-bar": colors.gray[300],
             },
             dark: {
-              "bg-app-bar": colors.slate[900],
-              "bg-card": colors.slate[800],
-              "bg-default": colors.slate[900],
-              "bg-dialog": colors.slate[800],
+              "bg-app-bar": colors.gray[900],
+              "bg-card": colors.gray[800],
+              "bg-default": colors.gray[900],
+              "bg-dialog": colors.gray[800],
               "bg-hover": "rgba(255, 255, 255, 0.05)",
               "bg-surface": "rgba(255, 255, 255, 0.05)",
-              "bg-status-bar": colors.slate[900],
+              "bg-status-bar": colors.gray[900],
             },
           },
           foreground: {

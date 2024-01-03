@@ -1,3 +1,16 @@
+html {
+  @apply w-full h-full overflow-auto scroll-smooth;
+}
+
+body {
+  @apply w-full h-full text-base font-sans text-default;
+}
+
+a {
+  @apply text-primary hover:underline;
+}
+
+
 @layer base {
 
   * {
@@ -13,18 +26,6 @@
       &:focus {
           outline: none !important;
       }
-  }
-
-  /* HTML and Body default styles */
-  html,
-  body {
-      display: flex;
-      flex-direction: column;
-      flex: 1 1 auto;
-      width: 100%;
-      min-height: 100%;
-      -webkit-font-smoothing: auto;
-      -moz-osx-font-smoothing: auto;
   }
 
   /* Font size */
@@ -69,7 +70,7 @@
   ::before,
   ::after {
       --tw-border-opacity: 1 !important;
-      border-color: rgba(var(--border-rgb), var(--tw-border-opacity));
+      border-color: rgba(var(--fuse-border-rgb), var(--tw-border-opacity));
 
       .dark & {
           --tw-border-opacity: 0.12 !important;
