@@ -130,7 +130,7 @@ module.exports = {
   },
   plugins: [
     require(path.resolve(__dirname, "src/tailwindcss/plugins/icon-size")),
-    require(path.resolve(__dirname, "src/tailwindcss/plugins/utils")),
+    require(path.resolve(__dirname, "src/tailwindcss/plugins/utilities")),
     require(path.resolve(__dirname, "src/tailwindcss/plugins/theming"))({
       themes,
     }),

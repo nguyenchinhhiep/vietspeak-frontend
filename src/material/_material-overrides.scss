@@ -1,7 +1,7 @@
 /* -------------------------------------------------------------------------- */
 /*  @ Overlay
 /* -------------------------------------------------------------------------- */
-.fuse-backdrop-on-mobile {
+.backdrop-on-mobile {
     @apply bg-black bg-opacity-60 sm:bg-transparent #{'!important'};
 }
 
@@ -100,7 +100,7 @@
     line-height: 1 !important;
 
     /* Large button */
-    &.fuse-mat-button-large {
+    &.mat-button-large {
         height: 48px;
         min-height: 48px;
         max-height: 48px;
@@ -539,7 +539,7 @@
                             .mat-mdc-select-arrow-wrapper {
 
                                 .mat-mdc-select-arrow {
-                                    border-top-color: var(--fuse-primary) !important;
+                                    border-top-color: var(--primary) !important;
                                 }
                             }
                         }
@@ -651,14 +651,14 @@
     }
 
     /* Rounded */
-    &.fuse-mat-rounded {
+    &.mat-rounded {
 
         .mat-mdc-text-field-wrapper {
             border-radius: 24px;
         }
 
         /* Emphasized affix */
-        &.fuse-mat-emphasized-affix {
+        &.mat-emphasized-affix {
 
             .mat-mdc-text-field-wrapper {
 
@@ -719,7 +719,7 @@
     }
 
     /* Dense */
-    &.fuse-mat-dense {
+    &.mat-dense {
 
         .mat-mdc-text-field-wrapper {
 
@@ -785,14 +785,14 @@
         }
 
         /* Rounded */
-        &.fuse-mat-rounded {
+        &.mat-rounded {
 
             .mat-mdc-text-field-wrapper {
                 border-radius: 20px;
             }
 
             /* Emphasized affix */
-            &.fuse-mat-emphasized-affix {
+            &.mat-emphasized-affix {
 
                 .mat-mdc-text-field-wrapper {
 
@@ -814,7 +814,7 @@
     }
 
     /* Emphasized affix */
-    &.fuse-mat-emphasized-affix {
+    &.mat-emphasized-affix {
 
         .mat-mdc-text-field-wrapper {
 
@@ -908,7 +908,7 @@
     }
 
     /* Bolder border width */
-    &.fuse-mat-bold {
+    &.mat-bold {
 
         .mat-mdc-text-field-wrapper {
             border-width: 2px !important;
@@ -925,7 +925,7 @@
         .mdc-notched-outline__leading,
         .mdc-notched-outline__notch,
         .mdc-notched-outline__trailing {
-            border-color: var(--fuse-warn) !important;
+            border-color: var(--warn) !important;
         }
     }
 
@@ -938,7 +938,7 @@
             .mdc-notched-outline__leading,
             .mdc-notched-outline__notch,
             .mdc-notched-outline__trailing {
-                border-color: var(--fuse-primary) !important;
+                border-color: var(--primary) !important;
             }
         }
 
@@ -948,7 +948,7 @@
             .mdc-notched-outline__leading,
             .mdc-notched-outline__notch,
             .mdc-notched-outline__trailing {
-                border-color: var(--fuse-accent) !important;
+                border-color: var(--accent) !important;
             }
         }
     }
@@ -1085,7 +1085,7 @@
 
             .mat-icon-no-color {
                 --tw-text-opacity: 1;
-                color: rgba(var(--fuse-mat-icon-rgb), var(--tw-text-opacity));
+                color: rgba(var(--mat-icon-rgb), var(--tw-text-opacity));
             }
         }
 
@@ -1224,7 +1224,7 @@
 .mat-mdc-tab-group {
 
     /* No header */
-    &.fuse-mat-no-header {
+    &.mat-no-header {
 
         .mat-mdc-tab-header {
             height: 0 !important;
@@ -1240,7 +1240,7 @@
         .mat-mdc-tab-header {
 
             .mat-mdc-tab-label-container {
-                box-shadow: inset 0 -1px var(--fuse-border);
+                box-shadow: inset 0 -1px var(--border);
             }
         }
     }
@@ -1347,11 +1347,11 @@ textarea.mat-mdc-input-element {
 /* -------------------------------------------------------------------------- */
 
 .mat-mdc-tooltip .mdc-tooltip__surface {
-    background-color: var(--fuse-text-default) !important;
+    background-color: var(--text-default) !important;
     color: white;
 
     .dark & {
-        background-color: var(--fuse-text-secondary) !important;
-        color: var(--fuse-bg-default) !important;
+        background-color: var(--text-secondary) !important;
+        color: var(--bg-default) !important;
     }
 }
