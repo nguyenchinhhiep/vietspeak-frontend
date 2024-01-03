@@ -288,8 +288,8 @@
       </mat-form-field>
       <mat-form-field appearance="fill" class="w-full" floatLabel="always">
         <mat-label>{{ "TutorProfile.WhatYouTeach" | translate }}</mat-label>
-        <mat-chip-list #chipTeachingJobList formControlName="teachingJobs">
-          <mat-chip
+        <mat-chip-grid #chipTeachingJobList formControlName="teachingJobs">
+          <mat-chip-row
             [disableRipple]="true"
             *ngFor="
               let job of this.tutorProfileForm.get('teachingJobs')?.value || []
@@ -300,7 +300,7 @@
             <button matChipRemove [disabled]="tutorProfileForm.disabled">
               <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
             </button>
-          </mat-chip>
+          </mat-chip-row>
           <input
             placeholder="{{
               'TutorProfile.TeachingJobDescription' | translate
@@ -311,7 +311,7 @@
             #teachingJobInput
             (blur)="teachingJobInput.value = ''"
           />
-        </mat-chip-list>
+        </mat-chip-grid>
         <mat-hint>{{ "Action.PressEnterToAdd" | translate }}</mat-hint>
         <mat-error
           *ngIf="tutorProfileForm.get('teachingJobs')?.hasError('required')"

@@ -320,11 +320,11 @@
                     <mat-label>{{
                       "TutorProfile.WhatYouTeach" | translate
                     }}</mat-label>
-                    <mat-chip-list
+                    <mat-chip-grid
                       #chipTeachingJobList
                       formControlName="teachingJobs"
                     >
-                      <mat-chip
+                      <mat-chip-row
                         [disableRipple]="true"
                         *ngFor="
                           let job of this.tutorExperienceForm.get(
@@ -340,7 +340,7 @@
                         >
                           <mat-icon [svgIcon]="'mat_outline:close'"></mat-icon>
                         </button>
-                      </mat-chip>
+                      </mat-chip-row>
                       <input
                         placeholder="{{
                           'TutorProfile.TeachingJobDescription' | translate
@@ -351,7 +351,7 @@
                         #teachingJobInput
                         (blur)="teachingJobInput.value = ''"
                       />
-                    </mat-chip-list>
+                    </mat-chip-grid>
                     <mat-hint>{{
                       "Action.PressEnterToAdd" | translate
                     }}</mat-hint>
